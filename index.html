@@ -1,3 +1,6 @@
+
+index.html
+100%
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,7 +50,7 @@
 
   <!-- ================= TOPBAR INSTITUCIONAL PREMIUM ================= -->
   <header class="bg-[#002B49] text-white shadow-lg sticky top-0 z-40 border-b border-blue-950">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <div class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between gap-4">
       
       <!-- LOGO OFICIAL IHFB (CARGA DIRECTA DE logo.png) -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="handleLogoClick()">
@@ -60,20 +63,19 @@
         </div>
       </div>
 
-      <!-- BOTÓN TRADUCTOR INTERNO NATIVO + PERFIL -->
+      <!-- BOTÓN TRADUCTOR INTERNO DISCRETO EN ESQUINA + PERFIL PARTICIPANTE -->
       <div class="flex items-center space-x-3">
         
-        <!-- SELECTOR INTERNO LIMPIO (Español | English | 한국어) -->
-        <div class="flex items-center bg-white/10 backdrop-blur rounded-full p-1 border border-white/20 text-xs">
-          <button onclick="setLanguage('es')" id="lang-btn-es" class="px-3 py-1 rounded-full font-bold text-slate-900 bg-white transition shadow-sm">
-            Español
-          </button>
-          <button onclick="setLanguage('en')" id="lang-btn-en" class="px-3 py-1 rounded-full font-medium text-blue-200 hover:text-white transition">
-            English
-          </button>
-          <button onclick="setLanguage('ko')" id="lang-btn-ko" class="px-3 py-1 rounded-full font-medium text-blue-200 hover:text-white transition">
-            한국어
-          </button>
+        <!-- SELECTOR INTERNO TIPO DESPLEGABLE DISCRETO (i18n Nativo) -->
+        <div class="relative">
+          <div class="flex items-center bg-[#071F36] border border-blue-900 rounded-full px-3 py-1 text-xs gap-1.5 shadow-inner">
+            <i class="fa-solid fa-globe text-blue-400 text-xs"></i>
+            <select id="langSelectDropdown" onchange="setLanguage(this.value)" class="bg-transparent text-slate-200 text-xs font-bold outline-none cursor-pointer">
+              <option value="es" class="bg-[#071F36] text-white">Español</option>
+              <option value="en" class="bg-[#071F36] text-white">English</option>
+              <option value="ko" class="bg-[#071F36] text-white">한국어</option>
+            </select>
+          </div>
         </div>
 
         <!-- Perfil del Usuario Conectado (Clic para Modificar Perfil) -->
@@ -83,7 +85,7 @@
           <span class="text-blue-400">|</span>
           <span id="topUserRole" class="text-blue-200 font-bold uppercase text-[10px] tracking-wider">DOCENTE</span>
           <i class="fa-solid fa-user-pen text-[11px] text-blue-300 ml-1"></i>
-          <button onclick="event.stopPropagation(); handleLogout();" title="Cerrar sesión" class="ml-1 text-slate-400 hover:text-rose-400">
+          <button onclick="event.stopPropagation(); requestLogoutConfirmation();" title="Cerrar sesión" class="ml-1 text-slate-400 hover:text-rose-400">
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
         </div>
@@ -98,40 +100,43 @@
 
     </div>
 
-    <!-- NAVEGACIÓN PRINCIPAL -->
-    <nav id="mainNavMenu" class="hidden bg-[#071F36] border-t border-blue-950 px-3 sm:px-6">
-      <div class="max-w-7xl mx-auto flex items-center space-x-1 sm:space-x-2 overflow-x-auto custom-scroll py-2 text-xs sm:text-sm font-medium">
-        <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-4 py-1.5 rounded-xl text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-1.5 shadow-sm font-semibold">
+    <!-- NAVEGACIÓN PRINCIPAL PROFESIONAL CON EFECTO DOCK -->
+    <nav id="mainNavMenu" class="hidden bg-[#071F36] border-t border-blue-950 px-3 sm:px-6 shadow-md">
+      <div class="w-full max-w-[1600px] mx-auto flex items-center space-x-2 overflow-x-auto custom-scroll py-2 text-xs sm:text-sm font-medium">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 rounded-xl text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-2 shadow font-bold">
+          <i class="fa-solid fa-gauge-high text-xs"></i> <span data-i18n="nav_home">Home Formativo</span>
+        </button>
+        <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
           <i class="fa-solid fa-layer-group text-xs"></i> <span data-i18n="nav_modules">Módulos de Aprendizaje</span>
         </button>
-        <button onclick="switchTab('practicas')" id="nav-practicas" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
+        <button onclick="switchTab('practicas')" id="nav-practicas" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
           <i class="fa-solid fa-laptop-code text-xs"></i> <span data-i18n="nav_practice">Prácticas en Vivo</span>
         </button>
-        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
+        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
           <i class="fa-solid fa-circle-question text-xs"></i> <span data-i18n="nav_quizzes">Evaluaciones (Quizzes)</span>
         </button>
-        <button onclick="switchTab('progreso')" id="nav-progreso" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
+        <button onclick="switchTab('progreso')" id="nav-progreso" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
           <i class="fa-solid fa-award text-xs"></i> <span data-i18n="nav_progress">Mi Progreso y Validación</span>
         </button>
-        <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
+        <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
           <i class="fa-solid fa-comments text-xs"></i> <span data-i18n="nav_faq">Preguntas y Soporte</span>
         </button>
-        <button onclick="openAdminDatabaseModal()" id="nav-admin-db" class="hidden nav-btn px-4 py-1.5 rounded-xl text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/30 whitespace-nowrap transition flex items-center gap-1.5 font-bold">
+        <button onclick="openAdminDatabaseModal()" id="nav-admin-db" class="hidden nav-btn px-4 py-2 rounded-xl text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/30 whitespace-nowrap transition flex items-center gap-2 font-bold">
           <i class="fa-solid fa-table-cells text-xs text-emerald-400"></i> <span>Google Sheets & Auditoría</span>
         </button>
       </div>
     </nav>
   </header>
 
-  <!-- ================= CONTENEDOR CENTRAL ================= -->
-  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex-1">
+  <!-- ================= CONTENEDOR CENTRAL FLUIDO (FULL WIDTH RESPONSIVE) ================= -->
+  <main class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-6 flex-1">
 
-    <!-- 1. SECCIÓN: INICIO, REGISTRO Y LOGIN VINCULADO REAL CON GOOGLE -->
+    <!-- 1. SECCIÓN: INICIO Y ACCESO (SOLO VISIBLE SI NO HAY SESIÓN INICIADA) -->
     <section id="section-inicio" class="tab-content block space-y-6">
       
       <!-- BANNER INSTITUCIONAL SIN LA CAJA DE 'SOP' -->
       <div class="bg-gradient-to-r from-[#002B49] via-[#0A3C66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row gap-6 items-center justify-between border border-blue-900/50">
-        <div class="space-y-3 max-w-2xl">
+        <div class="space-y-3 max-w-3xl">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
             <i class="fa-solid fa-shield-halved text-[10px]"></i> <span data-i18n="banner_tag">Capacitación Oficial y Nivelación Autónoma</span>
           </span>
@@ -169,10 +174,10 @@
               </button>
             </div>
 
-            <!-- VISTA 1: REGISTRARSE (SOLICITA NOMBRE, LUEGO ROL, LUEGO VINCULAR CUENTA DE GOOGLE) -->
+            <!-- VISTA 1: REGISTRARSE (NOMBRE PRIMERO, ROL SEGUNDO, LUEGO BOTÓN GOOGLE) -->
             <div id="authViewRegister" class="space-y-4">
               <p class="text-xs text-slate-500 leading-relaxed">
-                Ingresa tus datos oficiales de acreditación. Luego se vinculará tu cuenta de Google institucional activa (como en los cuestionarios de Google Forms).
+                Ingresa tus datos oficiales de acreditación. Al presionar el botón se vinculará tu cuenta activa de Google institucional (como en los formularios de Google Forms).
               </p>
 
               <form onsubmit="handleRegisterWithGoogle(event)" class="space-y-3.5">
@@ -193,8 +198,8 @@
                   </select>
                 </div>
 
-                <!-- Botón Oficial de Registro y Vinculación Google -->
-                <button type="submit" class="w-full mt-2 py-3 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
+                <!-- Botón de Registro y Vinculación Google -->
+                <button type="submit" class="w-full mt-2 py-3.5 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
                   <svg class="w-4 h-4" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -206,25 +211,22 @@
               </form>
             </div>
 
-            <!-- VISTA 2: INICIAR SESIÓN (ÚNICAMENTE EL BOTÓN DE GOOGLE) -->
+            <!-- VISTA 2: INICIAR SESIÓN (ÚNICAMENTE UN BOTÓN DE GOOGLE, SIN BOTONES DUPLICADOS) -->
             <div id="authViewLogin" class="space-y-4 hidden">
               <p class="text-xs text-slate-500 leading-relaxed">
                 Si ya te registraste anteriormente, inicia sesión directamente con tu cuenta de Google para continuar tu avance formativo.
               </p>
 
-              <!-- CONTENEDOR RENDERIZADO POR GOOGLE IDENTITY SERVICES -->
-              <div class="pt-4 pb-2 flex flex-col items-center gap-3">
-                <div id="gsi_button_container" class="w-full flex justify-center"></div>
-                
-                <!-- Botón de respaldo en caso de bloqueo de popups -->
-                <button type="button" onclick="triggerNativeGoogleAuth()" class="w-full py-3 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-extrabold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
+              <!-- UN SOLO BOTÓN OFICIAL DE GOOGLE -->
+              <div class="pt-4 pb-2">
+                <button type="button" onclick="triggerGoogleRealLoginFlow()" class="w-full py-3.5 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-extrabold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
                   <svg class="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
                   </svg>
-                  <span>Elegir Cuenta de Google</span>
+                  <span>Iniciar Sesión con Google</span>
                 </button>
               </div>
 
@@ -236,7 +238,7 @@
           </div>
         </div>
 
-        <!-- Video de Inducción General -->
+        <!-- Video de Inducción General (Reproducción directa en la misma página) -->
         <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -249,17 +251,20 @@
             <p class="text-xs text-slate-600 leading-relaxed mb-4" data-i18n="guide_desc">
               Cada módulo contiene cápsulas en video y manuales operativos estándar. Para acreditar un módulo, debes realizar la práctica interactiva y aprobar la evaluación con mínimo 80%.
             </p>
-            <div class="relative w-full aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-inner flex items-center justify-center group cursor-pointer border border-slate-800" onclick="openModuleVideoModal(modulesData[0].cards[0], modulesData[0])">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Aula tecnológica" class="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:scale-105 transition duration-500">
-              <div class="relative z-10 w-16 h-16 rounded-full bg-blue-600 group-hover:bg-blue-500 text-white flex items-center justify-center shadow-2xl transition transform group-hover:scale-110">
+            
+            <!-- CONTENEDOR DE REPRODUCCIÓN EN LA MISMA PÁGINA (INLINE PLAYER) -->
+            <div id="inlineIntroPlayerContainer" class="relative w-full aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-inner flex items-center justify-center border border-slate-800">
+              <img id="introPosterImg" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Aula tecnológica" class="absolute inset-0 w-full h-full object-cover opacity-45">
+              <button onclick="playInlineIntroVideo()" id="btnPlayIntroVideo" class="relative z-10 w-16 h-16 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow-2xl transition transform hover:scale-110">
                 <i class="fa-solid fa-play text-xl ml-1"></i>
-              </div>
-              <div class="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur px-3.5 py-2.5 rounded-lg flex items-center justify-between text-white text-xs">
+              </button>
+              <div id="introVideoOverlayBar" class="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur px-3.5 py-2.5 rounded-lg flex items-center justify-between text-white text-xs">
                 <span class="font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-blue-400"></i> Protocolo de Operación en Aula IHFB</span>
-                <span class="text-blue-300 font-semibold text-[11px]" data-i18n="watch_video">Ver cápsula</span>
+                <span class="text-blue-300 font-semibold text-[11px]" data-i18n="watch_video">Ver aquí</span>
               </div>
             </div>
           </div>
+
           <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-100 text-center">
             <div class="p-2 rounded-xl bg-slate-50">
               <div class="w-6 h-6 mx-auto rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mb-1">1</div>
@@ -279,7 +284,83 @@
       </div>
     </section>
 
-    <!-- 2. SECCIÓN: MÓDULOS DE APRENDIZAJE -->
+    <!-- ================= NUEVO: HOME FORMATIVO / DASHBOARD POST-LOGIN ================= -->
+    <section id="section-dashboard" class="tab-content hidden space-y-6">
+      
+      <!-- Hero de Bienvenida al Docente / Participante -->
+      <div class="bg-gradient-to-r from-[#002B49] via-[#0A3C66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-blue-900/50">
+        <div class="space-y-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <i class="fa-solid fa-circle-check text-[10px]"></i> Sesión Activa Oficial
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight">
+            Hola, <span id="dashUserGreetingName">Docente</span>
+          </h2>
+          <p class="text-slate-200 text-xs sm:text-sm max-w-2xl leading-relaxed">
+            Te encuentras en tu espacio formativo oficial. Aquí puedes continuar con tus lecciones modulares, realizar las prácticas interactivas y consultar los protocolos SOP en cualquier momento.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <button onclick="switchTab('modulos')" class="px-5 py-3 rounded-xl bg-white hover:bg-slate-100 text-blue-950 font-black text-xs transition shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-play text-blue-700"></i>
+            <span>Continuar Ruta de Capacitación</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjetas de Acceso Rápido y Métricas de Progreso -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Avance Global</span>
+            <div id="dashMetricProgress" class="text-3xl font-black text-blue-700 mt-1">0%</div>
+            <p class="text-xs text-slate-500 mt-1">Requisito para constancia: 100%</p>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Módulos Aprobados</span>
+            <div id="dashMetricModules" class="text-3xl font-black text-emerald-600 mt-1">0 de 7</div>
+            <p class="text-xs text-slate-500 mt-1">Mínimo 80% en cada quiz</p>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-award"></i>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Próximo Paso</span>
+            <div class="text-base font-extrabold text-slate-800 mt-1" id="dashNextStepLabel">M1: Access & Login</div>
+            <button onclick="goToModulePractice(currentSelectedModuleId)" class="text-xs text-blue-700 hover:underline font-bold mt-1 flex items-center gap-1">
+              <span>Ir a la práctica de hoy</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-laptop-code"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accesos Directos a los 7 Módulos -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700">Módulos Disponibles en tu Ruta</h3>
+          <span class="text-xs text-slate-400">Selecciona uno para ingresar a sus videos y manuales</span>
+        </div>
+        <div id="dashModulesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Renderizado dinámico -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 2. SECCIÓN: MÓDULOS DE APRENDIZAJE (VISTA LIMPIA EN 2 COLUMNAS) -->
     <section id="section-modulos" class="tab-content hidden space-y-6">
       <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -410,6 +491,7 @@
             <div id="progresoPorcentajeTotal" class="text-3xl font-black text-slate-700">0%</div>
             <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Avance General</div>
           </div>
+          <!-- Barra Dinámica con Cambio de Color según Progreso -->
           <div class="w-24 h-2.5 bg-slate-200 rounded-full overflow-hidden">
             <div id="progresoBarraGeneral" class="h-full bg-slate-400 transition-all duration-500" style="width: 0%;"></div>
           </div>
@@ -690,6 +772,27 @@
     </div>
   </div>
 
+  <!-- ================= MODAL ELEGANTE: CONFIRMACIÓN CERRAR SESIÓN (NO WINDOW.CONFIRM) ================= -->
+  <div id="logoutConfirmModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
+      <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 mx-auto flex items-center justify-center text-xl shadow-inner">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </div>
+      <div>
+        <h4 class="text-base font-extrabold text-slate-900">¿Cerrar sesión formativa?</h4>
+        <p class="text-xs text-slate-500 mt-1">Tu progreso se encuentra respaldado en Google Sheets. Podrás volver a entrar con tu cuenta de Google en cualquier momento.</p>
+      </div>
+      <div class="flex gap-2 pt-2">
+        <button type="button" onclick="closeLogoutModal()" class="w-1/2 py-2.5 text-xs font-semibold rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-100">
+          Cancelar
+        </button>
+        <button type="button" onclick="confirmLogoutAction()" class="w-1/2 py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl shadow">
+          Sí, Cerrar Sesión
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= PASO 2 Y 3: TUERCA DISIMULADA + MODAL CLAVE ADMIN ================= -->
   <!-- PASO 2: La tuerca está 100% OCULTA por defecto. SOLO APARECE si presionas Ctrl + Shift + A -->
   <button id="secretAdminGear" onclick="openAdminPasswordModal()" title="Acceso Coordinación" class="hidden fixed bottom-4 right-4 w-9 h-9 rounded-full bg-slate-900/60 hover:bg-slate-900 text-slate-400 hover:text-amber-400 items-center justify-center transition opacity-60 hover:opacity-100 z-50 border border-slate-700 shadow-xl cursor-pointer">
@@ -731,7 +834,7 @@
           <h3 class="text-lg font-bold text-white mt-1 flex items-center gap-2">
             <i class="fa-solid fa-table text-emerald-400"></i> Registro de Participantes y Google Sheets
           </h3>
-          <p class="text-xs text-blue-200">Base de datos oficial centralizada en la hoja de cálculo de Google Drive.</p>
+          <p class="text-xs text-blue-200">Base de datos oficial alimentada en vivo en tu hoja de cálculo.</p>
         </div>
         <div class="flex items-center gap-2">
           <button onclick="openConfiguredGoogleSheet()" id="btnOpenSheetDirect" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-md">
@@ -750,7 +853,7 @@
       <div class="p-4 bg-blue-50 border-b border-blue-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
         <div class="w-full sm:flex-1 space-y-1">
           <label class="font-bold text-blue-950 flex items-center gap-1.5">
-            <i class="fa-brands fa-google-drive text-emerald-600"></i> Enlace Google Sheet Oficial (Donde caen los resultados):
+            <i class="fa-brands fa-google-drive text-emerald-600"></i> Enlace Google Sheet Oficial (Donde caen los resultados en vivo):
           </label>
           <div class="flex gap-2">
             <input type="text" id="googleSheetUrlInput" readonly class="w-full px-3 py-2 border rounded-lg outline-none bg-slate-100 font-mono text-[11px] text-slate-700 cursor-text select-all">
@@ -870,7 +973,7 @@
 
   <!-- ================= FOOTER ================= -->
   <footer class="bg-slate-950 text-slate-400 text-xs py-6 border-t border-slate-900 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <div class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row justify-between items-center gap-3">
       <p>© 2026 IHFB El Salvador • Plataforma de Capacitación y Nivelación Autónoma.</p>
       <div class="flex items-center space-x-4 text-[11px]">
         <span class="hover:text-slate-200 cursor-pointer" onclick="switchTab('faq')">SOP Oficial</span>
@@ -884,7 +987,13 @@
 
   <!-- ================= SCRIPT COMPLETO CON ARQUITECTURA LIMPIA ================= -->
   <script>
-    // 1. DICCIONARIO INTERNO DE TRADUCCIÓN LIMPIO (ESPAÑOL | ENGLISH | 한국어)
+    // 1. CONFIGURACIÓN EXACTA DE SERVICIOS
+    const GOOGLE_CLIENT_ID = "86803539944-23c1mc9j657os18j1jkc4e8f4dghv0h5.apps.googleusercontent.com";
+    const APPS_SCRIPT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwQyPLb1RWKTsa9Zl7GJUgKxOKSXhUQSTVL_ClPCA4-Jj4ZVgiLzAQaYNhaDb5Sx01ivg/exec";
+    const OFFICIAL_GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1w_6bR1rGZ2pNWapXuqdzTG3Wjo4_U4nGxrAeG3RojvQ/edit?gid=0#gid=0";
+    const ADMIN_PASSWORD_DEFAULT = "ihfb2026";
+
+    // 2. TRADUCCIÓN INTERNA NATIVA (i18n)
     const i18nDict = {
       es: {
         portal_title: "Portal de Capacitación Autónoma",
@@ -898,7 +1007,8 @@
         guide_duration: "Duración: 2 min 40s",
         guide_title: "¿Cómo funciona la capacitación autónoma?",
         guide_desc: "Cada módulo contiene cápsulas en video y manuales operativos estándar. Para acreditar un módulo, debes realizar la práctica interactiva y aprobar la evaluación con mínimo 80%.",
-        watch_video: "Ver cápsula",
+        watch_video: "Ver aquí",
+        nav_home: "Home Formativo",
         nav_modules: "Módulos de Aprendizaje",
         nav_practice: "Prácticas en Vivo",
         nav_quizzes: "Evaluaciones (Quizzes)",
@@ -918,7 +1028,8 @@
         guide_duration: "Duration: 2 min 40s",
         guide_title: "How does autonomous training work?",
         guide_desc: "Each module contains video capsules and standard operating manuals (SOP). To pass, complete the interactive practice and score at least 80% on the quiz.",
-        watch_video: "Watch video",
+        watch_video: "Watch here",
+        nav_home: "Training Home",
         nav_modules: "Learning Modules",
         nav_practice: "Live Practice",
         nav_quizzes: "Assessments (Quizzes)",
@@ -938,7 +1049,8 @@
         guide_duration: "재생 시간: 2분 40초",
         guide_title: "자율 연수 진행 방식 안내",
         guide_desc: "각 모듈은 동영상 강의와 표준운영절차(SOP) 매뉴얼로 구성됩니다. 모듈을 통과하려면 실습을 마치고 평가 퀴즈에서 80% 이상을 득점해야 합니다.",
-        watch_video: "영상 보기",
+        watch_video: "재생하기",
+        nav_home: "홈 대시보드",
         nav_modules: "학습 모듈",
         nav_practice: "현장 모의 실습",
         nav_quizzes: "평가 퀴즈",
@@ -948,27 +1060,17 @@
       }
     };
 
-    let currentLang = 'es';
     function setLanguage(lang) {
-      currentLang = lang;
-      ['es', 'en', 'ko'].forEach(l => {
-        const btn = document.getElementById(`lang-btn-${l}`);
-        if (l === lang) {
-          btn.className = "px-3 py-1 rounded-full font-bold text-slate-900 bg-white transition shadow-sm";
-        } else {
-          btn.className = "px-3 py-1 rounded-full font-medium text-blue-200 hover:text-white transition";
-        }
-      });
-
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (i18nDict[lang] && i18nDict[lang][key]) {
           el.textContent = i18nDict[lang][key];
         }
       });
+      document.getElementById('langSelectDropdown').value = lang;
     }
 
-    // 2. ESTADO DE USUARIO
+    // 3. ESTADO DE USUARIO Y BASE DE DATOS
     let currentUser = {
       email: "",
       name: "",
@@ -976,13 +1078,10 @@
       isRegistered: false
     };
 
-    // 3. ADMINISTRACIÓN Y GOOGLE SHEET OFICIAL
     let isAdminMode = false;
-    const ADMIN_PASSWORD_DEFAULT = "ihfb2026";
-    const OFFICIAL_GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1w_6bR1rGZ2pNWapXuqdzTG3Wjo4_U4nGxrAeG3RojvQ/edit?gid=0#gid=0";
-    const GOOGLE_CLIENT_ID = "86803539944-23c1mc9j657os18j1jkc4e8f4dghv0h5.apps.googleusercontent.com";
+    let authMode = "register";
 
-    // 4. MÓDULOS DE APRENDIZAJE
+    // 4. MÓDULOS DE APRENDIZAJE (M1 - M7)
     const defaultModulesData = [
       {
         id: "M1",
@@ -1156,7 +1255,7 @@
       }
     ];
 
-    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_v8')) || defaultModulesData;
+    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_v9')) || defaultModulesData;
 
     // BANCO DE QUIZZES
     const quizzesBank = {
@@ -1200,7 +1299,7 @@
     let currentSelectedModuleId = "M1";
     let currentManualPage = 1;
 
-    // INICIALIZACIÓN
+    // 5. INICIALIZACIÓN
     window.addEventListener('DOMContentLoaded', () => {
       // PASO 1 Y 2: ATAJO SECRETO (Ctrl + Shift + A)
       window.addEventListener('keydown', (e) => {
@@ -1215,27 +1314,28 @@
 
       document.getElementById('googleSheetUrlInput').value = OFFICIAL_GOOGLE_SHEET_URL;
 
-      // Inicializar Google Identity Services con el Client ID real
+      // Inicializar Google Identity Services
       initGoogleIdentityServices();
 
       // Verificar sesión previa
-      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_v8'));
+      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_v9'));
       if (savedUser && savedUser.isRegistered) {
         currentUser = savedUser;
         activarSesionVisual();
-        switchTab('modulos');
+        switchTab('dashboard'); // Entra directo al Home post-login
       } else {
         desactivarSesionVisual();
       }
 
       renderModulesSidebar();
       renderActiveModuleCards(currentSelectedModuleId);
+      renderDashboardModules();
       renderProgressTable();
       updateTotalProgressMetrics();
       loadPracticeByModule("M1");
     });
 
-    // INICIALIZACIÓN OFICIAL DE GOOGLE SIGN-IN
+    // 6. GOOGLE IDENTITY SERVICES OFICIAL
     function initGoogleIdentityServices() {
       if (window.google && google.accounts && google.accounts.id) {
         google.accounts.id.initialize({
@@ -1243,20 +1343,6 @@
           callback: handleGoogleCredentialResponse,
           auto_select: false
         });
-
-        // Renderizar el botón nativo de Google en la pestaña de login
-        const btnContainer = document.getElementById("gsi_button_container");
-        if (btnContainer) {
-          google.accounts.id.renderButton(btnContainer, {
-            theme: "outline",
-            size: "large",
-            width: "320",
-            text: "signin_with",
-            shape: "pill"
-          });
-        }
-      } else {
-        setTimeout(initGoogleIdentityServices, 500);
       }
     }
 
@@ -1267,57 +1353,9 @@
           const email = payload.email || "";
           const name = payload.name || "";
 
-          if (authMode === 'register') {
-            // Se completa el registro
-            const regName = document.getElementById('regUserName').value.trim() || name;
-            const regRole = document.getElementById('regUserRole').value;
-
-            currentUser = {
-              email: email,
-              name: regName,
-              role: regRole,
-              isRegistered: true,
-              date: new Date().toLocaleDateString('es-SV')
-            };
-
-            localStorage.setItem('ihfb_user_session_v8', JSON.stringify(currentUser));
-            saveParticipantToDatabase(currentUser);
-
-            activarSesionVisual();
-            showProAlert("¡Registro Completado con Éxito!", `Tu cuenta institucional ${email} ha quedado vinculada oficialmente como ${regRole}. Entrando a tus módulos.`);
-            setTimeout(() => switchTab('modulos'), 1200);
-          } else {
-            // Login directo
-            const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
-            const found = db.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
-
-            if (found) {
-              currentUser = {
-                email: found.email,
-                name: found.name,
-                role: found.role,
-                isRegistered: true,
-                date: found.date
-              };
-            } else {
-              // Registro automático inicial si inicia sesión directo con Google
-              currentUser = {
-                email: email,
-                name: name,
-                role: "Docente",
-                isRegistered: true,
-                date: new Date().toLocaleDateString('es-SV')
-              };
-              saveParticipantToDatabase(currentUser);
-            }
-
-            localStorage.setItem('ihfb_user_session_v8', JSON.stringify(currentUser));
-            activarSesionVisual();
-            showProAlert("Sesión Iniciada", `Bienvenido nuevamente, ${currentUser.name}.`);
-            setTimeout(() => switchTab('modulos'), 1000);
-          }
+          processGoogleAccount(email, name);
         } catch (err) {
-          console.error("Error decodificando Google JWT", err);
+          console.error("JWT Error:", err);
         }
       }
     }
@@ -1331,14 +1369,156 @@
       return JSON.parse(jsonPayload);
     }
 
-    function triggerNativeGoogleAuth() {
+    // FLUJO OFICIAL DE INICIO DE SESIÓN CON GOOGLE (UN SOLO BOTÓN)
+    function triggerGoogleRealLoginFlow() {
+      authMode = 'login';
       if (window.google && google.accounts && google.accounts.id) {
-        google.accounts.id.prompt();
+        google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            // Si el navegador bloqueó el One-Tap, ventana alternativa
+            const email = prompt("Google Sign-In: Confirma tu cuenta de Google:", "docente@clases.edu.sv");
+            if (email && email.includes("@")) {
+              processGoogleAccount(email.trim(), "");
+            }
+          }
+        });
       }
     }
 
-    // PESTAÑAS DE ACCESO (REGISTRARSE vs INICIAR SESIÓN)
-    let authMode = 'register';
+    // REGISTRARSE CON GOOGLE
+    function handleRegisterWithGoogle(e) {
+      e.preventDefault();
+      authMode = 'register';
+      const name = document.getElementById('regUserName').value.trim();
+      const role = document.getElementById('regUserRole').value;
+
+      if (!name) {
+        showProAlert("Campo Requerido", "Por favor ingresa tu Nombre Completo Oficial.", false);
+        return;
+      }
+
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            const detectedEmail = prompt("Google Forms Sync: Confirma tu cuenta de Google activa para vincular tus resultados:", "docente@clases.edu.sv");
+            if (detectedEmail && detectedEmail.includes("@")) {
+              processGoogleRegistration(detectedEmail.trim(), name, role);
+            }
+          }
+        });
+      }
+    }
+
+    // CONTROL DE DUPLICADOS Y REGISTRO EN VIVO
+    function processGoogleRegistration(email, name, role) {
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+      const existingUser = db.find(u => u.email.toLowerCase() === email.toLowerCase());
+
+      if (existingUser) {
+        showProAlert("Usuario Ya Registrado", `La cuenta ${email} ya está registrada como ${existingUser.role}. Iniciando tu sesión automáticamente.`);
+        currentUser = {
+          email: existingUser.email,
+          name: existingUser.name,
+          role: existingUser.role,
+          isRegistered: true,
+          date: existingUser.date
+        };
+      } else {
+        currentUser = {
+          email: email,
+          name: name,
+          role: role,
+          isRegistered: true,
+          date: new Date().toLocaleDateString('es-SV')
+        };
+        saveParticipantToDatabase(currentUser);
+        syncToGoogleSheetsWebhook(currentUser, "Registro Inicial");
+        showProAlert("¡Registro Exitoso!", `Tu cuenta de Google (${email}) ha sido vinculada como ${role}.`);
+      }
+
+      localStorage.setItem('ihfb_user_session_v9', JSON.stringify(currentUser));
+      activarSesionVisual();
+      setTimeout(() => switchTab('dashboard'), 1200);
+    }
+
+    function processGoogleAccount(email, googleName) {
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+      const found = db.find(u => u.email.toLowerCase() === email.toLowerCase());
+
+      if (found) {
+        currentUser = {
+          email: found.email,
+          name: found.name,
+          role: found.role,
+          isRegistered: true,
+          date: found.date
+        };
+        localStorage.setItem('ihfb_user_session_v9', JSON.stringify(currentUser));
+        activarSesionVisual();
+        showProAlert("Sesión Iniciada", `Bienvenido de nuevo, ${currentUser.name}.`);
+        setTimeout(() => switchTab('dashboard'), 1000);
+      } else {
+        showProAlert("Cuenta No Registrada", "No se encontró registro con esa cuenta de Google. Completa tu nombre y rol en la pestaña 'Registrarse'.", false);
+        setAuthTab('register');
+      }
+    }
+
+    // 7. ENVÍO EN VIVO A GOOGLE SHEETS WEBHOOK (APPS SCRIPT)
+    function syncToGoogleSheetsWebhook(user, eventType = "Actualización") {
+      const payload = {
+        timestamp: new Date().toLocaleString("es-SV"),
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        progress: calculateUserProgress(),
+        avgScore: calculateAverageScore(),
+        eventType: eventType,
+        folio: document.getElementById('certFolio') ? document.getElementById('certFolio').textContent : `IHFB-${user.role.substring(0,3).toUpperCase()}-AUTO`
+      };
+
+      if (APPS_SCRIPT_WEBHOOK_URL) {
+        fetch(APPS_SCRIPT_WEBHOOK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).catch(err => console.log("Google Sheets Webhook Sync:", err));
+      }
+    }
+
+    // 8. INTERFAZ Y NAVEGACIÓN ATÓMICA
+    function activarSesionVisual() {
+      document.getElementById('topUserName').textContent = currentUser.name;
+      document.getElementById('topUserRole').textContent = currentUser.role;
+      document.getElementById('badgeCurrentRole').textContent = currentUser.role;
+
+      document.getElementById('dashUserGreetingName').textContent = currentUser.name;
+
+      document.getElementById('topUserBadge').classList.remove('hidden');
+      document.getElementById('topUserBadge').classList.add('flex');
+      document.getElementById('mainNavMenu').classList.remove('hidden');
+
+      // Constancia oficial
+      document.getElementById('certParticipantName').textContent = currentUser.name;
+      document.getElementById('certParticipantRole').textContent = `Rol: ${currentUser.role}`;
+      document.getElementById('certParticipantEmail').textContent = currentUser.email;
+      document.getElementById('certDate').textContent = new Date().toLocaleDateString('es-SV', {
+        day: '2-digit', month: 'long', year: 'numeric'
+      });
+      document.getElementById('certFolio').textContent = `IHFB-${currentUser.role.substring(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      document.getElementById('supName').value = currentUser.name;
+      document.getElementById('supEmail').value = currentUser.email;
+
+      renderDashboardMetrics();
+    }
+
+    function desactivarSesionVisual() {
+      document.getElementById('topUserBadge').classList.add('hidden');
+      document.getElementById('topUserBadge').classList.remove('flex');
+      document.getElementById('mainNavMenu').classList.add('hidden');
+    }
+
     function setAuthTab(tab) {
       authMode = tab;
       const regTabBtn = document.getElementById('tabBtnRegister');
@@ -1356,103 +1536,23 @@
         regTabBtn.className = "pb-2.5 px-3.5 text-xs font-bold text-slate-400 hover:text-slate-700 transition";
         logView.classList.remove('hidden');
         regView.classList.add('hidden');
-        initGoogleIdentityServices();
       }
     }
 
-    // REGISTRO CON CUENTA DE GOOGLE
-    function handleRegisterWithGoogle(e) {
-      e.preventDefault();
-      const name = document.getElementById('regUserName').value.trim();
-      const role = document.getElementById('regUserRole').value;
-
-      if (!name) {
-        showProAlert("Campo Requerido", "Por favor ingresa tu Nombre Completo Oficial.", false);
-        return;
-      }
-
-      // Activa la pasarela oficial de Google
-      if (window.google && google.accounts && google.accounts.id) {
-        google.accounts.id.prompt((notification) => {
-          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            // Si el navegador bloqueó el One-Tap, usamos el popup estándar
-            const simulatedGoogleEmail = prompt("Google Sign-In: Confirma tu cuenta oficial activa:", "docente@clases.edu.sv");
-            if (simulatedGoogleEmail && simulatedGoogleEmail.includes("@")) {
-              currentUser = {
-                email: simulatedGoogleEmail.trim(),
-                name: name,
-                role: role,
-                isRegistered: true,
-                date: new Date().toLocaleDateString('es-SV')
-              };
-              localStorage.setItem('ihfb_user_session_v8', JSON.stringify(currentUser));
-              saveParticipantToDatabase(currentUser);
-              activarSesionVisual();
-              showProAlert("Registro Exitoso", `Tu cuenta de Google (${currentUser.email}) ha sido vinculada como ${currentUser.role}.`);
-              setTimeout(() => switchTab('modulos'), 1000);
-            }
-          }
-        });
-      }
-    }
-
-    // INICIO DE SESIÓN DIRECTO CON GOOGLE
-    function handleDirectGoogleLogin() {
-      if (window.google && google.accounts && google.accounts.id) {
-        google.accounts.id.prompt();
-      }
-    }
-
-    function activarSesionVisual() {
-      document.getElementById('topUserName').textContent = currentUser.name;
-      document.getElementById('topUserRole').textContent = currentUser.role;
-      document.getElementById('badgeCurrentRole').textContent = currentUser.role;
-
-      document.getElementById('topUserBadge').classList.remove('hidden');
-      document.getElementById('topUserBadge').classList.add('flex');
-      document.getElementById('mainNavMenu').classList.remove('hidden');
-
-      document.getElementById('certParticipantName').textContent = currentUser.name;
-      document.getElementById('certParticipantRole').textContent = `Rol: ${currentUser.role}`;
-      document.getElementById('certParticipantEmail').textContent = currentUser.email;
-      document.getElementById('certDate').textContent = new Date().toLocaleDateString('es-SV', {
-        day: '2-digit', month: 'long', year: 'numeric'
-      });
-      document.getElementById('certFolio').textContent = `IHFB-${currentUser.role.substring(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
-
-      document.getElementById('supName').value = currentUser.name;
-      document.getElementById('supEmail').value = currentUser.email;
-    }
-
-    function desactivarSesionVisual() {
-      document.getElementById('topUserBadge').classList.add('hidden');
-      document.getElementById('topUserBadge').classList.remove('flex');
-      document.getElementById('mainNavMenu').classList.add('hidden');
-    }
-
-    function handleLogout() {
-      if (confirm("¿Deseas cerrar tu sesión?")) {
-        localStorage.removeItem('ihfb_user_session_v8');
-        currentUser = { email: "", name: "", role: "Docente", isRegistered: false };
-        desactivarSesionVisual();
-        switchTab('inicio');
-      }
-    }
-
-    // NAVEGACIÓN Y PROTECCIÓN
+    // TRANSICIÓN DE PESTAÑAS
     function switchTab(tabKey) {
       if (!currentUser.isRegistered && !isAdminMode && tabKey !== 'inicio') {
         showProAlert("Acceso Restringido", "Por favor ingresa primero con tu cuenta de Google.", false);
         return;
       }
       if (tabKey === 'inicio' && currentUser.isRegistered && !isAdminMode) {
-        switchTab('modulos');
+        switchTab('dashboard');
         return;
       }
 
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('bg-blue-700', 'text-white');
+        btn.classList.remove('bg-blue-700', 'text-white', 'shadow');
         btn.classList.add('text-slate-300');
       });
 
@@ -1460,21 +1560,53 @@
       const targetNav = document.getElementById(`nav-${tabKey}`);
       if (target) target.classList.remove('hidden');
       if (targetNav) {
-        targetNav.classList.add('bg-blue-700', 'text-white');
+        targetNav.classList.add('bg-blue-700', 'text-white', 'shadow');
         targetNav.classList.remove('text-slate-300');
       }
+
+      // Si entra a módulos, renderiza de inmediato el catálogo limpio en dos columnas
+      if (tabKey === 'modulos') {
+        renderModulesSidebar();
+        renderActiveModuleCards(currentSelectedModuleId);
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function handleLogoClick() {
       if (currentUser.isRegistered || isAdminMode) {
-        switchTab('modulos');
+        switchTab('dashboard');
       } else {
         switchTab('inicio');
       }
     }
 
-    // MODAL DE PERFIL
+    // MODAL ELEGANTE CERRAR SESIÓN
+    function requestLogoutConfirmation() {
+      document.getElementById('logoutConfirmModal').classList.remove('hidden');
+    }
+
+    function closeLogoutModal() {
+      document.getElementById('logoutConfirmModal').classList.add('hidden');
+    }
+
+    function confirmLogoutAction() {
+      closeLogoutModal();
+      localStorage.removeItem('ihfb_user_session_v9');
+      currentUser = { email: "", name: "", role: "Docente", isRegistered: false };
+      desactivarSesionVisual();
+      switchTab('inicio');
+    }
+
+    // 9. REPRODUCCIÓN DIRECTA DEL VIDEO DE INDUCCIÓN (INLINE PLAYER)
+    function playInlineIntroVideo() {
+      const container = document.getElementById('inlineIntroPlayerContainer');
+      container.innerHTML = `
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      `;
+    }
+
+    // 10. MODAL DE PERFIL (MODIFICAR NOMBRE O ROL)
     function openProfileEditModal() {
       if (!currentUser.isRegistered) return;
       document.getElementById('profileEmailDisplay').value = currentUser.email;
@@ -1492,18 +1624,19 @@
       currentUser.name = document.getElementById('profileNameInput').value.trim();
       currentUser.role = document.getElementById('profileRoleSelect').value;
 
-      localStorage.setItem('ihfb_user_session_v8', JSON.stringify(currentUser));
+      localStorage.setItem('ihfb_user_session_v9', JSON.stringify(currentUser));
       saveParticipantToDatabase(currentUser);
+      syncToGoogleSheetsWebhook(currentUser, "Actualización de Perfil");
 
       activarSesionVisual();
       closeProfileEditModal();
-      showProAlert("Perfil Actualizado", "Tus datos y rol han sido actualizados con éxito.");
+      showProAlert("Perfil Actualizado", "Tus datos oficiales y rol han sido actualizados con éxito.");
     }
 
-    // BASE DE DATOS
+    // 11. BASE DE DATOS LOCAL
     function saveParticipantToDatabase(user) {
-      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
-      const index = db.findIndex(u => u.email === user.email);
+      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+      const index = db.findIndex(u => u.email.toLowerCase() === user.email.toLowerCase());
       const participantRecord = {
         name: user.name,
         email: user.email,
@@ -1511,7 +1644,7 @@
         progress: calculateUserProgress(),
         avgScore: calculateAverageScore(),
         date: user.date || new Date().toLocaleDateString('es-SV'),
-        folio: document.getElementById('certFolio').textContent
+        folio: document.getElementById('certFolio') ? document.getElementById('certFolio').textContent : `IHFB-${user.role.substring(0,3).toUpperCase()}-8491`
       };
 
       if (index !== -1) {
@@ -1519,7 +1652,7 @@
       } else {
         db.push(participantRecord);
       }
-      localStorage.setItem('ihfb_participants_db_v8', JSON.stringify(db));
+      localStorage.setItem('ihfb_participants_db_v9', JSON.stringify(db));
     }
 
     function calculateUserProgress() {
@@ -1541,7 +1674,51 @@
       return "bg-emerald-500";
     }
 
-    // REPRODUCTOR HÍBRIDO
+    // 12. DASHBOARD POST-LOGIN
+    function renderDashboardMetrics() {
+      const completedCount = modulesData.filter(m => m.quizCompleted).length;
+      const totalPercent = Math.round((completedCount / modulesData.length) * 100);
+
+      document.getElementById('dashMetricProgress').textContent = `${totalPercent}%`;
+      document.getElementById('dashMetricModules').textContent = `${completedCount} de ${modulesData.length}`;
+
+      const activeMod = modulesData.find(m => !m.quizCompleted && m.unlocked) || modulesData[0];
+      document.getElementById('dashNextStepLabel').textContent = `${activeMod.code}: ${activeMod.title}`;
+    }
+
+    function renderDashboardModules() {
+      const grid = document.getElementById('dashModulesGrid');
+      grid.innerHTML = "";
+
+      modulesData.forEach(mod => {
+        const card = document.createElement('div');
+        card.className = "p-4 bg-slate-50 hover:bg-blue-50/50 rounded-xl border border-slate-200 transition cursor-pointer flex flex-col justify-between";
+        card.onclick = () => {
+          currentSelectedModuleId = mod.id;
+          switchTab('modulos');
+        };
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="w-7 h-7 rounded-lg ${mod.quizCompleted ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} flex items-center justify-center text-xs font-bold">
+                <i class="fa-solid ${mod.icon}"></i>
+              </span>
+              <span class="text-[10px] font-bold ${mod.quizCompleted ? 'text-emerald-700 bg-emerald-100' : 'text-slate-500 bg-slate-200'} px-2 py-0.5 rounded-full">
+                ${mod.quizCompleted ? 'Aprobado' : (mod.unlocked ? 'Activo' : 'Bloqueado')}
+              </span>
+            </div>
+            <h4 class="text-xs font-bold text-slate-800">${mod.code}: ${mod.title}</h4>
+          </div>
+          <div class="mt-3 text-[11px] text-blue-700 font-bold flex items-center gap-1">
+            <span>Ver contenido</span> <i class="fa-solid fa-chevron-right text-[9px]"></i>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // 13. REPRODUCTOR HÍBRIDO (YOUTUBE / DRIVE)
     function formatVideoEmbedUrl(rawUrl) {
       if (!rawUrl) return "https://www.youtube.com/embed/dQw4w9WgXcQ";
       let url = rawUrl.trim();
@@ -1560,7 +1737,7 @@
       return url;
     }
 
-    // MODAL AMPLIO VIDEO + MANUAL
+    // 14. MODAL AMPLIO VIDEO + MANUAL (TIPO IMAGEN 2 / 3)
     function openModuleVideoModal(card, mod) {
       document.getElementById('proModalTag').textContent = card.num;
       document.getElementById('proModalHeaderTitle').textContent = card.title;
@@ -1592,7 +1769,7 @@
       document.getElementById('manualPageIndicator').textContent = `${currentManualPage} / 4`;
     }
 
-    // RENDERIZADO DE MÓDULOS CON BARRAS DINÁMICAS
+    // 15. RENDERIZADO DE MÓDULOS CON BARRAS DINÁMICAS
     function renderModulesSidebar() {
       const container = document.getElementById('moduleListContainer');
       container.innerHTML = "";
@@ -1715,7 +1892,7 @@
       });
     }
 
-    // PRÁCTICAS EN VIVO
+    // 16. PRÁCTICAS EN VIVO
     function goToModulePractice(modId) {
       document.getElementById('selectPracticeModule').value = modId;
       loadPracticeByModule(modId);
@@ -1803,12 +1980,15 @@
       const mod = modulesData.find(m => m.id === modId);
       if (!mod) return;
       mod.practiceCompleted = true;
-      localStorage.setItem('ihfb_modules_clean_v8', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v9', JSON.stringify(modulesData));
+
       if (currentUser.isRegistered) {
         saveParticipantToDatabase(currentUser);
+        syncToGoogleSheetsWebhook(currentUser, `Práctica Validada: ${mod.code}`);
       }
 
       renderModulesSidebar();
+      renderDashboardMetrics();
       renderProgressTable();
       showProAlert("¡Práctica Validada!", `Has completado la práctica de ${mod.code}. El Quiz ha sido desbloqueado.`);
 
@@ -1834,7 +2014,7 @@
       }
     }
 
-    // QUIZZES Y CALIFICACIÓN
+    // 17. QUIZZES Y CALIFICACIÓN
     function loadQuizByModule(modId) {
       const mod = modulesData.find(m => m.id === modId);
       const questions = quizzesBank[modId] || [];
@@ -1912,9 +2092,11 @@
         }
       }
 
-      localStorage.setItem('ihfb_modules_clean_v8', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v9', JSON.stringify(modulesData));
+
       if (currentUser.isRegistered) {
         saveParticipantToDatabase(currentUser);
+        syncToGoogleSheetsWebhook(currentUser, `Quiz Evaluado: ${modId} (Nota: ${percentage}%)`);
       }
 
       const resultBox = document.getElementById('quizResultBox');
@@ -1946,11 +2128,12 @@
       }
 
       renderModulesSidebar();
+      renderDashboardMetrics();
       renderProgressTable();
       updateTotalProgressMetrics();
     }
 
-    // PROGRESO Y CONSTANCIA (CON BARRA DINÁMICA)
+    // 18. PROGRESO Y CONSTANCIA
     function renderProgressTable() {
       const tbody = document.getElementById('progressTableBody');
       tbody.innerHTML = "";
@@ -2013,7 +2196,7 @@
       window.print();
     }
 
-    // PASO 3: MODAL DE CLAVE ADMIN (AL PULSAR LA TUERCA)
+    // 19. ADMINISTRACIÓN (PASO 3: MODAL AL HACER CLIC EN LA TUERCA)
     function openAdminPasswordModal() {
       document.getElementById('adminPasswordInput').value = "";
       document.getElementById('adminPasswordModal').classList.remove('hidden');
@@ -2058,7 +2241,7 @@
       showProAlert("Modo Administrador Cerrado", "Se ha cerrado la sesión de coordinación.");
     }
 
-    // BASE DE DATOS Y SHEET OFICIAL
+    // 20. BASE DE DATOS Y SHEET OFICIAL
     function openAdminDatabaseModal() {
       renderAdminDatabaseTable();
       document.getElementById('adminDatabaseModal').classList.remove('hidden');
@@ -2073,7 +2256,7 @@
     }
 
     function renderAdminDatabaseTable() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -2083,7 +2266,7 @@
           { name: "Rebeca Callejas", email: "rebecacallejas@clases.edu.sv", role: "Docente", progress: 50, avgScore: "85%", folio: "IHFB-DOC-3120", date: "29/10/2026" },
           { name: "Carlos Menjívar", email: "carlos.menjivar@mined.gob.sv", role: "Supervisor", progress: 28, avgScore: "90%", folio: "IHFB-SUP-9104", date: "28/10/2026" }
         );
-        localStorage.setItem('ihfb_participants_db_v8', JSON.stringify(db));
+        localStorage.setItem('ihfb_participants_db_v9', JSON.stringify(db));
       }
 
       document.getElementById('adminRecordCount').textContent = `Mostrando ${db.length} participantes registrados`;
@@ -2108,7 +2291,7 @@
     function filterAdminDatabase() {
       const query = document.getElementById('adminSearchInput').value.toLowerCase();
       const roleFilter = document.getElementById('adminRoleFilter').value;
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -2138,7 +2321,7 @@
     }
 
     function exportParticipantsToCSV() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
       if (db.length === 0) {
         showProAlert("Base de Datos Vacía", "No hay registros disponibles para exportar.", false);
         return;
@@ -2157,7 +2340,7 @@
       document.body.removeChild(link);
     }
 
-    // EDITOR EN VIVO DE ENLACES
+    // 21. EDITOR EN VIVO DE ENLACES
     function openAdminEditModal(modId, cardIndex) {
       const mod = modulesData.find(m => m.id === modId);
       const card = mod.cards[cardIndex];
@@ -2190,10 +2373,30 @@
       mod.cards[cardIndex].manual = document.getElementById('editCardManualText').value.trim();
       mod.cards[cardIndex].points = document.getElementById('editCardPoints').value.split(',').map(s => s.trim()).filter(Boolean);
 
-      localStorage.setItem('ihfb_modules_clean_v8', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v9', JSON.stringify(modulesData));
       closeAdminEditModal();
       renderActiveModuleCards(modId);
       showProAlert("Cambios Guardados", "El enlace y el manual han sido actualizados con éxito.");
+    }
+
+    // 22. SISTEMA DE ALERTAS GENERALES
+    function showProAlert(title, message, isSuccess = true) {
+      document.getElementById('proAlertTitle').textContent = title;
+      document.getElementById('proAlertMessage').textContent = message;
+      const iconBox = document.getElementById('proAlertIconBox');
+      const icon = document.getElementById('proAlertIcon');
+      if (isSuccess) {
+        iconBox.className = "w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 mx-auto flex items-center justify-center text-xl shadow-sm";
+        icon.className = "fa-solid fa-circle-check";
+      } else {
+        iconBox.className = "w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 mx-auto flex items-center justify-center text-xl shadow-sm";
+        icon.className = "fa-solid fa-circle-xmark";
+      }
+      document.getElementById('proAlertModal').classList.remove('hidden');
+    }
+
+    function closeProAlertModal() {
+      document.getElementById('proAlertModal').classList.add('hidden');
     }
 
     // FAQ Y SOPORTE
