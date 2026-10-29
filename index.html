@@ -16,13 +16,10 @@
             ihfb: {
               blue: '#002B49',
               primary: '#0B4F8A',
-              lightBlue: '#E8F1F8',
               orange: '#F59E0B',
-              accent: '#2563EB',
-              success: '#10B981',
-              dark: '#0F172A',
-              pink: '#FF3399',
-              green: '#00D06C'
+              pink: '#FF2E93',
+              green: '#00D06C',
+              dark: '#081726'
             }
           }
         }
@@ -35,75 +32,72 @@
     .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scroll::-webkit-scrollbar-track { background: transparent; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 9999px; }
-    .dropzone-hover { border-color: #2563EB !important; background-color: #EFF6FF !important; }
-    @keyframes pulseSoft { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
-    .pulse-soft { animation: pulseSoft 2.5s infinite ease-in-out; }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white relative">
 
-  <!-- ================= TOPBAR INSTITUCIONAL PREMIUM ================= -->
-  <header class="bg-gradient-to-r from-[#031b2e] via-[#002B49] to-[#08355c] text-white shadow-lg sticky top-0 z-40 border-b border-blue-900/60">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+  <!-- ================= TOPBAR INSTITUCIONAL CON LOGO OFICIAL ================= -->
+  <header class="bg-[#002B49] text-white shadow-lg sticky top-0 z-40 border-b border-blue-900/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
       
-      <!-- LOGO VECTORIAL IHFB + TÍTULO -->
+      <!-- LOGO VECTORIAL IHFB REDISEÑADO CON ALTA DEFINICIÓN -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('inicio')">
-        <div class="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shadow-md shadow-black/20 shrink-0">
-          <!-- Logo vectorial fiel a I Hate Flying Bugs -->
-          <svg viewBox="0 0 100 100" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" rx="8" fill="#FFFFFF"/>
-            <!-- Letra I -->
-            <path d="M12 16H20V34H12V16Z" fill="#111827"/>
-            <!-- Letra H -->
-            <path d="M26 16H34V22H42V16H50V34H42V28H34V34H26V16Z" fill="#111827"/>
-            <!-- Trazo diagonal azul (A de HATE) -->
-            <path d="M53 34L66 16H74L61 34H53Z" fill="#2563EB"/>
-            <path d="M67 16H88V22H79V34H71V22H67V16Z" fill="#111827"/>
-            <!-- FLYING trazo rosa (Y) -->
-            <path d="M12 40H30V45H19V49H29V54H19V62H12V40Z" fill="#111827"/>
-            <path d="M33 40H40V56H51V62H33V40Z" fill="#111827"/>
-            <path d="M53 62L66 40H74L61 62H53Z" fill="#FF3399"/>
-            <path d="M72 40H80V62H72V40Z" fill="#111827"/>
-            <!-- BUGS trazo verde lima diagonal -->
-            <path d="M12 68H28C32 68 34 70 34 73C34 75 32 76 30 77C33 78 35 80 35 84C35 88 31 90 27 90H12V68ZM20 73V76H26C27 76 28 75 28 74C28 73 27 73 26 73H20ZM20 81V85H27C28 85 29 84 29 83C29 82 28 81 27 81H20Z" fill="#111827"/>
-            <path d="M38 68H46V82C46 84 48 85 50 85C52 85 54 84 54 82V68H62V82C62 87 57 90 50 90C43 90 38 87 38 82V68Z" fill="#111827"/>
-            <path d="M72 90L86 68H94L80 90H72Z" fill="#00D06C"/>
+        <div class="w-11 h-11 bg-white rounded-xl p-1.5 flex items-center justify-center shadow-md shrink-0">
+          <svg viewBox="0 0 120 120" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- I -->
+            <rect x="10" y="14" width="9" height="22" fill="#111827"/>
+            <!-- H -->
+            <rect x="25" y="14" width="8" height="22" fill="#111827"/>
+            <rect x="33" y="21" width="10" height="7" fill="#111827"/>
+            <rect x="43" y="14" width="8" height="22" fill="#111827"/>
+            <!-- ATE (Trazo azul diagonal en A) -->
+            <polygon points="56,36 68,14 77,14 65,36" fill="#2563EB"/>
+            <polygon points="69,14 78,14 87,36 78,36" fill="#111827"/>
+            <rect x="88" y="14" width="18" height="7" fill="#111827"/>
+            <rect x="93" y="21" width="8" height="15" fill="#111827"/>
+            <!-- FLYING (Trazo magenta/rosa en Y) -->
+            <rect x="10" y="46" width="18" height="6" fill="#111827"/>
+            <rect x="10" y="52" width="7" height="18" fill="#111827"/>
+            <rect x="17" y="58" width="8" height="5" fill="#111827"/>
+            <rect x="32" y="46" width="8" height="24" fill="#111827"/>
+            <rect x="40" y="64" width="11" height="6" fill="#111827"/>
+            <polygon points="56,70 68,46 78,46 66,70" fill="#FF2E93"/>
+            <rect x="80" y="46" width="8" height="24" fill="#111827"/>
+            <!-- BUGS (Trazo diagonal verde lima) -->
+            <rect x="10" y="80" width="8" height="24" fill="#111827"/>
+            <path d="M18 80H30C33 80 35 82 35 85C35 87 33 89 30 90C34 91 36 93 36 97C36 101 33 104 29 104H18V80ZM26 86H29C30 86 31 85 31 84C31 83 30 82 29 82H26V86ZM26 98H29C30 98 31 97 31 96C31 95 30 94 29 94H26V98Z" fill="#111827"/>
+            <path d="M42 80H50V96C50 98 52 99 54 99C56 99 58 98 58 96V80H66V96C66 102 60 105 54 105C48 105 42 102 42 96V80Z" fill="#111827"/>
+            <polygon points="76,104 90,80 98,80 84,104" fill="#00D06C"/>
+            <!-- Asterisco característico -->
+            <path d="M106 91L110 88L112 92L108 95L112 98L110 102L106 99L106 104L101 104L101 99L97 102L95 98L99 95L95 92L97 88L101 91L101 86L106 86V91Z" fill="#111827"/>
           </svg>
         </div>
-        <div class="leading-tight">
-          <div class="flex items-center gap-2">
-            <h1 class="text-xs sm:text-base font-extrabold tracking-tight text-white flex items-center gap-1.5">
-              Portal de Capacitación Autónoma
-            </h1>
-            <span class="hidden md:inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">Oficial</span>
-          </div>
-          <p class="text-[11px] text-blue-200 hidden sm:block">IHFB El Salvador • Nivelación y Acreditación Operativa</p>
+        <div>
+          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight">
+            Portal de Capacitación Autónoma
+          </h1>
+          <p class="text-[11px] text-blue-200">IHFB El Salvador • Nivelación y Acreditación Operativa</p>
         </div>
       </div>
 
-      <!-- BADGES Y BOTÓN ADMIN -->
-      <div class="flex items-center space-x-2 sm:space-x-3">
-        <!-- Badge de Usuario -->
-        <div id="topUserBadge" class="flex items-center space-x-2 bg-blue-950/70 px-2.5 sm:px-3 py-1.5 rounded-full border border-blue-400/20 text-[11px] sm:text-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-soft"></span>
-          <span id="topUserName" class="font-medium text-white truncate max-w-[90px] sm:max-w-[140px]">Prof. Nelson Morales</span>
-          <span class="text-blue-400">|</span>
-          <span id="topUserRole" class="text-blue-200 font-bold uppercase text-[9px] sm:text-[10px] tracking-wider">DOCENTE</span>
-        </div>
-
-        <!-- Botón de Administrador / Editor en Vivo -->
-        <button onclick="toggleAdminPrompt()" id="btnAdminTrigger" class="px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition flex items-center gap-1.5 bg-slate-800/80 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 shadow-sm">
-          <i class="fa-solid fa-shield-halved text-xs"></i>
-          <span id="adminBtnLabel" class="hidden sm:inline">Modo Admin</span>
+      <!-- BADGE USUARIO (OCULTO HASTA INICIAR SESIÓN) -->
+      <div id="topUserBadge" class="hidden items-center space-x-2 bg-blue-950/70 px-3 py-1.5 rounded-full border border-blue-400/20 text-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="topUserName" class="font-medium text-white truncate max-w-[120px] sm:max-w-[160px]">Usuario</span>
+        <span class="text-blue-400">|</span>
+        <span id="topUserRole" class="text-blue-200 font-bold uppercase text-[10px] tracking-wider">Docente</span>
+        <button onclick="cerrarSesion()" title="Cerrar sesión" class="ml-1 text-slate-400 hover:text-rose-300">
+          <i class="fa-solid fa-right-from-bracket"></i>
         </button>
       </div>
+
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN ADAPTATIVA (SCROLL HORIZONTAL EN MÓVIL) -->
-    <nav class="bg-slate-950/90 border-t border-slate-800 px-2 sm:px-6 backdrop-blur">
+    <!-- MENÚ HORIZONTAL: OCULTO POR DEFECTO HASTA INGRESAR CORREO -->
+    <nav id="mainNavMenu" class="hidden bg-slate-950/90 border-t border-slate-800 px-3 sm:px-6">
       <div class="max-w-7xl mx-auto flex items-center space-x-1 sm:space-x-2 overflow-x-auto custom-scroll py-2 text-xs sm:text-sm font-medium">
-        <button onclick="switchTab('inicio')" id="nav-inicio" class="nav-btn px-3 py-1.5 rounded-lg text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-1.5 shadow-sm">
-          <i class="fa-solid fa-house text-xs"></i> <span>1. Inicio y Acceso</span>
+        <button onclick="switchTab('inicio')" id="nav-inicio" class="nav-btn px-3 py-1.5 rounded-lg text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-1.5">
+          <i class="fa-solid fa-house text-xs"></i> <span>1. Inicio</span>
         </button>
         <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
           <i class="fa-solid fa-layer-group text-xs"></i> <span>2. Módulos de Aprendizaje</span>
@@ -118,21 +112,21 @@
           <i class="fa-solid fa-award text-xs"></i> <span>5. Mi Progreso y Validación</span>
         </button>
         <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
-          <i class="fa-solid fa-comments text-xs"></i> <span>6. Preguntas y Consultas</span>
+          <i class="fa-solid fa-comments text-xs"></i> <span>6. Preguntas y Soporte</span>
         </button>
       </div>
     </nav>
   </header>
 
-  <!-- BANNER FLOTANTE DEL MODO ADMINISTRADOR (APARECE SOLO CUANDO ESTÁ ACTIVO) -->
-  <div id="adminNoticeBar" class="hidden bg-amber-500 text-slate-950 px-4 py-2 text-xs font-bold shadow-md sticky top-28 z-30 flex items-center justify-between">
+  <!-- AVISO VISUAL DE MODO ADMINISTRADOR (SOLO CUANDO SE ACTIVA) -->
+  <div id="adminNoticeBar" class="hidden bg-amber-500 text-slate-950 px-4 py-2 text-xs font-bold shadow-md sticky top-16 z-30 flex items-center justify-between">
     <div class="flex items-center gap-2">
-      <i class="fa-solid fa-triangle-exclamation text-slate-900"></i>
-      <span>MODO ADMINISTRADOR ACTIVO: Puedes editar enlaces de videos, PDFs, títulos y preguntas en tiempo real.</span>
+      <i class="fa-solid fa-wrench text-slate-900"></i>
+      <span>MODO ADMINISTRADOR ACTIVO: Edición en vivo de enlaces (YouTube / Drive), títulos y manuales.</span>
     </div>
     <div class="flex items-center gap-2">
-      <button onclick="exportConfigJSON()" class="px-2.5 py-1 bg-slate-950 text-white rounded text-[11px] hover:bg-slate-800 flex items-center gap-1">
-        <i class="fa-solid fa-download"></i> Respaldar Cambios
+      <button onclick="exportConfigJSON()" class="px-2.5 py-1 bg-slate-950 text-white rounded text-[11px] hover:bg-slate-800">
+        Respaldar Configuración
       </button>
       <button onclick="disableAdminMode()" class="px-2.5 py-1 bg-amber-700 text-white rounded text-[11px] hover:bg-amber-800">
         Salir de Admin
@@ -140,648 +134,491 @@
     </div>
   </div>
 
-  <!-- ================= CONTENEDOR PRINCIPAL FLUIDO ================= -->
-  <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 py-5 sm:py-7 flex-1">
+  <!-- ================= CONTENEDOR CENTRAL ================= -->
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex-1">
 
-    <!-- 1. SECCIÓN: INICIO Y ACCESO POR PERFIL -->
+    <!-- 1. SECCIÓN: INICIO Y ACCESO POR CORREO INSTITUCIONAL -->
     <section id="section-inicio" class="tab-content block space-y-6">
       
-      <!-- Banner Premium de Bienvenida -->
-      <div class="bg-gradient-to-r from-[#002B49] via-[#093c66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-blue-900/50 flex flex-col lg:flex-row gap-6 items-center justify-between">
+      <!-- Banner de bienvenida -->
+      <div class="bg-gradient-to-r from-[#002B49] via-[#093c66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row gap-6 items-center justify-between border border-blue-900/50">
         <div class="space-y-3 max-w-2xl">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            <i class="fa-solid fa-shield-halved text-[10px]"></i> Capacitación Oficial y Nivelación Autónoma
+            <i class="fa-solid fa-shield-halved text-[10px]"></i> Capacitación Oficial y Nivelación Autónoma[cite: 12]
           </span>
-          <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Bienvenido al Espacio Formativo IHFB</h2>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Bienvenido al Espacio Formativo IHFB[cite: 12]</h2>
           <p class="text-slate-200 text-xs sm:text-sm leading-relaxed">
-            Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.
+            Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador[cite: 12].
           </p>
         </div>
         <div class="flex items-center gap-4 bg-white/10 backdrop-blur px-6 py-4 rounded-2xl border border-white/10 text-center shrink-0">
           <div>
             <div class="text-3xl font-black text-amber-400">7</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Módulos</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Módulos[cite: 12]</div>
           </div>
           <div class="h-8 w-px bg-white/20"></div>
           <div>
             <div class="text-3xl font-black text-emerald-400">80%</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Aprobación</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Aprobación[cite: 12]</div>
           </div>
           <div class="h-8 w-px bg-white/20"></div>
           <div>
             <div class="text-3xl font-black text-blue-300">SOP</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Protocolos</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Protocolos[cite: 12]</div>
           </div>
         </div>
       </div>
 
-      <!-- Cuadrícula: Formulario en 1 Paso + Video Introductorio -->
+      <!-- Cuadrícula: Formulario con Correo Institucional + Video Introductorio -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Formulario de Acceso Rápido -->
-        <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200/90 p-5 sm:p-7 flex flex-col justify-between">
+        <!-- Formulario de Acceso -->
+        <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-                <i class="fa-solid fa-id-card text-blue-600"></i> Acceso en 1 Paso
+                <i class="fa-solid fa-at text-blue-600"></i> Acceso por Correo Institucional
               </h3>
-              <span class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-medium">Sin contraseña</span>
+              <span class="text-[11px] bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full font-medium">Sin contraseña</span>
             </div>
             <p class="text-xs text-slate-500 mb-5 leading-relaxed">
-              Ingresa tu documento oficial. El sistema reconocerá tu progreso automáticamente en cada sesión sin trámites previos.
+              Ingresa tu correo institucional asignado (ejemplo: <strong>docente@clases.edu.sv</strong>). El sistema desbloqueará de inmediato tu menú y módulos de formación.
             </p>
             <form id="accessForm" onsubmit="handleUserAccess(event)" class="space-y-3.5">
               <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Documento de Identidad (DUI / ID Oficial) *</label>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Correo Institucional Oficial *</label>
                 <div class="relative">
-                  <input type="text" id="userInputDUI" required placeholder="00000000-0" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
-                  <i class="fa-solid fa-fingerprint absolute right-3.5 top-3 text-slate-400 text-sm"></i>
+                  <input type="email" id="userInputEmail" required placeholder="nombre.apellido@clases.edu.sv" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
+                  <i class="fa-solid fa-envelope absolute right-3.5 top-3 text-slate-400 text-sm"></i>
                 </div>
+                <span class="text-[10px] text-slate-400 mt-1 block">Acepta correos institucionales (@clases, @docentes, @ihfb, etc.)</span>
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo (para constancia oficial) *</label>
-                <input type="text" id="userInputName" required placeholder="Ej. Juan Carlos Henríquez" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo Oficial (para constancia) *</label>
+                <input type="text" id="userInputName" required placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label class="block text-xs font-semibold text-slate-700 mb-1">Rol Operativo *</label>
                   <select id="userInputRole" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
-                    <option value="Docente">Docente</option>
-                    <option value="Tutor">Tutor</option>
-                    <option value="Facilitador">Facilitador</option>
-                    <option value="Monitor">Monitor</option>
-                    <option value="Supervisor">Supervisor</option>
-                    <option value="Auditor">Auditor</option>
+                    <option value="Docente">Docente[cite: 13]</option>
+                    <option value="Tutor">Tutor[cite: 13]</option>
+                    <option value="Facilitador">Facilitador[cite: 13]</option>
+                    <option value="Monitor">Monitor[cite: 13]</option>
+                    <option value="Supervisor">Supervisor[cite: 13]</option>
+                    <option value="Auditor">Auditor[cite: 13]</option>
                   </select>
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-slate-700 mb-1">Sede / Departamento *</label>
                   <select id="userInputDept" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
-                    <option value="San Salvador">San Salvador</option>
-                    <option value="La Libertad">La Libertad</option>
-                    <option value="Santa Ana">Santa Ana</option>
-                    <option value="San Miguel">San Miguel</option>
-                    <option value="Sonsonate">Sonsonate</option>
-                    <option value="Otro / Central">Otro / Central</option>
+                    <option value="San Salvador">San Salvador[cite: 13]</option>
+                    <option value="La Libertad">La Libertad[cite: 13]</option>
+                    <option value="Santa Ana">Santa Ana[cite: 13]</option>
+                    <option value="San Miguel">San Miguel[cite: 13]</option>
+                    <option value="Sonsonate">Sonsonate[cite: 13]</option>
+                    <option value="Otro / Central">Otro / Central[cite: 13]</option>
                   </select>
                 </div>
               </div>
-              <button type="submit" class="w-full mt-2 bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition shadow-md hover:shadow-lg flex items-center justify-center gap-2">
-                <span>Ingresar a mi Ruta de Capacitación</span>
+              <button type="submit" class="w-full mt-2 bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition shadow-md flex items-center justify-center gap-2">
+                <span>Ingresar a mis Módulos</span>
                 <i class="fa-solid fa-arrow-right text-xs"></i>
               </button>
             </form>
           </div>
           <div id="accessStatusMsg" class="mt-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs hidden items-center gap-2">
             <i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
-            <span id="accessStatusText">Sesión registrada con éxito. Redirigiendo...</span>
+            <span id="accessStatusText">Correo verificado. Desbloqueando plataforma...</span>
           </div>
         </div>
 
-        <!-- Video Introductorio de Inducción -->
-        <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200/90 p-5 sm:p-7 flex flex-col justify-between">
+        <!-- Video de Inducción -->
+        <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
               <span class="text-xs uppercase tracking-wider font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md">
-                Guía de Inducción
+                Guía de Inducción[cite: 14]
               </span>
-              <span class="text-xs text-slate-400">Duración: 2 min 40s</span>
+              <span class="text-xs text-slate-400">Duración: 2 min 40s[cite: 14]</span>
             </div>
-            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">¿Cómo funciona la capacitación autónoma?</h3>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">¿Cómo funciona la capacitación autónoma?[cite: 14]</h3>
             <p class="text-xs text-slate-600 leading-relaxed mb-4">
-              Aprende a tu propio ritmo. Cada módulo contiene cápsulas en video y manuales operativos estándar (SOP). Al finalizar el contenido de cada módulo, deberás realizar su evaluación práctica para desbloquear el siguiente nivel.
+              Cada módulo contiene cápsulas en video y manuales operativos estándar (SOP)[cite: 14]. Para aprobar un módulo, debes realizar la práctica interactiva y luego aprobar la evaluación (quiz) con mínimo 80%[cite: 12, 14, 15].
             </p>
-            
-            <!-- Visor del Video con Modal -->
-            <div class="relative w-full aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-inner flex items-center justify-center group cursor-pointer border border-slate-800" onclick="openIntroVideoModal()">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Aula tecnológica" class="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:scale-105 transition duration-500">
-              <div class="relative z-10 w-16 h-16 rounded-full bg-blue-600 group-hover:bg-blue-500 text-white flex items-center justify-center shadow-2xl transition transform group-hover:scale-110">
-                <i class="fa-solid fa-play text-xl ml-1"></i>
+            <div class="relative w-full aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-inner flex items-center justify-center group cursor-pointer border border-slate-800" onclick="openUniversalVideoModal('Inducción General IHFB', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'M1')">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Aula tecnológica" class="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:scale-105 transition duration-500">[cite: 14]
+              <div class="relative z-10 w-16 h-16 rounded-full bg-blue-600 group-hover:bg-blue-500 text-white flex items-center justify-center shadow-2xl transition transform group-hover:scale-110">[cite: 14]
+                <i class="fa-solid fa-play text-xl ml-1"></i>[cite: 14]
               </div>
-              <div class="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur px-3.5 py-2.5 rounded-lg flex items-center justify-between text-white text-xs">
-                <span class="font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-blue-400"></i> Protocolo de Operación en Aula IHFB</span>
-                <span class="text-blue-300 font-semibold text-[11px]">Ver cápsula</span>
+              <div class="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur px-3.5 py-2.5 rounded-lg flex items-center justify-between text-white text-xs">[cite: 14]
+                <span class="font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-blue-400"></i> Protocolo de Operación en Aula IHFB[cite: 14]</span>
+                <span class="text-blue-300 font-semibold text-[11px]">Ver cápsula[cite: 14]</span>
               </div>
             </div>
           </div>
-
           <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-100 text-center">
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
-              <div class="w-6 h-6 mx-auto rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mb-1">1</div>
-              <p class="text-[11px] font-semibold text-slate-700">Explora Videos & SOP</p>
+            <div class="p-2 rounded-xl bg-slate-50">
+              <div class="w-6 h-6 mx-auto rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mb-1">1</div>[cite: 14]
+              <p class="text-[11px] font-semibold text-slate-700">Explora Videos & SOP[cite: 14]</p>
             </div>
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
-              <div class="w-6 h-6 mx-auto rounded-full bg-amber-100 text-amber-700 text-xs font-bold flex items-center justify-center mb-1">2</div>
-              <p class="text-[11px] font-semibold text-slate-700">Simula y Evalúa</p>
+            <div class="p-2 rounded-xl bg-slate-50">
+              <div class="w-6 h-6 mx-auto rounded-full bg-amber-100 text-amber-700 text-xs font-bold flex items-center justify-center mb-1">2</div>[cite: 15]
+              <p class="text-[11px] font-semibold text-slate-700">Simula y Evalúa[cite: 15]</p>
             </div>
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
-              <div class="w-6 h-6 mx-auto rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center mb-1">3</div>
-              <p class="text-[11px] font-semibold text-slate-700">Obtén tu Constancia</p>
+            <div class="p-2 rounded-xl bg-slate-50">
+              <div class="w-6 h-6 mx-auto rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center mb-1">3</div>[cite: 15]
+              <p class="text-[11px] font-semibold text-slate-700">Obtén tu Constancia[cite: 15]</p>
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- 2. SECCIÓN: MÓDULOS DE APRENDIZAJE (M1-M7 Y CATÁLOGO) -->
+    <!-- 2. SECCIÓN: MÓDULOS DE APRENDIZAJE -->
     <section id="section-modulos" class="tab-content hidden space-y-6">
-      
-      <!-- Encabezado de Sección -->
-      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Secuencia Formativa Oficial</span>
-          <h2 class="text-xl font-extrabold text-slate-900">Módulos de Capacitación y Nivelación</h2>
-          <p class="text-xs text-slate-500">Los módulos se desbloquean en orden estricto tras aprobar el quiz correspondiente (mínimo 80%).</p>
+          <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Secuencia Formativa Oficial[cite: 15]</span>
+          <h2 class="text-xl font-extrabold text-slate-900">Módulos de Capacitación y Nivelación[cite: 15]</h2>
+          <p class="text-xs text-slate-500">Visualiza los videos, consulta los SOP relacionados y avanza a la práctica modular para desbloquear tu evaluación[cite: 15].</p>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-xs font-medium text-slate-500">Filtrando para rol:</span>
+          <span class="text-xs font-medium text-slate-500">Rol activo:</span>
           <span id="badgeCurrentRole" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-extrabold uppercase">Docente</span>
         </div>
       </div>
 
-      <!-- Cuadrícula: Menú Lateral de Módulos (M1-M7) + Tarjetas de Recursos -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        <!-- SIDEBAR DE MÓDULOS -->
-        <aside class="lg:col-span-4 bg-white rounded-2xl border border-slate-200/90 p-4 shadow-sm space-y-3 lg:sticky lg:top-24">
+        <!-- Sidebar M1 a M7 -->
+        <aside class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 p-4 shadow-sm space-y-3 lg:sticky lg:top-24">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">Ruta de Módulos</h3>
-            <span id="modulesCompletedCount" class="text-xs font-bold text-blue-700">2 de 7 aprobados</span>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">Ruta de Módulos[cite: 15]</h3>
+            <span id="modulesCompletedCount" class="text-xs font-bold text-blue-700">0 de 7 completados</span>
           </div>
-          <div id="moduleListContainer" class="space-y-2.5">
-            <!-- Renderizado dinámicamente -->
-          </div>
+          <div id="moduleListContainer" class="space-y-2.5"></div>
         </aside>
 
-        <!-- CATÁLOGO CENTRAL DE RECURSOS DEL MÓDULO ACTIVO -->
+        <!-- Catálogo de Recursos -->
         <div class="lg:col-span-8 space-y-5">
-          
-          <!-- Encabezado del Módulo Activo -->
-          <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col sm:flex-row justify-between sm:items-center gap-3">
             <div>
               <div class="flex items-center gap-2">
                 <span id="activeModuleCode" class="text-xs font-black px-2.5 py-0.5 rounded bg-blue-100 text-blue-800">M1</span>
-                <span id="activeModuleStatusBadge" class="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700">Completado y Aprobado</span>
+                <span id="activeModuleStatusBadge" class="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-700">En Curso</span>
               </div>
-              <h3 id="activeModuleTitle" class="text-lg font-bold text-slate-900 mt-1">M1: Access & Login</h3>
-              <p id="activeModuleDesc" class="text-xs text-slate-500">Configuración del entorno del aula, conectividad Wi-Fi y acceso a cuentas.</p>
+              <h3 id="activeModuleTitle" class="text-lg font-bold text-slate-900 mt-1">M1: Access & Login[cite: 16]</h3>
+              <p id="activeModuleDesc" class="text-xs text-slate-500">Configuración del entorno del aula, conectividad Wi-Fi y acceso a cuentas[cite: 32].</p>
             </div>
-            <button onclick="goToModuleQuiz()" class="px-4 py-2.5 rounded-xl bg-[#0B4F8A] hover:bg-blue-800 text-white font-semibold text-xs transition shadow flex items-center justify-center gap-2 shrink-0">
-              <i class="fa-solid fa-pen-to-square"></i>
-              <span>Ir a la Evaluación del Módulo</span>
+            <button onclick="goToModulePractice(currentSelectedModuleId)" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition shadow flex items-center justify-center gap-2 shrink-0">
+              <i class="fa-solid fa-laptop-code"></i>
+              <span>Ir a la Práctica de este Módulo</span>
             </button>
           </div>
-
-          <!-- Cuadrícula de Tarjetas de Videos y Manuales -->
-          <div id="moduleCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Inyectado dinámicamente con botón para editar en modo admin -->
-          </div>
+          <div id="moduleCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </div>
       </div>
     </section>
 
-    <!-- 3. SECCIÓN: PRÁCTICAS INTERACTIVAS (SIMULADOR EN VIVO) -->
+    <!-- 3. SECCIÓN: PRÁCTICAS EN VIVO SEGMENTADAS POR MÓDULOS -->
     <section id="section-practicas" class="tab-content hidden space-y-6">
-      
       <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <span class="text-xs font-bold uppercase text-amber-600 tracking-wider">Entorno Sandbox / Sin Riesgo</span>
-          <h2 class="text-xl font-extrabold text-slate-900">Simulador de Aula Interactiva</h2>
-          <p class="text-xs text-slate-500">Comprueba el dominio de la plataforma en vivo: prueba el bloqueo de pantallas, sincronización y dinámicas táctiles.</p>
+          <span class="text-xs font-bold uppercase text-amber-600 tracking-wider">Entorno Sandbox / Sin Riesgo[cite: 17]</span>
+          <h2 class="text-xl font-extrabold text-slate-900">Laboratorio Práctico Modular</h2>
+          <p class="text-xs text-slate-500">Completa la práctica asignada para desbloquear la evaluación (quiz) de este módulo.</p>
         </div>
-        <div class="flex items-center gap-2 text-xs font-semibold bg-amber-50 text-amber-800 px-3 py-1.5 rounded-xl border border-amber-200">
-          <i class="fa-solid fa-flask"></i> Modo Laboratorio Activo
-        </div>
-      </div>
-
-      <!-- SIMULADOR DUAL: DOCENTE VS ESTUDIANTE -->
-      <div class="bg-slate-950 rounded-2xl p-4 sm:p-6 text-white shadow-xl border border-slate-800">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-red-500"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span class="text-xs font-mono text-slate-400 ml-2">Simulador_Dual_IHFB_v2.0.sv</span>
-          </div>
-          <button onclick="resetSimulation()" class="hover:text-white underline text-xs text-slate-400">
-            <i class="fa-solid fa-rotate-left mr-1"></i> Reiniciar
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          
-          <!-- PANTALLA DOCENTE -->
-          <div class="bg-white text-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-300 flex flex-col">
-            <div class="bg-blue-900 text-white p-3 flex items-center justify-between text-xs">
-              <div class="flex items-center gap-2 font-bold">
-                <i class="fa-solid fa-chalkboard-user"></i>
-                <span>Vista Docente: Clase de Lenguaje y Ciencias</span>
-              </div>
-              <button id="btnLockScreen" onclick="toggleScreenLock()" class="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[11px] transition flex items-center gap-1.5 shadow">
-                <i class="fa-solid fa-lock" id="lockIcon"></i>
-                <span id="lockButtonText">Bloquear Pantalla Alumnos</span>
-              </button>
-            </div>
-            <div class="p-4 flex-1 space-y-4 text-xs">
-              <div class="p-3 bg-blue-50 rounded-xl border border-blue-100">
-                <h4 class="font-bold text-blue-900 text-sm mb-1">¿Qué comen los animales?</h4>
-                <p class="text-slate-600">Observa la imagen y resuelve los ejercicios de comprensión.</p>
-              </div>
-              <div class="space-y-3">
-                <div class="p-3 rounded-xl border border-slate-200">
-                  <div class="flex justify-between items-center mb-1">
-                    <span class="font-bold text-slate-700">1. ¿Qué come la vaca?</span>
-                    <span id="teacherFeedbackBadge" class="text-[10px] px-2 py-0.5 rounded font-bold bg-slate-100 text-slate-500">Esperando respuesta</span>
-                  </div>
-                  <div class="flex items-center gap-3">
-                    <img src="https://images.unsplash.com/photo-1546445317-29f4545e9d53?q=80&w=200&auto=format&fit=crop" class="w-12 h-12 object-cover rounded-lg border" alt="Vaca" />
-                    <div id="teacherSyncExplanation" class="text-slate-500 italic text-[11px]">
-                      El estudiante aún no selecciona una opción en su pantalla...
-                    </div>
-                  </div>
-                </div>
-                <div class="bg-slate-50 p-3 rounded-xl border text-[11px] space-y-1">
-                  <div class="flex justify-between font-semibold text-slate-700">
-                    <span>Estudiantes conectados:</span>
-                    <span class="text-blue-700 font-bold">28/28 en línea</span>
-                  </div>
-                  <div class="flex justify-between text-slate-600">
-                    <span>Estado del candado remoto:</span>
-                    <span id="teacherLockStatus" class="font-bold text-emerald-600">Pantallas Desbloqueadas</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- PANTALLA ESTUDIANTE -->
-          <div class="bg-white text-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-300 relative flex flex-col min-h-[360px]">
-            <div class="bg-slate-800 text-white p-3 flex items-center justify-between text-xs">
-              <div class="flex items-center gap-2 font-medium">
-                <i class="fa-solid fa-graduation-cap text-blue-400"></i>
-                <span>Vista Estudiante: Tablet Escolar AprendES</span>
-              </div>
-              <span class="text-[11px] bg-slate-700 px-2 py-0.5 rounded text-blue-200 font-mono">ID: EST-8419</span>
-            </div>
-            <div class="p-4 flex-1 space-y-3 text-xs">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">Pregunta 1 de 2</span>
-                <span class="text-[11px] text-blue-600 font-medium"><i class="fa-solid fa-robot mr-1"></i> Tutor IA Conectado</span>
-              </div>
-              <p class="font-semibold text-slate-700">¿Qué comen estos animales? (Selecciona para sincronizar):</p>
-              <div class="flex items-center gap-3">
-                <img src="https://images.unsplash.com/photo-1546445317-29f4545e9d53?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 object-cover rounded-xl border shadow-sm" alt="Vaca" />
-                <div class="space-y-1.5 flex-1">
-                  <button onclick="studentSelectOption('A')" id="btnOptA" class="student-opt-btn w-full text-left px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition flex items-center justify-between">
-                    <span>A) Plantas (Hierbas y pasto)</span>
-                    <span class="text-[10px] text-slate-400 font-mono">Opción 1</span>
-                  </button>
-                  <button onclick="studentSelectOption('B')" id="btnOptB" class="student-opt-btn w-full text-left px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition flex items-center justify-between">
-                    <span>B) Carne exclusivamente</span>
-                    <span class="text-[10px] text-slate-400 font-mono">Opción 2</span>
-                  </button>
-                  <button onclick="studentSelectOption('C')" id="btnOptC" class="student-opt-btn w-full text-left px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition flex items-center justify-between">
-                    <span>C) Ambos por igual</span>
-                    <span class="text-[10px] text-slate-400 font-mono">Opción 3</span>
-                  </button>
-                </div>
-              </div>
-              <div id="studentJustificationBox" class="hidden p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px]">
-                <strong>Justificación pedagógica:</strong> Las vacas son animales herbívoros; su sistema digestivo procesa fibras vegetales y pasto.
-              </div>
-            </div>
-
-            <!-- OVERLAY DE BLOQUEO DE PANTALLA -->
-            <div id="studentLockOverlay" class="absolute inset-0 bg-slate-950/95 backdrop-blur-md z-30 flex flex-col items-center justify-center text-center p-6 text-white hidden">
-              <div class="w-16 h-16 rounded-full bg-slate-900 border-2 border-slate-700 flex items-center justify-center text-amber-400 text-2xl mb-4 shadow-2xl">
-                <i class="fa-solid fa-lock"></i>
-              </div>
-              <h3 class="text-lg font-black tracking-wide text-white">Pantalla bloqueada</h3>
-              <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-xs leading-relaxed">
-                Es momento de concentrarte en la explicación del docente.
-              </p>
-              <div class="mt-4 text-[11px] font-mono text-slate-500">Control remoto ejecutado por el facilitador</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ACTIVIDAD DE ARRASTRAR Y SOLTAR -->
-      <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm space-y-4">
-        <div class="flex items-center justify-between">
-          <div>
-            <span class="text-xs font-bold uppercase text-blue-700">Práctica Interactiva 2</span>
-            <h3 class="text-lg font-bold text-slate-900">Actividad de Clasificación: Arrastrar y Soltar (Drag & Drop)</h3>
-            <p class="text-xs text-slate-500">Arrastra cada tarjeta hacia la caja correcta según su clasificación alimenticia.</p>
-          </div>
-          <button onclick="resetDragActivity()" class="text-xs text-blue-600 font-semibold hover:underline">
-            <i class="fa-solid fa-arrow-rotate-left mr-1"></i> Restablecer
-          </button>
-        </div>
-
-        <div id="draggableContainer" class="flex flex-wrap gap-3 p-4 bg-slate-50 rounded-xl border border-dashed border-slate-300">
-          <div draggable="true" ondragstart="drag(event)" id="drag-vaca" data-type="herbivoro" class="cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
-            <span>🐮 Vaca</span> <span class="text-[10px] text-slate-400 font-normal">(Hierba)</span>
-          </div>
-          <div draggable="true" ondragstart="drag(event)" id="drag-leon" data-type="carnivoro" class="cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
-            <span>🦁 León</span> <span class="text-[10px] text-slate-400 font-normal">(Carne)</span>
-          </div>
-          <div draggable="true" ondragstart="drag(event)" id="drag-conejo" data-type="herbivoro" class="cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
-            <span>🐰 Conejo</span> <span class="text-[10px] text-slate-400 font-normal">(Vegetales)</span>
-          </div>
-          <div draggable="true" ondragstart="drag(event)" id="drag-aguila" data-type="carnivoro" class="cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
-            <span>🦅 Águila</span> <span class="text-[10px] text-slate-400 font-normal">(Presas)</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div ondrop="drop(event, 'herbivoro')" ondragover="allowDrop(event)" ondragleave="clearDropStyle(event)" id="zone-herbivoro" class="p-4 rounded-xl border-2 border-dashed border-emerald-300 bg-emerald-50/40 min-h-[120px] transition space-y-2">
-            <h4 class="text-xs font-extrabold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
-              <i class="fa-solid fa-leaf"></i> Zona Herbívoros (Plantas)
-            </h4>
-            <div id="zone-herbivoro-content" class="flex flex-wrap gap-2 pt-1"></div>
-          </div>
-          <div ondrop="drop(event, 'carnivoro')" ondragover="allowDrop(event)" ondragleave="clearDropStyle(event)" id="zone-carnivoro" class="p-4 rounded-xl border-2 border-dashed border-rose-300 bg-rose-50/40 min-h-[120px] transition space-y-2">
-            <h4 class="text-xs font-extrabold text-rose-800 uppercase tracking-wider flex items-center gap-1.5">
-              <i class="fa-solid fa-drumstick-bite"></i> Zona Carnívoros (Carne)
-            </h4>
-            <div id="zone-carnivoro-content" class="flex flex-wrap gap-2 pt-1"></div>
-          </div>
-        </div>
-        <div id="dragSuccessMessage" class="hidden p-3 bg-emerald-100 border border-emerald-300 rounded-xl text-xs font-bold text-emerald-800 flex items-center gap-2">
-          <i class="fa-solid fa-circle-check text-emerald-600"></i>
-          <span>¡Excelente! Has clasificado correctamente todos los elementos del simulador de aula.</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. SECCIÓN: EVALUACIONES (QUIZZES DINÁMICOS) -->
-    <section id="section-quizzes" class="tab-content hidden space-y-6">
-      
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Acreditación Académica</span>
-          <h2 class="text-xl font-extrabold text-slate-900">Evaluaciones de Validación (Quizzes)</h2>
-          <p class="text-xs text-slate-500">Para aprobar cada módulo y desbloquear el siguiente, debes obtener al menos el 80% de aciertos.</p>
-        </div>
-        <div class="flex items-center gap-2 w-full md:w-auto">
-          <label class="text-xs font-semibold text-slate-600 whitespace-nowrap">Módulo a Evaluar:</label>
-          <select id="selectQuizModule" onchange="loadQuizByModule(this.value)" class="w-full md:w-auto px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-blue-600">
-            <option value="M1">M1: Access & Login</option>
-            <option value="M2">M2: Menu Options</option>
-            <option value="M3">M3: Visibility Settings</option>
-            <option value="M4">M4: Curriculum Structure</option>
-            <option value="M5">M5: Class Mode</option>
-            <option value="M6">M6: Monitoring Tools</option>
-            <option value="M7">M7: Supervisor Page</option>
+        <div class="flex items-center gap-2">
+          <label class="text-xs font-bold text-slate-600">Práctica del Módulo:</label>
+          <select id="selectPracticeModule" onchange="loadPracticeByModule(this.value)" class="px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 outline-none">
+            <option value="M1">M1: Conexión y Login</option>
+            <option value="M2">M2: Opciones de Menú</option>
+            <option value="M3">M3: Visibilidad</option>
+            <option value="M4">M4: Currículo y Drag & Drop</option>
+            <option value="M5">M5: Bloqueo Remoto de Aula</option>
+            <option value="M6">M6: Monitoreo</option>
+            <option value="M7">M7: Auditoría y Supervisor</option>
           </select>
         </div>
       </div>
 
-      <!-- TARJETA DEL CUESTIONARIO -->
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-sm max-w-3xl mx-auto space-y-6">
+      <!-- CONTENEDOR DE LA PRÁCTICA SELECCIONADA -->
+      <div id="practiceContentContainer" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-6">
+        <!-- Inyectado dinámicamente según el módulo -->
+      </div>
+    </section>
+
+    <!-- 4. SECCIÓN: EVALUACIONES (QUIZZES) -->
+    <section id="section-quizzes" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Acreditación Académica[cite: 22]</span>
+          <h2 class="text-xl font-extrabold text-slate-900">Evaluaciones de Validación (Quizzes)[cite: 22]</h2>
+          <p class="text-xs text-slate-500">Para presentar el quiz, debes haber completado previamente la práctica del módulo[cite: 15, 22]. Mínimo 80% para aprobar[cite: 12, 22].</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="text-xs font-bold text-slate-600">Módulo a Evaluar:[cite: 22]</label>
+          <select id="selectQuizModule" onchange="loadQuizByModule(this.value)" class="px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 outline-none">
+            <option value="M1">M1: Access & Login[cite: 22]</option>
+            <option value="M2">M2: Menu Options[cite: 22]</option>
+            <option value="M3">M3: Visibility Settings[cite: 22]</option>
+            <option value="M4">M4: Curriculum Structure[cite: 22]</option>
+            <option value="M5">M5: Class Mode[cite: 22]</option>
+            <option value="M6">M6: Monitoring Tools[cite: 22]</option>
+            <option value="M7">M7: Supervisor Page[cite: 22]</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm max-w-3xl mx-auto space-y-6">
         <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
           <div>
-            <span id="quizBadgeHeader" class="text-xs font-extrabold px-2.5 py-0.5 rounded bg-blue-100 text-blue-800">Cuestionario Oficial M1</span>
-            <h3 id="quizTitleHeader" class="text-base sm:text-lg font-bold text-slate-900 mt-1">Evaluación de Competencias: Access & Login</h3>
+            <span id="quizBadgeHeader" class="text-xs font-extrabold px-2.5 py-0.5 rounded bg-blue-100 text-blue-800">Cuestionario Oficial: M1</span>
+            <h3 id="quizTitleHeader" class="text-base sm:text-lg font-bold text-slate-900 mt-1">Evaluación: Access & Login[cite: 23]</h3>
           </div>
           <span class="text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-full">
-            Mínimo 80% para aprobar
+            Mínimo 80%[cite: 23]
           </span>
         </div>
 
         <form id="quizForm" onsubmit="submitQuiz(event)" class="space-y-6">
-          <div id="quizQuestionsContainer" class="space-y-5">
-            <!-- Inyectado por JS -->
-          </div>
+          <div id="quizQuestionsContainer" class="space-y-5"></div>
           <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
             <span class="text-xs text-slate-400">Preguntas prácticas basadas en el SOP</span>
-            <button type="submit" class="px-6 py-2.5 bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
+            <button type="submit" id="btnSubmitQuiz" class="px-6 py-2.5 bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
               <i class="fa-solid fa-check-circle"></i>
-              <span>Calificar y Guardar Resultado</span>
+              <span>Calificar y Registrar</span>
             </button>
           </div>
         </form>
 
-        <div id="quizResultBox" class="hidden p-5 rounded-xl border text-xs space-y-3">
-          <!-- Inyectado por JS -->
-        </div>
+        <div id="quizResultBox" class="hidden p-5 rounded-2xl border text-xs space-y-3"></div>
       </div>
     </section>
 
     <!-- 5. SECCIÓN: MI PROGRESO Y VALIDACIÓN -->
     <section id="section-progreso" class="tab-content hidden space-y-6">
-      
-      <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div class="space-y-2">
-          <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Historial de Nivelación</span>
-          <h2 class="text-2xl font-black text-slate-900">Estado de Acreditación Oficial</h2>
-          <p class="text-xs text-slate-500">Completa todos los módulos con al menos 80% para desbloquear la constancia digital.</p>
+          <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Historial de Nivelación[cite: 24]</span>
+          <h2 class="text-2xl font-black text-slate-900">Estado de Acreditación Oficial[cite: 24]</h2>
+          <p class="text-xs text-slate-500">Completa la práctica y el quiz de los 7 módulos para generar tu constancia[cite: 24].</p>
         </div>
         <div class="flex items-center gap-4 bg-slate-50 px-5 py-3 rounded-2xl border border-slate-200 shrink-0">
           <div>
-            <div id="progresoPorcentajeTotal" class="text-3xl font-black text-blue-700">28%</div>
-            <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Avance General</div>
+            <div id="progresoPorcentajeTotal" class="text-3xl font-black text-blue-700">0%</div>
+            <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Avance General[cite: 24]</div>
           </div>
           <div class="w-20 h-2.5 bg-slate-200 rounded-full overflow-hidden">
-            <div id="progresoBarraGeneral" class="h-full bg-blue-600 transition-all duration-500" style="width: 28%;"></div>
+            <div id="progresoBarraGeneral" class="h-full bg-blue-600 transition-all duration-500" style="width: 0%;"></div>
           </div>
         </div>
       </div>
 
-      <!-- TABLA DETALLADA DE MÓDULOS -->
-      <div class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm">
+      <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
         <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-          <h3 class="text-xs font-bold uppercase text-slate-700 tracking-wider">Desglose de Calificaciones por Módulo</h3>
-          <span class="text-xs font-semibold text-slate-500">Requisito: 7 módulos aprobados</span>
+          <h3 class="text-xs font-bold uppercase text-slate-700 tracking-wider">Desglose por Módulo[cite: 24]</h3>
+          <span class="text-xs font-semibold text-slate-500">7 módulos obligatorios[cite: 24]</span>
         </div>
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs text-slate-700">
             <thead class="bg-slate-100 text-slate-600 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-200">
               <tr>
-                <th class="px-4 py-3">Código & Módulo</th>
-                <th class="px-4 py-3">Estado</th>
-                <th class="px-4 py-3">Calificación</th>
-                <th class="px-4 py-3">Validación</th>
-                <th class="px-4 py-3 text-right">Acción</th>
+                <th class="px-4 py-3">Módulo[cite: 24]</th>
+                <th class="px-4 py-3">Práctica en Vivo</th>
+                <th class="px-4 py-3">Quiz[cite: 24]</th>
+                <th class="px-4 py-3">Calificación[cite: 24]</th>
+                <th class="px-4 py-3 text-right">Acción[cite: 24]</th>
               </tr>
             </thead>
-            <tbody id="progressTableBody" class="divide-y divide-slate-100">
-              <!-- Renderizado con JS -->
-            </tbody>
+            <tbody id="progressTableBody" class="divide-y divide-slate-100"></tbody>
           </table>
         </div>
       </div>
 
-      <!-- PLANTILLA DE LA CONSTANCIA FORMAL -->
-      <div id="certificateContainer" class="bg-gradient-to-br from-slate-950 via-[#002B49] to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <!-- Constancia Formal con Logo Oficial IHFB -->
+      <div id="certificateContainer" class="bg-gradient-to-br from-[#002B49] via-slate-900 to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
         <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-slate-700/60 pb-5">
           <div>
             <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-500/30">
-              Acreditación Institucional
+              Acreditación Institucional[cite: 25]
             </span>
-            <h3 class="text-xl font-bold mt-2 text-white">Constancia Digital de Aprobación</h3>
-            <p class="text-xs text-slate-300">Documento formal con código alfanumérico único para auditorías y comprobación de horas operativas.</p>
+            <h3 class="text-xl font-bold mt-2 text-white">Constancia Digital de Aprobación[cite: 25]</h3>
+            <p class="text-xs text-slate-300">Documento formal con código alfanumérico único para auditorías[cite: 25].</p>
           </div>
           <button id="btnPrintCertificate" onclick="printCertificate()" disabled class="px-5 py-3 rounded-xl bg-slate-700 text-slate-400 font-bold text-xs transition flex items-center justify-center gap-2 cursor-not-allowed shrink-0">
             <i class="fa-solid fa-print"></i>
-            <span>Descargar / Imprimir Constancia</span>
+            <span>Descargar / Imprimir Constancia[cite: 25]</span>
           </button>
         </div>
 
-        <!-- Previsualización Impresa -->
         <div id="certificatePreview" class="bg-white text-slate-900 rounded-2xl p-6 sm:p-10 border-4 border-double border-blue-950 shadow-2xl relative overflow-hidden">
           <div class="relative z-10 text-center space-y-4">
-            
             <div class="flex justify-between items-center border-b pb-4">
-              <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-blue-900 text-white font-black text-xs flex items-center justify-center">IHFB</div>
-                <div class="text-left font-black tracking-wider text-base text-blue-950">IHFB EL SALVADOR</div>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white border border-slate-200 rounded-lg p-1 flex items-center justify-center">
+                  <!-- Logo vectorial en la constancia -->
+                  <svg viewBox="0 0 120 120" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="14" width="9" height="22" fill="#111827"/>
+                    <rect x="25" y="14" width="8" height="22" fill="#111827"/>
+                    <rect x="33" y="21" width="10" height="7" fill="#111827"/>
+                    <rect x="43" y="14" width="8" height="22" fill="#111827"/>
+                    <polygon points="56,36 68,14 77,14 65,36" fill="#2563EB"/>
+                    <polygon points="69,14 78,14 87,36 78,36" fill="#111827"/>
+                    <polygon points="56,70 68,46 78,46 66,70" fill="#FF2E93"/>
+                    <polygon points="76,104 90,80 98,80 84,104" fill="#00D06C"/>
+                  </svg>
+                </div>
+                <div class="text-left font-black tracking-wider text-base text-blue-950">IHFB EL SALVADOR[cite: 25]</div>
               </div>
-              <div class="text-right text-[10px] text-slate-400 uppercase font-mono">Folio: <span id="certFolio" class="font-bold text-slate-700">IHFB-PENDIENTE</span></div>
+              <div class="text-right text-[10px] text-slate-400 uppercase font-mono">Folio: <span id="certFolio" class="font-bold text-slate-700">IHFB-PENDIENTE[cite: 25]</span></div>
             </div>
 
             <div class="py-2">
-              <p class="text-xs uppercase tracking-widest font-bold text-slate-500">Se otorga la presente</p>
-              <h2 class="text-2xl sm:text-3xl font-black text-blue-900 tracking-tight mt-1">CONSTANCIA DE ACREDITACIÓN</h2>
-              <p class="text-xs text-slate-600 mt-2">Por haber completado satisfactoriamente el programa de capacitación y nivelación técnica en:</p>
-              <p class="text-sm font-extrabold text-slate-800 mt-1">"Operación y Gestión de Plataforma Educativa Digital con IA"</p>
+              <p class="text-xs uppercase tracking-widest font-bold text-slate-500">Se otorga la presente[cite: 25]</p>
+              <h2 class="text-2xl sm:text-3xl font-black text-blue-900 tracking-tight mt-1">CONSTANCIA DE ACREDITACIÓN[cite: 25]</h2>
+              <p class="text-xs text-slate-600 mt-2">Por haber completado satisfactoriamente el programa de capacitación y nivelación técnica en:[cite: 25]</p>
+              <p class="text-sm font-extrabold text-slate-800 mt-1">"Operación y Gestión de Plataforma Educativa Digital con IA"[cite: 25]</p>
             </div>
 
             <div class="py-4 border-y border-slate-200">
-              <p class="text-xs text-slate-500">Otorgado a favor de:</p>
-              <h3 id="certParticipantName" class="text-xl sm:text-2xl font-black text-blue-950 uppercase tracking-wide">JUAN PÉREZ</h3>
+              <p class="text-xs text-slate-500">Otorgado a favor de:[cite: 26]</p>
+              <h3 id="certParticipantName" class="text-xl sm:text-2xl font-black text-blue-950 uppercase tracking-wide">JUAN PÉREZ[cite: 26]</h3>
               <p class="text-xs font-semibold text-blue-700 mt-1" id="certParticipantRole">Rol: Docente • Sede San Salvador</p>
-              <p class="text-[11px] text-slate-400 font-mono mt-0.5">DUI / ID: <span id="certParticipantDUI">00000000-0</span></p>
+              <p class="text-[11px] text-slate-400 font-mono mt-0.5">Correo: <span id="certParticipantEmail">usuario@clases.edu.sv</span></p>
             </div>
 
             <div class="flex flex-col sm:flex-row justify-between items-center pt-4 text-xs text-slate-500 gap-4">
               <div class="text-left">
-                <p>Fecha de emisión: <strong id="certDate" class="text-slate-700">--/--/----</strong></p>
-                <p>Validación: <strong class="text-emerald-700">100% Módulos Aprobados</strong></p>
+                <p>Fecha de emisión: <strong id="certDate" class="text-slate-700">--/--/----[cite: 26]</strong></p>
+                <p>Validación: <strong class="text-emerald-700">100% Aprobado[cite: 26]</strong></p>
               </div>
               <div class="flex items-center gap-3">
-                <div class="w-16 h-16 border border-slate-300 rounded-xl p-1 bg-white flex flex-col items-center justify-center text-[9px] text-center font-mono">
-                  <i class="fa-solid fa-qrcode text-2xl text-slate-800"></i>
-                  <span>QR VALID</span>
+                <div class="w-16 h-16 border border-slate-300 rounded-xl p-1 bg-white flex flex-col items-center justify-center text-[9px] text-center font-mono">[cite: 26]
+                  <i class="fa-solid fa-qrcode text-2xl text-slate-800"></i>[cite: 26]
+                  <span>QR VALID</span>[cite: 26]
                 </div>
                 <div class="text-left text-[11px]">
-                  <div class="font-bold text-slate-800">Comité Académico IHFB</div>
-                  <div class="text-slate-400 text-[10px]">Acreditación Operativa El Salvador</div>
+                  <div class="font-bold text-slate-800">Comité Académico IHFB[cite: 26]</div>
+                  <div class="text-slate-400 text-[10px]">Acreditación Operativa El Salvador[cite: 26]</div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. SECCIÓN: PREGUNTAS FRECUENTES Y CONSULTAS -->
+    <!-- 6. SECCIÓN: PREGUNTAS FRECUENTES Y SOPORTE -->
     <section id="section-faq" class="tab-content hidden space-y-6">
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-sm">
-        <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Centro de Ayuda y Soporte</span>
-        <h2 class="text-xl font-extrabold text-slate-900">Preguntas Frecuentes y Mesa de Ayuda</h2>
-        <p class="text-xs text-slate-500">Respuestas rápidas a los problemas operativos más comunes y formulario de contacto con el equipo técnico.</p>
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+        <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Centro de Ayuda[cite: 26]</span>
+        <h2 class="text-xl font-extrabold text-slate-900">Preguntas Frecuentes y Mesa de Ayuda[cite: 26]</h2>
+        <p class="text-xs text-slate-500">Respuestas rápidas a los problemas operativos más comunes y contacto técnico[cite: 26].</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- ACORDEÓN SOP -->
         <div class="lg:col-span-7 space-y-3">
           <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-            <button onclick="toggleFaq('faq1')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50 transition">
-              <span>¿Qué hacer si un alumno pierde la conexión durante la clase?</span>
-              <i id="faq1-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+            <button onclick="toggleFaq('faq1')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50">
+              <span>¿Qué hacer si un alumno pierde la conexión durante la clase?[cite: 27]</span>
+              <i id="faq1-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>[cite: 27]
             </button>
-            <div id="faq1" class="hidden px-5 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
-              Según el protocolo SOP de conectividad, los ejercicios ya cargados se mantienen en la memoria caché del dispositivo. Pide al estudiante continuar la lectura sin recargar la página y notifica al facilitador o tutor en campo para revisar el punto de acceso Wi-Fi del aula.
+            <div id="faq1" class="hidden px-5 pb-4 text-xs text-slate-600 border-t bg-slate-50/50">
+              Según el protocolo SOP de conectividad, los ejercicios ya cargados se mantienen en la memoria caché del dispositivo[cite: 27]. Continúa la clase sin recargar la página[cite: 27].
             </div>
           </div>
-
           <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-            <button onclick="toggleFaq('faq2')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50 transition">
-              <span>¿Cuántas veces puedo reintentar un quiz si no alcanzo el 80%?</span>
-              <i id="faq2-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+            <button onclick="toggleFaq('faq2')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50">
+              <span>¿Por qué no puedo presentar el Quiz de un módulo?</span>
+              <i id="faq2-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
             </button>
-            <div id="faq2" class="hidden px-5 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
-              Los reintentos son ilimitados. El objetivo de la capacitación autónoma es garantizar la comprensión real de los protocolos. Se sugiere volver a mirar el video del módulo antes de presentar la evaluación nuevamente.
-            </div>
-          </div>
-
-          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-            <button onclick="toggleFaq('faq3')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50 transition">
-              <span>¿Cómo funciona el botón de bloqueo de pantalla remoto?</span>
-              <i id="faq3-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
-            </button>
-            <div id="faq3" class="hidden px-5 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
-              El bloqueo remoto envía una orden inmediata a las tablets de los alumnos sincronizados para congelar la pantalla con el mensaje "Pantalla bloqueada. Es momento de concentrarte en la clase". Se utiliza para centrar la atención en explicaciones orales.
-            </div>
-          </div>
-
-          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-            <button onclick="toggleFaq('faq4')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50 transition">
-              <span>¿Dónde se entregan las constancias para justificar horas formativas?</span>
-              <i id="faq4-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
-            </button>
-            <div id="faq4" class="hidden px-5 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
-              Al finalizar los 7 módulos, puedes descargar tu constancia en PDF o imprimirla directamente. Además, el sistema registra tu código de folio en la base de datos central de IHFB El Salvador para cotejo de supervisiones.
+            <div id="faq2" class="hidden px-5 pb-4 text-xs text-slate-600 border-t bg-slate-50/50">
+              Por normativa operativa, es obligatorio completar primero la práctica interactiva de ese módulo. Al terminar la práctica, el quiz se desbloqueará de inmediato.
             </div>
           </div>
         </div>
 
-        <!-- FORMULARIO DE SOPORTE -->
-        <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200/90 p-6 shadow-sm">
+        <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
           <h3 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
-            <i class="fa-solid fa-envelope text-blue-600"></i> Enviar Consulta a la Coordinación
+            <i class="fa-solid fa-envelope text-blue-600"></i> Consulta a Mesa de Ayuda[cite: 28]
           </h3>
-          <p class="text-xs text-slate-500 mb-4">¿Tienes una duda operativa o un problema técnico con tu sede? Escribe tu mensaje:</p>
+          <p class="text-xs text-slate-500 mb-4">¿Tienes una duda técnica con tu usuario institucional?[cite: 28]</p>
           <form id="supportForm" onsubmit="handleSupportSubmit(event)" class="space-y-3">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo</label>
-              <input type="text" id="supName" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-blue-600" />
-            </div>
-            <div class="grid grid-cols-2 gap-2">
-              <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">DUI/ID</label>
-                <input type="text" id="supDUI" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-blue-600" />
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Tipo de Consulta</label>
-                <select id="supType" class="w-full px-2 py-2 text-xs rounded-xl border border-slate-300 outline-none bg-white">
-                  <option value="Duda de Módulo">Duda de Módulo</option>
-                  <option value="Problema Técnico">Problema Técnico</option>
-                  <option value="Error en Constancia">Error en Constancia</option>
-                  <option value="SOP en Aula">SOP en Aula</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Detalle del mensaje</label>
-              <textarea id="supMsg" required rows="3" placeholder="Explica detalladamente tu inquietud..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-blue-600"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-2.5 px-4 rounded-xl text-xs transition shadow flex items-center justify-center gap-2">
-              <i class="fa-solid fa-paper-plane"></i>
-              <span>Enviar Consulta a Mesa de Ayuda</span>
+            <input type="text" id="supName" required placeholder="Nombre Completo" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300" />[cite: 28]
+            <input type="email" id="supEmail" required placeholder="Correo @clases.edu.sv" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300" />
+            <textarea id="supMsg" required rows="3" placeholder="Detalle de tu consulta..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300"></textarea>[cite: 29]
+            <button type="submit" class="w-full bg-[#002B49] hover:bg-blue-900 text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i> <span>Enviar Consulta[cite: 29]</span>
             </button>
           </form>
-          <div id="supSuccessMsg" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl flex items-center gap-2">
-            <i class="fa-solid fa-circle-check text-emerald-600"></i>
-            <span>Tu consulta ha sido enviada al equipo de soporte IHFB.</span>
+          <div id="supSuccessMsg" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl">[cite: 29]
+            Tu consulta ha sido enviada con éxito al equipo técnico[cite: 29].
           </div>
         </div>
-
       </div>
     </section>
 
   </main>
 
-  <!-- ================= MODAL DE EDICIÓN EN VIVO (MODO ADMIN) ================= -->
+  <!-- ================= VENTANA MODAL HÍBRIDA DE VIDEO + MANUALES + IR A PRÁCTICA ================= -->
+  <div id="videoModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl border border-slate-200 flex flex-col max-h-[92vh]">
+      
+      <!-- Cabecera modal -->
+      <div class="p-3.5 bg-[#002B49] text-white flex justify-between items-center text-xs">
+        <span id="modalVideoTitle" class="font-bold flex items-center gap-2">
+          <i class="fa-solid fa-circle-play text-blue-400"></i> Lección Audiovisual Oficial
+        </span>
+        <div class="flex items-center gap-2">
+          <a id="btnModalExternalVideo" href="#" target="_blank" class="text-blue-200 hover:text-white text-[11px] flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir en Pestaña Exterior
+          </a>
+          <button onclick="closeVideoModal()" class="text-slate-300 hover:text-white text-base ml-2">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contenedor del reproductor -->
+      <div class="aspect-video bg-black flex items-center justify-center relative">
+        <iframe id="videoIframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <!-- Zona de Manuales Relacionados y Botón Directo a Práctica -->
+      <div class="p-4 bg-slate-50 border-t border-slate-200 space-y-3">
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+          <div>
+            <h5 class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <i class="fa-solid fa-file-pdf text-rose-500"></i> Manual SOP Relacionado a esta Sesión
+            </h5>
+            <p id="modalManualText" class="text-[11px] text-slate-600 mt-0.5">SOP Oficial de Consulta Rápida</p>
+          </div>
+          <a id="btnModalOpenPdf" href="#" target="_blank" class="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold flex items-center gap-1.5 shrink-0">
+            <i class="fa-solid fa-book-open text-blue-600"></i> Abrir Manual PDF
+          </a>
+        </div>
+
+        <!-- Botón estrella: Ir a la práctica -->
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-center">
+          <span class="text-[11px] text-slate-500">¿Finalizaste este video? Aplica lo aprendido en el simulador:</span>
+          <button id="btnModalGoToPractice" onclick="" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs transition shadow flex items-center gap-2">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>Ir Directamente a la Práctica</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= MODAL ADMIN: EDICIÓN EN VIVO ================= -->
   <div id="adminEditModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-    <div class="bg-white rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl border border-amber-300 animate-fadeIn">
+    <div class="bg-white rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl border border-amber-300">
       <div class="p-4 bg-amber-500 text-slate-950 flex justify-between items-center font-bold text-xs sm:text-sm">
         <span class="flex items-center gap-2">
-          <i class="fa-solid fa-pen-to-square"></i> Editor de Recurso (Modo Administrador)
+          <i class="fa-solid fa-wrench"></i> Configurar Video y Manuales (Drive o YouTube)
         </span>
         <button onclick="closeAdminEditModal()" class="text-slate-950 hover:text-white text-base">
           <i class="fa-solid fa-xmark"></i>
@@ -792,140 +629,91 @@
         <input type="hidden" id="editCardIndex">
         
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Título de la Tarjeta</label>
+          <label class="block font-bold text-slate-700 mb-1">Título de la Sesión</label>
           <input type="text" id="editCardTitle" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500 font-medium">
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Enlace del Video de YouTube (Embed o URL completa)</label>
-          <input type="text" id="editCardVideoUrl" required placeholder="https://www.youtube.com/embed/..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500 font-mono text-[11px]">
-          <p class="text-[10px] text-slate-400 mt-0.5">Acepta enlaces normales de YouTube o enlaces de incrustación /embed/.</p>
+          <label class="block font-bold text-slate-700 mb-1">Enlace del Video (YouTube o Google Drive)</label>
+          <input type="text" id="editCardVideoUrl" required placeholder="https://www.youtube.com/watch?v=... o https://drive.google.com/file/d/.../view" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500 font-mono text-[11px]">
+          <p class="text-[10px] text-slate-500 mt-0.5">El sistema lo convierte automáticamente a reproductor incrustado.</p>
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Enlace del Manual SOP (PDF / Google Drive)</label>
+          <label class="block font-bold text-slate-700 mb-1">Enlace del Manual SOP (Drive o Web)</label>
           <input type="text" id="editCardManualUrl" required placeholder="https://drive.google.com/..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500 font-mono text-[11px]">
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Nombre del Manual SOP (Etiqueta)</label>
+          <label class="block font-bold text-slate-700 mb-1">Nombre Oficial del Manual</label>
           <input type="text" id="editCardManualText" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500">
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Puntos clave / Viñetas (Separados por coma)</label>
+          <label class="block font-bold text-slate-700 mb-1">Puntos clave (Separados por coma)</label>
           <textarea id="editCardPoints" rows="2" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500"></textarea>
         </div>
 
         <div class="pt-3 border-t flex justify-end gap-2">
           <button type="button" onclick="closeAdminEditModal()" class="px-3 py-1.5 rounded-lg border text-slate-600 hover:bg-slate-100">Cancelar</button>
-          <button type="submit" class="px-4 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold shadow-sm">Guardar Cambios en Vivo</button>
+          <button type="submit" class="px-4 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold shadow-sm">Guardar Cambios</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: REPRODUCTOR DE VIDEO INCORPORADO -->
-  <div id="videoModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-    <div class="bg-white rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl border border-slate-200">
-      <div class="p-3.5 bg-slate-950 text-white flex justify-between items-center text-xs">
-        <span id="modalVideoTitle" class="font-bold flex items-center gap-2">
-          <i class="fa-solid fa-play text-blue-400"></i> Reproduciendo Video Oficial
-        </span>
-        <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white text-base">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="aspect-video bg-black flex items-center justify-center relative">
-        <iframe id="videoIframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="p-3 bg-slate-50 flex justify-between items-center text-xs border-t">
-        <span class="text-slate-500">Streaming formativo en alta disponibilidad para escuelas públicas.</span>
-        <button onclick="closeVideoModal()" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-medium hover:bg-black">
-          Cerrar
-        </button>
-      </div>
-    </div>
-  </div>
+  <!-- ================= BOTÓN DISCRETO ADMIN (TUERCA EN LA ESQUINA INFERIOR) ================= -->
+  <button onclick="toggleAdminPrompt()" title="Administración del Sistema" class="fixed bottom-4 right-4 w-9 h-9 rounded-full bg-slate-900/40 hover:bg-slate-900 text-slate-400 hover:text-amber-400 flex items-center justify-center transition-all opacity-40 hover:opacity-100 z-50 border border-slate-700 shadow-md">
+    <i class="fa-solid fa-gear text-sm"></i>
+  </button>
 
-  <!-- MODAL: VISOR DE MANUAL SOP -->
-  <div id="manualModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-    <div class="bg-white rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl border border-slate-200 flex flex-col max-h-[85vh]">
-      <div class="p-4 bg-blue-950 text-white flex justify-between items-center text-xs">
-        <span id="modalManualTitle" class="font-bold flex items-center gap-2">
-          <i class="fa-solid fa-file-pdf text-rose-400"></i> Protocolo Operativo Estándar (SOP)
-        </span>
-        <button onclick="closeManualModal()" class="text-slate-400 hover:text-white text-base">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed custom-scroll">
-        <div class="bg-blue-50 p-3.5 rounded-xl border border-blue-100 flex items-start gap-3">
-          <i class="fa-solid fa-circle-info text-blue-600 mt-0.5 text-sm"></i>
-          <div>
-            <h5 class="font-bold text-blue-900">Documento Oficial de Referencia Rápida</h5>
-            <p class="text-slate-600 text-[11px]">Consulte estos pasos durante la ejecución de clases o rondas de supervisión en el centro escolar.</p>
-          </div>
-        </div>
-        <div id="modalManualContent" class="space-y-3"></div>
-      </div>
-      <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center">
-        <a id="btnExternalPdf" href="#" target="_blank" class="text-blue-700 hover:underline font-bold text-xs flex items-center gap-1.5">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir en Google Drive / Pestaña Nueva
-        </a>
-        <button onclick="closeManualModal()" class="px-4 py-2 bg-blue-800 text-white rounded-xl text-xs font-bold hover:bg-blue-900">
-          Entendido / Cerrar
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER INSTITUCIONAL -->
+  <!-- ================= FOOTER ================= -->
   <footer class="bg-slate-950 text-slate-400 text-xs py-6 border-t border-slate-900 mt-auto">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-      <p>© 2026 IHFB El Salvador • Plataforma de Capacitación y Nivelación Autónoma.</p>
+      <p>© 2026 IHFB El Salvador • Plataforma de Capacitación y Nivelación Autónoma[cite: 31].</p>
       <div class="flex items-center space-x-4 text-[11px]">
-        <span class="hover:text-slate-200 cursor-pointer" onclick="switchTab('faq')">SOP Oficial</span>
+        <span>SOP Oficial[cite: 31]</span>
         <span>•</span>
-        <span class="hover:text-slate-200 cursor-pointer" onclick="switchTab('faq')">Mesa de Ayuda</span>
+        <span>Mesa de Ayuda[cite: 31]</span>
         <span>•</span>
-        <span class="hover:text-slate-200 cursor-pointer" onclick="switchTab('progreso')">Validación de Constancias</span>
+        <span>Validación de Constancias[cite: 31]</span>
       </div>
     </div>
   </footer>
 
-  <!-- ================= LÓGICA COMPLETA DE FUNCIONAMIENTO Y EDICIÓN ================= -->
+  <!-- ================= LÓGICA JAVASCRIPT ================= -->
   <script>
-    // 1. ESTADO DE USUARIO
+    // ESTADO DE USUARIO
     let currentUser = {
-      dui: "05171185-8",
-      name: "Prof. Nelson Morales",
+      email: "",
+      name: "",
       role: "Docente",
       dept: "San Salvador",
-      isRegistered: true
+      isRegistered: false
     };
 
-    // 2. MODO ADMINISTRADOR (CLAVE MAESTRA: ihfb2026)
+    // MODO ADMIN Y CLAVE
     let isAdminMode = false;
     const ADMIN_PASSWORD_DEFAULT = "ihfb2026";
 
-    // 3. ESTRUCTURA COMPLETA DE LOS 7 MÓDULOS (EDITABLE EN VIVO)
+    // ESTRUCTURA DE LOS 7 MÓDULOS
     const defaultModulesData = [
       {
         id: "M1",
         code: "M1",
         title: "Access & Login",
         icon: "fa-globe",
-        progress: 100,
+        progress: 0,
         unlocked: true,
-        completed: true,
-        score: 100,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
         desc: "Configuración del entorno del aula, conectividad Wi-Fi y acceso a cuentas.",
         cards: [
           {
             num: "VIDEO 1",
             title: "Configuración del entorno del aula",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
             manual: "SOP-01: Verificación de Red y Enlace de Dispositivos",
             points: ["Configuración del entorno del aula", "Conexión Wi-Fi escolar", "Inicio de sesión seguro", "Selección de escuela"]
@@ -933,7 +721,7 @@
           {
             num: "VIDEO 2",
             title: "Lista de aulas y Clase de hoy",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
             manual: "SOP-02: Asignación y Apertura de Jornada Escolar",
             points: ["Lista de Aulas asignadas", "Acceso rápido a 'Clase de Hoy'", "Verificación de lista de asistencia inicial"]
@@ -945,16 +733,17 @@
         code: "M2",
         title: "Menu Options",
         icon: "fa-clipboard-list",
-        progress: 100,
-        unlocked: true,
-        completed: true,
-        score: 90,
+        progress: 0,
+        unlocked: false,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
         desc: "Opciones de menú, clases regulares, revisión y control de asistencia.",
         cards: [
           {
             num: "VIDEO 3",
             title: "Clase regular y Asistencia",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
             manual: "SOP-03: Control de Asistencia y Reporte de Ausencias",
             points: ["Navegación de clase regular", "Revisión previa de materiales", "Toma de asistencia digital"]
@@ -962,7 +751,7 @@
           {
             num: "VIDEO 4",
             title: "Lista de Clases y Tareas",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
             manual: "SOP-04: Gestión de Tareas y Recursos Complementarios",
             points: ["Mi progreso escolar", "Lista de clases habilitadas", "Programación de tareas y refuerzos"]
@@ -975,26 +764,19 @@
         title: "Visibility Settings",
         icon: "fa-eye",
         progress: 0,
-        unlocked: true,
-        completed: false,
+        unlocked: false,
+        practiceCompleted: false,
+        quizCompleted: false,
         score: null,
         desc: "Configuración de visibilidad, modo individual y ocultar contenidos.",
         cards: [
           {
             num: "VIDEO 5",
             title: "Configuración de Visibilidad",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
             manual: "SOP-05: Ajustes de Privacidad y Visibilidad en Clase",
             points: ["Ocultar/Mostrar contenido para alumnos", "Visibilidad diferenciada por grupo", "Gestión de permisos"]
-          },
-          {
-            num: "VIDEO 6",
-            title: "Personalización del Panel",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            manualUrl: "https://drive.google.com",
-            manual: "SOP-06: Configuración de Interfaz Accesible",
-            points: ["Ajuste de temas visuales", "Modo nocturno y alto contraste", "Optimización de pantalla"]
           }
         ]
       },
@@ -1005,25 +787,18 @@
         icon: "fa-folder-open",
         progress: 0,
         unlocked: false,
-        completed: false,
+        practiceCompleted: false,
+        quizCompleted: false,
         score: null,
         desc: "Estructura de Lenguaje y Matemáticas, refuerzo escolar con IA.",
         cards: [
           {
             num: "VIDEO 7",
-            title: "Estructura Curricular (Lenguaje)",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Estructura Curricular",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
-            manual: "SOP-07: Despliegue de Unidades de Lenguaje",
-            points: ["Grupo de clase de lenguaje", "Refuerzo y comprensión lectora", "Rutas guiadas por IA"]
-          },
-          {
-            num: "VIDEO 8",
-            title: "Estructura Curricular (Matemática)",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            manualUrl: "https://drive.google.com",
-            manual: "SOP-08: Secuencias Didácticas de Matemática",
-            points: ["Grupo de clase de matemáticas", "Resolución paso a paso", "Ejercicios automatizados"]
+            manual: "SOP-07: Despliegue de Unidades de Aprendizaje",
+            points: ["Grupo de clase", "Refuerzo y comprensión", "Rutas guiadas por IA"]
           }
         ]
       },
@@ -1034,25 +809,18 @@
         icon: "fa-screwdriver-wrench",
         progress: 0,
         unlocked: false,
-        completed: false,
+        practiceCompleted: false,
+        quizCompleted: false,
         score: null,
         desc: "Sincronización en tiempo real, bloqueo de pantalla y pizarra.",
         cards: [
           {
             num: "VIDEO 9",
-            title: "Modo de Clase (Sincronización y Bloqueo)",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Modo de Clase (Bloqueo y Control)",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
             manual: "SOP-09: Dinámicas de Control y Atención en Aula",
-            points: ["Bloqueo remoto de pantalla de alumnos", "Sincronización de respuestas", "Envío de actividades al unísono"]
-          },
-          {
-            num: "VIDEO 10",
-            title: "Pizarra y Material de Referencia",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            manualUrl: "https://drive.google.com",
-            manual: "SOP-10: Pizarra Digital y Soporte Visual",
-            points: ["Herramientas de dibujo en vivo", "Visualización de material de apoyo", "Función reintentar ejercicio"]
+            points: ["Bloqueo remoto de pantalla", "Sincronización de respuestas", "Envío simultáneo"]
           }
         ]
       },
@@ -1063,17 +831,18 @@
         icon: "fa-chart-simple",
         progress: 0,
         unlocked: false,
-        completed: false,
+        practiceCompleted: false,
+        quizCompleted: false,
         score: null,
         desc: "Tableros de rendimiento, completación escolar y reportes de aula.",
         cards: [
           {
             num: "VIDEO 11",
             title: "Monitoreo en Tiempo Real",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
             manual: "SOP-11: Uso de Dashboards para Monitores y Tutores",
-            points: ["Mapa de calor de avance", "Detección de alumnos rezagados", "Reportes de completación"]
+            points: ["Detección de alumnos rezagados", "Reportes de completación"]
           }
         ]
       },
@@ -1084,78 +853,88 @@
         icon: "fa-shield",
         progress: 0,
         unlocked: false,
-        completed: false,
+        practiceCompleted: false,
+        quizCompleted: false,
         score: null,
         desc: "Consola de supervisión departamental, auditoría de listas y soporte.",
         cards: [
           {
             num: "VIDEO 12",
             title: "Consola de Auditoría y Control",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             manualUrl: "https://drive.google.com",
             manual: "SOP-12: Auditoría Integral y Control de Calidad",
-            points: ["Fiscalización de uso escolar", "Verificación de inventarios de tablets", "Reporte final a coordinadores"]
+            points: ["Fiscalización de uso escolar", "Verificación de inventarios de tablets"]
           }
         ]
       }
     ];
 
-    // Cargar desde LocalStorage si existe para guardar ediciones previas
-    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_data')) || defaultModulesData;
+    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_data_v3')) || defaultModulesData;
 
-    // BANCO DE QUIZZES (3 PREGUNTAS POR MÓDULO)
+    // BANCO DE PREGUNTAS
     const quizzesBank = {
       M1: [
         { q: "¿Cuál es el primer paso obligatorio al encender los dispositivos en el aula?", options: ["Comenzar a escribir en la pizarra digital", "Verificar la conexión a la red Wi-Fi escolar e inicio de sesión", "Apagar el proyector del salón"], correct: 1 },
-        { q: "¿Qué se debe hacer si un alumno no aparece en la lista de su aula asignada?", options: ["Pedirle que no use la plataforma", "Reportarlo de inmediato al facilitador/tutor para vincular su ID", "Crear una cuenta personal inventada"], correct: 1 },
-        { q: "¿Cuál es la función de la opción 'Clase de Hoy'?", options: ["Abrir los juegos de recreo", "Acceder directamente a la sesión pedagógica programada para la jornada", "Eliminar los historiales escolares"], correct: 1 }
+        { q: "¿Qué credencial utiliza el participante para identificarse en este portal?", options: ["Correo Institucional Oficial", "Número telefónico personal", "Contraseña arbitraria"], correct: 0 },
+        { q: "¿Cuál es la función de la opción 'Clase de Hoy'?", options: ["Abrir los juegos de recreo", "Acceder directamente a la sesión programada de la jornada", "Eliminar los historiales"], correct: 1 }
       ],
       M2: [
-        { q: "¿Cuándo debe registrarse el control de asistencia digital en la plataforma?", options: ["Al inicio de la jornada en el menú de clase", "Al día siguiente por correo", "Solo al finalizar el año"], correct: 0 },
-        { q: "¿Dónde puede consultar el docente el historial de tareas pendientes?", options: ["En el menú 'Lista de Tareas'", "En la configuración de red", "En la papelera"], correct: 0 },
-        { q: "¿Qué permite la opción 'Revisión previa de la clase'?", options: ["Borrar las notas de los alumnos", "Visualizar anticipadamente los ejercicios y justificaciones pedagógicas", "Bloquear el internet"], correct: 1 }
+        { q: "¿Cuándo debe registrarse el control de asistencia digital?", options: ["Al inicio de la jornada en el menú de clase", "Al día siguiente por mensaje", "Solo al final del año"], correct: 0 },
+        { q: "¿Dónde puede consultar el docente el historial de tareas?", options: ["En el menú 'Lista de Tareas'", "En la papelera", "En la red pública"], correct: 0 },
+        { q: "¿Qué permite la opción 'Revisión previa de la clase'?", options: ["Borrar las notas", "Visualizar anticipadamente ejercicios y justificaciones pedagógicas", "Bloquear la pantalla"], correct: 1 }
       ],
       M3: [
-        { q: "¿Para qué sirve el ajuste de visibilidad de contenidos?", options: ["Para regular el brillo de la pantalla", "Para mostrar u ocultar unidades a estudiantes según su ritmo de avance", "Para cambiar el idioma a coreano"], correct: 1 },
-        { q: "¿Quién puede modificar la visibilidad de los grupos de clase?", options: ["Cualquier estudiante", "El docente o personal autorizado con credencial asignada", "El proveedor de internet"], correct: 1 },
-        { q: "Si un alumno tiene debilidad visual, ¿qué ajuste de visibilidad se recomienda?", options: ["Modo de alto contraste y tamaño adaptativo", "Bloquear la pantalla", "Cerrar la sesión"], correct: 0 }
+        { q: "¿Para qué sirve el ajuste de visibilidad de contenidos?", options: ["Para regular el brillo físico", "Para mostrar u ocultar unidades según el avance", "Para reiniciar las tablets"], correct: 1 },
+        { q: "¿Quién tiene permiso para cambiar la visibilidad?", options: ["Cualquier estudiante", "El docente o personal autorizado con credencial asignada", "El router Wi-Fi"], correct: 1 },
+        { q: "Si un alumno tiene debilidad visual, ¿qué ajuste se recomienda?", options: ["Modo de alto contraste y tamaño adaptativo", "Bloquear la pantalla", "Cerrar la sesión"], correct: 0 }
       ],
       M4: [
-        { q: "¿Cómo está estructurado el refuerzo escolar en la plataforma IHFB?", options: ["Lecciones aleatorias sin orden", "Unidades secuenciales de Lenguaje y Matemáticas con apoyo del Tutor IA", "Solo videos de entretenimiento"], correct: 1 },
-        { q: "¿Qué función cumple el motor de Inteligencia Artificial en las lecciones?", options: ["Reemplazar al docente en el salón", "Dar pistas pedagógicas y retroalimentación inmediata ante dudas del alumno", "Apagar las tablets automáticamente"], correct: 1 },
-        { q: "¿Qué evaluación externa evidenció el impacto de la estructura curricular en El Salvador?", options: ["OECD PISA for Schools", "Censo poblacional", "Prueba deportiva local"], correct: 0 }
+        { q: "¿Cómo está estructurado el refuerzo escolar en la plataforma IHFB?", options: ["Lecciones aleatorias", "Unidades secuenciales con apoyo del Tutor IA", "Videos de redes sociales"], correct: 1 },
+        { q: "¿Qué función cumple el motor de Inteligencia Artificial?", options: ["Reemplazar al docente", "Dar pistas pedagógicas y retroalimentación inmediata", "Apagar la tablet"], correct: 1 },
+        { q: "¿Qué evaluación externa evidenció el impacto del currículo en El Salvador?", options: ["OECD PISA for Schools", "Censo local", "Torneo deportivo"], correct: 0 }
       ],
       M5: [
-        { q: "¿Qué mensaje exacto visualiza el estudiante cuando el docente presiona 'Bloquear Pantalla'?", options: ["Sin conexión", "Pantalla bloqueada. Es momento de concentrarte en la clase.", "Clase terminada"], correct: 1 },
-        { q: "¿Qué ocurre en la pantalla del docente cuando el alumno selecciona una respuesta?", options: ["No pasa nada", "Se sincroniza al instante mostrando si es correcta y su justificación", "Se reinicia el navegador"], correct: 1 },
-        { q: "¿Para qué sirve la herramienta 'Pizarra Digital' en modo clase?", options: ["Modelar ejercicios y hacer anotaciones en tiempo real frente al grupo", "Jugar videojuegos", "Ver videos personales"], correct: 0 }
+        { q: "¿Qué mensaje exacto visualiza el alumno cuando se presiona 'Bloquear Pantalla'?", options: ["Sin conexión", "Pantalla bloqueada. Es momento de concentrarte en la clase.", "Clase finalizada"], correct: 1 },
+        { q: "¿Qué ocurre en la pantalla del docente cuando el alumno selecciona una opción?", options: ["No pasa nada", "Se sincroniza al instante mostrando la respuesta y su justificación", "Se bloquea el proyector"], correct: 1 },
+        { q: "¿Para qué sirve la 'Pizarra Digital' en modo clase?", options: ["Modelar ejercicios y hacer anotaciones en tiempo real", "Jugar videojuegos", "Escuchar música"], correct: 0 }
       ],
       M6: [
-        { q: "¿Cuál es el indicador principal que monitorean los tutores y monitores?", options: ["El color de las tablets", "La tasa de completación efectiva de actividades de aprendizaje", "El clima exterior"], correct: 1 },
-        { q: "En el caso El Salvador, ¿cuál fue la completación con apoyo operativo en campo vs. solo software?", options: ["50% vs 50%", "84.45% con acompañamiento vs. 8.58% solo software", "10% vs 90%"], correct: 1 },
-        { q: "¿Qué acción toma el monitor si un estudiante presenta baja completación repetitiva?", options: ["Suspender al alumno", "Notificar al docente y brindar tutoría personalizada de nivelación", "Ignorar el dato"], correct: 1 }
+        { q: "¿Cuál es el indicador principal que monitorean tutores y monitores?", options: ["El color de las carcasas", "La tasa de completación efectiva de actividades", "El estado del tiempo"], correct: 1 },
+        { q: "En el caso El Salvador, ¿cuál fue la completación con apoyo operativo vs. solo software?", options: ["50% vs 50%", "84.45% con acompañamiento vs. 8.58% solo software", "10% vs 90%"], correct: 1 },
+        { q: "¿Qué acción toma el monitor si detecta baja completación repetitiva?", options: ["Suspender al estudiante", "Notificar al docente y brindar tutoría personalizada", "Ignorar el dato"], correct: 1 }
       ],
       M7: [
-        { q: "¿Qué función tiene el perfil de Supervisor / Auditor en la consola nacional?", options: ["Fiscalizar listas, validar inventarios de dispositivos y auditar el avance escolar", "Dar clases de lenguaje diariamente", "Reparar cables eléctricos"], correct: 0 },
-        { q: "¿Cómo se respaldan las incidencias técnicas según el protocolo SOP de auditoría?", options: ["Mediante reportes verbales informales", "A través de tickets de soporte y bitácoras en la mesa de ayuda", "En redes sociales"], correct: 1 },
-        { q: "¿Qué requisito es indispensable para emitir la constancia oficial de acreditación?", options: ["Asistir únicamente el primer día", "Aprobar el 100% de los módulos evaluados con al menos 80% de aciertos", "Tener conexión de fibra óptica"], correct: 1 }
+        { q: "¿Qué función tiene el perfil de Supervisor / Auditor?", options: ["Fiscalizar listas, validar inventarios de dispositivos y auditar el avance escolar", "Limpiar las aulas", "Reparar cables"], correct: 0 },
+        { q: "¿Cómo se respaldan las incidencias técnicas según el SOP?", options: ["Mediante comentarios verbales", "A través de tickets de soporte y bitácoras en mesa de ayuda", "En chats no oficiales"], correct: 1 },
+        { q: "¿Qué requisito es indispensable para emitir la constancia oficial?", options: ["Asistir el primer día", "Completar la práctica y aprobar el 100% de los módulos con al menos 80%", "Tener fibra óptica"], correct: 1 }
       ]
     };
 
     let currentSelectedModuleId = "M1";
-    let isScreenLockedByTeacher = false;
 
     // INICIALIZACIÓN
     window.addEventListener('DOMContentLoaded', () => {
-      loadUserDataToInterface();
+      // Verificar sesión guardada
+      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session'));
+      if (savedUser && savedUser.isRegistered) {
+        currentUser = savedUser;
+        activarSesionVisual();
+      } else {
+        desactivarSesionVisual();
+      }
       renderModulesSidebar();
       renderActiveModuleCards(currentSelectedModuleId);
       renderProgressTable();
       updateTotalProgressMetrics();
     });
 
-    // SISTEMA DE PESTAÑAS (TABS)
+    // SISTEMA DE PESTAÑAS (RESTRINGIDO SI NO HA INICIADO SESIÓN)
     function switchTab(tabKey) {
+      if (!currentUser.isRegistered && tabKey !== 'inicio') {
+        alert("Por favor ingresa primero tu Correo Institucional en la pantalla de inicio.");
+        return;
+      }
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('bg-blue-700', 'text-white');
@@ -1171,26 +950,26 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // REGISTRO Y AUTENTICACIÓN RÁPIDA
+    // ACCESO POR CORREO INSTITUCIONAL
     function handleUserAccess(e) {
       e.preventDefault();
-      const dui = document.getElementById('userInputDUI').value.trim();
+      const email = document.getElementById('userInputEmail').value.trim();
       const name = document.getElementById('userInputName').value.trim();
       const role = document.getElementById('userInputRole').value;
       const dept = document.getElementById('userInputDept').value;
 
       currentUser = {
-        dui: dui || "00000000-0",
-        name: name || "Participante IHFB",
+        email: email,
+        name: name,
         role: role,
         dept: dept,
         isRegistered: true
       };
 
-      loadUserDataToInterface();
+      localStorage.setItem('ihfb_user_session', JSON.stringify(currentUser));
+      activarSesionVisual();
+
       const statusBox = document.getElementById('accessStatusMsg');
-      const statusText = document.getElementById('accessStatusText');
-      statusText.textContent = `¡Bienvenido, ${currentUser.name}! Accediendo a módulos...`;
       statusBox.classList.remove('hidden');
       statusBox.classList.add('flex');
 
@@ -1198,43 +977,112 @@
         statusBox.classList.add('hidden');
         statusBox.classList.remove('flex');
         switchTab('modulos');
-      }, 1200);
+      }, 1000);
     }
 
-    function loadUserDataToInterface() {
+    function activarSesionVisual() {
+      // Mostrar badges y menú
       document.getElementById('topUserName').textContent = currentUser.name;
       document.getElementById('topUserRole').textContent = currentUser.role;
       document.getElementById('badgeCurrentRole').textContent = currentUser.role;
+      document.getElementById('topUserBadge').classList.remove('hidden');
+      document.getElementById('topUserBadge').classList.add('flex');
+      document.getElementById('mainNavMenu').classList.remove('hidden');
 
-      // Datos para la constancia
+      // Actualizar datos del certificado
       document.getElementById('certParticipantName').textContent = currentUser.name;
       document.getElementById('certParticipantRole').textContent = `Rol: ${currentUser.role} • Sede ${currentUser.dept}`;
-      document.getElementById('certParticipantDUI').textContent = currentUser.dui;
+      document.getElementById('certParticipantEmail').textContent = currentUser.email;
       document.getElementById('certDate').textContent = new Date().toLocaleDateString('es-SV', {
         day: '2-digit', month: 'long', year: 'numeric'
       });
       document.getElementById('certFolio').textContent = `IHFB-${currentUser.role.substring(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-      // Formulario de soporte
       document.getElementById('supName').value = currentUser.name;
-      document.getElementById('supDUI').value = currentUser.dui;
+      document.getElementById('supEmail').value = currentUser.email;
     }
 
-    // SIDEBAR MÓDULOS (M1 A M7)
+    function desactivarSesionVisual() {
+      document.getElementById('topUserBadge').classList.add('hidden');
+      document.getElementById('topUserBadge').classList.remove('flex');
+      document.getElementById('mainNavMenu').classList.add('hidden');
+    }
+
+    function cerrarSesion() {
+      if (confirm("¿Deseas cerrar tu sesión?")) {
+        localStorage.removeItem('ihfb_user_session');
+        currentUser = { email: "", name: "", role: "Docente", dept: "San Salvador", isRegistered: false };
+        desactivarSesionVisual();
+        switchTab('inicio');
+      }
+    }
+
+    // GESTOR DE ENLACES INTELIGENTE (YOUTUBE + GOOGLE DRIVE)
+    function formatVideoEmbedUrl(rawUrl) {
+      if (!rawUrl) return "https://www.youtube.com/embed/dQw4w9WgXcQ";
+      let url = rawUrl.trim();
+
+      // YouTube
+      if (url.includes("watch?v=")) {
+        const id = url.split("watch?v=")[1].split("&")[0];
+        return `https://www.youtube.com/embed/${id}?autoplay=1`;
+      }
+      if (url.includes("youtu.be/")) {
+        const id = url.split("youtu.be/")[1].split("?")[0];
+        return `https://www.youtube.com/embed/${id}?autoplay=1`;
+      }
+
+      // Google Drive (Conversión de /view a /preview)
+      if (url.includes("drive.google.com/file/d/")) {
+        const id = url.split("/file/d/")[1].split("/")[0];
+        return `https://drive.google.com/file/d/${id}/preview`;
+      }
+
+      return url;
+    }
+
+    // MODAL HÍBRIDO DE VIDEO
+    function openUniversalVideoModal(title, rawUrl, moduleId, manualName, manualUrl) {
+      document.getElementById('modalVideoTitle').innerHTML = `<i class="fa-solid fa-circle-play text-blue-400"></i> ${title}`;
+      
+      const embedUrl = formatVideoEmbedUrl(rawUrl);
+      document.getElementById('videoIframe').src = embedUrl;
+      document.getElementById('btnModalExternalVideo').href = rawUrl;
+
+      // Manuales relacionados
+      document.getElementById('modalManualText').textContent = manualName || "SOP Oficial del Módulo";
+      document.getElementById('btnModalOpenPdf').href = manualUrl || "https://drive.google.com";
+
+      // Botón directo a práctica
+      const btnPractice = document.getElementById('btnModalGoToPractice');
+      btnPractice.onclick = () => {
+        closeVideoModal();
+        goToModulePractice(moduleId);
+      };
+
+      document.getElementById('videoModal').classList.remove('hidden');
+    }
+
+    function closeVideoModal() {
+      document.getElementById('videoIframe').src = "";
+      document.getElementById('videoModal').classList.add('hidden');
+    }
+
+    // SIDEBAR Y CATÁLOGO DE MÓDULOS
     function renderModulesSidebar() {
       const container = document.getElementById('moduleListContainer');
       container.innerHTML = "";
       let completedCount = 0;
 
       modulesData.forEach(mod => {
-        if (mod.completed) completedCount++;
+        if (mod.quizCompleted) completedCount++;
         const isCurrent = mod.id === currentSelectedModuleId;
         const itemDiv = document.createElement('div');
         itemDiv.className = `p-3 rounded-xl border transition cursor-pointer flex flex-col gap-2 ${
           isCurrent 
             ? 'border-blue-600 bg-blue-50/70 shadow-sm ring-1 ring-blue-500' 
             : 'border-slate-200 bg-white hover:border-slate-300'
-        } ${!mod.unlocked ? 'opacity-60 bg-slate-50 cursor-not-allowed' : ''}`;
+        } ${!mod.unlocked ? 'opacity-50 bg-slate-50 cursor-not-allowed' : ''}`;
 
         itemDiv.onclick = () => {
           if (mod.unlocked) {
@@ -1247,17 +1095,17 @@
         itemDiv.innerHTML = `
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <span class="w-7 h-7 rounded-lg ${mod.completed ? 'bg-emerald-100 text-emerald-700' : mod.unlocked ? 'bg-blue-100 text-blue-700' : 'bg-slate-200 text-slate-500'} flex items-center justify-center text-xs font-bold">
+              <span class="w-7 h-7 rounded-lg ${mod.quizCompleted ? 'bg-emerald-100 text-emerald-700' : mod.unlocked ? 'bg-blue-100 text-blue-700' : 'bg-slate-200 text-slate-500'} flex items-center justify-center text-xs font-bold">
                 <i class="fa-solid ${mod.icon}"></i>
               </span>
               <span class="text-xs font-bold text-slate-800">${mod.code}: ${mod.title}</span>
             </div>
             <div>
               ${
-                mod.completed
+                mod.quizCompleted
                   ? '<span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full"><i class="fa-solid fa-check"></i> 100%</span>'
                   : mod.unlocked
-                  ? '<span class="text-[10px] font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">Activo</span>'
+                  ? (mod.practiceCompleted ? '<span class="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">Práctica OK</span>' : '<span class="text-[10px] font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">En Curso</span>')
                   : '<span class="text-[10px] font-bold text-slate-400 bg-slate-200 px-2 py-0.5 rounded-full"><i class="fa-solid fa-lock text-[9px]"></i> Bloqueado</span>'
               }
             </div>
@@ -1265,20 +1113,19 @@
           <div class="space-y-1">
             <div class="flex justify-between text-[10px] text-slate-500 font-medium">
               <span>Progreso</span>
-              <span>${mod.progress}%</span>
+              <span>${mod.quizCompleted ? 100 : (mod.practiceCompleted ? 50 : (mod.unlocked ? 15 : 0))}%</span>
             </div>
             <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-              <div class="h-full bg-amber-500 rounded-full transition-all duration-300" style="width: ${mod.progress}%"></div>
+              <div class="h-full bg-amber-500 rounded-full transition-all duration-300" style="width: ${mod.quizCompleted ? 100 : (mod.practiceCompleted ? 50 : (mod.unlocked ? 15 : 0))}%"></div>
             </div>
           </div>
         `;
         container.appendChild(itemDiv);
       });
 
-      document.getElementById('modulesCompletedCount').textContent = `${completedCount} de ${modulesData.length} aprobados`;
+      document.getElementById('modulesCompletedCount').textContent = `${completedCount} de ${modulesData.length} completados`;
     }
 
-    // CATÁLOGO DE RECURSOS CON BOTÓN DE EDICIÓN EN VIVO
     function renderActiveModuleCards(modId) {
       const mod = modulesData.find(m => m.id === modId);
       if (!mod) return;
@@ -1288,11 +1135,14 @@
       document.getElementById('activeModuleDesc').textContent = mod.desc;
 
       const badge = document.getElementById('activeModuleStatusBadge');
-      if (mod.completed) {
+      if (mod.quizCompleted) {
         badge.textContent = "Completado y Aprobado";
         badge.className = "text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700";
+      } else if (mod.practiceCompleted) {
+        badge.textContent = "Práctica lista • Quiz Pendiente";
+        badge.className = "text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800";
       } else {
-        badge.textContent = "Módulo Activo en Curso";
+        badge.textContent = "En Curso";
         badge.className = "text-[11px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-700";
       }
 
@@ -1301,14 +1151,13 @@
 
       mod.cards.forEach((card, cardIndex) => {
         const cardDiv = document.createElement('div');
-        cardDiv.className = "bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between relative group";
+        cardDiv.className = "bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between relative";
 
         const pointsHtml = card.points.map(pt => `<li class="flex items-start gap-1.5"><span class="text-blue-600 font-bold">•</span> <span>${pt}</span></li>`).join('');
 
-        // Botón dorado de edición directa visible solo para Administrador
         const adminEditBtn = isAdminMode ? `
-          <button onclick="openAdminEditModal('${mod.id}', ${cardIndex})" class="absolute top-3 right-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[10px] px-2 py-1 rounded-md shadow flex items-center gap-1 z-10 transition">
-            <i class="fa-solid fa-pen"></i> Editar Recurso
+          <button onclick="openAdminEditModal('${mod.id}', ${cardIndex})" class="absolute top-3 right-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[10px] px-2 py-1 rounded shadow flex items-center gap-1 z-10">
+            <i class="fa-solid fa-pen"></i> Editar
           </button>
         ` : '';
 
@@ -1317,7 +1166,7 @@
           <div>
             <div class="flex items-center justify-between mb-2">
               <span class="text-[10px] font-extrabold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded">${card.num}</span>
-              <span class="text-[11px] text-slate-400 ${isAdminMode ? 'mr-20' : ''}"><i class="fa-solid fa-clock text-[10px]"></i> 3-5 min</span>
+              <span class="text-[11px] text-slate-400 ${isAdminMode ? 'mr-16' : ''}"><i class="fa-solid fa-clock text-[10px]"></i> 3-5 min</span>
             </div>
             <h4 class="text-sm font-bold text-slate-900 mb-2 leading-snug">${card.title}</h4>
             <ul class="text-xs text-slate-600 space-y-1.5 mb-5">
@@ -1325,11 +1174,11 @@
             </ul>
           </div>
           <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100">
-            <button onclick="openManualModal('${card.title}', '${card.manual}', '${card.manualUrl}')" class="px-2.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
+            <a href="${card.manualUrl}" target="_blank" class="px-2.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
               <i class="fa-solid fa-book-open text-blue-600 text-xs"></i>
               <span>Manual SOP</span>
-            </button>
-            <button onclick="openVideoPlayerModal('${card.title}', '${card.videoUrl}')" class="px-2.5 py-2 rounded-xl bg-[#0B4F8A] hover:bg-blue-800 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-sm">
+            </a>
+            <button onclick="openUniversalVideoModal('${card.title}', '${card.videoUrl}', '${mod.id}', '${card.manual}', '${card.manualUrl}')" class="px-2.5 py-2 rounded-xl bg-[#0B4F8A] hover:bg-blue-800 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-sm">
               <i class="fa-solid fa-circle-play text-xs"></i>
               <span>Ver video</span>
             </button>
@@ -1339,30 +1188,383 @@
       });
     }
 
-    // MODAL DE EDICIÓN EN VIVO (ADMIN)
+    // RUTAS HACIA LAS PRÁCTICAS Y CARGA POR MÓDULOS
+    function goToModulePractice(modId) {
+      document.getElementById('selectPracticeModule').value = modId;
+      loadPracticeByModule(modId);
+      switchTab('practicas');
+    }
+
+    function loadPracticeByModule(modId) {
+      const container = document.getElementById('practiceContentContainer');
+      const mod = modulesData.find(m => m.id === modId);
+
+      if (modId === "M5") {
+        // Práctica de Bloqueo de Pantallas (Modo Clase)
+        container.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase text-amber-600">Módulo 5: Class Mode</span>
+                <h3 class="text-lg font-bold text-slate-900">Simulador de Control de Aula y Bloqueo Remoto</h3>
+              </div>
+              <button onclick="completarPracticaActual('${modId}')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1.5">
+                <i class="fa-solid fa-check"></i> Validar Práctica y Desbloquear Quiz
+              </button>
+            </div>
+            <p class="text-xs text-slate-600">Prueba el bloqueo remoto desde la consola del profesor y observa cómo reacciona la tablet del estudiante.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Vista Profesor -->
+              <div class="border rounded-xl p-4 bg-slate-50 text-xs space-y-3">
+                <div class="flex justify-between items-center font-bold text-slate-700">
+                  <span>Pantalla Docente</span>
+                  <span class="text-blue-600">Clase Activa</span>
+                </div>
+                <button id="btnLockScreen" onclick="toggleScreenLock()" class="w-full py-2.5 bg-rose-600 text-white font-bold rounded-lg flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-lock" id="lockIcon"></i>
+                  <span id="lockButtonText">Bloquear Pantallas de Alumnos</span>
+                </button>
+              </div>
+              <!-- Vista Alumno -->
+              <div class="border rounded-xl p-4 bg-slate-950 text-white text-xs relative min-h-[160px] flex flex-col justify-between overflow-hidden">
+                <span class="text-slate-400">Tablet Estudiante #8419</span>
+                <div id="pantallaNormalAlumno" class="my-auto text-center">
+                  <p class="font-bold text-emerald-400">Resolviendo actividad en aula...</p>
+                </div>
+                <div id="overlayBloqueoAlumno" class="hidden absolute inset-0 bg-slate-900/95 flex flex-col items-center justify-center text-center p-4">
+                  <i class="fa-solid fa-lock text-3xl text-amber-400 mb-2"></i>
+                  <h5 class="text-sm font-bold text-white">Pantalla bloqueada</h5>
+                  <p class="text-xs text-slate-300 mt-1">Es momento de concentrarte en la explicación del docente.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (modId === "M4") {
+        // Práctica de Arrastrar y Soltar (Estructura Curricular)
+        container.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase text-amber-600">Módulo 4: Curriculum Structure</span>
+                <h3 class="text-lg font-bold text-slate-900">Actividad de Clasificación Didáctica (Drag & Drop)</h3>
+              </div>
+              <button onclick="completarPracticaActual('${modId}')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1.5">
+                <i class="fa-solid fa-check"></i> Validar Práctica y Desbloquear Quiz
+              </button>
+            </div>
+            <p class="text-xs text-slate-600">Arrastra cada elemento hacia su asignatura correspondiente.</p>
+            
+            <div id="dragItemsBox" class="flex flex-wrap gap-2 p-3 bg-slate-50 border rounded-xl">
+              <div draggable="true" ondragstart="drag(event)" id="drag-1" data-cat="lenguaje" class="px-3 py-1.5 bg-white border rounded shadow-sm text-xs font-bold cursor-grab">Comprensión Lectora</div>
+              <div draggable="true" ondragstart="drag(event)" id="drag-2" data-cat="mate" class="px-3 py-1.5 bg-white border rounded shadow-sm text-xs font-bold cursor-grab">Ecuaciones Lineales</div>
+              <div draggable="true" ondragstart="drag(event)" id="drag-3" data-cat="lenguaje" class="px-3 py-1.5 bg-white border rounded shadow-sm text-xs font-bold cursor-grab">Reglas Ortográficas</div>
+              <div draggable="true" ondragstart="drag(event)" id="drag-4" data-cat="mate" class="px-3 py-1.5 bg-white border rounded shadow-sm text-xs font-bold cursor-grab">Fracciones Mixtas</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div ondrop="drop(event, 'lenguaje')" ondragover="allowDrop(event)" class="p-4 border-2 border-dashed border-blue-300 bg-blue-50/50 rounded-xl min-h-[110px]">
+                <h5 class="text-xs font-bold text-blue-900 mb-2">Zona: Lenguaje</h5>
+                <div id="drop-lenguaje-content" class="flex flex-wrap gap-2"></div>
+              </div>
+              <div ondrop="drop(event, 'mate')" ondragover="allowDrop(event)" class="p-4 border-2 border-dashed border-emerald-300 bg-emerald-50/50 rounded-xl min-h-[110px]">
+                <h5 class="text-xs font-bold text-emerald-900 mb-2">Zona: Matemática</h5>
+                <div id="drop-mate-content" class="flex flex-wrap gap-2"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        // Práctica guiada con preguntas de simulación para los demás módulos
+        container.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase text-amber-600">${mod.code}: ${mod.title}</span>
+                <h3 class="text-lg font-bold text-slate-900">Caso Práctico Operativo en Centro Escolar</h3>
+              </div>
+              <button onclick="completarPracticaActual('${modId}')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1.5">
+                <i class="fa-solid fa-check"></i> Validar Práctica y Desbloquear Quiz
+              </button>
+            </div>
+            
+            <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs text-blue-900 space-y-2">
+              <p class="font-bold flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-blue-600"></i> Escenario Real en Aula:</p>
+              <p>Durante la jornada escolar asignada, un grupo de estudiantes no puede iniciar sesión por aparente problema de credencial o conectividad Wi-Fi.</p>
+            </div>
+
+            <div class="p-4 bg-slate-50 border rounded-xl space-y-3 text-xs">
+              <h5 class="font-bold text-slate-800">Pasos de resolución según el Manual SOP:</h5>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="chk1" class="rounded text-blue-600">
+                <span>1. Comprobar que la tablet tenga conexión al punto de acceso del aula.</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="chk2" class="rounded text-blue-600">
+                <span>2. Cotejar la lista del aula en la opción "Lista de Clases" y validar el ID del estudiante.</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="chk3" class="rounded text-blue-600">
+                <span>3. En caso de persistencia, reportar ticket en bitácora y activar el modo local.</span>
+              </label>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // VALIDAR PRÁCTICA Y DESBLOQUEAR QUIZ
+    function completarPracticaActual(modId) {
+      const mod = modulesData.find(m => m.id === modId);
+      if (!mod) return;
+
+      mod.practiceCompleted = true;
+      localStorage.setItem('ihfb_modules_data_v3', JSON.stringify(modulesData));
+
+      renderModulesSidebar();
+      renderProgressTable();
+
+      alert(`¡Práctica de ${mod.code} completada con éxito! Ahora se ha desbloqueado la Evaluación (Quiz) correspondiente.`);
+      
+      // Dirigir al quiz de ese módulo
+      document.getElementById('selectQuizModule').value = modId;
+      loadQuizByModule(modId);
+      switchTab('quizzes');
+    }
+
+    // SIMULADOR DE BLOQUEO
+    let pantallaBloqueada = false;
+    function toggleScreenLock() {
+      pantallaBloqueada = !pantallaBloqueada;
+      const overlay = document.getElementById('overlayBloqueoAlumno');
+      const txt = document.getElementById('lockButtonText');
+      const icon = document.getElementById('lockIcon');
+      if (pantallaBloqueada) {
+        overlay.classList.remove('hidden');
+        txt.textContent = "Desbloquear Pantallas";
+        icon.className = "fa-solid fa-lock-open";
+      } else {
+        overlay.classList.add('hidden');
+        txt.textContent = "Bloquear Pantallas de Alumnos";
+        icon.className = "fa-solid fa-lock";
+      }
+    }
+
+    // DRAG AND DROP
+    function allowDrop(ev) { ev.preventDefault(); }
+    function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+    function drop(ev, catEsperada) {
+      ev.preventDefault();
+      const id = ev.dataTransfer.getData("text");
+      const elem = document.getElementById(id);
+      if (!elem) return;
+      if (elem.getAttribute('data-cat') === catEsperada) {
+        document.getElementById(`drop-${catEsperada}-content`).appendChild(elem);
+        elem.classList.add('bg-emerald-100', 'border-emerald-400');
+      } else {
+        elem.classList.add('bg-rose-100', 'border-rose-400');
+        setTimeout(() => elem.classList.remove('bg-rose-100', 'border-rose-400'), 500);
+      }
+    }
+
+    // GESTIÓN DE QUIZZES
+    function loadQuizByModule(modId) {
+      const mod = modulesData.find(m => m.id === modId);
+      const questions = quizzesBank[modId] || [];
+
+      document.getElementById('quizBadgeHeader').textContent = `Cuestionario Oficial: ${modId}`;
+      document.getElementById('quizTitleHeader').textContent = `Evaluación: ${mod ? mod.title : ''}`;
+
+      const container = document.getElementById('quizQuestionsContainer');
+      container.innerHTML = "";
+      document.getElementById('quizResultBox').classList.add('hidden');
+
+      // Si no ha hecho la práctica, bloquear el envío
+      const btnSubmit = document.getElementById('btnSubmitQuiz');
+      if (!mod.practiceCompleted) {
+        btnSubmit.disabled = true;
+        btnSubmit.className = "px-6 py-2.5 bg-slate-300 text-slate-500 font-bold text-xs rounded-xl cursor-not-allowed";
+        container.innerHTML = `
+          <div class="p-4 bg-amber-50 border border-amber-300 text-amber-900 rounded-xl text-xs space-y-2">
+            <h5 class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-lock"></i> Quiz Bloqueado</h5>
+            <p>Debes realizar y validar primero la práctica interactiva de este módulo para habilitar el cuestionario.</p>
+            <button onclick="goToModulePractice('${modId}')" class="mt-2 px-3 py-1.5 bg-amber-600 text-white font-bold rounded-lg text-xs">
+              Ir a la Práctica de ${mod.code}
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      btnSubmit.disabled = false;
+      btnSubmit.className = "px-6 py-2.5 bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow transition";
+
+      questions.forEach((qItem, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = "p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2.5";
+        const optsHtml = qItem.options.map((opt, optIdx) => `
+          <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white border border-transparent hover:border-slate-200 cursor-pointer text-xs transition">
+            <input type="radio" name="q_${idx}" value="${optIdx}" required class="text-blue-600 focus:ring-blue-500" />
+            <span class="text-slate-700 font-medium">${opt}</span>
+          </label>
+        `).join('');
+
+        qDiv.innerHTML = `
+          <h4 class="font-bold text-slate-800 text-xs sm:text-sm flex items-start gap-2">
+            <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-xs flex items-center justify-center shrink-0 mt-0.5 font-bold">${idx + 1}</span>
+            <span>${qItem.q}</span>
+          </h4>
+          <div class="space-y-1 pl-7">${optsHtml}</div>
+        `;
+        container.appendChild(qDiv);
+      });
+    }
+
+    function submitQuiz(e) {
+      e.preventDefault();
+      const modId = document.getElementById('selectQuizModule').value;
+      const questions = quizzesBank[modId] || [];
+      let scoreCount = 0;
+
+      questions.forEach((qItem, idx) => {
+        const selected = document.querySelector(`input[name="q_${idx}"]:checked`);
+        if (selected && parseInt(selected.value) === qItem.correct) {
+          scoreCount++;
+        }
+      });
+
+      const percentage = Math.round((scoreCount / questions.length) * 100);
+      const passed = percentage >= 80;
+
+      const modIndex = modulesData.findIndex(m => m.id === modId);
+      if (modIndex !== -1) {
+        modulesData[modIndex].score = percentage;
+        if (passed) {
+          modulesData[modIndex].quizCompleted = true;
+          modulesData[modIndex].progress = 100;
+
+          // Desbloquear siguiente módulo
+          if (modIndex + 1 < modulesData.length) {
+            modulesData[modIndex + 1].unlocked = true;
+          }
+        }
+      }
+
+      localStorage.setItem('ihfb_modules_data_v3', JSON.stringify(modulesData));
+
+      const resultBox = document.getElementById('quizResultBox');
+      resultBox.classList.remove('hidden');
+
+      if (passed) {
+        resultBox.className = "p-5 rounded-2xl border bg-emerald-50 border-emerald-300 text-emerald-900 text-xs space-y-2";
+        resultBox.innerHTML = `
+          <div class="flex items-center gap-2 font-bold text-sm text-emerald-800">
+            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+            <span>¡Módulo Aprobado! (Calificación: ${percentage}%)</span>
+          </div>
+          <p class="text-slate-700">Has cumplido el criterio del 80%. El siguiente módulo ha sido desbloqueado en tu ruta.</p>
+          <div class="pt-2 flex gap-2">
+            <button onclick="switchTab('modulos')" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl font-bold text-xs">Continuar a los Módulos</button>
+            <button onclick="switchTab('progreso')" class="px-4 py-2 bg-white border border-emerald-300 text-emerald-800 rounded-xl font-bold text-xs">Ver Mi Progreso</button>
+          </div>
+        `;
+      } else {
+        resultBox.className = "p-5 rounded-2xl border bg-rose-50 border-rose-300 text-rose-900 text-xs space-y-2";
+        resultBox.innerHTML = `
+          <div class="flex items-center gap-2 font-bold text-sm text-rose-800">
+            <i class="fa-solid fa-circle-xmark text-rose-600 text-lg"></i>
+            <span>Módulo No Aprobado (${percentage}% obtenido / Mínimo 80%)</span>
+          </div>
+          <p class="text-slate-700">Obtuviste ${scoreCount} de ${questions.length} respuestas correctas. Vuelve a revisar los videos antes de reintentar.</p>
+          <button onclick="loadQuizByModule('${modId}')" class="px-4 py-2 bg-rose-700 text-white rounded-xl font-bold text-xs mt-1">Reintentar Evaluación</button>
+        `;
+      }
+
+      renderModulesSidebar();
+      renderProgressTable();
+      updateTotalProgressMetrics();
+    }
+
+    // PROGRESO Y VALIDACIÓN
+    function renderProgressTable() {
+      const tbody = document.getElementById('progressTableBody');
+      tbody.innerHTML = "";
+
+      modulesData.forEach(mod => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition";
+        tr.innerHTML = `
+          <td class="px-4 py-3 font-medium text-slate-900">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid ${mod.icon} text-slate-400"></i>
+              <span>${mod.code}: ${mod.title}</span>
+            </div>
+          </td>
+          <td class="px-4 py-3">
+            ${mod.practiceCompleted ? '<span class="text-emerald-700 font-bold">Completada</span>' : (mod.unlocked ? '<span class="text-amber-600 font-semibold">Pendiente</span>' : '<span class="text-slate-300">Bloqueado</span>')}
+          </td>
+          <td class="px-4 py-3">
+            ${mod.quizCompleted ? '<span class="text-emerald-700 font-bold">Aprobado</span>' : (mod.practiceCompleted ? '<span class="text-blue-600 font-semibold">Habilitado</span>' : '<span class="text-slate-300">Bloqueado</span>')}
+          </td>
+          <td class="px-4 py-3 font-semibold ${mod.score >= 80 ? 'text-emerald-700' : 'text-slate-500'}">
+            ${mod.score !== null ? mod.score + '%' : '--'}
+          </td>
+          <td class="px-4 py-3 text-right">
+            ${
+              mod.unlocked
+                ? `<button onclick="goToModulePractice('${mod.id}')" class="text-blue-700 hover:underline font-bold text-[11px]">Ir a Práctica</button>`
+                : `<span class="text-slate-300 text-[11px]">Bloqueado</span>`
+            }
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateTotalProgressMetrics() {
+      const completedCount = modulesData.filter(m => m.quizCompleted).length;
+      const totalPercent = Math.round((completedCount / modulesData.length) * 100);
+
+      document.getElementById('progresoPorcentajeTotal').textContent = `${totalPercent}%`;
+      document.getElementById('progresoBarraGeneral').style.width = `${totalPercent}%`;
+
+      const btnCert = document.getElementById('btnPrintCertificate');
+      if (completedCount === modulesData.length) {
+        btnCert.disabled = false;
+        btnCert.className = "px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs transition shadow-lg flex items-center justify-center gap-2 cursor-pointer";
+        btnCert.innerHTML = '<i class="fa-solid fa-award"></i> <span>Descargar Constancia Oficial</span>';
+      } else {
+        btnCert.disabled = true;
+        btnCert.className = "px-5 py-3 rounded-xl bg-slate-700 text-slate-400 font-bold text-xs transition flex items-center justify-center gap-2 cursor-not-allowed";
+        btnCert.innerHTML = '<i class="fa-solid fa-lock"></i> <span>Completar 7/7 para Constancia</span>';
+      }
+    }
+
+    function printCertificate() {
+      window.print();
+    }
+
+    // MODO ADMIN DISCRETO
     function toggleAdminPrompt() {
       if (isAdminMode) {
         disableAdminMode();
         return;
       }
-      const pass = prompt("Ingresa la clave maestra de Administrador:", "");
+      const pass = prompt("Acceso Administrativo IHFB:", "");
       if (pass === ADMIN_PASSWORD_DEFAULT) {
         isAdminMode = true;
         document.getElementById('adminNoticeBar').classList.remove('hidden');
-        document.getElementById('btnAdminTrigger').className = "px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-slate-950 border border-amber-400 shadow-md";
-        document.getElementById('adminBtnLabel').textContent = "Admin Activado";
         renderActiveModuleCards(currentSelectedModuleId);
-        alert("¡Modo Administrador Habilitado! Ahora verás botones dorados 'Editar Recurso' en cada tarjeta de video y manual.");
+        alert("Modo Administrador activado. Puedes editar videos, manuales y textos.");
       } else if (pass !== null) {
-        alert("Clave incorrecta. Acceso restringido.");
+        alert("Clave incorrecta.");
       }
     }
 
     function disableAdminMode() {
       isAdminMode = false;
       document.getElementById('adminNoticeBar').classList.add('hidden');
-      document.getElementById('btnAdminTrigger').className = "px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition flex items-center gap-1.5 bg-slate-800/80 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 shadow-sm";
-      document.getElementById('adminBtnLabel').textContent = "Modo Admin";
       renderActiveModuleCards(currentSelectedModuleId);
     }
 
@@ -1389,32 +1591,19 @@
       e.preventDefault();
       const modId = document.getElementById('editCardModuleId').value;
       const cardIndex = parseInt(document.getElementById('editCardIndex').value);
-
       const mod = modulesData.find(m => m.id === modId);
       if (!mod) return;
 
-      // Normalizar link de YouTube si es link regular
-      let rawVideo = document.getElementById('editCardVideoUrl').value.trim();
-      if (rawVideo.includes("watch?v=")) {
-        const vId = rawVideo.split("watch?v=")[1].split("&")[0];
-        rawVideo = `https://www.youtube.com/embed/${vId}`;
-      } else if (rawVideo.includes("youtu.be/")) {
-        const vId = rawVideo.split("youtu.be/")[1].split("?")[0];
-        rawVideo = `https://www.youtube.com/embed/${vId}`;
-      }
-
       mod.cards[cardIndex].title = document.getElementById('editCardTitle').value.trim();
-      mod.cards[cardIndex].videoUrl = rawVideo;
+      mod.cards[cardIndex].videoUrl = document.getElementById('editCardVideoUrl').value.trim();
       mod.cards[cardIndex].manualUrl = document.getElementById('editCardManualUrl').value.trim();
       mod.cards[cardIndex].manual = document.getElementById('editCardManualText').value.trim();
       mod.cards[cardIndex].points = document.getElementById('editCardPoints').value.split(',').map(s => s.trim()).filter(Boolean);
 
-      // Persistir en LocalStorage
-      localStorage.setItem('ihfb_modules_data', JSON.stringify(modulesData));
-
+      localStorage.setItem('ihfb_modules_data_v3', JSON.stringify(modulesData));
       closeAdminEditModal();
       renderActiveModuleCards(modId);
-      alert("¡Recurso actualizado con éxito! El nuevo enlace y contenidos ya están activos.");
+      alert("Recurso actualizado con éxito.");
     }
 
     function exportConfigJSON() {
@@ -1427,352 +1616,7 @@
       downloadAnchor.remove();
     }
 
-    // MODAL DE VIDEOS
-    function openVideoPlayerModal(title, url) {
-      document.getElementById('modalVideoTitle').innerHTML = `<i class="fa-solid fa-play text-blue-400"></i> ${title}`;
-      const iframe = document.getElementById('videoIframe');
-      iframe.src = url || "https://www.youtube.com/embed/dQw4w9WgXcQ";
-      document.getElementById('videoModal').classList.remove('hidden');
-    }
-
-    function closeVideoModal() {
-      document.getElementById('videoIframe').src = "";
-      document.getElementById('videoModal').classList.add('hidden');
-    }
-
-    function openIntroVideoModal() {
-      openVideoPlayerModal("Inducción al Programa de Capacitación Autónoma IHFB", "https://www.youtube.com/embed/dQw4w9WgXcQ");
-    }
-
-    // MODAL DE MANUALES SOP
-    function openManualModal(title, manualCode, pdfUrl) {
-      document.getElementById('modalManualTitle').innerHTML = `<i class="fa-solid fa-file-pdf text-rose-400"></i> ${manualCode}`;
-      document.getElementById('btnExternalPdf').href = pdfUrl || "#";
-      document.getElementById('modalManualContent').innerHTML = `
-        <h4 class="font-bold text-slate-900 text-sm">${title}</h4>
-        <p class="text-xs text-slate-600">Este manual técnico contiene el procedimiento estándar (SOP) aprobado por la coordinación del proyecto para garantizar la correcta aplicación en escuelas públicas salvadoreñas.</p>
-        <div class="p-3.5 bg-slate-100 rounded-xl font-mono text-[11px] text-slate-700 space-y-1.5">
-          <div>1. Verificar que el dispositivo cuente con carga mínima del 40%.</div>
-          <div>2. Sincronizar el ID del usuario con la lista oficial de la sede.</div>
-          <div>3. En caso de corte de red, activar el modo caché local sin recargar.</div>
-          <div>4. Reportar toda incidencia técnica en la bitácora física o digital.</div>
-        </div>
-      `;
-      document.getElementById('manualModal').classList.remove('hidden');
-    }
-
-    function closeManualModal() {
-      document.getElementById('manualModal').classList.add('hidden');
-    }
-
-    // CONTROL DE QUIZZES
-    function goToModuleQuiz() {
-      const select = document.getElementById('selectQuizModule');
-      select.value = currentSelectedModuleId;
-      loadQuizByModule(currentSelectedModuleId);
-      switchTab('quizzes');
-    }
-
-    function loadQuizByModule(modId) {
-      const mod = modulesData.find(m => m.id === modId);
-      const questions = quizzesBank[modId] || [];
-
-      document.getElementById('quizBadgeHeader').textContent = `Cuestionario Oficial: ${modId}`;
-      document.getElementById('quizTitleHeader').textContent = `Evaluación de Competencias: ${mod ? mod.title : ''}`;
-
-      const container = document.getElementById('quizQuestionsContainer');
-      container.innerHTML = "";
-      document.getElementById('quizResultBox').classList.add('hidden');
-
-      questions.forEach((qItem, idx) => {
-        const qDiv = document.createElement('div');
-        qDiv.className = "p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2.5";
-
-        const optsHtml = qItem.options.map((opt, optIdx) => `
-          <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white border border-transparent hover:border-slate-200 cursor-pointer text-xs transition">
-            <input type="radio" name="q_${idx}" value="${optIdx}" required class="text-blue-600 focus:ring-blue-500" />
-            <span class="text-slate-700 font-medium">${opt}</span>
-          </label>
-        `).join('');
-
-        qDiv.innerHTML = `
-          <h4 class="font-bold text-slate-800 text-xs sm:text-sm flex items-start gap-2">
-            <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-xs flex items-center justify-center shrink-0 mt-0.5 font-bold">${idx + 1}</span>
-            <span>${qItem.q}</span>
-          </h4>
-          <div class="space-y-1 pl-7">
-            ${optsHtml}
-          </div>
-        `;
-        container.appendChild(qDiv);
-      });
-    }
-
-    function submitQuiz(e) {
-      e.preventDefault();
-      const modId = document.getElementById('selectQuizModule').value;
-      const questions = quizzesBank[modId] || [];
-      let scoreCount = 0;
-
-      questions.forEach((qItem, idx) => {
-        const selected = document.querySelector(`input[name="q_${idx}"]:checked`);
-        if (selected && parseInt(selected.value) === qItem.correct) {
-          scoreCount++;
-        }
-      });
-
-      const percentage = Math.round((scoreCount / questions.length) * 100);
-      const passed = percentage >= 80;
-
-      const modIndex = modulesData.findIndex(m => m.id === modId);
-      if (modIndex !== -1) {
-        modulesData[modIndex].score = percentage;
-        if (passed) {
-          modulesData[modIndex].completed = true;
-          modulesData[modIndex].progress = 100;
-        }
-      }
-
-      // Desbloquear módulo siguiente
-      if (passed && modIndex + 1 < modulesData.length) {
-        modulesData[modIndex + 1].unlocked = true;
-      }
-
-      localStorage.setItem('ihfb_modules_data', JSON.stringify(modulesData));
-
-      const resultBox = document.getElementById('quizResultBox');
-      resultBox.classList.remove('hidden');
-
-      if (passed) {
-        resultBox.className = "p-5 rounded-2xl border bg-emerald-50 border-emerald-300 text-emerald-900 text-xs space-y-2";
-        resultBox.innerHTML = `
-          <div class="flex items-center gap-2 font-bold text-sm text-emerald-800">
-            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
-            <span>¡Módulo Aprobado con Éxito! (Calificación: ${percentage}%)</span>
-          </div>
-          <p class="text-slate-700">Has superado el criterio del 80%. El siguiente módulo ha sido desbloqueado en tu ruta formativa.</p>
-          <div class="pt-2 flex gap-2">
-            <button onclick="switchTab('modulos')" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl font-bold text-xs">Continuar a los Módulos</button>
-            <button onclick="switchTab('progreso')" class="px-4 py-2 bg-white border border-emerald-300 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs">Ver Mi Progreso</button>
-          </div>
-        `;
-      } else {
-        resultBox.className = "p-5 rounded-2xl border bg-rose-50 border-rose-300 text-rose-900 text-xs space-y-2";
-        resultBox.innerHTML = `
-          <div class="flex items-center gap-2 font-bold text-sm text-rose-800">
-            <i class="fa-solid fa-circle-xmark text-rose-600 text-lg"></i>
-            <span>Módulo No Aprobado (${percentage}% obtenido / Mínimo 80% requerido)</span>
-          </div>
-          <p class="text-slate-700">Obtuviste ${scoreCount} de ${questions.length} respuestas correctas. Vuelve a revisar los videos y el manual SOP antes de intentar nuevamente.</p>
-          <button onclick="loadQuizByModule('${modId}')" class="px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white rounded-xl font-bold text-xs mt-1">
-            <i class="fa-solid fa-rotate-left mr-1"></i> Reintentar Evaluación
-          </button>
-        `;
-      }
-
-      renderModulesSidebar();
-      renderProgressTable();
-      updateTotalProgressMetrics();
-    }
-
-    // SIMULADOR DE BLOQUEO Y AULA DUAL
-    function toggleScreenLock() {
-      isScreenLockedByTeacher = !isScreenLockedByTeacher;
-      const overlay = document.getElementById('studentLockOverlay');
-      const lockBtn = document.getElementById('btnLockScreen');
-      const lockIcon = document.getElementById('lockIcon');
-      const lockText = document.getElementById('lockButtonText');
-      const teacherStatus = document.getElementById('teacherLockStatus');
-
-      if (isScreenLockedByTeacher) {
-        overlay.classList.remove('hidden');
-        lockBtn.className = "px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-[11px] transition flex items-center gap-1.5 shadow";
-        lockIcon.className = "fa-solid fa-lock-open";
-        lockText.textContent = "Desbloquear Pantallas";
-        teacherStatus.textContent = "Pantallas BLOQUEADAS remotamente";
-        teacherStatus.className = "font-bold text-rose-600";
-      } else {
-        overlay.classList.add('hidden');
-        lockBtn.className = "px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[11px] transition flex items-center gap-1.5 shadow";
-        lockIcon.className = "fa-solid fa-lock";
-        lockText.textContent = "Bloquear Pantalla Alumnos";
-        teacherStatus.textContent = "Pantallas Desbloqueadas";
-        teacherStatus.className = "font-bold text-emerald-600";
-      }
-    }
-
-    function studentSelectOption(optionLetter) {
-      if (isScreenLockedByTeacher) return;
-      document.querySelectorAll('.student-opt-btn').forEach(btn => {
-        btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-800', 'font-bold');
-      });
-
-      const selectedBtn = document.getElementById(`btnOpt${optionLetter}`);
-      const justification = document.getElementById('studentJustificationBox');
-      const teacherBadge = document.getElementById('teacherFeedbackBadge');
-      const teacherExplanation = document.getElementById('teacherSyncExplanation');
-
-      if (optionLetter === 'A') {
-        selectedBtn.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-800', 'font-bold');
-        justification.classList.remove('hidden');
-        teacherBadge.textContent = "Respuesta Correcta (Sincronizado)";
-        teacherBadge.className = "text-[10px] px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-700";
-        teacherExplanation.innerHTML = "<strong class='text-emerald-700 font-medium'>El estudiante respondió: A) Plantas.</strong> Justificación activa: Las vacas son animales herbívoros; procesan fibras vegetales.";
-      } else {
-        selectedBtn.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-800');
-        justification.classList.add('hidden');
-        teacherBadge.textContent = "Respuesta Incorrecta";
-        teacherBadge.className = "text-[10px] px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-700";
-        teacherExplanation.innerHTML = "<strong class='text-rose-700 font-medium'>Respuesta incorrecta seleccionada.</strong> El docente puede activar la pista con el Tutor IA.";
-      }
-    }
-
-    function resetSimulation() {
-      if (isScreenLockedByTeacher) toggleScreenLock();
-      document.querySelectorAll('.student-opt-btn').forEach(btn => {
-        btn.className = "student-opt-btn w-full text-left px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition flex items-center justify-between";
-      });
-      document.getElementById('studentJustificationBox').classList.add('hidden');
-      document.getElementById('teacherFeedbackBadge').textContent = "Esperando respuesta";
-      document.getElementById('teacherFeedbackBadge').className = "text-[10px] px-2 py-0.5 rounded font-bold bg-slate-100 text-slate-500";
-      document.getElementById('teacherSyncExplanation').textContent = "El estudiante aún no selecciona una opción en su pantalla...";
-    }
-
-    // ARRASTRAR Y SOLTAR
-    function allowDrop(ev) {
-      ev.preventDefault();
-      ev.currentTarget.classList.add('dropzone-hover');
-    }
-    function clearDropStyle(ev) {
-      ev.currentTarget.classList.remove('dropzone-hover');
-    }
-    function drag(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
-    }
-    function drop(ev, zoneType) {
-      ev.preventDefault();
-      ev.currentTarget.classList.remove('dropzone-hover');
-      const dataId = ev.dataTransfer.getData("text");
-      const draggedElement = document.getElementById(dataId);
-      if (!draggedElement) return;
-
-      const itemType = draggedElement.getAttribute('data-type');
-      if (itemType === zoneType) {
-        document.getElementById(`zone-${zoneType}-content`).appendChild(draggedElement);
-        draggedElement.classList.add('bg-emerald-100', 'text-emerald-900', 'border-emerald-300');
-        draggedElement.classList.remove('bg-white', 'text-slate-700');
-        checkDragCompletion();
-      } else {
-        draggedElement.classList.add('bg-rose-100', 'border-rose-300');
-        setTimeout(() => {
-          draggedElement.classList.remove('bg-rose-100', 'border-rose-300');
-        }, 500);
-      }
-    }
-    function checkDragCompletion() {
-      const remaining = document.getElementById('draggableContainer').children.length;
-      if (remaining === 0) {
-        document.getElementById('dragSuccessMessage').classList.remove('hidden');
-      }
-    }
-    function resetDragActivity() {
-      const container = document.getElementById('draggableContainer');
-      const items = [
-        { id: "drag-vaca", type: "herbivoro", text: "🐮 Vaca", hint: "(Hierba)" },
-        { id: "drag-leon", type: "carnivoro", text: "🦁 León", hint: "(Carne)" },
-        { id: "drag-conejo", type: "herbivoro", text: "🐰 Conejo", hint: "(Vegetales)" },
-        { id: "drag-aguila", type: "carnivoro", text: "🦅 Águila", hint: "(Presas)" }
-      ];
-      document.getElementById('zone-herbivoro-content').innerHTML = "";
-      document.getElementById('zone-carnivoro-content').innerHTML = "";
-      document.getElementById('dragSuccessMessage').classList.add('hidden');
-      container.innerHTML = "";
-      items.forEach(it => {
-        const div = document.createElement('div');
-        div.id = it.id;
-        div.draggable = true;
-        div.ondragstart = drag;
-        div.setAttribute('data-type', it.type);
-        div.className = "cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700";
-        div.innerHTML = `<span>${it.text}</span><span class="text-[10px] text-slate-400 font-normal">${it.hint}</span>`;
-        container.appendChild(div);
-      });
-    }
-
-    // TABLA DE PROGRESO Y DESCARGA DE CONSTANCIA
-    function renderProgressTable() {
-      const tbody = document.getElementById('progressTableBody');
-      tbody.innerHTML = "";
-
-      modulesData.forEach(mod => {
-        const tr = document.createElement('tr');
-        tr.className = "hover:bg-slate-50 transition";
-        tr.innerHTML = `
-          <td class="px-4 py-3 font-medium text-slate-900">
-            <div class="flex items-center gap-2">
-              <i class="fa-solid ${mod.icon} text-slate-400"></i>
-              <span>${mod.code}: ${mod.title}</span>
-            </div>
-          </td>
-          <td class="px-4 py-3">
-            ${
-              mod.completed
-                ? '<span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-check"></i> Aprobado</span>'
-                : mod.unlocked
-                ? '<span class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-100 px-2.5 py-0.5 rounded-full">Pendiente</span>'
-                : '<span class="inline-flex items-center gap-1 text-[11px] font-bold text-slate-400 bg-slate-100 px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-lock"></i> Bloqueado</span>'
-            }
-          </td>
-          <td class="px-4 py-3 font-semibold ${mod.score >= 80 ? 'text-emerald-700' : 'text-slate-500'}">
-            ${mod.score !== null ? mod.score + '%' : '--'}
-          </td>
-          <td class="px-4 py-3">
-            <div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
-              <div class="h-full ${mod.completed ? 'bg-emerald-500' : 'bg-amber-500'}" style="width: ${mod.progress}%"></div>
-            </div>
-          </td>
-          <td class="px-4 py-3 text-right">
-            ${
-              mod.unlocked
-                ? `<button onclick="openQuizFromProgress('${mod.id}')" class="text-blue-700 hover:underline font-bold text-[11px]">Evaluar</button>`
-                : `<span class="text-slate-300 text-[11px]">Bloqueado</span>`
-            }
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function openQuizFromProgress(modId) {
-      document.getElementById('selectQuizModule').value = modId;
-      loadQuizByModule(modId);
-      switchTab('quizzes');
-    }
-
-    function updateTotalProgressMetrics() {
-      const completedCount = modulesData.filter(m => m.completed).length;
-      const totalPercent = Math.round((completedCount / modulesData.length) * 100);
-
-      document.getElementById('progresoPorcentajeTotal').textContent = `${totalPercent}%`;
-      document.getElementById('progresoBarraGeneral').style.width = `${totalPercent}%`;
-
-      const btnCert = document.getElementById('btnPrintCertificate');
-      if (completedCount === modulesData.length) {
-        btnCert.disabled = false;
-        btnCert.className = "px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs transition shadow-lg flex items-center justify-center gap-2 cursor-pointer";
-        btnCert.innerHTML = '<i class="fa-solid fa-award"></i> <span>Descargar Constancia Oficial</span>';
-      } else {
-        btnCert.disabled = true;
-        btnCert.className = "px-5 py-3 rounded-xl bg-slate-700 text-slate-400 font-bold text-xs transition flex items-center justify-center gap-2 cursor-not-allowed";
-        btnCert.innerHTML = '<i class="fa-solid fa-lock"></i> <span>Completar 7/7 para Constancia</span>';
-      }
-    }
-
-    function printCertificate() {
-      window.print();
-    }
-
-    // FAQ Y FORMULARIO DE SOPORTE
+    // FAQ Y SOPORTE
     function toggleFaq(id) {
       const el = document.getElementById(id);
       const icon = document.getElementById(`${id}-icon`);
@@ -1789,9 +1633,7 @@
       e.preventDefault();
       document.getElementById('supSuccessMsg').classList.remove('hidden');
       document.getElementById('supMsg').value = "";
-      setTimeout(() => {
-        document.getElementById('supSuccessMsg').classList.add('hidden');
-      }, 4000);
+      setTimeout(() => document.getElementById('supSuccessMsg').classList.add('hidden'), 4000);
     }
   </script>
 </body>
