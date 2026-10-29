@@ -1,3 +1,6 @@
+
+index.html
+100%
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,7 +36,7 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; top: 0px !important; }
     .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 9999px; }
@@ -41,7 +44,59 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
+
+    /* MÁSCARA TOTAL DE GOOGLE TRANSLATE (CERO BARRAS NI POPUPS MOLESTOS) */
+    .goog-te-banner-frame.skiptranslate, 
+    .goog-te-banner-frame,
+    iframe.goog-te-banner-frame { 
+      display: none !important; 
+      visibility: hidden !important;
+      height: 0 !important;
+    }
+    body { 
+      position: static !important; 
+      top: 0px !important; 
+    }
+    .goog-tooltip, 
+    .goog-tooltip:hover, 
+    .goog-te-balloon-frame { 
+      display: none !important; 
+    }
+    .goog-text-highlight { 
+      background-color: transparent !important; 
+      box-shadow: none !important; 
+    }
+    .goog-te-gadget-simple {
+      background-color: #071F36 !important;
+      border: 1px solid #1E3A8A !important;
+      padding: 4px 10px !important;
+      border-radius: 9999px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      color: #E2E8F0 !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+    .goog-te-gadget-simple span {
+      color: #E2E8F0 !important;
+    }
+    .goog-te-gadget-icon {
+      display: none !important;
+    }
   </style>
+
+  <!-- Script Oficial de Google Translate API -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'es',
+        includedLanguages: 'es,en,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white relative">
 
@@ -49,30 +104,24 @@
   <header class="bg-[#002B49] text-white shadow-lg sticky top-0 z-40 border-b border-blue-950">
     <div class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between gap-4">
       
-      <!-- LOGO OFICIAL IHFB (CARGA DIRECTA DE logo.png) -->
+      <!-- LOGO OFICIAL IHFB (CARGA DIRECTA DE logo.png CON FALLBACK AUTOMÁTICO) -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="handleLogoClick()">
         <img src="logo.png" onerror="this.onerror=null; this.src='logo.png.jpg';" alt="Logo IHFB" class="w-11 h-11 object-contain rounded-xl bg-white p-1 shadow-md shrink-0 border border-slate-100">
         <div>
-          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight" data-i18n="portal_title">
+          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight">
             Portal de Capacitación Autónoma
           </h1>
-          <p class="text-[11px] text-blue-200" data-i18n="portal_subtitle">IHFB El Salvador • Nivelación y Acreditación Operativa</p>
+          <p class="text-[11px] text-blue-200">IHFB El Salvador • Nivelación y Acreditación Operativa</p>
         </div>
       </div>
 
-      <!-- BOTÓN TRADUCTOR INTERNO DISCRETO EN ESQUINA + PERFIL PARTICIPANTE -->
+      <!-- TRADUCTOR DISCRETO EN LA ESQUINA + PERFIL PARTICIPANTE -->
       <div class="flex items-center space-x-3">
         
-        <!-- SELECTOR INTERNO TIPO DESPLEGABLE DISCRETO (i18n Nativo) -->
-        <div class="relative">
-          <div class="flex items-center bg-[#071F36] border border-blue-900 rounded-full px-3 py-1 text-xs gap-1.5 shadow-inner">
-            <i class="fa-solid fa-globe text-blue-400 text-xs"></i>
-            <select id="langSelectDropdown" onchange="setLanguage(this.value)" class="bg-transparent text-slate-200 text-xs font-bold outline-none cursor-pointer">
-              <option value="es" class="bg-[#071F36] text-white">Español</option>
-              <option value="en" class="bg-[#071F36] text-white">English</option>
-              <option value="ko" class="bg-[#071F36] text-white">한국어</option>
-            </select>
-          </div>
+        <!-- WIDGET ELEGANTE DE TRADUCCIÓN DE GOOGLE (ESQUINA DERECHA) -->
+        <div class="flex items-center gap-1.5">
+          <i class="fa-solid fa-globe text-blue-400 text-xs"></i>
+          <div id="google_translate_element"></div>
         </div>
 
         <!-- Perfil del Usuario Conectado (Clic para Modificar Perfil) -->
@@ -90,33 +139,33 @@
         <!-- Indicador Admin Activo -->
         <div id="topAdminBadge" class="hidden items-center gap-2 bg-slate-900 text-slate-200 px-3 py-1.5 rounded-full text-xs font-bold border border-slate-700 shadow-sm">
           <i class="fa-solid fa-shield-halved text-blue-400 text-xs"></i>
-          <span data-i18n="admin_mode_active">Modo Admin</span>
+          <span>Modo Admin</span>
           <button onclick="closeAdminSession()" title="Salir de administración" class="ml-1 text-slate-400 hover:text-rose-400">&times;</button>
         </div>
       </div>
 
     </div>
 
-    <!-- NAVEGACIÓN PRINCIPAL PROFESIONAL CON EFECTO DOCK -->
+    <!-- NAVEGACIÓN PRINCIPAL -->
     <nav id="mainNavMenu" class="hidden bg-[#071F36] border-t border-blue-950 px-3 sm:px-6 shadow-md">
       <div class="w-full max-w-[1600px] mx-auto flex items-center space-x-2 overflow-x-auto custom-scroll py-2 text-xs sm:text-sm font-medium">
         <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 rounded-xl text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-2 shadow font-bold">
-          <i class="fa-solid fa-gauge-high text-xs"></i> <span data-i18n="nav_home">Home Formativo</span>
+          <i class="fa-solid fa-gauge-high text-xs"></i> <span>Home Formativo</span>
         </button>
         <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-layer-group text-xs"></i> <span data-i18n="nav_modules">Módulos de Aprendizaje</span>
+          <i class="fa-solid fa-layer-group text-xs"></i> <span>Módulos de Aprendizaje</span>
         </button>
         <button onclick="switchTab('practicas')" id="nav-practicas" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-laptop-code text-xs"></i> <span data-i18n="nav_practice">Prácticas en Vivo</span>
+          <i class="fa-solid fa-laptop-code text-xs"></i> <span>Prácticas en Vivo</span>
         </button>
         <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-circle-question text-xs"></i> <span data-i18n="nav_quizzes">Evaluaciones (Quizzes)</span>
+          <i class="fa-solid fa-circle-question text-xs"></i> <span>Evaluaciones (Quizzes)</span>
         </button>
         <button onclick="switchTab('progreso')" id="nav-progreso" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-award text-xs"></i> <span data-i18n="nav_progress">Mi Progreso y Validación</span>
+          <i class="fa-solid fa-award text-xs"></i> <span>Mi Progreso y Validación</span>
         </button>
         <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-comments text-xs"></i> <span data-i18n="nav_faq">Preguntas y Soporte</span>
+          <i class="fa-solid fa-comments text-xs"></i> <span>Preguntas y Soporte</span>
         </button>
         <button onclick="openAdminDatabaseModal()" id="nav-admin-db" class="hidden nav-btn px-4 py-2 rounded-xl text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/30 whitespace-nowrap transition flex items-center gap-2 font-bold">
           <i class="fa-solid fa-table-cells text-xs text-emerald-400"></i> <span>Google Sheets & Auditoría</span>
@@ -125,37 +174,42 @@
     </nav>
   </header>
 
-  <!-- ================= CONTENEDOR CENTRAL FLUIDO (FULL WIDTH RESPONSIVE) ================= -->
+  <!-- ================= CONTENEDOR CENTRAL ================= -->
   <main class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-6 flex-1">
 
-    <!-- 1. SECCIÓN: INICIO Y ACCESO (SOLO VISIBLE SI NO HAY SESIÓN INICIADA) -->
+    <!-- 1. SECCIÓN: INICIO, REGISTRO Y LOGIN VINCULADO REAL CON GOOGLE -->
     <section id="section-inicio" class="tab-content block space-y-6">
       
-      <!-- BANNER INSTITUCIONAL SIN LA CAJA DE 'SOP' -->
-      <div class="bg-gradient-to-r from-[#002B49] via-[#0A3C66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row gap-6 items-center justify-between border border-blue-900/50">
+      <!-- BANNER INSTITUCIONAL (EDITABLE EN MODO ADMIN) -->
+      <div class="relative bg-gradient-to-r from-[#002B49] via-[#0A3C66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row gap-6 items-center justify-between border border-blue-900/50">
+        <!-- Botón de edición del banner para Admin -->
+        <button id="btnEditBannerAdmin" onclick="openAdminBannerEditModal()" class="hidden absolute top-4 right-4 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-lg text-xs shadow-md items-center gap-1.5 z-10">
+          <i class="fa-solid fa-pen"></i> Editar Cartel de Bienvenida
+        </button>
+
         <div class="space-y-3 max-w-3xl">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            <i class="fa-solid fa-shield-halved text-[10px]"></i> <span data-i18n="banner_tag">Capacitación Oficial y Nivelación Autónoma</span>
+            <i class="fa-solid fa-shield-halved text-[10px]"></i> <span id="portalBannerTag">Capacitación Oficial y Nivelación Autónoma</span>
           </span>
-          <h2 class="text-2xl sm:text-3xl font-black tracking-tight" data-i18n="banner_title">Bienvenido al Espacio Formativo IHFB</h2>
-          <p class="text-slate-200 text-xs sm:text-sm leading-relaxed" data-i18n="banner_desc">
+          <h2 id="portalBannerTitle" class="text-2xl sm:text-3xl font-black tracking-tight">Bienvenido al Espacio Formativo IHFB</h2>
+          <p id="portalBannerDesc" class="text-slate-200 text-xs sm:text-sm leading-relaxed">
             Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.
           </p>
         </div>
         <div class="flex items-center gap-8 bg-white/10 backdrop-blur px-8 py-4 rounded-2xl border border-white/10 text-center shrink-0">
           <div>
-            <div class="text-3xl sm:text-4xl font-black text-white">7</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider" data-i18n="banner_modules">Módulos</div>
+            <div id="portalBannerModulesNum" class="text-3xl sm:text-4xl font-black text-white">7</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Módulos</div>
           </div>
           <div class="h-10 w-px bg-white/20"></div>
           <div>
-            <div class="text-3xl sm:text-4xl font-black text-emerald-400">80%</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider" data-i18n="banner_approval">Aprobación</div>
+            <div id="portalBannerApprovalNum" class="text-3xl sm:text-4xl font-black text-emerald-400">80%</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Aprobación</div>
           </div>
         </div>
       </div>
 
-      <!-- Cuadrícula: Autenticación Real de Google (Lógica Google Forms) -->
+      <!-- Cuadrícula: Autenticación Oficial de Google (Forms Logic) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         <!-- Tarjeta de Acceso con Google -->
@@ -180,7 +234,7 @@
               <form onsubmit="handleRegisterWithGoogle(event)" class="space-y-3.5">
                 <div>
                   <label class="block text-xs font-bold text-slate-700 mb-1">1. Nombre Completo Oficial (Para constancia) *</label>
-                  <input type="text" id="regUserName" required placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
+                  <input type="text" id="regUserName" required placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition font-medium" />
                 </div>
 
                 <div>
@@ -195,7 +249,7 @@
                   </select>
                 </div>
 
-                <!-- Botón de Registro y Vinculación Google -->
+                <!-- Botón Oficial de Registro y Vinculación Google -->
                 <button type="submit" class="w-full mt-2 py-3.5 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
                   <svg class="w-4 h-4" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -208,23 +262,15 @@
               </form>
             </div>
 
-            <!-- VISTA 2: INICIAR SESIÓN (ÚNICAMENTE UN BOTÓN DE GOOGLE, SIN BOTONES DUPLICADOS) -->
+            <!-- VISTA 2: INICIAR SESIÓN (ÚNICAMENTE EL BOTÓN OFICIAL DE GOOGLE GSI) -->
             <div id="authViewLogin" class="space-y-4 hidden">
               <p class="text-xs text-slate-500 leading-relaxed">
                 Si ya te registraste anteriormente, inicia sesión directamente con tu cuenta de Google para continuar tu avance formativo.
               </p>
 
-              <!-- UN SOLO BOTÓN OFICIAL DE GOOGLE -->
-              <div class="pt-4 pb-2">
-                <button type="button" onclick="triggerGoogleRealLoginFlow()" class="w-full py-3.5 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-extrabold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
-                  <svg class="w-5 h-5" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                  </svg>
-                  <span>Iniciar Sesión con Google</span>
-                </button>
+              <!-- CONTENEDOR DONDE GOOGLE RENDERIZA SU BOTÓN OFICIAL EN FORMA DE PÍLDORA -->
+              <div class="pt-4 pb-2 flex flex-col items-center gap-2">
+                <div id="gsi_button_container" class="w-full flex justify-center"></div>
               </div>
 
               <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-blue-900 leading-snug">
@@ -236,20 +282,25 @@
         </div>
 
         <!-- Video de Inducción General (Reproducción directa en la misma página) -->
-        <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+        <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between relative">
+          <!-- Botón Admin para cambiar el Video de Inducción -->
+          <button id="btnEditIntroVideoAdmin" onclick="openAdminIntroVideoEditModal()" class="hidden absolute top-4 right-4 px-3 py-1 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-lg text-xs shadow-md items-center gap-1.5 z-10">
+            <i class="fa-solid fa-video"></i> Editar Video
+          </button>
+
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs uppercase tracking-wider font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md" data-i18n="guide_tag">
+              <span class="text-xs uppercase tracking-wider font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md">
                 Guía de Inducción
               </span>
-              <span class="text-xs text-slate-400" data-i18n="guide_duration">Duración: 2 min 40s</span>
+              <span class="text-xs text-slate-400">Duración: 2 min 40s</span>
             </div>
-            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2" data-i18n="guide_title">¿Cómo funciona la capacitación autónoma?</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4" data-i18n="guide_desc">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">¿Cómo funciona la capacitación autónoma?</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
               Cada módulo contiene cápsulas en video y manuales operativos estándar. Para acreditar un módulo, debes realizar la práctica interactiva y aprobar la evaluación con mínimo 80%.
             </p>
             
-            <!-- CONTENEDOR DE REPRODUCCIÓN EN LA MISMA PÁGINA (INLINE PLAYER) -->
+            <!-- REPRODUCTOR EN LA MISMA PÁGINA (INLINE PLAYER) -->
             <div id="inlineIntroPlayerContainer" class="relative w-full aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-inner flex items-center justify-center border border-slate-800">
               <img id="introPosterImg" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Aula tecnológica" class="absolute inset-0 w-full h-full object-cover opacity-45">
               <button onclick="playInlineIntroVideo()" id="btnPlayIntroVideo" class="relative z-10 w-16 h-16 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow-2xl transition transform hover:scale-110">
@@ -257,7 +308,7 @@
               </button>
               <div id="introVideoOverlayBar" class="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur px-3.5 py-2.5 rounded-lg flex items-center justify-between text-white text-xs">
                 <span class="font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-blue-400"></i> Protocolo de Operación en Aula IHFB</span>
-                <span class="text-blue-300 font-semibold text-[11px]" data-i18n="watch_video">Ver aquí</span>
+                <span class="text-blue-300 font-semibold text-[11px]">Ver aquí</span>
               </div>
             </div>
           </div>
@@ -281,10 +332,10 @@
       </div>
     </section>
 
-    <!-- ================= NUEVO: HOME FORMATIVO / DASHBOARD POST-LOGIN ================= -->
+    <!-- ================= HOME FORMATIVO / DASHBOARD POST-LOGIN ================= -->
     <section id="section-dashboard" class="tab-content hidden space-y-6">
       
-      <!-- Hero de Bienvenida al Docente / Participante -->
+      <!-- Hero de Bienvenida -->
       <div class="bg-gradient-to-r from-[#002B49] via-[#0A3C66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-blue-900/50">
         <div class="space-y-2">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -350,9 +401,7 @@
           <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700">Módulos Disponibles en tu Ruta</h3>
           <span class="text-xs text-slate-400">Selecciona uno para ingresar a sus videos y manuales</span>
         </div>
-        <div id="dashModulesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- Renderizado dinámico -->
-        </div>
+        <div id="dashModulesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
       </div>
 
     </section>
@@ -372,7 +421,6 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <!-- Sidebar M1 a M7 con Barras que Cambian de Color según el Avance -->
         <aside class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 p-4 shadow-sm space-y-3 lg:sticky lg:top-24">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">Ruta de Módulos</h3>
@@ -381,7 +429,6 @@
           <div id="moduleListContainer" class="space-y-2.5"></div>
         </aside>
 
-        <!-- Catálogo de Recursos del Módulo Seleccionado -->
         <div class="lg:col-span-8 space-y-5">
           <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col sm:flex-row justify-between sm:items-center gap-3">
             <div>
@@ -488,7 +535,6 @@
             <div id="progresoPorcentajeTotal" class="text-3xl font-black text-slate-700">0%</div>
             <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Avance General</div>
           </div>
-          <!-- Barra Dinámica con Cambio de Color según Progreso -->
           <div class="w-24 h-2.5 bg-slate-200 rounded-full overflow-hidden">
             <div id="progresoBarraGeneral" class="h-full bg-slate-400 transition-all duration-500" style="width: 0%;"></div>
           </div>
@@ -516,7 +562,7 @@
         </div>
       </div>
 
-      <!-- Constancia Formal con Logo Oficial IHFB -->
+      <!-- Constancia Formal -->
       <div id="certificateContainer" class="bg-gradient-to-br from-[#002B49] via-slate-900 to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
         <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-slate-700/60 pb-5">
           <div>
@@ -769,7 +815,7 @@
     </div>
   </div>
 
-  <!-- ================= MODAL ELEGANTE: CONFIRMACIÓN CERRAR SESIÓN (NO WINDOW.CONFIRM) ================= -->
+  <!-- ================= MODAL ELEGANTE: CONFIRMACIÓN CERRAR SESIÓN ================= -->
   <div id="logoutConfirmModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
       <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 mx-auto flex items-center justify-center text-xl shadow-inner">
@@ -790,10 +836,10 @@
     </div>
   </div>
 
-  <!-- ================= PASO 2 Y 3: TUERCA DISIMULADA + MODAL CLAVE ADMIN ================= -->
-  <!-- PASO 2: La tuerca está 100% OCULTA por defecto. SOLO APARECE si presionas Ctrl + Shift + A -->
-  <button id="secretAdminGear" onclick="openAdminPasswordModal()" title="Acceso Coordinación" class="hidden fixed bottom-4 right-4 w-9 h-9 rounded-full bg-slate-900/60 hover:bg-slate-900 text-slate-400 hover:text-amber-400 items-center justify-center transition opacity-60 hover:opacity-100 z-50 border border-slate-700 shadow-xl cursor-pointer">
-    <i class="fa-solid fa-gear text-sm"></i>
+  <!-- ================= PASO 2 Y 3: INTERRUPTOR TOGGLE (CTRL + SHIFT + A) ================= -->
+  <!-- PASO 2: La tuerca está 100% OCULTA por defecto. Solo aparece/desaparece como INTERRUPTOR con Ctrl+Shift+A -->
+  <button id="secretAdminGear" onclick="openAdminPasswordModal()" title="Acceso Coordinación" class="hidden fixed bottom-4 right-4 w-10 h-10 rounded-full bg-slate-900/80 hover:bg-slate-900 text-amber-400 items-center justify-center transition opacity-80 hover:opacity-100 z-50 border border-slate-700 shadow-2xl cursor-pointer">
+    <i class="fa-solid fa-gear text-base"></i>
   </button>
 
   <!-- PASO 3: Al hacer clic a la tuerca, se abre este modal solicitando la contraseña -->
@@ -815,6 +861,73 @@
           <button type="submit" class="w-1/2 py-2 bg-[#0B4F8A] hover:bg-blue-800 text-white text-xs font-bold rounded-xl shadow">
             Verificar
           </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL ADMIN: EDITAR CARTEL DE BIENVENIDA FRONTAL ================= -->
+  <div id="adminBannerEditModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl border border-slate-300">
+      <div class="p-4 bg-slate-900 text-white flex justify-between items-center font-bold text-xs sm:text-sm">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-pen text-amber-400"></i> Editar Cartel Frontal de Bienvenida
+        </span>
+        <button onclick="closeAdminBannerEditModal()" class="text-slate-400 hover:text-white text-base">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form onsubmit="saveAdminBanner(event)" class="p-5 space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Etiqueta Superior</label>
+          <input type="text" id="editBannerTag" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-600 font-medium">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Título Principal</label>
+          <input type="text" id="editBannerTitle" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-600 font-medium">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Descripción del Programa</label>
+          <textarea id="editBannerDesc" rows="3" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Cantidad de Módulos</label>
+            <input type="text" id="editBannerModulesNum" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-600">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Porcentaje de Aprobación</label>
+            <input type="text" id="editBannerApprovalNum" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-600">
+          </div>
+        </div>
+        <div class="pt-3 border-t flex justify-end gap-2">
+          <button type="button" onclick="closeAdminBannerEditModal()" class="px-3 py-1.5 rounded-lg border text-slate-600 hover:bg-slate-100">Cancelar</button>
+          <button type="submit" class="px-4 py-1.5 rounded-lg bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold shadow-sm">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL ADMIN: EDITAR VIDEO DE INDUCCIÓN FRONTAL ================= -->
+  <div id="adminIntroVideoEditModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white rounded-2xl overflow-hidden max-w-md w-full shadow-2xl border border-slate-300">
+      <div class="p-4 bg-slate-900 text-white flex justify-between items-center font-bold text-xs sm:text-sm">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-video text-amber-400"></i> Editar Video de Inducción Frontal
+        </span>
+        <button onclick="closeAdminIntroVideoEditModal()" class="text-slate-400 hover:text-white text-base">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form onsubmit="saveAdminIntroVideo(event)" class="p-5 space-y-3.5 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Enlace del Video (YouTube o Google Drive)</label>
+          <input type="text" id="editIntroVideoUrl" required placeholder="https://www.youtube.com/watch?v=... o Google Drive" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-600 font-mono text-[11px]">
+          <p class="text-[10px] text-slate-500 mt-1">Acepta enlaces regulares de YouTube o enlaces compartidos de Google Drive.</p>
+        </div>
+        <div class="pt-3 border-t flex justify-end gap-2">
+          <button type="button" onclick="closeAdminIntroVideoEditModal()" class="px-3 py-1.5 rounded-lg border text-slate-600 hover:bg-slate-100">Cancelar</button>
+          <button type="submit" class="px-4 py-1.5 rounded-lg bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold shadow-sm">Actualizar Video</button>
         </div>
       </form>
     </div>
@@ -903,7 +1016,7 @@
     </div>
   </div>
 
-  <!-- ================= MODAL ADMIN: EDICIÓN EN VIVO DE ENLACES ================= -->
+  <!-- ================= MODAL ADMIN: EDICIÓN EN VIVO DE ENLACES DE MÓDULOS ================= -->
   <div id="adminEditModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-3 sm:p-4 hidden">
     <div class="bg-white rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl border border-slate-300">
       <div class="p-4 bg-slate-900 text-white flex justify-between items-center font-bold text-xs sm:text-sm">
@@ -952,7 +1065,7 @@
     </div>
   </div>
 
-  <!-- ================= MODAL ELEGANTE DE MENSAJES (REEMPLAZO DE ALERT) ================= -->
+  <!-- ================= MODAL ELEGANTE DE MENSAJES ================= -->
   <div id="proAlertModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
       <div id="proAlertIconBox" class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 mx-auto flex items-center justify-center text-xl shadow-sm">
@@ -982,92 +1095,15 @@
     </div>
   </footer>
 
-  <!-- ================= SCRIPT COMPLETO CON ARQUITECTURA LIMPIA ================= -->
+  <!-- ================= LÓGICA JAVASCRIPT ================= -->
   <script>
-    // 1. CONFIGURACIÓN EXACTA DE SERVICIOS
+    // 1. CONSTANTES DEL SISTEMA
     const GOOGLE_CLIENT_ID = "86803539944-23c1mc9j657os18j1jkc4e8f4dghv0h5.apps.googleusercontent.com";
     const APPS_SCRIPT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwQyPLb1RWKTsa9Zl7GJUgKxOKSXhUQSTVL_ClPCA4-Jj4ZVgiLzAQaYNhaDb5Sx01ivg/exec";
     const OFFICIAL_GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1w_6bR1rGZ2pNWapXuqdzTG3Wjo4_U4nGxrAeG3RojvQ/edit?gid=0#gid=0";
     const ADMIN_PASSWORD_DEFAULT = "ihfb2026";
 
-    // 2. TRADUCCIÓN INTERNA NATIVA (i18n)
-    const i18nDict = {
-      es: {
-        portal_title: "Portal de Capacitación Autónoma",
-        portal_subtitle: "IHFB El Salvador • Nivelación y Acreditación Operativa",
-        banner_tag: "Capacitación Oficial y Nivelación Autónoma",
-        banner_title: "Bienvenido al Espacio Formativo IHFB",
-        banner_desc: "Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.",
-        banner_modules: "Módulos",
-        banner_approval: "Aprobación",
-        guide_tag: "Guía de Inducción",
-        guide_duration: "Duración: 2 min 40s",
-        guide_title: "¿Cómo funciona la capacitación autónoma?",
-        guide_desc: "Cada módulo contiene cápsulas en video y manuales operativos estándar. Para acreditar un módulo, debes realizar la práctica interactiva y aprobar la evaluación con mínimo 80%.",
-        watch_video: "Ver aquí",
-        nav_home: "Home Formativo",
-        nav_modules: "Módulos de Aprendizaje",
-        nav_practice: "Prácticas en Vivo",
-        nav_quizzes: "Evaluaciones (Quizzes)",
-        nav_progress: "Mi Progreso y Validación",
-        nav_faq: "Preguntas y Soporte",
-        admin_mode_active: "Modo Admin"
-      },
-      en: {
-        portal_title: "Autonomous Training Portal",
-        portal_subtitle: "IHFB El Salvador • Operational Leveling & Accreditation",
-        banner_tag: "Official Training & Autonomous Leveling",
-        banner_title: "Welcome to the IHFB Training Space",
-        banner_desc: "Platform designed for self-learning, missed workday make-ups, and modular operational accreditation for all personnel in El Salvador.",
-        banner_modules: "Modules",
-        banner_approval: "Passing Score",
-        guide_tag: "Induction Guide",
-        guide_duration: "Duration: 2 min 40s",
-        guide_title: "How does autonomous training work?",
-        guide_desc: "Each module contains video capsules and standard operating manuals (SOP). To pass, complete the interactive practice and score at least 80% on the quiz.",
-        watch_video: "Watch here",
-        nav_home: "Training Home",
-        nav_modules: "Learning Modules",
-        nav_practice: "Live Practice",
-        nav_quizzes: "Assessments (Quizzes)",
-        nav_progress: "My Progress & Status",
-        nav_faq: "Help & Support",
-        admin_mode_active: "Admin Mode"
-      },
-      ko: {
-        portal_title: "IHFB 자율 연수 포털",
-        portal_subtitle: "IHFB 엘살바도르 • 운영 표준화 및 역량 인증",
-        banner_tag: "공식 연수 및 자율 학습",
-        banner_title: "IHFB 교육 연수 공간에 오신 것을 환영합니다",
-        banner_desc: "자기주도 학습, 미이수 수업 보충 및 엘살바도르 전 현장 인력을 위한 모듈형 운영 역량 공인 플랫폼입니다.",
-        banner_modules: "모듈",
-        banner_approval: "수료 기준",
-        guide_tag: "오리엔테이션 안내",
-        guide_duration: "재생 시간: 2분 40초",
-        guide_title: "자율 연수 진행 방식 안내",
-        guide_desc: "각 모듈은 동영상 강의와 표준운영절차(SOP) 매뉴얼로 구성됩니다. 모듈을 통과하려면 실습을 마치고 평가 퀴즈에서 80% 이상을 득점해야 합니다.",
-        watch_video: "재생하기",
-        nav_home: "홈 대시보드",
-        nav_modules: "학습 모듈",
-        nav_practice: "현장 모의 실습",
-        nav_quizzes: "평가 퀴즈",
-        nav_progress: "나의 진도 및 수료증",
-        nav_faq: "자주 묻는 질문",
-        admin_mode_active: "관리자 모드"
-      }
-    };
-
-    function setLanguage(lang) {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (i18nDict[lang] && i18nDict[lang][key]) {
-          el.textContent = i18nDict[lang][key];
-        }
-      });
-      document.getElementById('langSelectDropdown').value = lang;
-    }
-
-    // 3. ESTADO DE USUARIO Y BASE DE DATOS
+    // 2. ESTADO DEL PORTAL
     let currentUser = {
       email: "",
       name: "",
@@ -1075,10 +1111,21 @@
       isRegistered: false
     };
 
+    let introVideoUrl = localStorage.getItem('ihfb_intro_video') || "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
+    let bannerConfig = JSON.parse(localStorage.getItem('ihfb_banner_cfg')) || {
+      tag: "Capacitación Oficial y Nivelación Autónoma",
+      title: "Bienvenido al Espacio Formativo IHFB",
+      desc: "Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.",
+      modulesNum: "7",
+      approvalNum: "80%"
+    };
+
+    let isGearVisible = false;
     let isAdminMode = false;
     let authMode = "register";
 
-    // 4. MÓDULOS DE APRENDIZAJE (M1 - M7)
+    // 3. MÓDULOS DE APRENDIZAJE (M1 - M7)
     const defaultModulesData = [
       {
         id: "M1",
@@ -1252,9 +1299,9 @@
       }
     ];
 
-    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_v9')) || defaultModulesData;
+    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_final')) || defaultModulesData;
 
-    // BANCO DE QUIZZES
+    // BANCO DE PREGUNTAS
     const quizzesBank = {
       M1: [
         { q: "¿Cuál es el primer paso obligatorio al encender los dispositivos en el aula?", options: ["Comenzar a escribir en la pizarra digital", "Verificar la conexión a la red Wi-Fi escolar e inicio de sesión", "Apagar el proyector del salón"], correct: 1 },
@@ -1296,30 +1343,28 @@
     let currentSelectedModuleId = "M1";
     let currentManualPage = 1;
 
-    // 5. INICIALIZACIÓN
+    // 4. INICIALIZACIÓN
     window.addEventListener('DOMContentLoaded', () => {
-      // PASO 1 Y 2: ATAJO SECRETO (Ctrl + Shift + A)
+      // ATAJO COMO INTERRUPTOR (TOGGLE): Ctrl + Shift + A
       window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
           e.preventDefault();
-          const gear = document.getElementById('secretAdminGear');
-          gear.classList.remove('hidden');
-          gear.classList.add('flex');
-          showProAlert("Atajo Reconocido", "Haz clic en la tuerca que ha aparecido en la esquina inferior derecha para ingresar tu contraseña.");
+          toggleAdminGear();
         }
       });
 
+      renderBannerUI();
       document.getElementById('googleSheetUrlInput').value = OFFICIAL_GOOGLE_SHEET_URL;
 
       // Inicializar Google Identity Services
       initGoogleIdentityServices();
 
       // Verificar sesión previa
-      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_v9'));
+      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_final'));
       if (savedUser && savedUser.isRegistered) {
         currentUser = savedUser;
         activarSesionVisual();
-        switchTab('dashboard'); // Entra directo al Home post-login
+        switchTab('dashboard');
       } else {
         desactivarSesionVisual();
       }
@@ -1332,7 +1377,21 @@
       loadPracticeByModule("M1");
     });
 
-    // 6. GOOGLE IDENTITY SERVICES OFICIAL
+    // INTERRUPTOR TOGGLE DE LA TUERCA
+    function toggleAdminGear() {
+      const gear = document.getElementById('secretAdminGear');
+      isGearVisible = !isGearVisible;
+      if (isGearVisible) {
+        gear.classList.remove('hidden');
+        gear.classList.add('flex');
+        showProAlert("Atajo Activado", "La tuerca de administración está visible en la esquina inferior. Haz clic para identificarte.");
+      } else {
+        gear.classList.add('hidden');
+        gear.classList.remove('flex');
+      }
+    }
+
+    // 5. GOOGLE IDENTITY SERVICES OFICIAL (GSI)
     function initGoogleIdentityServices() {
       if (window.google && google.accounts && google.accounts.id) {
         google.accounts.id.initialize({
@@ -1340,6 +1399,20 @@
           callback: handleGoogleCredentialResponse,
           auto_select: false
         });
+
+        // Renderiza el botón oficial en forma de píldora de Google
+        const btnContainer = document.getElementById("gsi_button_container");
+        if (btnContainer) {
+          google.accounts.id.renderButton(btnContainer, {
+            theme: "outline",
+            size: "large",
+            width: "320",
+            text: "signin_with",
+            shape: "pill"
+          });
+        }
+      } else {
+        setTimeout(initGoogleIdentityServices, 500);
       }
     }
 
@@ -1350,7 +1423,13 @@
           const email = payload.email || "";
           const name = payload.name || "";
 
-          processGoogleAccount(email, name);
+          if (authMode === 'register') {
+            const regName = document.getElementById('regUserName').value.trim() || name;
+            const regRole = document.getElementById('regUserRole').value;
+            processGoogleRegistration(email, regName, regRole);
+          } else {
+            processGoogleLogin(email, name);
+          }
         } catch (err) {
           console.error("JWT Error:", err);
         }
@@ -1366,23 +1445,7 @@
       return JSON.parse(jsonPayload);
     }
 
-    // FLUJO OFICIAL DE INICIO DE SESIÓN CON GOOGLE (UN SOLO BOTÓN)
-    function triggerGoogleRealLoginFlow() {
-      authMode = 'login';
-      if (window.google && google.accounts && google.accounts.id) {
-        google.accounts.id.prompt((notification) => {
-          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            // Si el navegador bloqueó el One-Tap, ventana alternativa
-            const email = prompt("Google Sign-In: Confirma tu cuenta de Google:", "docente@clases.edu.sv");
-            if (email && email.includes("@")) {
-              processGoogleAccount(email.trim(), "");
-            }
-          }
-        });
-      }
-    }
-
-    // REGISTRARSE CON GOOGLE
+    // REGISTRO CON GOOGLE (LÓGICA GOOGLE FORMS)
     function handleRegisterWithGoogle(e) {
       e.preventDefault();
       authMode = 'register';
@@ -1394,25 +1457,22 @@
         return;
       }
 
+      // Abre el selector nativo de cuentas de Google
       if (window.google && google.accounts && google.accounts.id) {
         google.accounts.id.prompt((notification) => {
           if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            const detectedEmail = prompt("Google Forms Sync: Confirma tu cuenta de Google activa para vincular tus resultados:", "docente@clases.edu.sv");
-            if (detectedEmail && detectedEmail.includes("@")) {
-              processGoogleRegistration(detectedEmail.trim(), name, role);
-            }
+            showProAlert("Permiso de Google", "Haz clic en el botón de Google para seleccionar tu cuenta activa.");
           }
         });
       }
     }
 
-    // CONTROL DE DUPLICADOS Y REGISTRO EN VIVO
     function processGoogleRegistration(email, name, role) {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_final')) || [];
       const existingUser = db.find(u => u.email.toLowerCase() === email.toLowerCase());
 
       if (existingUser) {
-        showProAlert("Usuario Ya Registrado", `La cuenta ${email} ya está registrada como ${existingUser.role}. Iniciando tu sesión automáticamente.`);
+        showProAlert("Usuario Ya Registrado", `La cuenta ${email} ya está registrada como ${existingUser.role}. Iniciando sesión automáticamente.`);
         currentUser = {
           email: existingUser.email,
           name: existingUser.name,
@@ -1433,13 +1493,13 @@
         showProAlert("¡Registro Exitoso!", `Tu cuenta de Google (${email}) ha sido vinculada como ${role}.`);
       }
 
-      localStorage.setItem('ihfb_user_session_v9', JSON.stringify(currentUser));
+      localStorage.setItem('ihfb_user_session_final', JSON.stringify(currentUser));
       activarSesionVisual();
       setTimeout(() => switchTab('dashboard'), 1200);
     }
 
-    function processGoogleAccount(email, googleName) {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+    function processGoogleLogin(email, googleName) {
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_final')) || [];
       const found = db.find(u => u.email.toLowerCase() === email.toLowerCase());
 
       if (found) {
@@ -1450,17 +1510,17 @@
           isRegistered: true,
           date: found.date
         };
-        localStorage.setItem('ihfb_user_session_v9', JSON.stringify(currentUser));
+        localStorage.setItem('ihfb_user_session_final', JSON.stringify(currentUser));
         activarSesionVisual();
         showProAlert("Sesión Iniciada", `Bienvenido de nuevo, ${currentUser.name}.`);
         setTimeout(() => switchTab('dashboard'), 1000);
       } else {
-        showProAlert("Cuenta No Registrada", "No se encontró registro con esa cuenta de Google. Completa tu nombre y rol en la pestaña 'Registrarse'.", false);
+        showProAlert("Cuenta No Registrada", "No se encontró registro previo con esa cuenta de Google. Completa tu nombre y rol en 'Registrarse'.", false);
         setAuthTab('register');
       }
     }
 
-    // 7. ENVÍO EN VIVO A GOOGLE SHEETS WEBHOOK (APPS SCRIPT)
+    // 6. ENLACE EN VIVO A GOOGLE SHEETS (APPS SCRIPT WEBHOOK)
     function syncToGoogleSheetsWebhook(user, eventType = "Actualización") {
       const payload = {
         timestamp: new Date().toLocaleString("es-SV"),
@@ -1483,19 +1543,17 @@
       }
     }
 
-    // 8. INTERFAZ Y NAVEGACIÓN ATÓMICA
+    // 7. GESTIÓN VISUAL Y NAVEGACIÓN
     function activarSesionVisual() {
       document.getElementById('topUserName').textContent = currentUser.name;
       document.getElementById('topUserRole').textContent = currentUser.role;
       document.getElementById('badgeCurrentRole').textContent = currentUser.role;
-
       document.getElementById('dashUserGreetingName').textContent = currentUser.name;
 
       document.getElementById('topUserBadge').classList.remove('hidden');
       document.getElementById('topUserBadge').classList.add('flex');
       document.getElementById('mainNavMenu').classList.remove('hidden');
 
-      // Constancia oficial
       document.getElementById('certParticipantName').textContent = currentUser.name;
       document.getElementById('certParticipantRole').textContent = `Rol: ${currentUser.role}`;
       document.getElementById('certParticipantEmail').textContent = currentUser.email;
@@ -1533,10 +1591,10 @@
         regTabBtn.className = "pb-2.5 px-3.5 text-xs font-bold text-slate-400 hover:text-slate-700 transition";
         logView.classList.remove('hidden');
         regView.classList.add('hidden');
+        initGoogleIdentityServices();
       }
     }
 
-    // TRANSICIÓN DE PESTAÑAS
     function switchTab(tabKey) {
       if (!currentUser.isRegistered && !isAdminMode && tabKey !== 'inicio') {
         showProAlert("Acceso Restringido", "Por favor ingresa primero con tu cuenta de Google.", false);
@@ -1561,7 +1619,6 @@
         targetNav.classList.remove('text-slate-300');
       }
 
-      // Si entra a módulos, renderiza de inmediato el catálogo limpio en dos columnas
       if (tabKey === 'modulos') {
         renderModulesSidebar();
         renderActiveModuleCards(currentSelectedModuleId);
@@ -1589,21 +1646,88 @@
 
     function confirmLogoutAction() {
       closeLogoutModal();
-      localStorage.removeItem('ihfb_user_session_v9');
+      localStorage.removeItem('ihfb_user_session_final');
       currentUser = { email: "", name: "", role: "Docente", isRegistered: false };
       desactivarSesionVisual();
       switchTab('inicio');
     }
 
-    // 9. REPRODUCCIÓN DIRECTA DEL VIDEO DE INDUCCIÓN (INLINE PLAYER)
+    // 8. REPRODUCCIÓN DEL VIDEO DE INDUCCIÓN INLINE
     function playInlineIntroVideo() {
       const container = document.getElementById('inlineIntroPlayerContainer');
+      const embedUrl = formatVideoEmbedUrl(introVideoUrl);
       container.innerHTML = `
-        <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="w-full h-full" src="${embedUrl}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       `;
     }
 
-    // 10. MODAL DE PERFIL (MODIFICAR NOMBRE O ROL)
+    // 9. EDICIÓN DEL BANNER Y VIDEO DE INDUCCIÓN (MODO ADMIN DESDE LA PORTADA)
+    function renderBannerUI() {
+      document.getElementById('portalBannerTag').textContent = bannerConfig.tag;
+      document.getElementById('portalBannerTitle').textContent = bannerConfig.title;
+      document.getElementById('portalBannerDesc').textContent = bannerConfig.desc;
+      document.getElementById('portalBannerModulesNum').textContent = bannerConfig.modulesNum;
+      document.getElementById('portalBannerApprovalNum').textContent = bannerConfig.approvalNum;
+    }
+
+    function openAdminBannerEditModal() {
+      document.getElementById('editBannerTag').value = bannerConfig.tag;
+      document.getElementById('editBannerTitle').value = bannerConfig.title;
+      document.getElementById('editBannerDesc').value = bannerConfig.desc;
+      document.getElementById('editBannerModulesNum').value = bannerConfig.modulesNum;
+      document.getElementById('editBannerApprovalNum').value = bannerConfig.approvalNum;
+      document.getElementById('adminBannerEditModal').classList.remove('hidden');
+    }
+
+    function closeAdminBannerEditModal() {
+      document.getElementById('adminBannerEditModal').classList.add('hidden');
+    }
+
+    function saveAdminBanner(e) {
+      e.preventDefault();
+      bannerConfig = {
+        tag: document.getElementById('editBannerTag').value.trim(),
+        title: document.getElementById('editBannerTitle').value.trim(),
+        desc: document.getElementById('editBannerDesc').value.trim(),
+        modulesNum: document.getElementById('editBannerModulesNum').value.trim(),
+        approvalNum: document.getElementById('editBannerApprovalNum').value.trim()
+      };
+      localStorage.setItem('ihfb_banner_cfg', JSON.stringify(bannerConfig));
+      renderBannerUI();
+      closeAdminBannerEditModal();
+      showProAlert("Cartel Actualizado", "Los cambios en el cartel de bienvenida se han guardado con éxito.");
+    }
+
+    function openAdminIntroVideoEditModal() {
+      document.getElementById('editIntroVideoUrl').value = introVideoUrl;
+      document.getElementById('adminIntroVideoEditModal').classList.remove('hidden');
+    }
+
+    function closeAdminIntroVideoEditModal() {
+      document.getElementById('adminIntroVideoEditModal').classList.add('hidden');
+    }
+
+    function saveAdminIntroVideo(e) {
+      e.preventDefault();
+      introVideoUrl = document.getElementById('editIntroVideoUrl').value.trim();
+      localStorage.setItem('ihfb_intro_video', introVideoUrl);
+      closeAdminIntroVideoEditModal();
+      // Reiniciar reproductor
+      const container = document.getElementById('inlineIntroPlayerContainer');
+      container.innerHTML = `
+        <img id="introPosterImg" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Aula tecnológica" class="absolute inset-0 w-full h-full object-cover opacity-45">
+        <button onclick="playInlineIntroVideo()" id="btnPlayIntroVideo" class="relative z-10 w-16 h-16 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow-2xl transition transform hover:scale-110">
+          <i class="fa-solid fa-play text-xl ml-1"></i>
+        </button>
+        <div id="introVideoOverlayBar" class="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur px-3.5 py-2.5 rounded-lg flex items-center justify-between text-white text-xs">
+          <span class="font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-blue-400"></i> Protocolo de Operación en Aula IHFB</span>
+          <span class="text-blue-300 font-semibold text-[11px]">Ver aquí</span>
+        </div>
+      `;
+      showProAlert("Video Actualizado", "El video de inducción ha sido actualizado correctamente.");
+    }
+
+    // 10. MODAL DE PERFIL DEL USUARIO
     function openProfileEditModal() {
       if (!currentUser.isRegistered) return;
       document.getElementById('profileEmailDisplay').value = currentUser.email;
@@ -1621,7 +1745,7 @@
       currentUser.name = document.getElementById('profileNameInput').value.trim();
       currentUser.role = document.getElementById('profileRoleSelect').value;
 
-      localStorage.setItem('ihfb_user_session_v9', JSON.stringify(currentUser));
+      localStorage.setItem('ihfb_user_session_final', JSON.stringify(currentUser));
       saveParticipantToDatabase(currentUser);
       syncToGoogleSheetsWebhook(currentUser, "Actualización de Perfil");
 
@@ -1632,7 +1756,7 @@
 
     // 11. BASE DE DATOS LOCAL
     function saveParticipantToDatabase(user) {
-      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_final')) || [];
       const index = db.findIndex(u => u.email.toLowerCase() === user.email.toLowerCase());
       const participantRecord = {
         name: user.name,
@@ -1641,7 +1765,7 @@
         progress: calculateUserProgress(),
         avgScore: calculateAverageScore(),
         date: user.date || new Date().toLocaleDateString('es-SV'),
-        folio: document.getElementById('certFolio') ? document.getElementById('certFolio').textContent : `IHFB-${user.role.substring(0,3).toUpperCase()}-8491`
+        folio: document.getElementById('certFolio') ? document.getElementById('certFolio').textContent : `IHFB-${user.role.substring(0,3).toUpperCase()}-AUTO`
       };
 
       if (index !== -1) {
@@ -1649,7 +1773,7 @@
       } else {
         db.push(participantRecord);
       }
-      localStorage.setItem('ihfb_participants_db_v9', JSON.stringify(db));
+      localStorage.setItem('ihfb_participants_db_final', JSON.stringify(db));
     }
 
     function calculateUserProgress() {
@@ -1721,11 +1845,11 @@
       let url = rawUrl.trim();
       if (url.includes("watch?v=")) {
         const id = url.split("watch?v=")[1].split("&")[0];
-        return `https://www.youtube.com/embed/${id}?autoplay=1`;
+        return `https://www.youtube.com/embed/${id}`;
       }
       if (url.includes("youtu.be/")) {
         const id = url.split("youtu.be/")[1].split("?")[0];
-        return `https://www.youtube.com/embed/${id}?autoplay=1`;
+        return `https://www.youtube.com/embed/${id}`;
       }
       if (url.includes("drive.google.com/file/d/")) {
         const id = url.split("/file/d/")[1].split("/")[0];
@@ -1734,7 +1858,7 @@
       return url;
     }
 
-    // 14. MODAL AMPLIO VIDEO + MANUAL (TIPO IMAGEN 2 / 3)
+    // 14. MODAL AMPLIO VIDEO + MANUAL
     function openModuleVideoModal(card, mod) {
       document.getElementById('proModalTag').textContent = card.num;
       document.getElementById('proModalHeaderTitle').textContent = card.title;
@@ -1977,7 +2101,7 @@
       const mod = modulesData.find(m => m.id === modId);
       if (!mod) return;
       mod.practiceCompleted = true;
-      localStorage.setItem('ihfb_modules_clean_v9', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_final', JSON.stringify(modulesData));
 
       if (currentUser.isRegistered) {
         saveParticipantToDatabase(currentUser);
@@ -2089,7 +2213,7 @@
         }
       }
 
-      localStorage.setItem('ihfb_modules_clean_v9', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_final', JSON.stringify(modulesData));
 
       if (currentUser.isRegistered) {
         saveParticipantToDatabase(currentUser);
@@ -2209,10 +2333,18 @@
       if (pass === ADMIN_PASSWORD_DEFAULT) {
         isAdminMode = true;
         closeAdminPasswordModal();
+
+        // Desbloquea navegación, consola de base de datos y botones de edición frontal
         document.getElementById('mainNavMenu').classList.remove('hidden');
         document.getElementById('nav-admin-db').classList.remove('hidden');
         document.getElementById('topAdminBadge').classList.remove('hidden');
         document.getElementById('topAdminBadge').classList.add('flex');
+
+        // Botones de edición frontal (cartel y video de inducción)
+        document.getElementById('btnEditBannerAdmin').classList.remove('hidden');
+        document.getElementById('btnEditBannerAdmin').classList.add('flex');
+        document.getElementById('btnEditIntroVideoAdmin').classList.remove('hidden');
+        document.getElementById('btnEditIntroVideoAdmin').classList.add('flex');
         
         modulesData.forEach(m => m.unlocked = true);
         renderModulesSidebar();
@@ -2220,8 +2352,7 @@
         renderProgressTable();
         updateTotalProgressMetrics();
 
-        showProAlert("Modo Administrador Activado", "Tienes acceso completo al menú, editor de recursos y a la Base de Datos con enlace a Google Sheets.");
-        openAdminDatabaseModal();
+        showProAlert("Modo Administrador Activado", "Tienes acceso completo. Puedes editar el cartel de bienvenida, el video de inducción y auditar la Base de Datos con enlace a Google Sheets.");
       } else {
         showProAlert("Acceso Denegado", "Clave administrativa incorrecta.", false);
       }
@@ -2232,6 +2363,14 @@
       document.getElementById('nav-admin-db').classList.add('hidden');
       document.getElementById('topAdminBadge').classList.add('hidden');
       document.getElementById('secretAdminGear').classList.add('hidden');
+      isGearVisible = false;
+
+      // Ocultar botones de edición frontal
+      document.getElementById('btnEditBannerAdmin').classList.add('hidden');
+      document.getElementById('btnEditBannerAdmin').classList.remove('flex');
+      document.getElementById('btnEditIntroVideoAdmin').classList.add('hidden');
+      document.getElementById('btnEditIntroVideoAdmin').classList.remove('flex');
+
       if (!currentUser.isRegistered) desactivarSesionVisual();
       renderModulesSidebar();
       renderActiveModuleCards(currentSelectedModuleId);
@@ -2253,7 +2392,7 @@
     }
 
     function renderAdminDatabaseTable() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_final')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -2263,7 +2402,7 @@
           { name: "Rebeca Callejas", email: "rebecacallejas@clases.edu.sv", role: "Docente", progress: 50, avgScore: "85%", folio: "IHFB-DOC-3120", date: "29/10/2026" },
           { name: "Carlos Menjívar", email: "carlos.menjivar@mined.gob.sv", role: "Supervisor", progress: 28, avgScore: "90%", folio: "IHFB-SUP-9104", date: "28/10/2026" }
         );
-        localStorage.setItem('ihfb_participants_db_v9', JSON.stringify(db));
+        localStorage.setItem('ihfb_participants_db_final', JSON.stringify(db));
       }
 
       document.getElementById('adminRecordCount').textContent = `Mostrando ${db.length} participantes registrados`;
@@ -2288,7 +2427,7 @@
     function filterAdminDatabase() {
       const query = document.getElementById('adminSearchInput').value.toLowerCase();
       const roleFilter = document.getElementById('adminRoleFilter').value;
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_final')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -2318,7 +2457,7 @@
     }
 
     function exportParticipantsToCSV() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v9')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_final')) || [];
       if (db.length === 0) {
         showProAlert("Base de Datos Vacía", "No hay registros disponibles para exportar.", false);
         return;
@@ -2337,7 +2476,7 @@
       document.body.removeChild(link);
     }
 
-    // 21. EDITOR EN VIVO DE ENLACES
+    // 21. EDITOR EN VIVO DE ENLACES DE MÓDULOS
     function openAdminEditModal(modId, cardIndex) {
       const mod = modulesData.find(m => m.id === modId);
       const card = mod.cards[cardIndex];
@@ -2370,7 +2509,7 @@
       mod.cards[cardIndex].manual = document.getElementById('editCardManualText').value.trim();
       mod.cards[cardIndex].points = document.getElementById('editCardPoints').value.split(',').map(s => s.trim()).filter(Boolean);
 
-      localStorage.setItem('ihfb_modules_clean_v9', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_final', JSON.stringify(modulesData));
       closeAdminEditModal();
       renderActiveModuleCards(modId);
       showProAlert("Cambios Guardados", "El enlace y el manual han sido actualizados con éxito.");
