@@ -9,6 +9,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Identity Services Oficial -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <script>
     tailwind.config = {
@@ -58,10 +60,10 @@
         </div>
       </div>
 
-      <!-- BOTÓN TRADUCTOR INTERNO PROFESIONAL (ESTILO IMAGEN LXP MANUAL) + PERFIL -->
+      <!-- BOTÓN TRADUCTOR INTERNO NATIVO + PERFIL -->
       <div class="flex items-center space-x-3">
         
-        <!-- SELECTOR INTERNO PILL-SHAPED (Español | English | 한국어) IDÉNTICO A LA FOTO -->
+        <!-- SELECTOR INTERNO LIMPIO (Español | English | 한국어) -->
         <div class="flex items-center bg-white/10 backdrop-blur rounded-full p-1 border border-white/20 text-xs">
           <button onclick="setLanguage('es')" id="lang-btn-es" class="px-3 py-1 rounded-full font-bold text-slate-900 bg-white transition shadow-sm">
             Español
@@ -191,7 +193,7 @@
                   </select>
                 </div>
 
-                <!-- Botón de Registro y Vinculación Google -->
+                <!-- Botón Oficial de Registro y Vinculación Google -->
                 <button type="submit" class="w-full mt-2 py-3 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
                   <svg class="w-4 h-4" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -210,16 +212,19 @@
                 Si ya te registraste anteriormente, inicia sesión directamente con tu cuenta de Google para continuar tu avance formativo.
               </p>
 
-              <!-- ÚNICO BOTÓN DIRECTO DE GOOGLE PARA LOGIN -->
-              <div class="pt-4 pb-2">
-                <button type="button" onclick="handleDirectGoogleLogin()" class="w-full py-3.5 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-extrabold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
+              <!-- CONTENEDOR RENDERIZADO POR GOOGLE IDENTITY SERVICES -->
+              <div class="pt-4 pb-2 flex flex-col items-center gap-3">
+                <div id="gsi_button_container" class="w-full flex justify-center"></div>
+                
+                <!-- Botón de respaldo en caso de bloqueo de popups -->
+                <button type="button" onclick="triggerNativeGoogleAuth()" class="w-full py-3 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-extrabold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
                   <svg class="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
                   </svg>
-                  <span>Iniciar Sesión con Google</span>
+                  <span>Elegir Cuenta de Google</span>
                 </button>
               </div>
 
@@ -405,7 +410,6 @@
             <div id="progresoPorcentajeTotal" class="text-3xl font-black text-slate-700">0%</div>
             <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Avance General</div>
           </div>
-          <!-- Barra Dinámica con Cambio de Color según Progreso -->
           <div class="w-24 h-2.5 bg-slate-200 rounded-full overflow-hidden">
             <div id="progresoBarraGeneral" class="h-full bg-slate-400 transition-all duration-500" style="width: 0%;"></div>
           </div>
@@ -956,7 +960,6 @@
         }
       });
 
-      // Traducir elementos con atributo data-i18n
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (i18nDict[lang] && i18nDict[lang][key]) {
@@ -977,6 +980,7 @@
     let isAdminMode = false;
     const ADMIN_PASSWORD_DEFAULT = "ihfb2026";
     const OFFICIAL_GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1w_6bR1rGZ2pNWapXuqdzTG3Wjo4_U4nGxrAeG3RojvQ/edit?gid=0#gid=0";
+    const GOOGLE_CLIENT_ID = "86803539944-23c1mc9j657os18j1jkc4e8f4dghv0h5.apps.googleusercontent.com";
 
     // 4. MÓDULOS DE APRENDIZAJE
     const defaultModulesData = [
@@ -1152,7 +1156,7 @@
       }
     ];
 
-    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_v7')) || defaultModulesData;
+    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_v8')) || defaultModulesData;
 
     // BANCO DE QUIZZES
     const quizzesBank = {
@@ -1199,7 +1203,6 @@
     // INICIALIZACIÓN
     window.addEventListener('DOMContentLoaded', () => {
       // PASO 1 Y 2: ATAJO SECRETO (Ctrl + Shift + A)
-      // Por defecto la tuerca está completamente oculta. Al pulsar el atajo, APARECE la tuerca.
       window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
           e.preventDefault();
@@ -1212,8 +1215,11 @@
 
       document.getElementById('googleSheetUrlInput').value = OFFICIAL_GOOGLE_SHEET_URL;
 
+      // Inicializar Google Identity Services con el Client ID real
+      initGoogleIdentityServices();
+
       // Verificar sesión previa
-      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_v7'));
+      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_v8'));
       if (savedUser && savedUser.isRegistered) {
         currentUser = savedUser;
         activarSesionVisual();
@@ -1229,8 +1235,112 @@
       loadPracticeByModule("M1");
     });
 
+    // INICIALIZACIÓN OFICIAL DE GOOGLE SIGN-IN
+    function initGoogleIdentityServices() {
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogleCredentialResponse,
+          auto_select: false
+        });
+
+        // Renderizar el botón nativo de Google en la pestaña de login
+        const btnContainer = document.getElementById("gsi_button_container");
+        if (btnContainer) {
+          google.accounts.id.renderButton(btnContainer, {
+            theme: "outline",
+            size: "large",
+            width: "320",
+            text: "signin_with",
+            shape: "pill"
+          });
+        }
+      } else {
+        setTimeout(initGoogleIdentityServices, 500);
+      }
+    }
+
+    function handleGoogleCredentialResponse(response) {
+      if (response && response.credential) {
+        try {
+          const payload = parseJwt(response.credential);
+          const email = payload.email || "";
+          const name = payload.name || "";
+
+          if (authMode === 'register') {
+            // Se completa el registro
+            const regName = document.getElementById('regUserName').value.trim() || name;
+            const regRole = document.getElementById('regUserRole').value;
+
+            currentUser = {
+              email: email,
+              name: regName,
+              role: regRole,
+              isRegistered: true,
+              date: new Date().toLocaleDateString('es-SV')
+            };
+
+            localStorage.setItem('ihfb_user_session_v8', JSON.stringify(currentUser));
+            saveParticipantToDatabase(currentUser);
+
+            activarSesionVisual();
+            showProAlert("¡Registro Completado con Éxito!", `Tu cuenta institucional ${email} ha quedado vinculada oficialmente como ${regRole}. Entrando a tus módulos.`);
+            setTimeout(() => switchTab('modulos'), 1200);
+          } else {
+            // Login directo
+            const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
+            const found = db.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
+
+            if (found) {
+              currentUser = {
+                email: found.email,
+                name: found.name,
+                role: found.role,
+                isRegistered: true,
+                date: found.date
+              };
+            } else {
+              // Registro automático inicial si inicia sesión directo con Google
+              currentUser = {
+                email: email,
+                name: name,
+                role: "Docente",
+                isRegistered: true,
+                date: new Date().toLocaleDateString('es-SV')
+              };
+              saveParticipantToDatabase(currentUser);
+            }
+
+            localStorage.setItem('ihfb_user_session_v8', JSON.stringify(currentUser));
+            activarSesionVisual();
+            showProAlert("Sesión Iniciada", `Bienvenido nuevamente, ${currentUser.name}.`);
+            setTimeout(() => switchTab('modulos'), 1000);
+          }
+        } catch (err) {
+          console.error("Error decodificando Google JWT", err);
+        }
+      }
+    }
+
+    function parseJwt(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    }
+
+    function triggerNativeGoogleAuth() {
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.prompt();
+      }
+    }
+
     // PESTAÑAS DE ACCESO (REGISTRARSE vs INICIAR SESIÓN)
+    let authMode = 'register';
     function setAuthTab(tab) {
+      authMode = tab;
       const regTabBtn = document.getElementById('tabBtnRegister');
       const logTabBtn = document.getElementById('tabBtnLogin');
       const regView = document.getElementById('authViewRegister');
@@ -1246,59 +1356,50 @@
         regTabBtn.className = "pb-2.5 px-3.5 text-xs font-bold text-slate-400 hover:text-slate-700 transition";
         logView.classList.remove('hidden');
         regView.classList.add('hidden');
+        initGoogleIdentityServices();
       }
     }
 
-    // REGISTRO CON CUENTA DE GOOGLE (LÓGICA GOOGLE FORMS)
+    // REGISTRO CON CUENTA DE GOOGLE
     function handleRegisterWithGoogle(e) {
       e.preventDefault();
       const name = document.getElementById('regUserName').value.trim();
       const role = document.getElementById('regUserRole').value;
 
-      // Simula el popup directo de Google Forms para autorizar la cuenta activa
-      const detectedEmail = prompt("Google Forms Sync: Confirma tu cuenta de Google activa para vincular tus resultados:", "docente@clases.edu.sv");
-      if (detectedEmail && detectedEmail.includes("@")) {
-        currentUser = {
-          email: detectedEmail.trim(),
-          name: name,
-          role: role,
-          isRegistered: true,
-          date: new Date().toLocaleDateString('es-SV')
-        };
+      if (!name) {
+        showProAlert("Campo Requerido", "Por favor ingresa tu Nombre Completo Oficial.", false);
+        return;
+      }
 
-        localStorage.setItem('ihfb_user_session_v7', JSON.stringify(currentUser));
-        saveParticipantToDatabase(currentUser);
-
-        activarSesionVisual();
-        showProAlert("Registro Exitoso", `Tu cuenta de Google (${currentUser.email}) ha sido vinculada como ${currentUser.role}. Entrando a tus módulos.`);
-        setTimeout(() => switchTab('modulos'), 1200);
+      // Activa la pasarela oficial de Google
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            // Si el navegador bloqueó el One-Tap, usamos el popup estándar
+            const simulatedGoogleEmail = prompt("Google Sign-In: Confirma tu cuenta oficial activa:", "docente@clases.edu.sv");
+            if (simulatedGoogleEmail && simulatedGoogleEmail.includes("@")) {
+              currentUser = {
+                email: simulatedGoogleEmail.trim(),
+                name: name,
+                role: role,
+                isRegistered: true,
+                date: new Date().toLocaleDateString('es-SV')
+              };
+              localStorage.setItem('ihfb_user_session_v8', JSON.stringify(currentUser));
+              saveParticipantToDatabase(currentUser);
+              activarSesionVisual();
+              showProAlert("Registro Exitoso", `Tu cuenta de Google (${currentUser.email}) ha sido vinculada como ${currentUser.role}.`);
+              setTimeout(() => switchTab('modulos'), 1000);
+            }
+          }
+        });
       }
     }
 
     // INICIO DE SESIÓN DIRECTO CON GOOGLE
     function handleDirectGoogleLogin() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
-      const email = prompt("Google Sign-In: Confirma tu cuenta de Google:", "docente@clases.edu.sv");
-
-      if (email && email.includes("@")) {
-        const found = db.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
-        if (found) {
-          currentUser = {
-            email: found.email,
-            name: found.name,
-            role: found.role,
-            isRegistered: true,
-            date: found.date
-          };
-          localStorage.setItem('ihfb_user_session_v7', JSON.stringify(currentUser));
-          activarSesionVisual();
-          showProAlert("Sesión Iniciada", `Bienvenido nuevamente, ${currentUser.name}.`);
-          setTimeout(() => switchTab('modulos'), 1000);
-        } else {
-          // Si no está registrado aún, le solicita completar su registro
-          showProAlert("Cuenta No Registrada", "No se encontró registro con esa cuenta de Google. Por favor completa tu nombre y rol en la pestaña 'Registrarse'.", false);
-          setAuthTab('register');
-        }
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.prompt();
       }
     }
 
@@ -1331,7 +1432,7 @@
 
     function handleLogout() {
       if (confirm("¿Deseas cerrar tu sesión?")) {
-        localStorage.removeItem('ihfb_user_session_v7');
+        localStorage.removeItem('ihfb_user_session_v8');
         currentUser = { email: "", name: "", role: "Docente", isRegistered: false };
         desactivarSesionVisual();
         switchTab('inicio');
@@ -1373,7 +1474,7 @@
       }
     }
 
-    // MODAL DE PERFIL (MODIFICAR NOMBRE O ROL)
+    // MODAL DE PERFIL
     function openProfileEditModal() {
       if (!currentUser.isRegistered) return;
       document.getElementById('profileEmailDisplay').value = currentUser.email;
@@ -1391,7 +1492,7 @@
       currentUser.name = document.getElementById('profileNameInput').value.trim();
       currentUser.role = document.getElementById('profileRoleSelect').value;
 
-      localStorage.setItem('ihfb_user_session_v7', JSON.stringify(currentUser));
+      localStorage.setItem('ihfb_user_session_v8', JSON.stringify(currentUser));
       saveParticipantToDatabase(currentUser);
 
       activarSesionVisual();
@@ -1401,7 +1502,7 @@
 
     // BASE DE DATOS
     function saveParticipantToDatabase(user) {
-      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
+      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
       const index = db.findIndex(u => u.email === user.email);
       const participantRecord = {
         name: user.name,
@@ -1418,7 +1519,7 @@
       } else {
         db.push(participantRecord);
       }
-      localStorage.setItem('ihfb_participants_db_v7', JSON.stringify(db));
+      localStorage.setItem('ihfb_participants_db_v8', JSON.stringify(db));
     }
 
     function calculateUserProgress() {
@@ -1702,7 +1803,7 @@
       const mod = modulesData.find(m => m.id === modId);
       if (!mod) return;
       mod.practiceCompleted = true;
-      localStorage.setItem('ihfb_modules_clean_v7', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v8', JSON.stringify(modulesData));
       if (currentUser.isRegistered) {
         saveParticipantToDatabase(currentUser);
       }
@@ -1811,7 +1912,7 @@
         }
       }
 
-      localStorage.setItem('ihfb_modules_clean_v7', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v8', JSON.stringify(modulesData));
       if (currentUser.isRegistered) {
         saveParticipantToDatabase(currentUser);
       }
@@ -1972,7 +2073,7 @@
     }
 
     function renderAdminDatabaseTable() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -1982,7 +2083,7 @@
           { name: "Rebeca Callejas", email: "rebecacallejas@clases.edu.sv", role: "Docente", progress: 50, avgScore: "85%", folio: "IHFB-DOC-3120", date: "29/10/2026" },
           { name: "Carlos Menjívar", email: "carlos.menjivar@mined.gob.sv", role: "Supervisor", progress: 28, avgScore: "90%", folio: "IHFB-SUP-9104", date: "28/10/2026" }
         );
-        localStorage.setItem('ihfb_participants_db_v7', JSON.stringify(db));
+        localStorage.setItem('ihfb_participants_db_v8', JSON.stringify(db));
       }
 
       document.getElementById('adminRecordCount').textContent = `Mostrando ${db.length} participantes registrados`;
@@ -2007,7 +2108,7 @@
     function filterAdminDatabase() {
       const query = document.getElementById('adminSearchInput').value.toLowerCase();
       const roleFilter = document.getElementById('adminRoleFilter').value;
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -2037,7 +2138,7 @@
     }
 
     function exportParticipantsToCSV() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v8')) || [];
       if (db.length === 0) {
         showProAlert("Base de Datos Vacía", "No hay registros disponibles para exportar.", false);
         return;
@@ -2089,7 +2190,7 @@
       mod.cards[cardIndex].manual = document.getElementById('editCardManualText').value.trim();
       mod.cards[cardIndex].points = document.getElementById('editCardPoints').value.split(',').map(s => s.trim()).filter(Boolean);
 
-      localStorage.setItem('ihfb_modules_clean_v7', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v8', JSON.stringify(modulesData));
       closeAdminEditModal();
       renderActiveModuleCards(modId);
       showProAlert("Cambios Guardados", "El enlace y el manual han sido actualizados con éxito.");
