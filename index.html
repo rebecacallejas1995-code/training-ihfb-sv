@@ -4,191 +4,1716 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal de Capacitación Autónoma IHFB El Salvador</title>
-  <!-- Tailwind CSS para el diseño visual limpio -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Iconos de Lucide -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Font Awesome for crisp operational icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ihfb: {
+              blue: '#002B49',
+              primary: '#0B4F8A',
+              lightBlue: '#E8F1F8',
+              orange: '#F59E0B',
+              accent: '#2563EB',
+              success: '#10B981',
+              dark: '#0F172A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+    .dropzone-hover { border-color: #2563EB !important; background-color: #EFF6FF !important; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col">
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col">
 
-  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+  <!-- ================= TOPBAR INSTITUCIONAL ================= -->
+  <header class="bg-ihfb-blue text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl">
-          I
+        <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center font-extrabold text-xl tracking-wider text-white shadow">
+          IHFB
         </div>
         <div>
-          <h1 class="text-base font-bold leading-tight text-slate-800">IHFB El Salvador</h1>
-          <p class="text-xs text-slate-500">Portal de Capacitación Autónoma</p>
+          <h1 class="text-sm md:text-base font-bold leading-tight tracking-wide">Portal de Capacitación Autónoma</h1>
+          <p class="text-xs text-blue-200">Programa de Nivelación y Acreditación Operativa · El Salvador</p>
         </div>
       </div>
 
-      <!-- Menú principal horizontal -->
-      <nav class="hidden md:flex space-x-1" id="nav-tabs">
-        <button onclick="cambiarVista('inicio')" class="px-3 py-2 text-sm font-medium rounded-md bg-blue-50 text-blue-700 nav-btn" data-target="inicio">Inicio & Acceso</button>
-        <button onclick="cambiarVista('modulos')" class="px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:text-slate-900 nav-btn" data-target="modulos">Módulos</button>
-        <button onclick="cambiarVista('practicas')" class="px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:text-slate-900 nav-btn" data-target="practicas">Prácticas en Vivo</button>
-        <button onclick="cambiarVista('progreso')" class="px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:text-slate-900 nav-btn" data-target="progreso">Mi Progreso</button>
-        <button onclick="cambiarVista('faq')" class="px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:text-slate-900 nav-btn" data-target="faq">Preguntas & Soporte</button>
-      </nav>
-
-      <!-- Badge de usuario conectado -->
-      <div id="usuario-badge" class="hidden items-center space-x-2 bg-slate-100 py-1.5 px-3 rounded-full text-xs font-medium text-slate-700">
-        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-        <span id="badge-nombre">Participante</span>
-        <span class="text-slate-400">|</span>
-        <span id="badge-rol" class="font-bold text-blue-600">Docente</span>
+      <!-- Badge de Estado del Participante -->
+      <div id="topUserBadge" class="hidden sm:flex items-center space-x-3 bg-blue-950/60 px-3 py-1.5 rounded-full border border-blue-400/20 text-xs">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="topUserName" class="font-medium text-white">Invitado</span>
+        <span class="text-blue-300">|</span>
+        <span id="topUserRole" class="text-blue-200 font-semibold uppercase text-[10px] tracking-wider">Sin Rol</span>
       </div>
     </div>
+
+    <!-- NAVEGACIÓN PRINCIPAL (6 SECCIONES SOLICITADAS) -->
+    <nav class="bg-slate-900 border-t border-slate-800 px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto flex items-center space-x-1 sm:space-x-2 overflow-x-auto custom-scroll py-2 text-xs md:text-sm font-medium">
+        <button onclick="switchTab('inicio')" id="nav-inicio" class="nav-btn px-3 py-1.5 rounded-md text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-1.5">
+          <i class="fa-solid fa-house"></i> <span>1. Inicio y Acceso</span>
+        </button>
+        <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+          <i class="fa-solid fa-layer-group"></i> <span>2. Módulos de Aprendizaje</span>
+        </button>
+        <button onclick="switchTab('practicas')" id="nav-practicas" class="nav-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+          <i class="fa-solid fa-laptop-code"></i> <span>3. Prácticas</span>
+        </button>
+        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+          <i class="fa-solid fa-circle-question"></i> <span>4. Evaluaciones (Quizzes)</span>
+        </button>
+        <button onclick="switchTab('progreso')" id="nav-progreso" class="nav-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+          <i class="fa-solid fa-award"></i> <span>5. Mi Progreso y Validación</span>
+        </button>
+        <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+          <i class="fa-solid fa-comments"></i> <span>6. Preguntas y Consultas</span>
+        </button>
+      </div>
+    </nav>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="flex-1 max-w-7xl mx-auto w-full p-4 md:p-6">
+  <!-- ================= CONTENEDOR CENTRAL ================= -->
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex-1">
 
-    <!-- SECCIÓN 1: INICIO & ACCESO POR PERFIL -->
-    <section id="vista-inicio" class="space-y-6">
-      <div class="bg-gradient-to-r from-blue-700 to-indigo-800 rounded-2xl p-6 md:p-8 text-white shadow-sm">
-        <div class="max-w-2xl space-y-3">
-          <span class="inline-block bg-blue-500/30 text-blue-100 text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">Nivelación Autónoma</span>
-          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Capacitación y Certificación Operativa</h2>
-          <p class="text-blue-100 text-sm leading-relaxed">
-            Plataforma oficial para docentes, tutores, monitores y supervisores. Completa tus módulos a tu propio ritmo, resuelve las evaluaciones prácticas y obtén tu acreditación formal del proyecto.
+    <!-- 1. SECCIÓN: INICIO Y ACCESO POR PERFIL -->
+    <section id="section-inicio" class="tab-content block space-y-6">
+      <!-- Banner de bienvenida -->
+      <div class="bg-gradient-to-r from-ihfb-blue via-slate-800 to-ihfb-primary text-white rounded-2xl p-6 sm:p-8 shadow-lg flex flex-col lg:flex-row gap-6 items-center justify-between">
+        <div class="space-y-3 max-w-2xl">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <i class="fa-solid fa-shield-halved text-[10px]"></i> Capacitación Oficial y Nivelación Autónoma
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Bienvenido al Espacio Formativo IHFB</h2>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.
           </p>
+        </div>
+        <div class="flex items-center gap-3 bg-white/10 backdrop-blur px-5 py-4 rounded-xl border border-white/10 text-center">
+          <div>
+            <div class="text-3xl font-black text-amber-400">7</div>
+            <div class="text-[11px] uppercase font-bold text-slate-200">Módulos</div>
+          </div>
+          <div class="h-8 w-px bg-white/20"></div>
+          <div>
+            <div class="text-3xl font-black text-emerald-400">80%</div>
+            <div class="text-[11px] uppercase font-bold text-slate-200">Aprobación</div>
+          </div>
+          <div class="h-8 w-px bg-white/20"></div>
+          <div>
+            <div class="text-3xl font-black text-blue-300">SOP</div>
+            <div class="text-[11px] uppercase font-bold text-slate-200">Protocolos</div>
+          </div>
         </div>
       </div>
 
-      <!-- FORMULARIO DE ACCESO (1 PASO SIN CONTRASEÑA) -->
-      <div class="max-w-xl mx-auto bg-white rounded-xl border border-slate-200 p-6 md:p-8 shadow-sm">
-        <div class="text-center mb-6">
-          <h3 class="text-lg font-bold text-slate-900">Ingreso de Participante</h3>
-          <p class="text-xs text-slate-500 mt-1">Ingresa tu número de documento para comenzar o continuar tu avance.</p>
+      <!-- Cuadrícula: Formulario de Autorregistro en 1 Paso + Video Introductorio -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Formulario de acceso -->
+        <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-id-card text-blue-600"></i> Acceso en 1 Paso
+              </h3>
+              <span class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">Sin contraseña</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-5">
+              Ingresa tu documento oficial. El sistema reconocerá tu progreso automáticamente en cada sesión sin trámites previos.
+            </p>
+
+            <form id="accessForm" onsubmit="handleUserAccess(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Documento de Identidad (DUI / ID Oficial) *</label>
+                <div class="relative">
+                  <input type="text" id="userInputDUI" required placeholder="00000000-0" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition" />
+                  <i class="fa-solid fa-fingerprint absolute right-3 top-3 text-slate-400 text-sm"></i>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo (para constancia oficial) *</label>
+                <input type="text" id="userInputName" required placeholder="Ej. Juan Carlos Henríquez" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Rol Operativo *</label>
+                  <select id="userInputRole" required class="w-full px-3 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white">
+                    <option value="Docente">Docente</option>
+                    <option value="Tutor">Tutor</option>
+                    <option value="Facilitador">Facilitador</option>
+                    <option value="Monitor">Monitor</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Auditor">Auditor</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Sede / Departamento *</label>
+                  <select id="userInputDept" required class="w-full px-3 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white">
+                    <option value="San Salvador">San Salvador</option>
+                    <option value="La Libertad">La Libertad</option>
+                    <option value="Santa Ana">Santa Ana</option>
+                    <option value="San Miguel">San Miguel</option>
+                    <option value="Sonsonate">Sonsonate</option>
+                    <option value="Otro">Otro / Central</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="w-full mt-2 bg-ihfb-primary hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-xl text-sm transition shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                <span>Ingresar a mi Ruta de Capacitación</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Mensaje informativo de estado -->
+          <div id="accessStatusMsg" class="mt-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg text-xs hidden flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-600"></i>
+            <span id="accessStatusText">Sesión registrada con éxito. Redirigiendo a módulos...</span>
+          </div>
         </div>
 
-        <form id="form-acceso" onsubmit="guardarParticipante(event)" class="space-y-4">
+        <!-- Video introductorio y marco conceptual -->
+        <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
-            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Documento de Identidad (DUI / ID)</label>
-            <input type="text" id="input-dui" required placeholder="00000000-0" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Nombre Completo Oficial</label>
-            <input type="text" id="input-nombre" required placeholder="Ej: Juan Carlos Pérez" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Rol Operativo</label>
-              <select id="input-rol" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-                <option value="Docente">Docente</option>
-                <option value="Tutor / Facilitador">Tutor / Facilitador</option>
-                <option value="Monitor">Monitor</option>
-                <option value="Supervisor / Auditor">Supervisor / Auditor</option>
-              </select>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs uppercase tracking-wider font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md">
+                Guía de Inducción
+              </span>
+              <span class="text-xs text-slate-400">Duración: 2 min 40s</span>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Departamento / Sede</label>
-              <select id="input-sede" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-                <option value="San Salvador">San Salvador</option>
-                <option value="Santa Ana">Santa Ana</option>
-                <option value="San Miguel">San Miguel</option>
-                <option value="La Libertad">La Libertad</option>
-                <option value="Sonsonate">Sonsonate</option>
-              </select>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">¿Cómo funciona la capacitación autónoma?</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Aprende a tu propio ritmo. Cada módulo contiene cápsulas en video y manuales operativos estándar (SOP). Al finalizar el contenido de cada módulo, deberás realizar su evaluación práctica para desbloquear el siguiente nivel.
+            </p>
+
+            <!-- Simulación de video con reproductor interactivo -->
+            <div class="relative w-full aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-inner flex items-center justify-center group cursor-pointer" onclick="openIntroVideoModal()">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Aula tecnológica" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition duration-500">
+              <div class="relative z-10 w-16 h-16 rounded-full bg-blue-600 group-hover:bg-blue-500 text-white flex items-center justify-center shadow-2xl transition transform group-hover:scale-110">
+                <i class="fa-solid fa-play text-xl ml-1"></i>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 bg-slate-950/80 backdrop-blur px-3 py-2 rounded-lg flex items-center justify-between text-white text-xs">
+                <span class="font-medium"><i class="fa-solid fa-circle-info text-blue-400 mr-1.5"></i> Protocolo de Operación en Aula IHFB</span>
+                <span class="text-slate-300 text-[11px]">Ver cápsula</span>
+              </div>
             </div>
           </div>
 
-          <button type="submit" class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm transition-colors shadow-sm">
-            Ingresar a mis Módulos
-          </button>
-        </form>
+          <!-- Pasos simplificados -->
+          <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-100 text-center">
+            <div class="p-2 rounded-lg bg-slate-50">
+              <div class="w-6 h-6 mx-auto rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mb-1">1</div>
+              <p class="text-[11px] font-semibold text-slate-700">Explora Videos & SOP</p>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-50">
+              <div class="w-6 h-6 mx-auto rounded-full bg-amber-100 text-amber-700 text-xs font-bold flex items-center justify-center mb-1">2</div>
+              <p class="text-[11px] font-semibold text-slate-700">Simula y Evalúa</p>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-50">
+              <div class="w-6 h-6 mx-auto rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center mb-1">3</div>
+              <p class="text-[11px] font-semibold text-slate-700">Obtén tu Constancia</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- SECCIÓN 2: MÓDULOS DE APRENDIZAJE CON BLOQUEO SECUENCIAL -->
-    <section id="vista-modulos" class="hidden space-y-6">
-      <div class="flex flex-col md:flex-row gap-6">
+    <!-- 2. SECCIÓN: MÓDULOS DE APRENDIZAJE (BARRA LATERAL M1-M7 Y CATÁLOGO DE TARJETAS) -->
+    <section id="section-modulos" class="tab-content hidden space-y-6">
+      
+      <!-- Encabezado de la sección -->
+      <div class="bg-white rounded-xl p-4 sm:p-5 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Secuencia Formativa Oficial</span>
+          <h2 class="text-xl font-bold text-slate-900">Módulos de Capacitación y Nivelación</h2>
+          <p class="text-xs text-slate-500">Los módulos se desbloquean en orden estricto tras aprobar el quiz correspondiente (mínimo 80%).</p>
+        </div>
+        <!-- Selector rápido de rol visualizado -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-medium text-slate-500">Filtrando para rol:</span>
+          <span id="badgeCurrentRole" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-bold">Docente</span>
+        </div>
+      </div>
+
+      <!-- Layout: Barra lateral izquierda (M1-M7) + Catálogo central derecho -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        <!-- COLUMNA IZQUIERDA: LISTA DE MÓDULOS (M1 A M7) -->
-        <div class="w-full md:w-80 flex-shrink-0 space-y-3">
-          <div class="bg-white p-4 rounded-xl border border-slate-200">
-            <h3 class="text-sm font-bold text-slate-800 mb-1">Ruta de Formación</h3>
-            <p class="text-xs text-slate-500 mb-4">Los módulos se desbloquean al aprobar cada evaluación.</p>
-            <div id="lista-modulos" class="space-y-2">
-              <!-- Se llena automáticamente con JavaScript -->
+        <!-- SIDEBAR DE MÓDULOS (M1 a M7 con barras naranjas y estados) -->
+        <aside class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 p-4 shadow-sm space-y-3 sticky top-24">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">Ruta de Módulos</h3>
+            <span id="modulesCompletedCount" class="text-xs font-bold text-blue-700">1 de 7 disponibles</span>
+          </div>
+
+          <div id="moduleListContainer" class="space-y-2.5">
+            <!-- Los módulos se renderizan dinámicamente con JavaScript -->
+          </div>
+        </aside>
+
+        <!-- CATÁLOGO DE RECURSOS DEL MÓDULO ACTIVO (Tarjetas con estilo idéntico a imagen aprendes-sv) -->
+        <div class="lg:col-span-8 space-y-5">
+          <!-- Cabecera del módulo seleccionado -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="activeModuleCode" class="text-xs font-extrabold px-2.5 py-0.5 rounded bg-blue-100 text-blue-800">M1</span>
+                <span id="activeModuleStatusBadge" class="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700">Desbloqueado</span>
+              </div>
+              <h3 id="activeModuleTitle" class="text-lg font-bold text-slate-900 mt-1">M1: Access & Login</h3>
+              <p id="activeModuleDesc" class="text-xs text-slate-500">Configuración básica, conectividad e inicio de sesión seguro.</p>
             </div>
+            <button onclick="goToModuleQuiz()" class="px-4 py-2.5 rounded-xl bg-ihfb-primary hover:bg-blue-800 text-white font-semibold text-xs transition shadow flex items-center justify-center gap-2">
+              <i class="fa-solid fa-pen-to-square"></i>
+              <span>Ir a la Evaluación del Módulo</span>
+            </button>
+          </div>
+
+          <!-- Cuadrícula de tarjetas de video y manuales -->
+          <div id="moduleCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Tarjetas inyectadas dinámicamente -->
           </div>
         </div>
 
-        <!-- COLUMNA DERECHA: RECURSOS DEL MÓDULO ACTIVO -->
-        <div class="flex-1 space-y-6">
-          <div id="detalle-modulo" class="bg-white p-6 rounded-xl border border-slate-200">
-            <!-- Título y descripción del módulo -->
-            <div class="border-b border-slate-100 pb-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-2">
-              <div>
-                <span id="modulo-tag" class="text-xs font-bold text-blue-600 uppercase tracking-wide">Módulo 1</span>
-                <h2 id="modulo-titulo" class="text-xl font-bold text-slate-900 mt-0.5">Access & Login</h2>
-                <p id="modulo-desc" class="text-xs text-slate-500 mt-1">Configuración del entorno del aula y credenciales de acceso.</p>
-              </div>
-              <span id="modulo-estado-badge" class="self-start md:self-auto px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                En curso
-              </span>
-            </div>
+      </div>
+    </section>
 
-            <!-- TARJETAS DE VIDEOS Y MANUALES -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="contenedor-tarjetas">
-              <!-- Tarjeta de Video -->
-              <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between hover:border-blue-300 transition-colors bg-slate-50/50">
-                <div>
-                  <span class="text-[11px] font-bold text-blue-600 uppercase">Lección en Video</span>
-                  <h4 class="text-sm font-bold text-slate-800 mt-1" id="card-video-title">Sesión audiovisual oficial</h4>
-                  <p class="text-xs text-slate-500 mt-1">Aprende paso a paso los procesos clave dentro de la plataforma.</p>
-                </div>
-                <button onclick="abrirModalVideo()" class="mt-4 w-full flex items-center justify-center space-x-2 py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-colors">
-                  <i data-lucide="play" class="w-3.5 h-3.5"></i>
-                  <span>Ver Video Oficial</span>
+    <!-- 3. SECCIÓN: PRÁCTICAS INTERACTIVAS (SIMULADOR EN VIVO: BLOQUEO, SINCRONIZACIÓN Y DRAG & DROP) -->
+    <section id="section-practicas" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase text-amber-600 tracking-wider">Entorno Sandbox / Sin Riesgo</span>
+          <h2 class="text-xl font-bold text-slate-900">Simulador de Aula Interactiva</h2>
+          <p class="text-xs text-slate-500">Comprueba el dominio de la plataforma en vivo: prueba el bloqueo de pantallas, la sincronización de respuestas y la clasificación táctil.</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-semibold bg-amber-50 text-amber-800 px-3 py-1.5 rounded-lg border border-amber-200">
+          <i class="fa-solid fa-flask"></i> Modo Laboratorio Activo
+        </div>
+      </div>
+
+      <!-- SIMULADOR DOBLE PANTALLA: DOCENTE VS ESTUDIANTE -->
+      <div class="bg-slate-900 rounded-2xl p-4 sm:p-6 text-white shadow-xl">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            <span class="text-xs font-mono text-slate-400 ml-2">Simulador_Dual_IHFB_v2.0.sv</span>
+          </div>
+          <div class="text-xs text-slate-300">
+            <button onclick="resetSimulation()" class="hover:text-white underline text-[11px]"><i class="fa-solid fa-rotate-left mr-1"></i> Reiniciar Simulación</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- VISTA DOCENTE (IZQUIERDA) -->
+          <div class="bg-white text-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-300 flex flex-col">
+            <!-- Barra superior del docente -->
+            <div class="bg-blue-900 text-white p-3 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2 font-bold">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Vista Docente: Clase de Lenguaje y Ciencias</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <!-- BOTÓN ESTRELLA: BLOQUEO DE PANTALLA -->
+                <button id="btnLockScreen" onclick="toggleScreenLock()" class="px-2.5 py-1 rounded bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[11px] transition flex items-center gap-1.5 shadow">
+                  <i class="fa-solid fa-lock" id="lockIcon"></i>
+                  <span id="lockButtonText">Bloquear Pantalla Alumnos</span>
                 </button>
               </div>
+            </div>
 
-              <!-- Tarjeta de Manual SOP -->
-              <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between hover:border-blue-300 transition-colors bg-slate-50/50">
-                <div>
-                  <span class="text-[11px] font-bold text-slate-500 uppercase">Manual de Procedimiento</span>
-                  <h4 class="text-sm font-bold text-slate-800 mt-1">Guía Oficial en PDF (SOP)</h4>
-                  <p class="text-xs text-slate-500 mt-1">Documento paso a paso con los protocolos de operación en el aula.</p>
+            <!-- Contenido de clase docente -->
+            <div class="p-4 flex-1 space-y-4 text-xs">
+              <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                <h4 class="font-bold text-blue-900 text-sm mb-1">¿Qué comen los animales?</h4>
+                <p class="text-slate-600">Observa la imagen y resuelve los ejercicios de comprensión.</p>
+              </div>
+
+              <!-- Monitoreo de respuestas del alumno en tiempo real -->
+              <div class="space-y-3">
+                <div class="p-3 rounded-lg border border-slate-200">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-slate-700">1. ¿Qué come la vaca?</span>
+                    <span id="teacherFeedbackBadge" class="text-[10px] px-2 py-0.5 rounded font-bold bg-slate-100 text-slate-500">Esperando respuesta</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1546445317-29f4545e9d53?q=80&w=200&auto=format&fit=crop" class="w-12 h-12 object-cover rounded-md border" alt="Vaca" />
+                    <div id="teacherSyncExplanation" class="text-slate-500 italic text-[11px]">
+                      El estudiante aún no selecciona una opción en su pantalla...
+                    </div>
+                  </div>
                 </div>
-                <a id="btn-manual" href="#" target="_blank" class="mt-4 w-full flex items-center justify-center space-x-2 py-2 px-3 border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-medium transition-colors">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
-                  <span>Abrir Manual PDF</span>
-                </a>
+
+                <!-- Panel de estadísticas instantáneas -->
+                <div class="bg-slate-50 p-2.5 rounded-lg border text-[11px] space-y-1">
+                  <div class="flex justify-between font-semibold text-slate-700">
+                    <span>Estudiantes conectados:</span>
+                    <span class="text-blue-700 font-bold">28 / 28 en línea</span>
+                  </div>
+                  <div class="flex justify-between text-slate-600">
+                    <span>Estado del candado remoto:</span>
+                    <span id="teacherLockStatus" class="font-bold text-emerald-600">Pantallas Desbloqueadas</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VISTA ESTUDIANTE (DERECHA) -->
+          <div class="bg-white text-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-300 relative flex flex-col min-h-[360px]">
+            <!-- Barra superior del estudiante -->
+            <div class="bg-slate-800 text-white p-3 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2 font-medium">
+                <i class="fa-solid fa-graduation-cap text-blue-400"></i>
+                <span>Vista Estudiante: Tablet Escolar AprendES</span>
+              </div>
+              <span class="text-[11px] bg-slate-700 px-2 py-0.5 rounded text-blue-200 font-mono">ID: EST-8419</span>
+            </div>
+
+            <!-- Contenido del estudiante -->
+            <div class="p-4 flex-1 space-y-3 text-xs">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">Pregunta 1 de 2</span>
+                <span class="text-[11px] text-blue-600 font-medium"><i class="fa-solid fa-robot mr-1"></i> Tutor IA Conectado</span>
+              </div>
+              <p class="font-semibold text-slate-700">¿Qué comen estos animales? (Selecciona para sincronizar):</p>
+
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1546445317-29f4545e9d53?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 object-cover rounded-lg border shadow-sm" alt="Vaca" />
+                <div class="space-y-1.5 flex-1">
+                  <button onclick="studentSelectOption('A')" id="btnOptA" class="student-opt-btn w-full text-left px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition flex items-center justify-between">
+                    <span>A) 🌿 Plantas (Hierbas y pasto)</span>
+                    <span class="text-[10px] text-slate-400 font-mono">Opción 1</span>
+                  </button>
+                  <button onclick="studentSelectOption('B')" id="btnOptB" class="student-opt-btn w-full text-left px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition flex items-center justify-between">
+                    <span>B) 🥩 Carne exclusivamente</span>
+                    <span class="text-[10px] text-slate-400 font-mono">Opción 2</span>
+                  </button>
+                  <button onclick="studentSelectOption('C')" id="btnOptC" class="student-opt-btn w-full text-left px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition flex items-center justify-between">
+                    <span>C) 🍽️ Ambos por igual</span>
+                    <span class="text-[10px] text-slate-400 font-mono">Opción 3</span>
+                  </button>
+                </div>
+              </div>
+
+              <div id="studentJustificationBox" class="hidden p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] animate-fadeIn">
+                <strong>Justificación pedagógica:</strong> Las vacas son animales herbívoros; su sistema digestivo procesa fibras vegetales y pasto.
               </div>
             </div>
 
-            <!-- BOTÓN PARA ABRIR QUIZ -->
-            <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
-              <div>
-                <h4 class="text-sm font-bold text-slate-800">Evaluación de Validación</h4>
-                <p class="text-xs text-slate-500">Responde 3 preguntas prácticas para desbloquear el siguiente módulo.</p>
+            <!-- CAPA OSCURA DE BLOQUEO REMOTO (SIMULACIÓN EXACTA DE LA CAPTURA) -->
+            <div id="studentLockOverlay" class="absolute inset-0 bg-slate-900/95 backdrop-blur-md z-30 flex flex-col items-center justify-center text-center p-6 text-white hidden">
+              <div class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-amber-400 text-2xl mb-4 shadow-2xl">
+                <i class="fa-solid fa-lock"></i>
               </div>
-              <button onclick="abrirQuizActual()" class="py-2 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow-sm transition-colors">
-                Realizar Quiz
-              </button>
+              <h3 class="text-lg font-extrabold tracking-wide text-white">Pantalla bloqueada</h3>
+              <p class="text-sm text-slate-300 mt-1 max-w-xs leading-relaxed">
+                Es momento de concentrarte en la explicación del docente.
+              </p>
+              <div class="mt-4 text-[11px] font-mono text-slate-500">
+                Control remoto ejecutado por el facilitador
+              </div>
             </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SEGUNDA ACTIVIDAD PRÁCTICA: ARRASTRAR Y SOLTAR (DRAG & DROP) -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold uppercase text-blue-700">Práctica Interactiva 2</span>
+            <h3 class="text-lg font-bold text-slate-900">Actividad de Clasificación: Arrastrar y Soltar (Drag & Drop)</h3>
+            <p class="text-xs text-slate-500">Arrastra cada tarjeta hacia la caja correcta según su clasificación alimenticia.</p>
+          </div>
+          <button onclick="resetDragActivity()" class="text-xs text-blue-600 font-semibold hover:underline">
+            <i class="fa-solid fa-arrow-rotate-left mr-1"></i> Restablecer elementos
+          </button>
+        </div>
+
+        <!-- Elementos arrastrables -->
+        <div id="draggableContainer" class="flex flex-wrap gap-3 p-4 bg-slate-50 rounded-xl border border-dashed border-slate-300">
+          <div draggable="true" ondragstart="drag(event)" id="drag-vaca" data-type="herbivoro" class="cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
+            <span>🐄 Vaca</span>
+            <span class="text-[10px] text-slate-400 font-normal">(Hierba)</span>
+          </div>
+          <div draggable="true" ondragstart="drag(event)" id="drag-leon" data-type="carnivoro" class="cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
+            <span>🦁 León</span>
+            <span class="text-[10px] text-slate-400 font-normal">(Carne)</span>
+          </div>
+          <div draggable="true" ondragstart="drag(event)" id="drag-conejo" data-type="herbivoro" class="cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
+            <span>🐇 Conejo</span>
+            <span class="text-[10px] text-slate-400 font-normal">(Vegetales)</span>
+          </div>
+          <div draggable="true" ondragstart="drag(event)" id="drag-aguila" data-type="carnivoro" class="cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
+            <span>🦅 Águila</span>
+            <span class="text-[10px] text-slate-400 font-normal">(Presas)</span>
+          </div>
+        </div>
+
+        <!-- Cajas de destino -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div ondrop="drop(event, 'herbivoro')" ondragover="allowDrop(event)" ondragleave="clearDropStyle(event)" id="zone-herbivoro" class="p-4 rounded-xl border-2 border-dashed border-emerald-300 bg-emerald-50/40 min-h-[120px] transition space-y-2">
+            <h4 class="text-xs font-extrabold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-leaf"></i> Zona Herbívoros (Plantas)
+            </h4>
+            <div id="zone-herbivoro-content" class="flex flex-wrap gap-2 pt-1"></div>
+          </div>
+
+          <div ondrop="drop(event, 'carnivoro')" ondragover="allowDrop(event)" ondragleave="clearDropStyle(event)" id="zone-carnivoro" class="p-4 rounded-xl border-2 border-dashed border-rose-300 bg-rose-50/40 min-h-[120px] transition space-y-2">
+            <h4 class="text-xs font-extrabold text-rose-800 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-drumstick-bite"></i> Zona Carnívoros (Carne)
+            </h4>
+            <div id="zone-carnivoro-content" class="flex flex-wrap gap-2 pt-1"></div>
+          </div>
+        </div>
+
+        <div id="dragSuccessMessage" class="hidden p-3 bg-emerald-100 border border-emerald-300 rounded-lg text-xs font-bold text-emerald-800 flex items-center gap-2">
+          <i class="fa-solid fa-circle-check text-emerald-600"></i>
+          <span>¡Excelente! Has clasificado correctamente todos los elementos del simulador de aula.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SECCIÓN: EVALUACIONES (QUIZZES POR MÓDULOS M1 A M7) -->
+    <section id="section-quizzes" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Acreditación Académica</span>
+          <h2 class="text-xl font-bold text-slate-900">Evaluaciones de Validación (Quizzes)</h2>
+          <p class="text-xs text-slate-500">Para aprobar cada módulo y desbloquear el siguiente, debes obtener al menos el 80% (2 de 3 preguntas correctas mínimo).</p>
+        </div>
+
+        <!-- Selector de Módulo a evaluar -->
+        <div class="flex items-center gap-2 w-full md:w-auto">
+          <label class="text-xs font-semibold text-slate-600 whitespace-nowrap">Módulo a Evaluar:</label>
+          <select id="selectQuizModule" onchange="loadQuizByModule(this.value)" class="w-full md:w-auto px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-blue-600">
+            <option value="M1">M1: Access & Login</option>
+            <option value="M2">M2: Menu Options</option>
+            <option value="M3">M3: Visibility Settings</option>
+            <option value="M4">M4: Curriculum Structure</option>
+            <option value="M5">M5: Class Mode</option>
+            <option value="M6">M6: Monitoring Tools</option>
+            <option value="M7">M7: Supervisor Page</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- TARJETA DEL QUIZ ACTIVO -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm max-w-3xl mx-auto space-y-6">
+        <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+          <div>
+            <span id="quizBadgeHeader" class="text-xs font-extrabold px-2.5 py-0.5 rounded bg-blue-100 text-blue-800">Cuestionario Oficial · M1</span>
+            <h3 id="quizTitleHeader" class="text-lg font-bold text-slate-900 mt-1">Evaluación de Competencias: Access & Login</h3>
+          </div>
+          <span class="text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-full">
+            Mínimo 80% para aprobar
+          </span>
+        </div>
+
+        <!-- Contenedor dinámico de preguntas -->
+        <form id="quizForm" onsubmit="submitQuiz(event)" class="space-y-6">
+          <div id="quizQuestionsContainer" class="space-y-6">
+            <!-- Preguntas inyectadas dinámicamente con JavaScript -->
+          </div>
+
+          <!-- Botón calificar -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-400">3 preguntas prácticas por módulo</span>
+            <button type="submit" class="px-6 py-2.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
+              <i class="fa-solid fa-check-circle"></i>
+              <span>Calificar y Guardar Resultado</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Resultado emergente de la evaluación -->
+        <div id="quizResultBox" class="hidden p-5 rounded-xl border text-xs space-y-3 animate-fadeIn">
+          <!-- Inyectado por JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SECCIÓN: MI PROGRESO Y VALIDACIÓN (EMISIÓN DE CONSTANCIA) -->
+    <section id="section-progreso" class="tab-content hidden space-y-6">
+      
+      <!-- Resumen general de cumplimiento -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Historial de Nivelación</span>
+          <h2 class="text-2xl font-extrabold text-slate-900">Estado de Acreditación Oficial</h2>
+          <p class="text-xs text-slate-500">Revisa tu avance modular acumulado. Completa todos los módulos con al menos 80% para desbloquear la constancia digital.</p>
+        </div>
+
+        <!-- Barra circular o indicador de porcentaje -->
+        <div class="flex items-center gap-4 bg-slate-50 px-5 py-3 rounded-2xl border border-slate-200">
+          <div>
+            <div id="progresoPorcentajeTotal" class="text-3xl font-black text-blue-700">14%</div>
+            <div class="text-[11px] font-semibold text-slate-500">Avance General</div>
+          </div>
+          <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div id="progresoBarraGeneral" class="h-full bg-blue-600 transition-all duration-500" style="width: 14%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de verificación por módulos M1 a M7 -->
+      <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+        <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <h3 class="text-xs font-bold uppercase text-slate-700 tracking-wider">Desglose de Calificaciones por Módulo</h3>
+          <span class="text-xs font-semibold text-slate-500">Requisito: 7 módulos aprobados</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-700">
+            <thead class="bg-slate-100 text-slate-600 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-200">
+              <tr>
+                <th class="px-4 py-3">Código & Módulo</th>
+                <th class="px-4 py-3">Estado</th>
+                <th class="px-4 py-3">Calificación</th>
+                <th class="px-4 py-3">Validación</th>
+                <th class="px-4 py-3 text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="progressTableBody" class="divide-y divide-slate-100">
+              <!-- Filas inyectadas con JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- BLOQUE DE EMISIÓN DE CONSTANCIA FORMAL -->
+      <div id="certificateContainer" class="bg-gradient-to-br from-slate-900 to-ihfb-blue text-white rounded-2xl p-6 sm:p-8 shadow-xl space-y-6">
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-slate-700/60 pb-5">
+          <div>
+            <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-500/30">
+              Acreditación Institucional
+            </span>
+            <h3 class="text-xl font-bold mt-2 text-white">Constancia Digital de Aprobación</h3>
+            <p class="text-xs text-slate-300">Documento formal con código alfanumérico único para auditorías y comprobación de horas operativas.</p>
+          </div>
+          <button id="btnPrintCertificate" onclick="printCertificate()" disabled class="px-5 py-3 rounded-xl bg-slate-700 text-slate-400 font-bold text-xs transition flex items-center justify-center gap-2 cursor-not-allowed">
+            <i class="fa-solid fa-print"></i>
+            <span>Descargar / Imprimir Constancia</span>
+          </button>
+        </div>
+
+        <!-- Plantilla visual de la constancia (previsualización interactiva) -->
+        <div id="certificatePreview" class="bg-white text-slate-900 rounded-xl p-6 sm:p-10 border-4 border-double border-blue-900 shadow-2xl relative overflow-hidden">
+          <div class="absolute -right-16 -top-16 w-44 h-44 rounded-full bg-blue-50 -z-0"></div>
+          
+          <div class="relative z-10 text-center space-y-4">
+            <div class="flex justify-between items-center border-b pb-4">
+              <div class="text-left font-black tracking-wider text-xl text-blue-950">IHFB EL SALVADOR</div>
+              <div class="text-right text-[10px] text-slate-400 uppercase font-mono">Folio: <span id="certFolio">IHFB-PENDIENTE</span></div>
+            </div>
+
+            <div class="py-2">
+              <p class="text-xs uppercase tracking-widest font-bold text-slate-500">Se otorga la presente</p>
+              <h2 class="text-2xl sm:text-3xl font-black text-blue-900 tracking-tight mt-1">CONSTANCIA DE ACREDITACIÓN</h2>
+              <p class="text-xs text-slate-600 mt-2">Por haber completado satisfactoriamente el programa de capacitación y nivelación técnica en:</p>
+              <p class="text-sm font-extrabold text-slate-800 mt-1">"Operación y Gestión de Plataforma Educativa Digital con IA"</p>
+            </div>
+
+            <div class="py-4 border-y border-slate-200">
+              <p class="text-xs text-slate-500">Otorgado a favor de:</p>
+              <h3 id="certParticipantName" class="text-xl sm:text-2xl font-black text-blue-950 uppercase tracking-wide">JUAN PÉREZ</h3>
+              <p class="text-xs font-semibold text-blue-700 mt-1" id="certParticipantRole">Rol: Docente · Sede San Salvador</p>
+              <p class="text-[11px] text-slate-400 font-mono mt-0.5">DUI / ID: <span id="certParticipantDUI">00000000-0</span></p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center pt-4 text-xs text-slate-500 gap-4">
+              <div class="text-left">
+                <p>Fecha de emisión: <strong id="certDate" class="text-slate-700">--/--/----</strong></p>
+                <p>Validación: <strong class="text-emerald-700">100% Módulos Aprobados</strong></p>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-16 border border-slate-300 rounded p-1 bg-white flex flex-col items-center justify-center text-[9px] text-center font-mono">
+                  <i class="fa-solid fa-qrcode text-2xl text-slate-800"></i>
+                  <span>QR VALID</span>
+                </div>
+                <div class="text-left text-[11px]">
+                  <div class="font-bold text-slate-800">Comité Académico IHFB</div>
+                  <div class="text-slate-400 text-[10px]">Acreditación Operativa El Salvador</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SECCIÓN: PREGUNTAS FRECUENTES Y CONSULTAS -->
+    <section id="section-faq" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-xl p-5 border border-slate-200">
+        <span class="text-xs font-bold uppercase text-blue-700 tracking-wider">Centro de Ayuda y Soporte</span>
+        <h2 class="text-xl font-bold text-slate-900">Preguntas Frecuentes y Mesa de Ayuda</h2>
+        <p class="text-xs text-slate-500">Respuestas rápidas a los problemas operativos más comunes y formulario de contacto con el equipo técnico.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- ACORDEÓN DE PREGUNTAS FRECUENTES (SOP, RED, ERRORES) -->
+        <div class="lg:col-span-7 space-y-3">
+          
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+            <button onclick="toggleFaq('faq1')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50 transition">
+              <span>¿Qué hacer si un alumno pierde la conexión durante la clase?</span>
+              <i id="faq1-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+            </button>
+            <div id="faq1" class="hidden px-5 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+              Según el protocolo SOP de conectividad, los ejercicios ya cargados se mantienen en la memoria caché del dispositivo. Pide al estudiante continuar la lectura sin recargar la página y notifica al facilitador o tutor en campo para revisar el punto de acceso Wi-Fi del aula.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+            <button onclick="toggleFaq('faq2')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50 transition">
+              <span>¿Cuántas veces puedo reintentar un quiz si no alcanzo el 80%?</span>
+              <i id="faq2-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+            </button>
+            <div id="faq2" class="hidden px-5 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+              Los reintentos son ilimitados. El objetivo de la capacitación autónoma es garantizar la comprensión real de los protocolos. Se sugiere volver a mirar el video del módulo antes de presentar la evaluación nuevamente.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+            <button onclick="toggleFaq('faq3')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50 transition">
+              <span>¿Cómo funciona el botón de bloqueo de pantalla remoto?</span>
+              <i id="faq3-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+            </button>
+            <div id="faq3" class="hidden px-5 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+              El bloqueo remoto envía una orden inmediata a las tablets de los alumnos sincronizados para congelar la pantalla con el mensaje "Pantalla bloqueada. Es momento de concentrarte en la clase". Se utiliza para centrar la atención en instrucciones orales.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+            <button onclick="toggleFaq('faq4')" class="w-full px-5 py-4 text-left font-bold text-xs sm:text-sm text-slate-800 flex justify-between items-center hover:bg-slate-50 transition">
+              <span>¿Dónde se entregan las constancias para justificar horas formativas?</span>
+              <i id="faq4-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+            </button>
+            <div id="faq4" class="hidden px-5 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+              Al finalizar los 7 módulos, puedes descargar tu constancia en PDF o imprimirla directamente. Además, el sistema registra tu código de folio en la base de datos central de IHFB El Salvador para cotejo de supervisiones.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FORMULARIO DE CONSULTA DIRECTA -->
+        <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+            <i class="fa-solid fa-envelope text-blue-600"></i> Enviar Consulta a la Coordinación
+          </h3>
+          <p class="text-xs text-slate-500 mb-4">¿Tienes una duda operativa o un problema técnico con tu sede? Escribe tu mensaje:</p>
+
+          <form id="supportForm" onsubmit="handleSupportSubmit(event)" class="space-y-3.5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo</label>
+              <input type="text" id="supName" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-blue-600" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">DUI / ID</label>
+                <input type="text" id="supDUI" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-blue-600" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Tipo de Consulta</label>
+                <select id="supType" class="w-full px-2 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
+                  <option value="Duda de Módulo">Duda de Módulo</option>
+                  <option value="Problema Técnico">Problema Técnico</option>
+                  <option value="Error en Constancia">Error en Constancia</option>
+                  <option value="SOP en Aula">SOP en Aula</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Detalle del mensaje</label>
+              <textarea id="supMsg" required rows="3" placeholder="Explica detalladamente tu inquietud..." class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition shadow flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Enviar Consulta a Mesa de Ayuda</span>
+            </button>
+          </form>
+
+          <div id="supSuccessMsg" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-lg flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-600"></i>
+            <span>Tu consulta ha sido enviada al equipo de soporte IHFB.</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- SECCIÓN 3: PRÁCTICAS EN VIVO (SIMULADOR DE AULA) -->
-    <section id="vista-practicas" class="hidden space-y-6">
-      <div class="bg-white p-6 rounded-xl border border-slate-200">
-        <div class="max-w-2xl mb-6">
-          <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">Entorno de Pruebas Seguro</span>
-          <h2 class="text-xl font-bold text-slate-900 mt-1">Simulador de Control de Aula y Bloqueo</h2>
-          <p class="text-xs text-slate-500 mt-1">
-            Comprueba cómo funciona la interacción en tiempo real entre la pantalla del docente y la del estudiante.
-          </p>
-        </div>
+  </main>
 
-        <div
+  <!-- ================= MODALES AUXILIARES ================= -->
+  
+  <!-- Modal 1: Reproductor de Video -->
+  <div id="videoModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl border border-slate-200 animate-fadeIn">
+      <div class="p-4 bg-slate-900 text-white flex justify-between items-center text-xs">
+        <span id="modalVideoTitle" class="font-bold flex items-center gap-2">
+          <i class="fa-solid fa-play text-blue-400"></i> Reproduciendo Video Formativo
+        </span>
+        <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white text-base">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="aspect-video bg-black flex items-center justify-center relative">
+        <!-- Simulación limpia de reproductor -->
+        <div class="text-center p-6 text-white space-y-3">
+          <i class="fa-brands fa-youtube text-5xl text-red-600 animate-pulse"></i>
+          <p id="modalVideoDesc" class="text-xs text-slate-300 max-w-md">Cargando transmisión en resolución optimizada para escuelas...</p>
+          <div class="inline-block px-3 py-1 bg-white/10 rounded-full text-[11px] font-mono text-emerald-400">
+            ● Streaming Educativo IHFB Activo
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-slate-50 flex justify-between items-center text-xs">
+        <span class="text-slate-500">¿Dudas con este video? Revisa el manual SOP adjunto.</span>
+        <button onclick="closeVideoModal()" class="px-4 py-1.5 rounded-lg bg-slate-800 text-white font-medium hover:bg-slate-900">
+          Cerrar Reproductor
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Visor de Manual SOP -->
+  <div id="manualModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl border border-slate-200 animate-fadeIn flex flex-col max-h-[85vh]">
+      <div class="p-4 bg-blue-950 text-white flex justify-between items-center text-xs">
+        <span id="modalManualTitle" class="font-bold flex items-center gap-2">
+          <i class="fa-solid fa-file-pdf text-rose-400"></i> Protocolo Operativo Estándar (SOP)
+        </span>
+        <button onclick="closeManualModal()" class="text-slate-400 hover:text-white text-base">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed custom-scroll">
+        <div class="bg-blue-50 p-3 rounded-lg border border-blue-100 flex items-start gap-3">
+          <i class="fa-solid fa-circle-info text-blue-600 mt-0.5 text-sm"></i>
+          <div>
+            <h5 class="font-bold text-blue-900">Documento Oficial de Referencia Rápida</h5>
+            <p class="text-slate-600 text-[11px]">Consulte estos pasos durante la ejecución de clases o rondas de supervisión en el centro escolar.</p>
+          </div>
+        </div>
+        <div id="modalManualContent" class="space-y-3">
+          <!-- Contenido del manual inyectado por JS -->
+        </div>
+      </div>
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end">
+        <button onclick="closeManualModal()" class="px-4 py-2 bg-blue-800 text-white rounded-lg text-xs font-bold hover:bg-blue-900">
+          Entendido / Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-5 border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p>© 2026 IHFB El Salvador · Plataforma de Capacitación y Nivelación Autónoma.</p>
+      <div class="flex items-center space-x-4 text-[11px]">
+        <span>SOP Oficial</span>
+        <span>•</span>
+        <span>Mesa de Ayuda</span>
+        <span>•</span>
+        <span>Validación de Constancias</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= LÓGICA DE JAVASCRIPT ================= -->
+  <script>
+    // --- ESTADO GLOBAL DEL USUARIO Y MÓDULOS ---
+    let currentUser = {
+      dui: "05894123-8",
+      name: "Prof. Nelson Morales",
+      role: "Docente",
+      dept: "San Salvador",
+      isRegistered: true
+    };
+
+    // Estructura de Módulos (M1 a M7)
+    const modulesData = [
+      {
+        id: "M1",
+        code: "M1",
+        title: "Access & Login",
+        icon: "fa-globe",
+        progress: 100,
+        unlocked: true,
+        completed: true,
+        score: 100,
+        desc: "Configuración del entorno del aula, conectividad Wi-Fi y acceso a cuentas.",
+        cards: [
+          {
+            num: "VIDEO 1",
+            title: "Configuración del entorno del aula",
+            points: ["Configuración del entorno del aula", "Conexión Wi-Fi escolar", "Inicio de sesión seguro", "Selección de escuela"],
+            manual: "SOP-01: Verificación de Red y Enlace de Dispositivos"
+          },
+          {
+            num: "VIDEO 2",
+            title: "Lista de aulas y Clase de hoy",
+            points: ["Lista de Aulas asignadas", "Acceso rápido a 'Clase de Hoy'", "Verificación de lista de asistencia inicial"],
+            manual: "SOP-02: Asignación y Apertura de Jornada Escolar"
+          }
+        ]
+      },
+      {
+        id: "M2",
+        code: "M2",
+        title: "Menu Options",
+        icon: "fa-clipboard-list",
+        progress: 100,
+        unlocked: true,
+        completed: true,
+        score: 90,
+        desc: "Opciones de menú, clases regulares, revisión y control de asistencia.",
+        cards: [
+          {
+            num: "VIDEO 3",
+            title: "Clase regular y Asistencia",
+            points: ["Navegación de clase regular", "Revisión previa de materiales", "Toma de asistencia digital"],
+            manual: "SOP-03: Control de Asistencia y Reporte de Ausencias"
+          },
+          {
+            num: "VIDEO 4",
+            title: "Lista de Clases y Tareas",
+            points: ["Mi progreso escolar", "Lista de clases habilitadas", "Programación de tareas y refuerzos"],
+            manual: "SOP-04: Gestión de Tareas y Recursos Complementarios"
+          }
+        ]
+      },
+      {
+        id: "M3",
+        code: "M3",
+        title: "Visibility Settings",
+        icon: "fa-eye",
+        progress: 0,
+        unlocked: true,
+        completed: false,
+        score: null,
+        desc: "Configuración de visibilidad, modo individual y ocultar contenidos.",
+        cards: [
+          {
+            num: "VIDEO 5",
+            title: "Configuración de Visibilidad",
+            points: ["Ocultar/Mostrar contenido para alumnos", "Visibilidad diferenciada por grupo", "Gestión de permisos"],
+            manual: "SOP-05: Ajustes de Privacidad y Visibilidad en Clase"
+          },
+          {
+            num: "VIDEO 6",
+            title: "Personalización del Panel",
+            points: ["Ajuste de temas visuales", "Modo nocturno y alto contraste", "Optimización de pantalla"],
+            manual: "SOP-06: Configuración de Interfaz Accesible"
+          }
+        ]
+      },
+      {
+        id: "M4",
+        code: "M4",
+        title: "Curriculum Structure",
+        icon: "fa-folder-open",
+        progress: 0,
+        unlocked: false,
+        completed: false,
+        score: null,
+        desc: "Estructura de Lenguaje y Matemáticas, refuerzo escolar con IA.",
+        cards: [
+          {
+            num: "VIDEO 7",
+            title: "Estructura Curricular (Lenguaje)",
+            points: ["Grupo de clase de lenguaje", "Refuerzo y comprensión lectora", "Rutas guiadas por IA"],
+            manual: "SOP-07: Despliegue de Unidades de Lenguaje"
+          },
+          {
+            num: "VIDEO 8",
+            title: "Estructura Curricular (Matemática)",
+            points: ["Grupo de clase de matemáticas", "Resolución paso a paso", "Ejercicios automatizados"],
+            manual: "SOP-08: Secuencias Didácticas de Matemática"
+          }
+        ]
+      },
+      {
+        id: "M5",
+        code: "M5",
+        title: "Class Mode",
+        icon: "fa-screwdriver-wrench",
+        progress: 0,
+        unlocked: false,
+        completed: false,
+        score: null,
+        desc: "Sincronización en tiempo real, bloqueo de pantalla y pizarra.",
+        cards: [
+          {
+            num: "VIDEO 9",
+            title: "Modo de Clase (Sincronización y Bloqueo)",
+            points: ["Bloqueo remoto de pantalla de alumnos", "Sincronización de respuestas", "Envío de actividades al unísono"],
+            manual: "SOP-09: Dinámicas de Control y Atención en Aula"
+          },
+          {
+            num: "VIDEO 10",
+            title: "Pizarra y Material de Referencia",
+            points: ["Herramientas de dibujo en vivo", "Visualización de material de apoyo", "Función reintentar ejercicio"],
+            manual: "SOP-10: Pizarra Digital y Soporte Visual"
+          }
+        ]
+      },
+      {
+        id: "M6",
+        code: "M6",
+        title: "Monitoring Tools",
+        icon: "fa-chart-simple",
+        progress: 0,
+        unlocked: false,
+        completed: false,
+        score: null,
+        desc: "Tableros de rendimiento, completación escolar y reportes de aula.",
+        cards: [
+          {
+            num: "VIDEO 11",
+            title: "Monitoreo en Tiempo Real",
+            points: ["Mapa de calor de avance", "Detección de alumnos rezagados", "Reportes de completación"],
+            manual: "SOP-11: Uso de Dashboards para Monitores y Tutores"
+          }
+        ]
+      },
+      {
+        id: "M7",
+        code: "M7",
+        title: "Supervisor Page",
+        icon: "fa-shield",
+        progress: 0,
+        unlocked: false,
+        completed: false,
+        score: null,
+        desc: "Consola de supervisión departamental, auditoría de listas y soporte.",
+        cards: [
+          {
+            num: "VIDEO 12",
+            title: "Consola de Auditoría y Control",
+            points: ["Fiscalización de uso escolar", "Verificación de inventarios de tablets", "Reporte final a coordinadores"],
+            manual: "SOP-12: Auditoría Integral y Control de Calidad"
+          }
+        ]
+      }
+    ];
+
+    // Banco de Quizzes (3 preguntas por cada módulo)
+    const quizzesBank = {
+      M1: [
+        {
+          q: "¿Cuál es el primer paso obligatorio al encender los dispositivos en el aula?",
+          options: ["Comenzar a escribir en la pizarra digital", "Verificar la conexión a la red Wi-Fi escolar e inicio de sesión", "Apagar el proyector del salón"],
+          correct: 1
+        },
+        {
+          q: "¿Qué se debe hacer si un alumno no aparece en la lista de su aula asignada?",
+          options: ["Pedirle que no use la plataforma", "Reportarlo de inmediato al facilitador/tutor para vincular su ID", "Crear una cuenta personal inventada"],
+          correct: 1
+        },
+        {
+          q: "¿Cuál es la función de la opción 'Clase de Hoy'?",
+          options: ["Abrir los juegos de recreo", "Acceder directamente a la sesión pedagógica programada para la jornada", "Eliminar los historiales escolares"],
+          correct: 1
+        }
+      ],
+      M2: [
+        {
+          q: "¿Cuándo debe registrarse el control de asistencia digital en la plataforma?",
+          options: ["Al inicio de la jornada en el menú de clase", "Al día siguiente por correo", "Solo al finalizar el año"],
+          correct: 0
+        },
+        {
+          q: "¿Dónde puede consultar el docente el historial de tareas pendientes?",
+          options: ["En el menú 'Lista de Tareas'", "En la configuración de red", "En la papelera"],
+          correct: 0
+        },
+        {
+          q: "¿Qué permite la opción 'Revisión previa de la clase'?",
+          options: ["Borrar las notas de los alumnos", "Visualizar anticipadamente los ejercicios y justificaciones pedagógicas", "Bloquear el internet"],
+          correct: 1
+        }
+      ],
+      M3: [
+        {
+          q: "¿Para qué sirve el ajuste de visibilidad de contenidos?",
+          options: ["Para regular el brillo de la pantalla", "Para mostrar u ocultar unidades a estudiantes según su ritmo de avance", "Para cambiar el idioma a coreano"],
+          correct: 1
+        },
+        {
+          q: "¿Quién puede modificar la visibilidad de los grupos de clase?",
+          options: ["Cualquier estudiante", "El docente o personal autorizado con credencial asignada", "El proveedor de internet"],
+          correct: 1
+        },
+        {
+          q: "Si un alumno tiene debilidad visual, ¿qué ajuste de visibilidad se recomienda?",
+          options: ["Modo de alto contraste y tamaño adaptativo", "Bloquear la pantalla", "Cerrar la sesión"],
+          correct: 0
+        }
+      ],
+      M4: [
+        {
+          q: "¿Cómo está estructurado el refuerzo escolar en la plataforma IHFB?",
+          options: ["Lecciones aleatorias sin orden", "Unidades secuenciales de Lenguaje y Matemáticas con apoyo del Tutor IA", "Solo videos de entretenimiento"],
+          correct: 1
+        },
+        {
+          q: "¿Qué función cumple el motor de Inteligencia Artificial en las lecciones?",
+          options: ["Reemplazar al docente en el salón", "Dar pistas pedagógicas y retroalimentación inmediata ante dudas del alumno", "Apagar las tablets automáticamente"],
+          correct: 1
+        },
+        {
+          q: "¿Qué evaluación externa evidenció el impacto de la estructura curricular en El Salvador?",
+          options: ["OECD PISA for Schools", "Censo poblacional", "Prueba deportiva local"],
+          correct: 0
+        }
+      ],
+      M5: [
+        {
+          q: "¿Qué mensaje exacto visualiza el estudiante cuando el docente presiona 'Bloquear Pantalla'?",
+          options: ["'Sin conexión'", "'Pantalla bloqueada. Es momento de concentrarte en la clase.'", "'Clase terminada'"],
+          correct: 1
+        },
+        {
+          q: "¿Qué ocurre en la pantalla del docente cuando el alumno selecciona una respuesta?",
+          options: ["No pasa nada", "Se sincroniza al instante mostrando si es correcta y su justificación", "Se reinicia el navegador"],
+          correct: 1
+        },
+        {
+          q: "¿Para qué sirve la herramienta 'Pizarra Digital' en modo clase?",
+          options: ["Modelar ejercicios y hacer anotaciones en tiempo real frente al grupo", "Jugar videojuegos", "Ver videos personales"],
+          correct: 0
+        }
+      ],
+      M6: [
+        {
+          q: "¿Cuál es el indicador principal que monitorean los tutores y monitores?",
+          options: ["El color de las tablets", "La tasa de completación efectiva de actividades de aprendizaje", "El clima exterior"],
+          correct: 1
+        },
+        {
+          q: "En el caso El Salvador, ¿cuál fue la completación con apoyo operativo en campo vs. solo software?",
+          options: ["50% vs 50%", "84.45% con acompañamiento vs. 8.58% solo software", "10% vs 90%"],
+          correct: 1
+        },
+        {
+          q: "¿Qué acción toma el monitor si un estudiante presenta baja completación repetitiva?",
+          options: ["Suspender al alumno", "Notificar al docente y brindar tutoría personalizada de nivelación", "Ignorar el dato"],
+          correct: 1
+        }
+      ],
+      M7: [
+        {
+          q: "¿Qué función tiene el perfil de Supervisor / Auditor en la consola nacional?",
+          options: ["Fiscalizar listas, validar inventarios de dispositivos y auditar el avance escolar", "Dar clases de lenguaje diariamente", "Reparar cables eléctricos"],
+          correct: 0
+        },
+        {
+          q: "¿Cómo se respaldan las incidencias técnicas según el protocolo SOP de auditoría?",
+          options: ["Mediante reportes verbales informales", "A través de tickets de soporte y bitácoras en la mesa de ayuda", "En redes sociales"],
+          correct: 1
+        },
+        {
+          q: "¿Qué requisito es indispensable para emitir la constancia oficial de acreditación?",
+          options: ["Asistir únicamente el primer día", "Aprobar el 100% de los módulos evaluados con al menos 80% de aciertos", "Tener conexión de fibra óptica"],
+          correct: 1
+        }
+      ]
+    };
+
+    let currentSelectedModuleId = "M1";
+    let isScreenLockedByTeacher = false;
+
+    // --- INICIALIZACIÓN ---
+    window.addEventListener('DOMContentLoaded', () => {
+      loadUserDataToInterface();
+      renderModulesSidebar();
+      renderActiveModuleCards(currentSelectedModuleId);
+      renderProgressTable();
+      updateTotalProgressMetrics();
+    });
+
+    // --- NAVEGACIÓN POR PESTAÑAS (LAS 6 SECCIONES) ---
+    function switchTab(tabKey) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-700', 'text-white');
+        btn.classList.add('text-slate-300');
+      });
+
+      const target = document.getElementById(`section-${tabKey}`);
+      const targetNav = document.getElementById(`nav-${tabKey}`);
+      if (target) target.classList.remove('hidden');
+      if (targetNav) {
+        targetNav.classList.add('bg-blue-700', 'text-white');
+        targetNav.classList.remove('text-slate-300');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- SECCIÓN 1: ACCESO Y AUTORREGISTRO EN 1 PASO ---
+    function handleUserAccess(e) {
+      e.preventDefault();
+      const dui = document.getElementById('userInputDUI').value.trim();
+      const name = document.getElementById('userInputName').value.trim();
+      const role = document.getElementById('userInputRole').value;
+      const dept = document.getElementById('userInputDept').value;
+
+      currentUser = {
+        dui: dui || "00000000-0",
+        name: name || "Participante IHFB",
+        role: role,
+        dept: dept,
+        isRegistered: true
+      };
+
+      loadUserDataToInterface();
+
+      const statusBox = document.getElementById('accessStatusMsg');
+      const statusText = document.getElementById('accessStatusText');
+      statusText.textContent = `¡Bienvenido, ${currentUser.name}! Tus datos fueron guardados. Accediendo a módulos...`;
+      statusBox.classList.remove('hidden');
+
+      setTimeout(() => {
+        statusBox.classList.add('hidden');
+        switchTab('modulos');
+      }, 1200);
+    }
+
+    function loadUserDataToInterface() {
+      document.getElementById('topUserName').textContent = currentUser.name;
+      document.getElementById('topUserRole').textContent = currentUser.role;
+      document.getElementById('badgeCurrentRole').textContent = currentUser.role;
+      document.getElementById('topUserBadge').classList.remove('hidden');
+
+      // Campos de certificado
+      document.getElementById('certParticipantName').textContent = currentUser.name;
+      document.getElementById('certParticipantRole').textContent = `Rol: ${currentUser.role} · Sede ${currentUser.dept}`;
+      document.getElementById('certParticipantDUI').textContent = currentUser.dui;
+      document.getElementById('certDate').textContent = new Date().toLocaleDateString('es-SV', {
+        day: '2-digit', month: 'long', year: 'numeric'
+      });
+      document.getElementById('certFolio').textContent = `IHFB-${currentUser.role.substring(0,3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      // Prellenar formulario de soporte
+      document.getElementById('supName').value = currentUser.name;
+      document.getElementById('supDUI').value = currentUser.dui;
+    }
+
+    // --- SECCIÓN 2: RENDERIZADO DE MÓDULOS (BARRA LATERAL Y CATÁLOGO) ---
+    function renderModulesSidebar() {
+      const container = document.getElementById('moduleListContainer');
+      container.innerHTML = "";
+
+      let completedCount = 0;
+
+      modulesData.forEach((mod, index) => {
+        if (mod.completed) completedCount++;
+
+        const isCurrent = mod.id === currentSelectedModuleId;
+        const itemDiv = document.createElement('div');
+        itemDiv.className = `p-3 rounded-xl border transition cursor-pointer flex flex-col gap-2 ${
+          isCurrent ? 'border-blue-600 bg-blue-50/70 shadow-sm ring-1 ring-blue-500' : 'border-slate-200 bg-white hover:border-slate-300'
+        } ${!mod.unlocked ? 'opacity-60 bg-slate-50 cursor-not-allowed' : ''}`;
+
+        itemDiv.onclick = () => {
+          if (mod.unlocked) {
+            currentSelectedModuleId = mod.id;
+            renderModulesSidebar();
+            renderActiveModuleCards(mod.id);
+          }
+        };
+
+        itemDiv.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg ${mod.completed ? 'bg-emerald-100 text-emerald-700' : mod.unlocked ? 'bg-blue-100 text-blue-700' : 'bg-slate-200 text-slate-500'} flex items-center justify-center text-xs font-bold">
+                <i class="fa-solid ${mod.icon}"></i>
+              </span>
+              <span class="text-xs font-bold text-slate-800">${mod.code}: ${mod.title}</span>
+            </div>
+            <div>
+              ${
+                mod.completed 
+                ? '<span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full"><i class="fa-solid fa-check"></i> 100%</span>' 
+                : mod.unlocked 
+                ? '<span class="text-[10px] font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">Activo</span>' 
+                : '<span class="text-[10px] font-bold text-slate-400 bg-slate-200 px-2 py-0.5 rounded-full"><i class="fa-solid fa-lock text-[9px]"></i> Bloqueado</span>'
+              }
+            </div>
+          </div>
+          <div class="space-y-1">
+            <div class="flex justify-between text-[10px] text-slate-500 font-medium">
+              <span>Progreso</span>
+              <span>${mod.progress}%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+              <div class="h-full bg-ihfb-orange rounded-full transition-all duration-300" style="width: ${mod.progress}%"></div>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(itemDiv);
+      });
+
+      document.getElementById('modulesCompletedCount').textContent = `${completedCount} de ${modulesData.length} aprobados`;
+    }
+
+    function renderActiveModuleCards(modId) {
+      const mod = modulesData.find(m => m.id === modId);
+      if (!mod) return;
+
+      document.getElementById('activeModuleCode').textContent = mod.code;
+      document.getElementById('activeModuleTitle').textContent = `${mod.code}: ${mod.title}`;
+      document.getElementById('activeModuleDesc').textContent = mod.desc;
+
+      const badge = document.getElementById('activeModuleStatusBadge');
+      if (mod.completed) {
+        badge.textContent = "Completado y Aprobado";
+        badge.className = "text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700";
+      } else {
+        badge.textContent = "Módulo Activo en Curso";
+        badge.className = "text-[11px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-700";
+      }
+
+      const grid = document.getElementById('moduleCardsGrid');
+      grid.innerHTML = "";
+
+      mod.cards.forEach(card => {
+        const cardDiv = document.createElement('div');
+        cardDiv.className = "bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow transition flex flex-col justify-between";
+
+        const pointsHtml = card.points.map(pt => `<li class="flex items-start gap-1.5"><span class="text-blue-600 font-bold">•</span> <span>${pt}</span></li>`).join('');
+
+        cardDiv.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded">${card.num}</span>
+              <span class="text-[11px] text-slate-400"><i class="fa-solid fa-clock text-[10px]"></i> 3-5 min</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 mb-3">${card.title}</h4>
+            <ul class="text-xs text-slate-600 space-y-1.5 mb-5">
+              ${pointsHtml}
+            </ul>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100">
+            <button onclick="openManualModal('${card.title}', '${card.manual}')" class="px-2.5 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
+              <i class="fa-solid fa-book-open text-blue-600 text-xs"></i>
+              <span>Manual SOP</span>
+            </button>
+            <button onclick="openVideoPlayerModal('${card.title}')" class="px-2.5 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-sm">
+              <i class="fa-solid fa-circle-play text-xs"></i>
+              <span>Ver video</span>
+            </button>
+          </div>
+        `;
+        grid.appendChild(cardDiv);
+      });
+    }
+
+    function goToModuleQuiz() {
+      const select = document.getElementById('selectQuizModule');
+      select.value = currentSelectedModuleId;
+      loadQuizByModule(currentSelectedModuleId);
+      switchTab('quizzes');
+    }
+
+    // --- SECCIÓN 3: PRÁCTICAS (SIMULADOR DE BLOQUEO Y ARRASTRAR Y SOLTAR) ---
+    function toggleScreenLock() {
+      isScreenLockedByTeacher = !isScreenLockedByTeacher;
+      const overlay = document.getElementById('studentLockOverlay');
+      const lockBtn = document.getElementById('btnLockScreen');
+      const lockIcon = document.getElementById('lockIcon');
+      const lockText = document.getElementById('lockButtonText');
+      const teacherStatus = document.getElementById('teacherLockStatus');
+
+      if (isScreenLockedByTeacher) {
+        overlay.classList.remove('hidden');
+        lockBtn.className = "px-2.5 py-1 rounded bg-rose-600 hover:bg-rose-700 text-white font-bold text-[11px] transition flex items-center gap-1.5 shadow";
+        lockIcon.className = "fa-solid fa-lock-open";
+        lockText.textContent = "Desbloquear Pantallas";
+        teacherStatus.textContent = "Pantallas BLOQUEADAS remotamente";
+        teacherStatus.className = "font-bold text-rose-600";
+      } else {
+        overlay.classList.add('hidden');
+        lockBtn.className = "px-2.5 py-1 rounded bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[11px] transition flex items-center gap-1.5 shadow";
+        lockIcon.className = "fa-solid fa-lock";
+        lockText.textContent = "Bloquear Pantalla Alumnos";
+        teacherStatus.textContent = "Pantallas Desbloqueadas";
+        teacherStatus.className = "font-bold text-emerald-600";
+      }
+    }
+
+    function studentSelectOption(optionLetter) {
+      if (isScreenLockedByTeacher) return;
+
+      document.querySelectorAll('.student-opt-btn').forEach(btn => {
+        btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-800', 'font-bold');
+      });
+
+      const selectedBtn = document.getElementById(`btnOpt${optionLetter}`);
+      const justification = document.getElementById('studentJustificationBox');
+      const teacherBadge = document.getElementById('teacherFeedbackBadge');
+      const teacherExplanation = document.getElementById('teacherSyncExplanation');
+
+      if (optionLetter === 'A') {
+        selectedBtn.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-800', 'font-bold');
+        justification.classList.remove('hidden');
+
+        teacherBadge.textContent = "Respuesta Correcta (Sincronizado)";
+        teacherBadge.className = "text-[10px] px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-700";
+        teacherExplanation.innerHTML = "<strong class='text-emerald-700 font-medium'>El estudiante respondió: A) Plantas.</strong> Justificación activa: Las vacas son rumiantes herbívoros.";
+      } else {
+        selectedBtn.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-800');
+        justification.classList.add('hidden');
+
+        teacherBadge.textContent = "Respuesta Incorrecta";
+        teacherBadge.className = "text-[10px] px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-700";
+        teacherExplanation.innerHTML = "<strong class='text-rose-700 font-medium'>Respuesta incorrecta seleccionada.</strong> El docente puede activar la pista con el Tutor IA.";
+      }
+    }
+
+    function resetSimulation() {
+      if (isScreenLockedByTeacher) toggleScreenLock();
+      document.querySelectorAll('.student-opt-btn').forEach(btn => {
+        btn.className = "student-opt-btn w-full text-left px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition flex items-center justify-between";
+      });
+      document.getElementById('studentJustificationBox').classList.add('hidden');
+      document.getElementById('teacherFeedbackBadge').textContent = "Esperando respuesta";
+      document.getElementById('teacherFeedbackBadge').className = "text-[10px] px-2 py-0.5 rounded font-bold bg-slate-100 text-slate-500";
+      document.getElementById('teacherSyncExplanation').textContent = "El estudiante aún no selecciona una opción en su pantalla...";
+    }
+
+    // --- ARRASTRAR Y SOLTAR (DRAG & DROP) ---
+    function allowDrop(ev) {
+      ev.preventDefault();
+      ev.currentTarget.classList.add('dropzone-hover');
+    }
+
+    function clearDropStyle(ev) {
+      ev.currentTarget.classList.remove('dropzone-hover');
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev, zoneType) {
+      ev.preventDefault();
+      ev.currentTarget.classList.remove('dropzone-hover');
+      const dataId = ev.dataTransfer.getData("text");
+      const draggedElement = document.getElementById(dataId);
+      if (!draggedElement) return;
+
+      const itemType = draggedElement.getAttribute('data-type');
+
+      if (itemType === zoneType) {
+        document.getElementById(`zone-${zoneType}-content`).appendChild(draggedElement);
+        draggedElement.classList.add('bg-emerald-100', 'text-emerald-900', 'border-emerald-300');
+        draggedElement.classList.remove('bg-white', 'text-slate-700');
+        checkDragCompletion();
+      } else {
+        draggedElement.classList.add('shake', 'bg-rose-100', 'border-rose-300');
+        setTimeout(() => {
+          draggedElement.classList.remove('shake', 'bg-rose-100', 'border-rose-300');
+        }, 600);
+      }
+    }
+
+    function checkDragCompletion() {
+      const remaining = document.getElementById('draggableContainer').children.length;
+      if (remaining === 0) {
+        document.getElementById('dragSuccessMessage').classList.remove('hidden');
+      }
+    }
+
+    function resetDragActivity() {
+      const container = document.getElementById('draggableContainer');
+      const items = [
+        { id: "drag-vaca", type: "herbivoro", text: "🐄 Vaca", hint: "(Hierba)" },
+        { id: "drag-leon", type: "carnivoro", text: "🦁 León", hint: "(Carne)" },
+        { id: "drag-conejo", type: "herbivoro", text: "🐇 Conejo", hint: "(Vegetales)" },
+        { id: "drag-aguila", type: "carnivoro", text: "🦅 Águila", hint: "(Presas)" }
+      ];
+
+      document.getElementById('zone-herbivoro-content').innerHTML = "";
+      document.getElementById('zone-carnivoro-content').innerHTML = "";
+      document.getElementById('dragSuccessMessage').classList.add('hidden');
+      container.innerHTML = "";
+
+      items.forEach(it => {
+        const div = document.createElement('div');
+        div.id = it.id;
+        div.draggable = true;
+        div.ondragstart = drag;
+        div.setAttribute('data-type', it.type);
+        div.className = "cursor-grab active:cursor-grabbing px-3 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700";
+        div.innerHTML = `<span>${it.text}</span> <span class="text-[10px] text-slate-400 font-normal">${it.hint}</span>`;
+        container.appendChild(div);
+      });
+    }
+
+    // --- SECCIÓN 4: EVALUACIONES (QUIZZES DINÁMICOS POR MÓDULOS) ---
+    function loadQuizByModule(modId) {
+      const mod = modulesData.find(m => m.id === modId);
+      const questions = quizzesBank[modId] || [];
+
+      document.getElementById('quizBadgeHeader').textContent = `Cuestionario Oficial · ${modId}`;
+      document.getElementById('quizTitleHeader').textContent = `Evaluación de Competencias: ${mod ? mod.title : ''}`;
+
+      const container = document.getElementById('quizQuestionsContainer');
+      container.innerHTML = "";
+      document.getElementById('quizResultBox').classList.add('hidden');
+
+      questions.forEach((qItem, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = "p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5";
+
+        const optsHtml = qItem.options.map((opt, optIdx) => `
+          <label class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white border border-transparent hover:border-slate-200 cursor-pointer text-xs transition">
+            <input type="radio" name="q_${idx}" value="${optIdx}" required class="text-blue-600 focus:ring-blue-500" />
+            <span class="text-slate-700 font-medium">${opt}</span>
+          </label>
+        `).join('');
+
+        qDiv.innerHTML = `
+          <h4 class="font-bold text-slate-800 text-xs sm:text-sm flex items-start gap-2">
+            <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-xs flex items-center justify-center shrink-0 mt-0.5 font-bold">${idx + 1}</span>
+            <span>${qItem.q}</span>
+          </h4>
+          <div class="space-y-1 pl-7">
+            ${optsHtml}
+          </div>
+        `;
+        container.appendChild(qDiv);
+      });
+    }
+
+    function submitQuiz(e) {
+      e.preventDefault();
+      const modId = document.getElementById('selectQuizModule').value;
+      const questions = quizzesBank[modId] || [];
+      let scoreCount = 0;
+
+      questions.forEach((qItem, idx) => {
+        const selected = document.querySelector(`input[name="q_${idx}"]:checked`);
+        if (selected && parseInt(selected.value) === qItem.correct) {
+          scoreCount++;
+        }
+      });
+
+      const percentage = Math.round((scoreCount / questions.length) * 100);
+      const passed = percentage >= 80;
+
+      // Actualizar datos del módulo
+      const modIndex = modulesData.findIndex(m => m.id === modId);
+      if (modIndex !== -1) {
+        modulesData[modIndex].score = percentage;
+        if (passed) {
+          modulesData[modIndex].completed = true;
+          modulesData[modIndex].progress = 100;
+          // Desbloquear siguiente módulo si existe
+          if (modIndex + 1 < modulesData.length) {
+            modulesData[modIndex + 1].unlocked = true;
+          }
+        }
+      }
+
+      // Mostrar caja de resultado
+      const resultBox = document.getElementById('quizResultBox');
+      resultBox.classList.remove('hidden');
+
+      if (passed) {
+        resultBox.className = "p-5 rounded-xl border bg-emerald-50 border-emerald-300 text-emerald-900 text-xs space-y-2 animate-fadeIn";
+        resultBox.innerHTML = `
+          <div class="flex items-center gap-2 font-bold text-sm text-emerald-800">
+            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+            <span>¡Módulo Aprobado con Éxito! (Calificación: ${percentage}%)</span>
+          </div>
+          <p class="text-slate-700">Has superado el criterio institucional del 80%. El siguiente módulo ha sido desbloqueado en tu ruta formativa.</p>
+          <div class="pt-2 flex gap-2">
+            <button onclick="switchTab('modulos')" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg font-bold text-xs">
+              Continuar a los Módulos
+            </button>
+            <button onclick="switchTab('progreso')" class="px-4 py-2 bg-white border border-emerald-300 text-emerald-800 hover:bg-emerald-100 rounded-lg font-bold text-xs">
+              Ver Mi Progreso
+            </button>
+          </div>
+        `;
+      } else {
+        resultBox.className = "p-5 rounded-xl border bg-rose-50 border-rose-300 text-rose-900 text-xs space-y-2 animate-fadeIn";
+        resultBox.innerHTML = `
+          <div class="flex items-center gap-2 font-bold text-sm text-rose-800">
+            <i class="fa-solid fa-circle-xmark text-rose-600 text-lg"></i>
+            <span>Módulo No Aprobado (${percentage}% obtenido / Mínimo 80% requerido)</span>
+          </div>
+          <p class="text-slate-700">Obtuviste ${scoreCount} de ${questions.length} respuestas correctas. Te recomendamos volver a revisar los videos y manuales SOP antes de reintentar.</p>
+          <button onclick="loadQuizByModule('${modId}')" class="px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white rounded-lg font-bold text-xs mt-1">
+            <i class="fa-solid fa-rotate-left mr-1"></i> Reintentar Evaluación Ahora
+          </button>
+        `;
+      }
+
+      renderModulesSidebar();
+      renderProgressTable();
+      updateTotalProgressMetrics();
+    }
+
+    // --- SECCIÓN 5: MI PROGRESO Y ACREDITACIÓN ---
+    function renderProgressTable() {
+      const tbody = document.getElementById('progressTableBody');
+      tbody.innerHTML = "";
+
+      modulesData.forEach(mod => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition";
+
+        tr.innerHTML = `
+          <td class="px-4 py-3 font-medium text-slate-900">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid ${mod.icon} text-slate-400"></i>
+              <span>${mod.code}: ${mod.title}</span>
+            </div>
+          </td>
+          <td class="px-4 py-3">
+            ${
+              mod.completed 
+              ? '<span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full"><i class="fa-solid fa-check"></i> Aprobado</span>'
+              : mod.unlocked
+              ? '<span class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">Pendiente</span>'
+              : '<span class="inline-flex items-center gap-1 text-[11px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full"><i class="fa-solid fa-lock"></i> Bloqueado</span>'
+            }
+          </td>
+          <td class="px-4 py-3 font-semibold ${mod.score >= 80 ? 'text-emerald-700' : 'text-slate-500'}">
+            ${mod.score !== null ? mod.score + '%' : '--'}
+          </td>
+          <td class="px-4 py-3">
+            <div class="w-24 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+              <div class="h-full ${mod.completed ? 'bg-emerald-500' : 'bg-amber-500'}" style="width: ${mod.progress}%"></div>
+            </div>
+          </td>
+          <td class="px-4 py-3 text-right">
+            ${
+              mod.unlocked 
+              ? `<button onclick="openQuizFromProgress('${mod.id}')" class="text-blue-700 hover:underline font-bold text-[11px]">Evaluar</button>` 
+              : `<span class="text-slate-300 text-[11px]">Bloqueado</span>`
+            }
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openQuizFromProgress(modId) {
+      document.getElementById('selectQuizModule').value = modId;
+      loadQuizByModule(modId);
+      switchTab('quizzes');
+    }
+
+    function updateTotalProgressMetrics() {
+      const completedCount = modulesData.filter(m => m.completed).length;
+      const totalPercent = Math.round((completedCount / modulesData.length) * 100);
+
+      document.getElementById('progresoPorcentajeTotal').textContent = `${totalPercent}%`;
+      document.getElementById('progresoBarraGeneral').style.width = `${totalPercent}%`;
+
+      const btnCert = document.getElementById('btnPrintCertificate');
+      if (completedCount === modulesData.length) {
+        btnCert.disabled = false;
+        btnCert.className = "px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold text-xs transition shadow-lg flex items-center justify-center gap-2 cursor-pointer";
+        btnCert.innerHTML = `<i class="fa-solid fa-award"></i> <span>Descargar Constancia Oficial</span>`;
+      } else {
+        btnCert.disabled = true;
+        btnCert.className = "px-5 py-3 rounded-xl bg-slate-700 text-slate-400 font-bold text-xs transition flex items-center justify-center gap-2 cursor-not-allowed";
+        btnCert.innerHTML = `<i class="fa-solid fa-lock"></i> <span>Completar 7/7 para Constancia</span>`;
+      }
+    }
+
+    function printCertificate() {
+      window.print();
+    }
+
+    // --- SECCIÓN 6: PREGUNTAS FRECUENTES Y SOPORTE ---
+    function toggleFaq(id) {
+      const el = document.getElementById(id);
+      const icon = document.getElementById(`${id}-icon`);
+      if (el.classList.contains('hidden')) {
+        el.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        el.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    function handleSupportSubmit(e) {
+      e.preventDefault();
+      document.getElementById('supSuccessMsg').classList.remove('hidden');
+      document.getElementById('supMsg').value = "";
+      setTimeout(() => {
+        document.getElementById('supSuccessMsg').classList.add('hidden');
+      }, 4000);
+    }
+
+    // --- MODALES (VIDEO Y MANUALES) ---
+    function openVideoPlayerModal(title) {
+      document.getElementById('modalVideoTitle').innerHTML = `<i class="fa-solid fa-play text-blue-400"></i> ${title}`;
+      document.getElementById('modalVideoDesc').textContent = `Reproduciendo lección formativa oficial vinculada al protocolo de aula IHFB El Salvador.`;
+      document.getElementById('videoModal').classList.remove('hidden');
+    }
+
+    function closeVideoModal() {
+      document.getElementById('videoModal').classList.add('hidden');
+    }
+
+    function openIntroVideoModal() {
+      openVideoPlayerModal("Inducción al Programa de Capacitación Autónoma IHFB");
+    }
+
+    function openManualModal(title, manualCode) {
+      document.getElementById('modalManualTitle').innerHTML = `<i class="fa-solid fa-file-pdf text-rose-400"></i> ${manualCode}`;
+      document.getElementById('modalManualContent').innerHTML = `
+        <h4 class="font-bold text-slate-900 text-sm">${title}</h4>
+        <p class="text-xs text-slate-600">Este manual técnico contiene el procedimiento estándar (SOP) aprobado por la coordinación del proyecto para garantizar la correcta aplicación en escuelas públicas salvadoreñas.</p>
+        <div class="p-3 bg-slate-100 rounded-lg font-mono text-[11px] text-slate-700 space-y-1">
+          <div>1. Verificar que el dispositivo cuente con carga mínima del 40%.</div>
+          <div>2. Sincronizar el ID del usuario con la lista oficial de la sede.</div>
+          <div>3. En caso de corte de red, activar el modo caché local sin recargar.</div>
+          <div>4. Reportar toda incidencia técnica en la bitácora física o digital.</div>
+        </div>
+      `;
+      document.getElementById('manualModal').classList.remove('hidden');
+    }
+
+    function closeManualModal() {
+      document.getElementById('manualModal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
