@@ -33,7 +33,7 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; top: 0px !important; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 9999px; }
@@ -41,87 +41,42 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
-
-    /* MÁSCARA TOTAL DE GOOGLE TRANSLATE (CERO BARRAS NI POPUPS MOLESTOS) */
-    .goog-te-banner-frame.skiptranslate, 
-    .goog-te-banner-frame,
-    iframe.goog-te-banner-frame { 
-      display: none !important; 
-      visibility: hidden !important;
-      height: 0 !important;
-    }
-    body { 
-      position: static !important; 
-      top: 0px !important; 
-    }
-    .goog-tooltip, 
-    .goog-tooltip:hover, 
-    .goog-te-balloon-frame { 
-      display: none !important; 
-    }
-    .goog-text-highlight { 
-      background-color: transparent !important; 
-      box-shadow: none !important; 
-    }
-    .goog-te-gadget-simple {
-      background-color: #071F36 !important;
-      border: 1px solid #1E3A8A !important;
-      padding: 4px 10px !important;
-      border-radius: 9999px !important;
-      font-size: 11px !important;
-      font-weight: 700 !important;
-      color: #E2E8F0 !important;
-      display: flex !important;
-      align-items: center !important;
-    }
-    .goog-te-gadget-simple span {
-      color: #E2E8F0 !important;
-    }
-    .goog-te-gadget-icon {
-      display: none !important;
-    }
   </style>
-
-  <!-- Script Oficial de Google Translate API -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'es',
-        includedLanguages: 'es,en,ko',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white relative">
 
-  <!-- ================= TOPBAR INSTITUCIONAL PREMIUM ================= -->
+  <!-- ================= TOPBAR INSTITUCIONAL ================= -->
   <header class="bg-[#002B49] text-white shadow-lg sticky top-0 z-40 border-b border-blue-950">
     <div class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between gap-4">
       
-      <!-- LOGO OFICIAL IHFB (CARGA DIRECTA DE logo.png CON FALLBACK AUTOMÁTICO) -->
+      <!-- LOGO OFICIAL IHFB -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="handleLogoClick()">
         <img src="logo.png" onerror="this.onerror=null; this.src='logo.png.jpg';" alt="Logo IHFB" class="w-11 h-11 object-contain rounded-xl bg-white p-1 shadow-md shrink-0 border border-slate-100">
         <div>
-          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight">
+          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight" data-i18n="portal_title">
             Portal de Capacitación Autónoma
           </h1>
-          <p class="text-[11px] text-blue-200">IHFB El Salvador • Nivelación y Acreditación Operativa</p>
+          <p class="text-[11px] text-blue-200" data-i18n="portal_subtitle">IHFB El Salvador • Nivelación y Acreditación Operativa</p>
         </div>
       </div>
 
-      <!-- TRADUCTOR DISCRETO EN LA ESQUINA + PERFIL PARTICIPANTE -->
+      <!-- TRADUCTOR INTERNO DISCRETO + PERFIL -->
       <div class="flex items-center space-x-3">
         
-        <!-- WIDGET ELEGANTE DE TRADUCCIÓN DE GOOGLE (ESQUINA DERECHA) -->
-        <div class="flex items-center gap-1.5">
-          <i class="fa-solid fa-globe text-blue-400 text-xs"></i>
-          <div id="google_translate_element"></div>
+        <!-- SELECTOR INTERNO PILL-STYLE (Español | English | 한국어) -->
+        <div class="flex items-center bg-white/10 backdrop-blur rounded-full p-1 border border-white/20 text-xs">
+          <button onclick="setLanguage('es')" id="lang-btn-es" class="px-3 py-1 rounded-full font-bold text-slate-900 bg-white transition shadow-sm">
+            Español
+          </button>
+          <button onclick="setLanguage('en')" id="lang-btn-en" class="px-3 py-1 rounded-full font-medium text-blue-200 hover:text-white transition">
+            English
+          </button>
+          <button onclick="setLanguage('ko')" id="lang-btn-ko" class="px-3 py-1 rounded-full font-medium text-blue-200 hover:text-white transition">
+            한국어
+          </button>
         </div>
 
-        <!-- Perfil del Usuario Conectado (Clic para Modificar Perfil) -->
+        <!-- Perfil Usuario Conectado -->
         <div id="topUserBadge" onclick="openProfileEditModal()" title="Haz clic para modificar tu nombre o rol" class="hidden cursor-pointer hover:bg-[#071F36] transition items-center space-x-2 bg-[#061B2E] px-3.5 py-1.5 rounded-full border border-blue-400/25 text-xs shadow-sm">
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span id="topUserName" class="font-medium text-white truncate max-w-[120px] sm:max-w-[170px]">Usuario</span>
@@ -136,7 +91,7 @@
         <!-- Indicador Admin Activo -->
         <div id="topAdminBadge" class="hidden items-center gap-2 bg-slate-900 text-slate-200 px-3 py-1.5 rounded-full text-xs font-bold border border-slate-700 shadow-sm">
           <i class="fa-solid fa-shield-halved text-blue-400 text-xs"></i>
-          <span>Modo Admin</span>
+          <span data-i18n="admin_mode_active">Modo Admin</span>
           <button onclick="closeAdminSession()" title="Salir de administración" class="ml-1 text-slate-400 hover:text-rose-400">&times;</button>
         </div>
       </div>
@@ -147,22 +102,22 @@
     <nav id="mainNavMenu" class="hidden bg-[#071F36] border-t border-blue-950 px-3 sm:px-6 shadow-md">
       <div class="w-full max-w-[1600px] mx-auto flex items-center space-x-2 overflow-x-auto custom-scroll py-2 text-xs sm:text-sm font-medium">
         <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 rounded-xl text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-2 shadow font-bold">
-          <i class="fa-solid fa-gauge-high text-xs"></i> <span>Home Formativo</span>
+          <i class="fa-solid fa-gauge-high text-xs"></i> <span data-i18n="nav_home">Home Formativo</span>
         </button>
         <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-layer-group text-xs"></i> <span>Módulos de Aprendizaje</span>
+          <i class="fa-solid fa-layer-group text-xs"></i> <span data-i18n="nav_modules">Módulos de Aprendizaje</span>
         </button>
         <button onclick="switchTab('practicas')" id="nav-practicas" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-laptop-code text-xs"></i> <span>Prácticas en Vivo</span>
+          <i class="fa-solid fa-laptop-code text-xs"></i> <span data-i18n="nav_practice">Prácticas en Vivo</span>
         </button>
         <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-circle-question text-xs"></i> <span>Evaluaciones (Quizzes)</span>
+          <i class="fa-solid fa-circle-question text-xs"></i> <span data-i18n="nav_quizzes">Evaluaciones (Quizzes)</span>
         </button>
         <button onclick="switchTab('progreso')" id="nav-progreso" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-award text-xs"></i> <span>Mi Progreso y Validación</span>
+          <i class="fa-solid fa-award text-xs"></i> <span data-i18n="nav_progress">Mi Progreso y Validación</span>
         </button>
         <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2 font-semibold">
-          <i class="fa-solid fa-comments text-xs"></i> <span>Preguntas y Soporte</span>
+          <i class="fa-solid fa-comments text-xs"></i> <span data-i18n="nav_faq">Preguntas y Soporte</span>
         </button>
         <button onclick="openAdminDatabaseModal()" id="nav-admin-db" class="hidden nav-btn px-4 py-2 rounded-xl text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/30 whitespace-nowrap transition flex items-center gap-2 font-bold">
           <i class="fa-solid fa-table-cells text-xs text-emerald-400"></i> <span>Google Sheets & Auditoría</span>
@@ -179,40 +134,40 @@
       
       <!-- BANNER INSTITUCIONAL (EDITABLE EN MODO ADMIN) -->
       <div class="relative bg-gradient-to-r from-[#002B49] via-[#0A3C66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row gap-6 items-center justify-between border border-blue-900/50">
-        <!-- Botón de edición del banner para Admin -->
+        <!-- Botón Admin para editar cartel -->
         <button id="btnEditBannerAdmin" onclick="openAdminBannerEditModal()" class="hidden absolute top-4 right-4 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-lg text-xs shadow-md items-center gap-1.5 z-10">
           <i class="fa-solid fa-pen"></i> Editar Cartel de Bienvenida
         </button>
 
         <div class="space-y-3 max-w-3xl">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            <i class="fa-solid fa-shield-halved text-[10px]"></i> <span id="portalBannerTag">Capacitación Oficial y Nivelación Autónoma</span>
+            <i class="fa-solid fa-shield-halved text-[10px]"></i> <span id="portalBannerTag" data-i18n="banner_tag">Capacitación Oficial y Nivelación Autónoma</span>
           </span>
-          <h2 id="portalBannerTitle" class="text-2xl sm:text-3xl font-black tracking-tight">Bienvenido al Espacio Formativo IHFB</h2>
-          <p id="portalBannerDesc" class="text-slate-200 text-xs sm:text-sm leading-relaxed">
+          <h2 id="portalBannerTitle" class="text-2xl sm:text-3xl font-black tracking-tight" data-i18n="banner_title">Bienvenido al Espacio Formativo IHFB</h2>
+          <p id="portalBannerDesc" class="text-slate-200 text-xs sm:text-sm leading-relaxed" data-i18n="banner_desc">
             Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.
           </p>
         </div>
         <div class="flex items-center gap-8 bg-white/10 backdrop-blur px-8 py-4 rounded-2xl border border-white/10 text-center shrink-0">
           <div>
             <div id="portalBannerModulesNum" class="text-3xl sm:text-4xl font-black text-white">7</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Módulos</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider" data-i18n="banner_modules">Módulos</div>
           </div>
           <div class="h-10 w-px bg-white/20"></div>
           <div>
             <div id="portalBannerApprovalNum" class="text-3xl sm:text-4xl font-black text-emerald-400">80%</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Aprobación</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider" data-i18n="banner_approval">Aprobación</div>
           </div>
         </div>
       </div>
 
-      <!-- Cuadrícula: Autenticación Oficial de Google (Forms Logic) -->
+      <!-- Cuadrícula: Autenticación Oficial de Google -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Tarjeta de Acceso con Google -->
+        <!-- Formulario de Acceso -->
         <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
-            <!-- PESTAÑAS: 1. REGISTRARSE (PRIMERO) | 2. INICIAR SESIÓN -->
+            <!-- PESTAÑAS: 1. REGISTRARSE | 2. INICIAR SESIÓN -->
             <div class="flex border-b border-slate-200 mb-5 pb-1">
               <button type="button" onclick="setAuthTab('register')" id="tabBtnRegister" class="pb-2.5 px-3.5 text-xs font-black text-blue-700 border-b-2 border-blue-700 transition">
                 <i class="fa-solid fa-user-plus mr-1"></i> Registrarse
@@ -222,10 +177,10 @@
               </button>
             </div>
 
-            <!-- VISTA 1: REGISTRARSE (NOMBRE PRIMERO, ROL SEGUNDO, LUEGO BOTÓN GOOGLE) -->
+            <!-- VISTA 1: REGISTRARSE -->
             <div id="authViewRegister" class="space-y-4">
               <p class="text-xs text-slate-500 leading-relaxed">
-                Ingresa tus datos oficiales de acreditación. Al presionar el botón se vinculará tu cuenta activa de Google institucional (como en los formularios de Google Forms).
+                Ingresa tus datos oficiales de acreditación y vincula tu cuenta de Google para registrar tus avances directamente.
               </p>
 
               <form onsubmit="handleRegisterWithGoogle(event)" class="space-y-3.5">
@@ -246,31 +201,24 @@
                   </select>
                 </div>
 
-                <!-- Botón Oficial de Registro y Vinculación Google -->
-                <button type="submit" class="w-full mt-2 py-3.5 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                  </svg>
-                  <span>Registrar y Vincular con Google</span>
-                </button>
+                <!-- Botón Oficial de Registro con Google -->
+                <div class="pt-2 flex flex-col items-center">
+                  <div id="gsi_register_button" class="w-full flex justify-center"></div>
+                </div>
               </form>
             </div>
 
             <!-- VISTA 2: INICIAR SESIÓN (ÚNICAMENTE EL BOTÓN OFICIAL DE GOOGLE GSI) -->
             <div id="authViewLogin" class="space-y-4 hidden">
               <p class="text-xs text-slate-500 leading-relaxed">
-                Si ya te registraste anteriormente, inicia sesión directamente con tu cuenta de Google para continuar tu avance formativo.
+                Si ya te registraste anteriormente, selecciona tu cuenta de Google para continuar tu formación.
               </p>
 
-              <!-- CONTENEDOR DONDE GOOGLE RENDERIZA SU BOTÓN OFICIAL EN FORMA DE PÍLDORA -->
-              <div class="pt-4 pb-2 flex flex-col items-center gap-2">
-                <div id="gsi_button_container" class="w-full flex justify-center"></div>
+              <div class="pt-6 pb-4 flex flex-col items-center gap-3">
+                <div id="gsi_login_button" class="w-full flex justify-center"></div>
               </div>
 
-              <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-blue-900 leading-snug">
+              <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-blue-900 leading-snug text-center">
                 <i class="fa-solid fa-circle-info text-blue-600 mr-1"></i> Se autenticará con la cuenta de Google activa en tu navegador.
               </div>
             </div>
@@ -287,13 +235,13 @@
 
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs uppercase tracking-wider font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md">
+              <span class="text-xs uppercase tracking-wider font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md" data-i18n="guide_tag">
                 Guía de Inducción
               </span>
-              <span class="text-xs text-slate-400">Duración: 2 min 40s</span>
+              <span class="text-xs text-slate-400" data-i18n="guide_duration">Duración: 2 min 40s</span>
             </div>
-            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">¿Cómo funciona la capacitación autónoma?</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2" data-i18n="guide_title">¿Cómo funciona la capacitación autónoma?</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4" data-i18n="guide_desc">
               Cada módulo contiene cápsulas en video y manuales operativos estándar. Para acreditar un módulo, debes realizar la práctica interactiva y aprobar la evaluación con mínimo 80%.
             </p>
             
@@ -305,7 +253,7 @@
               </button>
               <div id="introVideoOverlayBar" class="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur px-3.5 py-2.5 rounded-lg flex items-center justify-between text-white text-xs">
                 <span class="font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-blue-400"></i> Protocolo de Operación en Aula IHFB</span>
-                <span class="text-blue-300 font-semibold text-[11px]">Ver aquí</span>
+                <span class="text-blue-300 font-semibold text-[11px]" data-i18n="watch_video">Ver aquí</span>
               </div>
             </div>
           </div>
@@ -354,7 +302,7 @@
         </div>
       </div>
 
-      <!-- Tarjetas de Acceso Rápido y Métricas de Progreso -->
+      <!-- Tarjetas Métricas -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
@@ -392,7 +340,7 @@
         </div>
       </div>
 
-      <!-- Accesos Directos a los 7 Módulos -->
+      <!-- Accesos Directos a los Módulos -->
       <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
         <div class="flex justify-between items-center pb-3 border-b border-slate-100">
           <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700">Módulos Disponibles en tu Ruta</h3>
@@ -403,7 +351,7 @@
 
     </section>
 
-    <!-- 2. SECCIÓN: MÓDULOS DE APRENDIZAJE (VISTA LIMPIA EN 2 COLUMNAS) -->
+    <!-- 2. SECCIÓN: MÓDULOS DE APRENDIZAJE -->
     <section id="section-modulos" class="tab-content hidden space-y-6">
       <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -676,7 +624,7 @@
   <div id="proVideoManualModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-2 sm:p-5 hidden">
     <div class="bg-white rounded-2xl overflow-hidden max-w-6xl w-full shadow-2xl border border-slate-200 flex flex-col max-h-[95vh]">
       
-      <!-- Barra Superior de la Ventana -->
+      <!-- Barra Superior -->
       <div class="px-5 py-3.5 bg-slate-900 text-white flex justify-between items-center text-xs">
         <div class="flex items-center gap-2 font-bold">
           <span id="proModalTag" class="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded font-black">VIDEO 1</span>
@@ -687,10 +635,10 @@
         </button>
       </div>
 
-      <!-- Cuerpo Dividido en 2 Columnas Grandes y Claras -->
+      <!-- Cuerpo Dividido en 2 Columnas -->
       <div class="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-y-auto custom-scroll">
         
-        <!-- Columna Izquierda: Video + Puntos clave -->
+        <!-- Columna Izquierda: Video + Puntos -->
         <div class="lg:col-span-6 p-5 border-r border-slate-200 flex flex-col justify-between space-y-4">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -700,12 +648,10 @@
               </a>
             </div>
 
-            <!-- Video Player Embebido -->
             <div class="aspect-video bg-black rounded-xl overflow-hidden shadow-inner relative">
               <iframe id="proVideoIframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
-            <!-- Puntos de Contenido del Video -->
             <div class="pt-2">
               <h5 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Contenido del video:</h5>
               <ul id="proVideoPointsList" class="space-y-1.5 text-xs text-slate-600"></ul>
@@ -713,7 +659,7 @@
           </div>
         </div>
 
-        <!-- Columna Derecha: Visor Interactivo de Manual SOP -->
+        <!-- Columna Derecha: Visor SOP Paginado -->
         <div class="lg:col-span-6 p-5 flex flex-col justify-between space-y-4 bg-slate-50/50">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -725,7 +671,6 @@
               </a>
             </div>
 
-            <!-- Barra de Paginación del Manual -->
             <div class="flex items-center justify-between bg-white px-3.5 py-2 rounded-xl border border-slate-200 text-xs">
               <button onclick="changeManualPage(-1)" class="text-slate-500 hover:text-slate-800 font-bold flex items-center gap-1">
                 <i class="fa-solid fa-chevron-left text-[10px]"></i> Manual anterior
@@ -736,7 +681,6 @@
               </button>
             </div>
 
-            <!-- Previsualizador de Página de Manual SOP (Amplio) -->
             <div class="border border-slate-200 rounded-xl bg-white p-5 shadow-sm min-h-[260px] text-xs space-y-3">
               <div class="flex items-center justify-between pb-2 border-b border-slate-100">
                 <span class="font-extrabold text-blue-900" id="manualCardSubTitle">1.1 CONEXIÓN E INICIO DE SESIÓN EN LA PLATAFORMA</span>
@@ -757,7 +701,7 @@
 
       </div>
 
-      <!-- Barra Inferior Prominente: "Ir a la Práctica de este Módulo" -->
+      <!-- Barra Inferior -->
       <div class="p-4 bg-white border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3">
         <span class="text-xs text-slate-500">¿Terminaste de revisar el video y el manual? Comprueba tu aprendizaje en el simulador:</span>
         <button id="btnModalBottomGoPractice" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#0B4F8A] hover:bg-blue-800 text-white font-extrabold text-xs transition shadow-md flex items-center justify-center gap-2">
@@ -769,7 +713,7 @@
     </div>
   </div>
 
-  <!-- ================= MODAL: MODIFICAR PERFIL (PARTICIPANTE) ================= -->
+  <!-- ================= MODAL: MODIFICAR PERFIL ================= -->
   <div id="profileEditModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -834,12 +778,10 @@
   </div>
 
   <!-- ================= PASO 2 Y 3: INTERRUPTOR TOGGLE (CTRL + SHIFT + A) ================= -->
-  <!-- PASO 2: La tuerca está 100% OCULTA por defecto. Solo aparece/desaparece como INTERRUPTOR con Ctrl+Shift+A -->
   <button id="secretAdminGear" onclick="openAdminPasswordModal()" title="Acceso Coordinación" class="hidden fixed bottom-4 right-4 w-10 h-10 rounded-full bg-slate-900/80 hover:bg-slate-900 text-amber-400 items-center justify-center transition opacity-80 hover:opacity-100 z-50 border border-slate-700 shadow-2xl cursor-pointer">
     <i class="fa-solid fa-gear text-base"></i>
   </button>
 
-  <!-- PASO 3: Al hacer clic a la tuerca, se abre este modal solicitando la contraseña -->
   <div id="adminPasswordModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
       <div class="w-12 h-12 rounded-2xl bg-slate-900 text-blue-400 mx-auto flex items-center justify-center text-xl shadow-inner">
@@ -863,7 +805,7 @@
     </div>
   </div>
 
-  <!-- ================= MODAL ADMIN: EDITAR CARTEL DE BIENVENIDA FRONTAL ================= -->
+  <!-- ================= MODAL ADMIN: EDITAR CARTEL FRONTAL ================= -->
   <div id="adminBannerEditModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-3 sm:p-4 hidden">
     <div class="bg-white rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl border border-slate-300">
       <div class="p-4 bg-slate-900 text-white flex justify-between items-center font-bold text-xs sm:text-sm">
@@ -905,7 +847,7 @@
     </div>
   </div>
 
-  <!-- ================= MODAL ADMIN: EDITAR VIDEO DE INDUCCIÓN FRONTAL ================= -->
+  <!-- ================= MODAL ADMIN: EDITAR VIDEO INDUCCIÓN FRONTAL ================= -->
   <div id="adminIntroVideoEditModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-3 sm:p-4 hidden">
     <div class="bg-white rounded-2xl overflow-hidden max-w-md w-full shadow-2xl border border-slate-300">
       <div class="p-4 bg-slate-900 text-white flex justify-between items-center font-bold text-xs sm:text-sm">
@@ -934,7 +876,6 @@
   <div id="adminDatabaseModal" class="fixed inset-0 bg-slate-950/85 modal-glass z-50 flex items-center justify-center p-3 sm:p-6 hidden">
     <div class="bg-white rounded-2xl overflow-hidden max-w-6xl w-full shadow-2xl border border-slate-200 flex flex-col max-h-[92vh]">
       
-      <!-- Encabezado de la Consola de Registros -->
       <div class="p-4 sm:p-5 bg-[#002B49] text-white flex flex-col sm:flex-row justify-between sm:items-center gap-3">
         <div>
           <span class="text-[10px] font-black uppercase text-blue-300 bg-white/10 px-2.5 py-0.5 rounded">CONSOLA PRIVADA DE COORDINACIÓN</span>
@@ -956,7 +897,6 @@
         </div>
       </div>
 
-      <!-- Configuración del Link de Google Sheets Webhook -->
       <div class="p-4 bg-blue-50 border-b border-blue-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
         <div class="w-full sm:flex-1 space-y-1">
           <label class="font-bold text-blue-950 flex items-center gap-1.5">
@@ -971,7 +911,6 @@
         </div>
       </div>
 
-      <!-- Barra de Filtros -->
       <div class="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
         <div class="flex items-center gap-2 w-full sm:w-auto">
           <div class="relative flex-1 sm:w-64">
@@ -991,7 +930,6 @@
         </div>
       </div>
 
-      <!-- Tabla de Participantes -->
       <div class="overflow-x-auto flex-1 custom-scroll p-4">
         <table class="w-full text-left text-xs text-slate-700">
           <thead class="bg-slate-100 text-slate-600 uppercase font-semibold text-[10px] tracking-wider border-b">
@@ -1092,7 +1030,7 @@
     </div>
   </footer>
 
-  <!-- ================= LÓGICA JAVASCRIPT ================= -->
+  <!-- ================= SCRIPT COMPLETO CON ARQUITECTURA LIMPIA ================= -->
   <script>
     // 1. CONSTANTES DEL SISTEMA
     const GOOGLE_CLIENT_ID = "86803539944-23c1mc9j657os18j1jkc4e8f4dghv0h5.apps.googleusercontent.com";
@@ -1397,10 +1335,10 @@
           auto_select: false
         });
 
-        // Renderiza el botón oficial en forma de píldora de Google
-        const btnContainer = document.getElementById("gsi_button_container");
-        if (btnContainer) {
-          google.accounts.id.renderButton(btnContainer, {
+        // Botón en vista de Iniciar Sesión
+        const loginContainer = document.getElementById("gsi_login_button");
+        if (loginContainer) {
+          google.accounts.id.renderButton(loginContainer, {
             theme: "outline",
             size: "large",
             width: "320",
@@ -1408,8 +1346,20 @@
             shape: "pill"
           });
         }
+
+        // Botón en vista de Registro
+        const regContainer = document.getElementById("gsi_register_button");
+        if (regContainer) {
+          google.accounts.id.renderButton(regContainer, {
+            theme: "outline",
+            size: "large",
+            width: "320",
+            text: "signup_with",
+            shape: "pill"
+          });
+        }
       } else {
-        setTimeout(initGoogleIdentityServices, 500);
+        setTimeout(initGoogleIdentityServices, 400);
       }
     }
 
@@ -1440,28 +1390,6 @@
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
       return JSON.parse(jsonPayload);
-    }
-
-    // REGISTRO CON GOOGLE (LÓGICA GOOGLE FORMS)
-    function handleRegisterWithGoogle(e) {
-      e.preventDefault();
-      authMode = 'register';
-      const name = document.getElementById('regUserName').value.trim();
-      const role = document.getElementById('regUserRole').value;
-
-      if (!name) {
-        showProAlert("Campo Requerido", "Por favor ingresa tu Nombre Completo Oficial.", false);
-        return;
-      }
-
-      // Abre el selector nativo de cuentas de Google
-      if (window.google && google.accounts && google.accounts.id) {
-        google.accounts.id.prompt((notification) => {
-          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            showProAlert("Permiso de Google", "Haz clic en el botón de Google para seleccionar tu cuenta activa.");
-          }
-        });
-      }
     }
 
     function processGoogleRegistration(email, name, role) {
@@ -1588,8 +1516,8 @@
         regTabBtn.className = "pb-2.5 px-3.5 text-xs font-bold text-slate-400 hover:text-slate-700 transition";
         logView.classList.remove('hidden');
         regView.classList.add('hidden');
-        initGoogleIdentityServices();
       }
+      initGoogleIdentityServices();
     }
 
     function switchTab(tabKey) {
@@ -1658,7 +1586,7 @@
       `;
     }
 
-    // 9. EDICIÓN DEL BANNER Y VIDEO DE INDUCCIÓN (MODO ADMIN DESDE LA PORTADA)
+    // 9. EDICIÓN DEL BANNER Y VIDEO DE INDUCCIÓN (MODO ADMIN)
     function renderBannerUI() {
       document.getElementById('portalBannerTag').textContent = bannerConfig.tag;
       document.getElementById('portalBannerTitle').textContent = bannerConfig.title;
@@ -1709,7 +1637,7 @@
       introVideoUrl = document.getElementById('editIntroVideoUrl').value.trim();
       localStorage.setItem('ihfb_intro_video', introVideoUrl);
       closeAdminIntroVideoEditModal();
-      // Reiniciar reproductor
+      
       const container = document.getElementById('inlineIntroPlayerContainer');
       container.innerHTML = `
         <img id="introPosterImg" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Aula tecnológica" class="absolute inset-0 w-full h-full object-cover opacity-45">
@@ -1724,7 +1652,7 @@
       showProAlert("Video Actualizado", "El video de inducción ha sido actualizado correctamente.");
     }
 
-    // 10. MODAL DE PERFIL DEL USUARIO
+    // 10. MODAL DE PERFIL
     function openProfileEditModal() {
       if (!currentUser.isRegistered) return;
       document.getElementById('profileEmailDisplay').value = currentUser.email;
@@ -1836,7 +1764,7 @@
       });
     }
 
-    // 13. REPRODUCTOR HÍBRIDO (YOUTUBE / DRIVE)
+    // 13. REPRODUCTOR HÍBRIDO
     function formatVideoEmbedUrl(rawUrl) {
       if (!rawUrl) return "https://www.youtube.com/embed/dQw4w9WgXcQ";
       let url = rawUrl.trim();
@@ -2331,13 +2259,11 @@
         isAdminMode = true;
         closeAdminPasswordModal();
 
-        // Desbloquea navegación, consola de base de datos y botones de edición frontal
         document.getElementById('mainNavMenu').classList.remove('hidden');
         document.getElementById('nav-admin-db').classList.remove('hidden');
         document.getElementById('topAdminBadge').classList.remove('hidden');
         document.getElementById('topAdminBadge').classList.add('flex');
 
-        // Botones de edición frontal (cartel y video de inducción)
         document.getElementById('btnEditBannerAdmin').classList.remove('hidden');
         document.getElementById('btnEditBannerAdmin').classList.add('flex');
         document.getElementById('btnEditIntroVideoAdmin').classList.remove('hidden');
@@ -2362,7 +2288,6 @@
       document.getElementById('secretAdminGear').classList.add('hidden');
       isGearVisible = false;
 
-      // Ocultar botones de edición frontal
       document.getElementById('btnEditBannerAdmin').classList.add('hidden');
       document.getElementById('btnEditBannerAdmin').classList.remove('flex');
       document.getElementById('btnEditIntroVideoAdmin').classList.add('hidden');
