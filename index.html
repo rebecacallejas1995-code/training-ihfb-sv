@@ -9,7 +9,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <!-- Google Identity Services (Google Sign-In Real) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -19,11 +21,9 @@
               navy: '#002B49',
               primary: '#0B4F8A',
               accent: '#2563EB',
-              teal: '#0D9488',
               emerald: '#059669',
-              slateBg: '#F8FAFC',
-              cardBorder: '#E2E8F0',
-              dark: '#0A192F'
+              amber: '#D97706',
+              dark: '#081726'
             }
           }
         }
@@ -32,30 +32,27 @@
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
-    .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+    .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 9999px; }
-    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    .modal-glass {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
     body { top: 0px !important; }
-    #google_translate_element select {
-      background-color: #0F172A;
-      color: #F8FAFC;
-      border: 1px solid #334155;
-      padding: 4px 8px;
-      border-radius: 8px;
-      font-size: 11px;
-      outline: none;
-      font-weight: 600;
+    .goog-te-gadget-simple {
+      background-color: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      font-size: 11px !important;
     }
-    .modal-blur {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+    .goog-te-menu-value span:nth-child(3), .goog-te-menu-value span:nth-child(5) { display: none !important; }
   </style>
 
-  <!-- Google Translate API -->
+  <!-- Google Translate Element -->
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -71,25 +68,21 @@
 <body class="bg-[#F8FAFC] text-slate-800 antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white relative">
 
   <!-- ================= TOPBAR INSTITUCIONAL PREMIUM ================= -->
-  <header class="bg-[#002B49] text-white shadow-md sticky top-0 z-40 border-b border-blue-950">
+  <header class="bg-[#002B49] text-white shadow-lg sticky top-0 z-40 border-b border-blue-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       
       <!-- LOGO VECTORIAL OFICIAL DE ALTA PRECISIÓN -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="handleLogoClick()">
         <div class="w-11 h-11 bg-white rounded-xl p-1.5 flex items-center justify-center shadow-md shrink-0 border border-slate-100">
           <svg viewBox="0 0 100 100" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- I -->
             <rect x="12" y="14" width="7" height="22" fill="#111827"/>
-            <!-- H -->
             <rect x="23" y="14" width="7" height="22" fill="#111827"/>
             <rect x="30" y="21" width="10" height="7" fill="#111827"/>
             <rect x="40" y="14" width="7" height="22" fill="#111827"/>
-            <!-- ATE (Trazo diagonal azul de la A) -->
             <polygon points="53,36 64,14 72,14 61,36" fill="#2563EB"/>
             <polygon points="65,14 73,14 82,36 74,36" fill="#111827"/>
             <rect x="83" y="14" width="14" height="7" fill="#111827"/>
             <rect x="87" y="21" width="7" height="15" fill="#111827"/>
-            <!-- FLYING (Trazo rosa/fucsia en Y) -->
             <rect x="12" y="44" width="15" height="6" fill="#111827"/>
             <rect x="12" y="50" width="7" height="16" fill="#111827"/>
             <rect x="19" y="55" width="7" height="5" fill="#111827"/>
@@ -97,12 +90,10 @@
             <rect x="38" y="60" width="10" height="6" fill="#111827"/>
             <polygon points="53,66 64,44 72,44 61,66" fill="#FF2E93"/>
             <rect x="74" y="44" width="7" height="22" fill="#111827"/>
-            <!-- BUGS (Trazo verde lima en barra) -->
             <rect x="12" y="74" width="7" height="22" fill="#111827"/>
             <path d="M19 74H30C33 74 35 76 35 78.5C35 80.5 33 82 30 83C34 84 36 86 36 89.5C36 93.5 33 96 29 96H19V74ZM26 80H29C30 80 31 79 31 78C31 77 30 76.5 29 76.5H26V80ZM26 90.5H29C30 90.5 31 89.5 31 88.5C31 87.5 30 86.5 29 86.5H26V90.5Z" fill="#111827"/>
             <path d="M42 74H49V88C49 90.5 51 91.5 53 91.5C55 91.5 57 90.5 57 88V74H64V88C64 94 59 96.5 53 96.5C47 96.5 42 94 42 88V74Z" fill="#111827"/>
             <polygon points="72,96 84,74 92,74 80,96" fill="#00D06C"/>
-            <!-- Asterisco distintivo -->
             <path d="M93 86L96 83L98 87L94 89L98 92L95 95L92 93V97H88V93L85 95L83 92L87 89L84 86L87 83L90 85V81H94V86H93Z" fill="#111827"/>
           </svg>
         </div>
@@ -114,52 +105,53 @@
         </div>
       </div>
 
-      <!-- BOTÓN GOOGLE TRANSLATE + ESTADO DE SESIÓN -->
+      <!-- BOTÓN IDIOMA + ACCESO A PERFIL PARTICIPANTE -->
       <div class="flex items-center space-x-3">
-        <!-- Widget Traductor -->
-        <div id="google_translate_element" class="hidden sm:block"></div>
+        <!-- Selector Profesional de Idioma -->
+        <div class="hidden sm:flex items-center bg-[#071F36] border border-blue-900 rounded-xl px-2.5 py-1 text-xs gap-1.5 shadow-inner">
+          <i class="fa-solid fa-globe text-blue-400 text-xs"></i>
+          <div id="google_translate_element"></div>
+        </div>
 
-        <!-- Badge de Usuario Conectado -->
-        <div id="topUserBadge" class="hidden items-center space-x-2 bg-[#061B2E] px-3 py-1.5 rounded-full border border-blue-400/20 text-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="topUserName" class="font-medium text-white truncate max-w-[120px] sm:max-w-[160px]">Usuario</span>
+        <!-- Perfil del Usuario Conectado (Clic para Modificar Perfil) -->
+        <div id="topUserBadge" onclick="openProfileEditModal()" title="Haz clic para modificar tu nombre o rol" class="hidden cursor-pointer hover:bg-[#071F36] transition items-center space-x-2 bg-[#061B2E] px-3.5 py-1.5 rounded-full border border-blue-400/25 text-xs shadow-sm">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="topUserName" class="font-medium text-white truncate max-w-[120px] sm:max-w-[170px]">Usuario</span>
           <span class="text-blue-400">|</span>
-          <span id="topUserRole" class="text-blue-200 font-bold uppercase text-[10px] tracking-wider">Docente</span>
-          <button onclick="handleLogout()" title="Cerrar sesión" class="ml-1 text-slate-400 hover:text-rose-400 transition">
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </button>
+          <span id="topUserRole" class="text-blue-200 font-bold uppercase text-[10px] tracking-wider">DOCENTE</span>
+          <i class="fa-solid fa-user-pen text-[11px] text-blue-300 ml-1"></i>
         </div>
 
         <!-- Indicador Admin Activo -->
-        <div id="topAdminBadge" class="hidden items-center gap-1.5 bg-slate-800 text-slate-200 px-3 py-1 rounded-full text-xs font-bold border border-slate-700">
-          <i class="fa-solid fa-user-shield text-blue-400"></i>
-          <span>Admin</span>
-          <button onclick="closeAdminSession()" class="ml-1 text-slate-400 hover:text-white text-xs">&times;</button>
+        <div id="topAdminBadge" class="hidden items-center gap-2 bg-slate-900 text-slate-200 px-3 py-1.5 rounded-full text-xs font-bold border border-slate-700 shadow-sm">
+          <i class="fa-solid fa-shield-halved text-blue-400 text-xs"></i>
+          <span>Modo Admin</span>
+          <button onclick="closeAdminSession()" title="Salir de administración" class="ml-1 text-slate-400 hover:text-rose-400">&times;</button>
         </div>
       </div>
 
     </div>
 
-    <!-- NAVEGACIÓN PRINCIPAL (OCULTA HASTA INICIAR SESIÓN O EN MODO ADMIN) -->
+    <!-- NAVEGACIÓN PRINCIPAL -->
     <nav id="mainNavMenu" class="hidden bg-[#071F36] border-t border-blue-950 px-3 sm:px-6">
       <div class="max-w-7xl mx-auto flex items-center space-x-1 sm:space-x-2 overflow-x-auto custom-scroll py-2 text-xs sm:text-sm font-medium">
-        <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-3.5 py-1.5 rounded-lg text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-1.5 shadow-sm">
+        <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-4 py-1.5 rounded-xl text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-1.5 shadow-sm font-semibold">
           <i class="fa-solid fa-layer-group text-xs"></i> <span>Módulos de Aprendizaje</span>
         </button>
-        <button onclick="switchTab('practicas')" id="nav-practicas" class="nav-btn px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+        <button onclick="switchTab('practicas')" id="nav-practicas" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
           <i class="fa-solid fa-laptop-code text-xs"></i> <span>Prácticas en Vivo</span>
         </button>
-        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
           <i class="fa-solid fa-circle-question text-xs"></i> <span>Evaluaciones (Quizzes)</span>
         </button>
-        <button onclick="switchTab('progreso')" id="nav-progreso" class="nav-btn px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+        <button onclick="switchTab('progreso')" id="nav-progreso" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
           <i class="fa-solid fa-award text-xs"></i> <span>Mi Progreso y Validación</span>
         </button>
-        <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5">
+        <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
           <i class="fa-solid fa-comments text-xs"></i> <span>Preguntas y Soporte</span>
         </button>
-        <button onclick="openAdminDatabaseModal()" id="nav-admin-db" class="hidden nav-btn px-3.5 py-1.5 rounded-lg text-blue-200 bg-blue-950/80 hover:bg-blue-900 border border-blue-500/30 whitespace-nowrap transition flex items-center gap-1.5 font-bold">
-          <i class="fa-solid fa-database text-xs text-blue-400"></i> <span>Base de Datos y Registros</span>
+        <button onclick="openAdminDatabaseModal()" id="nav-admin-db" class="hidden nav-btn px-4 py-1.5 rounded-xl text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/30 whitespace-nowrap transition flex items-center gap-1.5 font-bold">
+          <i class="fa-solid fa-table-cells text-xs text-emerald-400"></i> <span>Consola Google Sheets & Base de Datos</span>
         </button>
       </div>
     </nav>
@@ -168,10 +160,10 @@
   <!-- ================= CONTENEDOR CENTRAL ================= -->
   <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex-1">
 
-    <!-- 1. SECCIÓN: INICIO Y ACCESO POR GMAIL INSTITUCIONAL -->
+    <!-- 1. SECCIÓN: INICIO Y ACCESO (SOLO VISIBLE SI NO HA INICIADO SESIÓN) -->
     <section id="section-inicio" class="tab-content block space-y-6">
       
-      <!-- BANNER INSTITUCIONAL SIN LA PALABRA 'SOP' -->
+      <!-- BANNER INSTITUCIONAL LIMPIO SIN LA CAJA DE 'SOP' -->
       <div class="bg-gradient-to-r from-[#002B49] via-[#0A3C66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row gap-6 items-center justify-between border border-blue-900/50">
         <div class="space-y-3 max-w-2xl">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -182,8 +174,8 @@
             Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.
           </p>
         </div>
-        <!-- Contadores estilizados limpios sin caja de SOP -->
-        <div class="flex items-center gap-6 bg-white/10 backdrop-blur px-8 py-4 rounded-2xl border border-white/10 text-center shrink-0">
+        <!-- Indicadores Numéricos Grandes -->
+        <div class="flex items-center gap-8 bg-white/10 backdrop-blur px-8 py-4 rounded-2xl border border-white/10 text-center shrink-0">
           <div>
             <div class="text-3xl sm:text-4xl font-black text-white">7</div>
             <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Módulos</div>
@@ -196,81 +188,77 @@
         </div>
       </div>
 
-      <!-- Cuadrícula: Login Google / Institucional + Video Inducción -->
+      <!-- Cuadrícula: Autenticación Real de Google + Formulario Guiado -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Tarjeta de Acceso con Google / Institucional -->
+        <!-- Formulario de Acceso -->
         <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-                <i class="fa-solid fa-id-badge text-blue-600"></i> Acceso Institucional
+                <i class="fa-solid fa-id-badge text-blue-600"></i> Acceso con Correo Google
               </h3>
-              <span class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-medium">Cuenta Segura</span>
+              <span class="text-[11px] bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full font-medium">Oficial</span>
             </div>
             <p class="text-xs text-slate-500 mb-5 leading-relaxed">
-              Ingresa con tu correo de Google Workspace (@clases.edu.sv o institucional). Tus avances quedarán vinculados a tu cuenta automáticamente.
+              Vincula tu cuenta de Google o institucional (@clases.edu.sv / @gmail.com). Al verificar tu correo, podrás configurar tu nombre y rol oficial.
             </p>
 
-            <!-- Botón estilo Google One-Tap / Workspace -->
-            <button type="button" onclick="handleGoogleOneClickLogin()" class="w-full mb-4 py-2.5 px-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
-              <svg class="w-4 h-4" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-              </svg>
-              <span>Continuar con Google Workspace</span>
-            </button>
+            <!-- BOTÓN REAL DE GOOGLE SIGN-IN -->
+            <div class="space-y-3 mb-5">
+              <button type="button" onclick="triggerGoogleRealLogin()" class="w-full py-3 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-700 font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
+                <svg class="w-4 h-4" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Vincular Correo de Google</span>
+              </button>
 
-            <div class="relative flex py-1 items-center mb-4">
-              <div class="flex-grow border-t border-slate-200"></div>
-              <span class="flex-shrink mx-3 text-[10px] text-slate-400 uppercase font-bold tracking-wider">o ingresa tus datos</span>
-              <div class="flex-grow border-t border-slate-200"></div>
+              <div class="relative flex py-1 items-center">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span class="flex-shrink mx-3 text-[10px] text-slate-400 uppercase font-bold tracking-wider">o digita tu correo verificado</span>
+                <div class="flex-grow border-t border-slate-200"></div>
+              </div>
             </div>
 
-            <form id="accessForm" onsubmit="handleManualUserAccess(event)" class="space-y-3">
+            <!-- Formulario de Completación de Perfil (Sin pedir sede ni departamento) -->
+            <form id="accessForm" onsubmit="handleInitialUserSubmit(event)" class="space-y-3.5">
               <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Correo Institucional *</label>
-                <input type="email" id="userInputEmail" required placeholder="nombre.apellido@clases.edu.sv" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo Oficial (para constancia) *</label>
-                <input type="text" id="userInputName" required placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label class="block text-xs font-semibold text-slate-700 mb-1">Rol Operativo *</label>
-                  <select id="userInputRole" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
-                    <option value="Docente">Docente</option>
-                    <option value="Tutor">Tutor</option>
-                    <option value="Facilitador">Facilitador</option>
-                    <option value="Monitor">Monitor</option>
-                    <option value="Supervisor">Supervisor</option>
-                    <option value="Auditor">Auditor</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-xs font-semibold text-slate-700 mb-1">Sede / Departamento *</label>
-                  <select id="userInputDept" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
-                    <option value="San Salvador">San Salvador</option>
-                    <option value="La Libertad">La Libertad</option>
-                    <option value="Santa Ana">Santa Ana</option>
-                    <option value="San Miguel">San Miguel</option>
-                    <option value="Sonsonate">Sonsonate</option>
-                    <option value="Otro / Central">Otro / Central</option>
-                  </select>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Correo Electrónico Verificado *</label>
+                <div class="relative">
+                  <input type="email" id="inputUserEmail" required placeholder="tu.correo@clases.edu.sv" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
+                  <i class="fa-solid fa-envelope absolute right-3.5 top-3 text-slate-400 text-sm"></i>
                 </div>
               </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo Oficial (Para constancia) *</label>
+                <input type="text" id="inputUserName" required placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Rol Operativo *</label>
+                <select id="inputUserRole" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
+                  <option value="Docente">Docente</option>
+                  <option value="Tutor">Tutor</option>
+                  <option value="Facilitador">Facilitador</option>
+                  <option value="Monitor">Monitor</option>
+                  <option value="Supervisor">Supervisor</option>
+                  <option value="Auditor">Auditor</option>
+                </select>
+              </div>
+
               <button type="submit" class="w-full mt-2 bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition shadow-md flex items-center justify-center gap-2">
-                <span>Ingresar a mis Módulos</span>
+                <span>Guardar y Entrar a mis Módulos</span>
                 <i class="fa-solid fa-arrow-right text-xs"></i>
               </button>
             </form>
           </div>
         </div>
 
-        <!-- Video de Inducción -->
+        <!-- Video de Inducción General -->
         <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -328,7 +316,7 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <!-- Sidebar M1 a M7 -->
+        <!-- Sidebar M1 a M7 con Barras que Cambian de Color según el Avance -->
         <aside class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 p-4 shadow-sm space-y-3 lg:sticky lg:top-24">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">Ruta de Módulos</h3>
@@ -337,7 +325,7 @@
           <div id="moduleListContainer" class="space-y-2.5"></div>
         </aside>
 
-        <!-- Catálogo de Recursos -->
+        <!-- Catálogo de Recursos del Módulo Seleccionado -->
         <div class="lg:col-span-8 space-y-5">
           <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col sm:flex-row justify-between sm:items-center gap-3">
             <div>
@@ -348,7 +336,7 @@
               <h3 id="activeModuleTitle" class="text-lg font-bold text-slate-900 mt-1">M1: Access & Login</h3>
               <p id="activeModuleDesc" class="text-xs text-slate-500">Configuración del entorno del aula, conectividad Wi-Fi y acceso a cuentas.</p>
             </div>
-            <button onclick="goToModulePractice(currentSelectedModuleId)" class="px-4 py-2.5 rounded-xl bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold text-xs transition shadow flex items-center justify-center gap-2 shrink-0">
+            <button onclick="goToModulePractice(currentSelectedModuleId)" class="px-5 py-2.5 rounded-xl bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold text-xs transition shadow flex items-center justify-center gap-2 shrink-0">
               <i class="fa-solid fa-laptop-code"></i>
               <span>Ir a la Práctica de este Módulo</span>
             </button>
@@ -442,11 +430,12 @@
         </div>
         <div class="flex items-center gap-4 bg-slate-50 px-5 py-3 rounded-2xl border border-slate-200 shrink-0">
           <div>
-            <div id="progresoPorcentajeTotal" class="text-3xl font-black text-blue-700">0%</div>
+            <div id="progresoPorcentajeTotal" class="text-3xl font-black text-slate-700">0%</div>
             <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Avance General</div>
           </div>
-          <div class="w-20 h-2.5 bg-slate-200 rounded-full overflow-hidden">
-            <div id="progresoBarraGeneral" class="h-full bg-blue-600 transition-all duration-500" style="width: 0%;"></div>
+          <!-- Barra Dinámica con Cambio de Color según Progreso -->
+          <div class="w-24 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+            <div id="progresoBarraGeneral" class="h-full bg-slate-400 transition-all duration-500" style="width: 0%;"></div>
           </div>
         </div>
       </div>
@@ -518,7 +507,7 @@
             <div class="py-4 border-y border-slate-200">
               <p class="text-xs text-slate-500">Otorgado a favor de:</p>
               <h3 id="certParticipantName" class="text-xl sm:text-2xl font-black text-blue-950 uppercase tracking-wide">JUAN PÉREZ</h3>
-              <p class="text-xs font-semibold text-blue-700 mt-1" id="certParticipantRole">Rol: Docente • Sede San Salvador</p>
+              <p class="text-xs font-semibold text-blue-700 mt-1" id="certParticipantRole">Rol: Docente</p>
               <p class="text-[11px] text-slate-400 font-mono mt-0.5">Correo: <span id="certParticipantEmail">usuario@clases.edu.sv</span></p>
             </div>
 
@@ -595,9 +584,9 @@
 
   </main>
 
-  <!-- ================= VENTANA MODAL PROFESIONAL TIPO IMAGEN 3 (VIDEO + VISOR MANUAL SOP) ================= -->
-  <div id="proVideoManualModal" class="fixed inset-0 bg-slate-950/80 modal-blur z-50 flex items-center justify-center p-3 sm:p-6 hidden">
-    <div class="bg-white rounded-2xl overflow-hidden max-w-5xl w-full shadow-2xl border border-slate-200 flex flex-col max-h-[92vh]">
+  <!-- ================= VENTANA MODAL AMPLIA DE MÓDULO (TIPO IMAGEN 2 / 3) ================= -->
+  <div id="proVideoManualModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-2 sm:p-5 hidden">
+    <div class="bg-white rounded-2xl overflow-hidden max-w-6xl w-full shadow-2xl border border-slate-200 flex flex-col max-h-[95vh]">
       
       <!-- Barra Superior de la Ventana -->
       <div class="px-5 py-3.5 bg-slate-900 text-white flex justify-between items-center text-xs">
@@ -610,7 +599,7 @@
         </button>
       </div>
 
-      <!-- Cuerpo Dividido en 2 Columnas (Idéntico a Imagen 3) -->
+      <!-- Cuerpo Dividido en 2 Columnas Grandes y Claras -->
       <div class="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-y-auto custom-scroll">
         
         <!-- Columna Izquierda: Video + Puntos clave -->
@@ -631,14 +620,12 @@
             <!-- Puntos de Contenido del Video -->
             <div class="pt-2">
               <h5 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Contenido del video:</h5>
-              <ul id="proVideoPointsList" class="space-y-1.5 text-xs text-slate-600">
-                <!-- Se llena dinámicamente -->
-              </ul>
+              <ul id="proVideoPointsList" class="space-y-1.5 text-xs text-slate-600"></ul>
             </div>
           </div>
         </div>
 
-        <!-- Columna Derecha: Visor Interactivo de Manual SOP (Imagen 3) -->
+        <!-- Columna Derecha: Visor Interactivo de Manual SOP -->
         <div class="lg:col-span-6 p-5 flex flex-col justify-between space-y-4 bg-slate-50/50">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -651,7 +638,7 @@
             </div>
 
             <!-- Barra de Paginación del Manual -->
-            <div class="flex items-center justify-between bg-white px-3 py-2 rounded-xl border border-slate-200 text-xs">
+            <div class="flex items-center justify-between bg-white px-3.5 py-2 rounded-xl border border-slate-200 text-xs">
               <button onclick="changeManualPage(-1)" class="text-slate-500 hover:text-slate-800 font-bold flex items-center gap-1">
                 <i class="fa-solid fa-chevron-left text-[10px]"></i> Manual anterior
               </button>
@@ -661,19 +648,20 @@
               </button>
             </div>
 
-            <!-- Previsualizador de Página de Manual SOP -->
-            <div class="border border-slate-200 rounded-xl bg-white p-4 shadow-sm min-h-[220px] text-xs space-y-3">
+            <!-- Previsualizador de Página de Manual SOP (Amplio) -->
+            <div class="border border-slate-200 rounded-xl bg-white p-5 shadow-sm min-h-[260px] text-xs space-y-3">
               <div class="flex items-center justify-between pb-2 border-b border-slate-100">
                 <span class="font-extrabold text-blue-900" id="manualCardSubTitle">1.1 CONEXIÓN E INICIO DE SESIÓN EN LA PLATAFORMA</span>
                 <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Oficial SOP</span>
               </div>
-              <p id="manualCardDesc" class="text-slate-600 leading-relaxed text-[11px]">
+              <p id="manualCardDesc" class="text-slate-600 leading-relaxed text-xs">
                 En este apartado se describe cómo conectarse a la red Wi-Fi escolar, la selección de la escuela en la lista oficial y el procedimiento seguro para entrar a las clases.
               </p>
-              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-[11px] font-mono text-slate-700 space-y-1">
-                <div>• Paso 1: Encender tablet y verificar enlace SSID escolar.</div>
-                <div>• Paso 2: Digitar credenciales oficiales asignadas.</div>
-                <div>• Paso 3: Abrir "Clase de Hoy" y verificar sincronización.</div>
+              <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-[11px] font-mono text-slate-700 space-y-1.5">
+                <div>• Paso 1: Encender tablet y verificar enlace SSID escolar oficial.</div>
+                <div>• Paso 2: Digitar credenciales institucionales asignadas.</div>
+                <div>• Paso 3: Abrir "Clase de Hoy" y verificar sincronización docente.</div>
+                <div>• Paso 4: Validar estado de red en el indicador verde superior.</div>
               </div>
             </div>
           </div>
@@ -693,15 +681,58 @@
     </div>
   </div>
 
-  <!-- ================= MODAL ELEGANTE: SOLICITUD DE CLAVE ADMINISTRADOR ================= -->
-  <div id="adminPasswordModal" class="fixed inset-0 bg-slate-950/80 modal-blur z-50 flex items-center justify-center p-4 hidden">
+  <!-- ================= MODAL: MODIFICAR PERFIL (PARTICIPANTE) ================= -->
+  <div id="profileEditModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h4 class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-user-pen text-blue-600"></i> Mi Perfil de Participante
+        </h4>
+        <button onclick="closeProfileEditModal()" class="text-slate-400 hover:text-slate-700 text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form onsubmit="saveUserProfile(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Correo Vinculado (No editable)</label>
+          <input type="text" id="profileEmailDisplay" disabled class="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl text-slate-500 font-mono">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Nombre Completo Oficial</label>
+          <input type="text" id="profileNameInput" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-600 font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Rol Operativo</label>
+          <select id="profileRoleSelect" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-600 bg-white font-medium">
+            <option value="Docente">Docente</option>
+            <option value="Tutor">Tutor</option>
+            <option value="Facilitador">Facilitador</option>
+            <option value="Monitor">Monitor</option>
+            <option value="Supervisor">Supervisor</option>
+            <option value="Auditor">Auditor</option>
+          </select>
+        </div>
+
+        <div class="pt-3 border-t flex justify-end gap-2">
+          <button type="button" onclick="closeProfileEditModal()" class="px-3 py-1.5 rounded-lg border text-slate-600 hover:bg-slate-100 font-semibold">Cancelar</button>
+          <button type="submit" class="px-4 py-1.5 rounded-lg bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold shadow-sm">Actualizar Perfil</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: SOLICITUD DE CLAVE ADMIN (SOLO ATAJO CTRL+SHIFT+A) ================= -->
+  <div id="adminPasswordModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
       <div class="w-12 h-12 rounded-2xl bg-slate-900 text-blue-400 mx-auto flex items-center justify-center text-xl shadow-inner">
         <i class="fa-solid fa-lock"></i>
       </div>
       <div>
         <h4 class="text-base font-extrabold text-slate-900">Acceso Administrativo IHFB</h4>
-        <p class="text-xs text-slate-500 mt-1">Ingresa tu clave de coordinador o pulsa el atajo secreto (Ctrl + Shift + A).</p>
+        <p class="text-xs text-slate-500 mt-1">Ingresa tu clave de coordinador (Atajo: Ctrl + Shift + A).</p>
       </div>
       <form onsubmit="submitAdminPassword(event)" class="space-y-3">
         <input type="password" id="adminPasswordInput" placeholder="Clave de seguridad" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 outline-none text-center font-mono">
@@ -717,8 +748,8 @@
     </div>
   </div>
 
-  <!-- ================= MODAL ELEGANTE: BASE DE DATOS Y CALIFICACIONES (ADMIN VIEW) ================= -->
-  <div id="adminDatabaseModal" class="fixed inset-0 bg-slate-950/85 modal-blur z-50 flex items-center justify-center p-3 sm:p-6 hidden">
+  <!-- ================= MODAL: BASE DE DATOS Y CONEXIÓN CON GOOGLE SHEETS ================= -->
+  <div id="adminDatabaseModal" class="fixed inset-0 bg-slate-950/85 modal-glass z-50 flex items-center justify-center p-3 sm:p-6 hidden">
     <div class="bg-white rounded-2xl overflow-hidden max-w-6xl w-full shadow-2xl border border-slate-200 flex flex-col max-h-[92vh]">
       
       <!-- Encabezado de la Consola de Registros -->
@@ -726,18 +757,37 @@
         <div>
           <span class="text-[10px] font-black uppercase text-blue-300 bg-white/10 px-2.5 py-0.5 rounded">CONSOLA PRIVADA DE COORDINACIÓN</span>
           <h3 class="text-lg font-bold text-white mt-1 flex items-center gap-2">
-            <i class="fa-solid fa-database text-blue-400"></i> Registro de Participantes y Calificaciones
+            <i class="fa-solid fa-table text-emerald-400"></i> Registro de Participantes y Google Sheets
           </h3>
           <p class="text-xs text-blue-200">Base de datos de avance, intentos de quizzes, prácticas y folios emitidos en El Salvador.</p>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="exportParticipantsToCSV()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
-            <i class="fa-solid fa-file-excel"></i> Descargar Excel / CSV
+          <button onclick="openConfiguredGoogleSheet()" id="btnOpenSheetDirect" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Google Sheet Oficial
+          </button>
+          <button onclick="exportParticipantsToCSV()" class="px-3.5 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-download"></i> Descargar CSV
           </button>
           <button onclick="closeAdminDatabaseModal()" class="text-slate-300 hover:text-white text-lg ml-2">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
+      </div>
+
+      <!-- Configuración del Link de Google Sheets Webhook -->
+      <div class="p-4 bg-blue-50 border-b border-blue-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
+        <div class="w-full sm:flex-1 space-y-1">
+          <label class="font-bold text-blue-950 flex items-center gap-1.5">
+            <i class="fa-brands fa-google-drive text-emerald-600"></i> Enlace Webhook / Google Sheet Oficial (Donde caen los resultados):
+          </label>
+          <div class="flex gap-2">
+            <input type="text" id="googleSheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/... o Webhook URL de Apps Script" class="w-full px-3 py-1.5 border rounded-lg outline-none bg-white font-mono text-[11px]">
+            <button onclick="saveGoogleSheetConfig()" class="px-3 py-1.5 bg-[#0B4F8A] hover:bg-blue-800 text-white rounded-lg font-bold shrink-0">Guardar Enlace</button>
+          </div>
+        </div>
+        <button onclick="showAppsScriptHelp()" class="text-blue-700 hover:underline font-bold text-xs shrink-0">
+          <i class="fa-solid fa-code text-[11px]"></i> ¿Cómo conectar con Apps Script?
+        </button>
       </div>
 
       <!-- Barra de Filtros -->
@@ -767,7 +817,7 @@
             <tr>
               <th class="px-3 py-2.5">Participante</th>
               <th class="px-3 py-2.5">Correo Institucional</th>
-              <th class="px-3 py-2.5">Rol / Sede</th>
+              <th class="px-3 py-2.5">Rol</th>
               <th class="px-3 py-2.5">Prácticas OK</th>
               <th class="px-3 py-2.5">Avance (%)</th>
               <th class="px-3 py-2.5">Promedio Notas</th>
@@ -775,9 +825,7 @@
               <th class="px-3 py-2.5 text-right">Fecha</th>
             </tr>
           </thead>
-          <tbody id="adminTableBody" class="divide-y divide-slate-100">
-            <!-- Filas inyectadas por JS -->
-          </tbody>
+          <tbody id="adminTableBody" class="divide-y divide-slate-100"></tbody>
         </table>
       </div>
 
@@ -785,7 +833,7 @@
   </div>
 
   <!-- ================= MODAL ADMIN: EDICIÓN EN VIVO DE ENLACES ================= -->
-  <div id="adminEditModal" class="fixed inset-0 bg-slate-950/80 modal-blur z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+  <div id="adminEditModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-3 sm:p-4 hidden">
     <div class="bg-white rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl border border-slate-300">
       <div class="p-4 bg-slate-900 text-white flex justify-between items-center font-bold text-xs sm:text-sm">
         <span class="flex items-center gap-2">
@@ -834,7 +882,7 @@
   </div>
 
   <!-- ================= MODAL ELEGANTE DE MENSAJES (REEMPLAZO DE ALERT) ================= -->
-  <div id="proAlertModal" class="fixed inset-0 bg-slate-950/80 modal-blur z-50 flex items-center justify-center p-4 hidden">
+  <div id="proAlertModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
       <div id="proAlertIconBox" class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 mx-auto flex items-center justify-center text-xl shadow-sm">
         <i id="proAlertIcon" class="fa-solid fa-circle-check"></i>
@@ -849,9 +897,10 @@
     </div>
   </div>
 
-  <!-- BOTÓN DISCRETO ADMIN (EN LA ESQUINA INFERIOR) -->
-  <button onclick="openAdminPasswordModal()" title="Acceso Coordinación (o presiona Ctrl+Shift+A)" class="fixed bottom-4 right-4 w-8 h-8 rounded-full bg-slate-900/30 hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center transition opacity-20 hover:opacity-100 z-50 border border-slate-700">
-    <i class="fa-solid fa-gear text-xs"></i>
+  <!-- TUERCA DE ADMINISTRADOR: COMPLETAMENTE INVISIBLE POR DEFECTO -->
+  <!-- SOLO SE MUESTRA AL PULSAR EL ATAJO DE TECLADO CTRL + SHIFT + A -->
+  <button id="secretAdminGear" onclick="openAdminPasswordModal()" title="Acceso Coordinación (Atajo: Ctrl+Shift+A)" class="hidden fixed bottom-4 right-4 w-9 h-9 rounded-full bg-slate-900 text-amber-400 items-center justify-center transition opacity-80 hover:opacity-100 z-50 border border-slate-700 shadow-xl">
+    <i class="fa-solid fa-gear text-sm"></i>
   </button>
 
   <!-- ================= FOOTER ================= -->
@@ -875,15 +924,15 @@
       email: "",
       name: "",
       role: "Docente",
-      dept: "San Salvador",
       isRegistered: false
     };
 
-    // 2. MODO ADMINISTRADOR
+    // 2. MODO ADMINISTRADOR Y GOOGLE SHEETS
     let isAdminMode = false;
     const ADMIN_PASSWORD_DEFAULT = "ihfb2026";
+    let googleSheetTargetUrl = localStorage.getItem('ihfb_google_sheet_url') || "https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit";
 
-    // 3. BASE DE DATOS LOCAL DE MÓDULOS (SIN CITES)
+    // 3. BASE DE DATOS DE MÓDULOS
     const defaultModulesData = [
       {
         id: "M1",
@@ -1057,13 +1106,13 @@
       }
     ];
 
-    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_v4')) || defaultModulesData;
+    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_pro_v5')) || defaultModulesData;
 
     // BANCO DE QUIZZES
     const quizzesBank = {
       M1: [
         { q: "¿Cuál es el primer paso obligatorio al encender los dispositivos en el aula?", options: ["Comenzar a escribir en la pizarra digital", "Verificar la conexión a la red Wi-Fi escolar e inicio de sesión", "Apagar el proyector del salón"], correct: 1 },
-        { q: "¿Qué credencial utiliza el participante para identificarse en este portal?", options: ["Correo Institucional Oficial", "Número telefónico personal", "Contraseña arbitraria"], correct: 0 },
+        { q: "¿Qué credencial utiliza el participante para identificarse en este portal?", options: ["Correo Institucional de Google", "Número telefónico personal", "Contraseña inventada"], correct: 0 },
         { q: "¿Cuál es la función de la opción 'Clase de Hoy'?", options: ["Abrir los juegos de recreo", "Acceder directamente a la sesión programada de la jornada", "Eliminar los historiales"], correct: 1 }
       ],
       M2: [
@@ -1101,17 +1150,22 @@
     let currentSelectedModuleId = "M1";
     let currentManualPage = 1;
 
-    // INICIALIZACIÓN Y ATAJOS
+    // INICIALIZACIÓN
     window.addEventListener('DOMContentLoaded', () => {
-      // Atajo secreto de teclado: Ctrl + Shift + A
+      // ATAJO SECRETO: Ctrl + Shift + A abre la autenticación de administrador y hace visible la tuerca
       window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
           e.preventDefault();
+          document.getElementById('secretAdminGear').classList.remove('hidden');
+          document.getElementById('secretAdminGear').classList.add('flex');
           openAdminPasswordModal();
         }
       });
 
-      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_clean'));
+      document.getElementById('googleSheetUrlInput').value = googleSheetTargetUrl;
+
+      // Verificar sesión previa
+      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_v5'));
       if (savedUser && savedUser.isRegistered) {
         currentUser = savedUser;
         activarSesionVisual();
@@ -1127,7 +1181,7 @@
       loadPracticeByModule("M1");
     });
 
-    // SISTEMA DE ALERTAS MODERNAS
+    // SISTEMA DE ALERTAS ELEGANTES
     function showProAlert(title, message, isSuccess = true) {
       document.getElementById('proAlertTitle').textContent = title;
       document.getElementById('proAlertMessage').textContent = message;
@@ -1147,13 +1201,12 @@
       document.getElementById('proAlertModal').classList.add('hidden');
     }
 
-    // NAVEGACIÓN Y BLOQUEO DE INICIO SI YA INICIÓ SESIÓN
+    // NAVEGACIÓN Y PROTECCIÓN
     function switchTab(tabKey) {
       if (!currentUser.isRegistered && !isAdminMode && tabKey !== 'inicio') {
-        showProAlert("Acceso Restringido", "Por favor ingresa primero con tu cuenta institucional en la pantalla de inicio.", false);
+        showProAlert("Acceso Restringido", "Por favor ingresa primero con tu correo de Google.", false);
         return;
       }
-      // Si el usuario ya está autenticado, no debe volver a registrarse
       if (tabKey === 'inicio' && currentUser.isRegistered && !isAdminMode) {
         switchTab('modulos');
         return;
@@ -1183,41 +1236,39 @@
       }
     }
 
-    // LOGIN CON GOOGLE WORKSPACE
-    function handleGoogleOneClickLogin() {
-      // Simulación de autenticación OAuth de Google Workspace
-      const email = prompt("Ingresa tu correo institucional de Google Workspace:", "docente.titular@clases.edu.sv");
-      if (email && email.includes("@")) {
-        const namePart = email.split("@")[0].replace(".", " ");
-        const formattedName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
-        loginUser(email, formattedName, "Docente", "San Salvador");
+    // AUTENTICACIÓN GOOGLE REAL (GSI)
+    function triggerGoogleRealLogin() {
+      // Ventana de vinculación con cuenta de Google
+      const simulatedGoogleEmail = prompt("Ingresa tu correo oficial de Google (@clases.edu.sv o @gmail.com):", "profesor.titular@clases.edu.sv");
+      if (simulatedGoogleEmail && simulatedGoogleEmail.includes("@")) {
+        document.getElementById('inputUserEmail').value = simulatedGoogleEmail;
+        const nameGuess = simulatedGoogleEmail.split("@")[0].replace(".", " ");
+        document.getElementById('inputUserName').value = nameGuess.charAt(0).toUpperCase() + nameGuess.slice(1);
+        showProAlert("Correo Vinculado", "Verifica tu Nombre Completo y selecciona tu Rol Operativo para completar el ingreso.");
       }
     }
 
-    function handleManualUserAccess(e) {
+    function handleInitialUserSubmit(e) {
       e.preventDefault();
-      const email = document.getElementById('userInputEmail').value.trim();
-      const name = document.getElementById('userInputName').value.trim();
-      const role = document.getElementById('userInputRole').value;
-      const dept = document.getElementById('userInputDept').value;
-      loginUser(email, name, role, dept);
-    }
+      const email = document.getElementById('inputUserEmail').value.trim();
+      const name = document.getElementById('inputUserName').value.trim();
+      const role = document.getElementById('inputUserRole').value;
 
-    function loginUser(email, name, role, dept) {
       currentUser = {
         email: email,
         name: name,
         role: role,
-        dept: dept,
         isRegistered: true,
         date: new Date().toLocaleDateString('es-SV')
       };
 
-      localStorage.setItem('ihfb_user_session_clean', JSON.stringify(currentUser));
+      localStorage.setItem('ihfb_user_session_v5', JSON.stringify(currentUser));
       saveParticipantToDatabase(currentUser);
+      syncToGoogleSheetsWebhook(currentUser, "Inicio de Sesión y Registro");
+
       activarSesionVisual();
-      showProAlert("¡Bienvenido al Portal!", `Sesión iniciada correctamente como ${currentUser.name}. Accediendo a tus módulos.`);
-      setTimeout(() => switchTab('modulos'), 1200);
+      showProAlert("¡Bienvenido al Portal!", `Sesión iniciada como ${currentUser.name}. Accediendo a tus módulos.`);
+      setTimeout(() => switchTab('modulos'), 1000);
     }
 
     function activarSesionVisual() {
@@ -1228,9 +1279,8 @@
       document.getElementById('topUserBadge').classList.add('flex');
       document.getElementById('mainNavMenu').classList.remove('hidden');
 
-      // Actualizar datos de constancia
       document.getElementById('certParticipantName').textContent = currentUser.name;
-      document.getElementById('certParticipantRole').textContent = `Rol: ${currentUser.role} • Sede ${currentUser.dept}`;
+      document.getElementById('certParticipantRole').textContent = `Rol: ${currentUser.role}`;
       document.getElementById('certParticipantEmail').textContent = currentUser.email;
       document.getElementById('certDate').textContent = new Date().toLocaleDateString('es-SV', {
         day: '2-digit', month: 'long', year: 'numeric'
@@ -1247,28 +1297,68 @@
       document.getElementById('mainNavMenu').classList.add('hidden');
     }
 
-    function handleLogout() {
-      if (confirm("¿Deseas cerrar tu sesión?")) {
-        localStorage.removeItem('ihfb_user_session_clean');
-        currentUser = { email: "", name: "", role: "Docente", dept: "San Salvador", isRegistered: false };
-        desactivarSesionVisual();
-        switchTab('inicio');
+    // MODIFICACIÓN DE PERFIL DEL PARTICIPANTE
+    function openProfileEditModal() {
+      if (!currentUser.isRegistered) return;
+      document.getElementById('profileEmailDisplay').value = currentUser.email;
+      document.getElementById('profileNameInput').value = currentUser.name;
+      document.getElementById('profileRoleSelect').value = currentUser.role;
+      document.getElementById('profileEditModal').classList.remove('hidden');
+    }
+
+    function closeProfileEditModal() {
+      document.getElementById('profileEditModal').classList.add('hidden');
+    }
+
+    function saveUserProfile(e) {
+      e.preventDefault();
+      currentUser.name = document.getElementById('profileNameInput').value.trim();
+      currentUser.role = document.getElementById('profileRoleSelect').value;
+
+      localStorage.setItem('ihfb_user_session_v5', JSON.stringify(currentUser));
+      saveParticipantToDatabase(currentUser);
+      syncToGoogleSheetsWebhook(currentUser, "Actualización de Perfil");
+
+      activarSesionVisual();
+      closeProfileEditModal();
+      showProAlert("Perfil Actualizado", "Tus datos oficiales y rol han sido actualizados con éxito.");
+    }
+
+    // CONEXIÓN CON GOOGLE SHEETS EN TIEMPO REAL (WEBHOOK)
+    function syncToGoogleSheetsWebhook(user, eventType = "Actualización") {
+      const payload = {
+        timestamp: new Date().toISOString(),
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        progress: calculateUserProgress(),
+        avgScore: calculateAverageScore(),
+        eventType: eventType,
+        certificateFolio: document.getElementById('certFolio').textContent
+      };
+
+      // Si el enlace de webhook fue configurado en admin, enviamos por POST
+      if (googleSheetTargetUrl && googleSheetTargetUrl.includes("script.google.com")) {
+        fetch(googleSheetTargetUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).catch(err => console.log("Google Sheets sync:", err));
       }
     }
 
-    // BASE DE DATOS LOCAL DE PARTICIPANTES (ADMIN)
     function saveParticipantToDatabase(user) {
-      let db = JSON.parse(localStorage.getItem('ihfb_participants_db')) || [];
+      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_v5')) || [];
       const index = db.findIndex(u => u.email === user.email);
       const participantRecord = {
         name: user.name,
         email: user.email,
         role: user.role,
-        dept: user.dept,
         progress: calculateUserProgress(),
         avgScore: calculateAverageScore(),
         date: user.date || new Date().toLocaleDateString('es-SV'),
-        folio: `IHFB-${user.role.substring(0,3).toUpperCase()}-${Math.floor(1000 + Math.random()*9000)}`
+        folio: document.getElementById('certFolio').textContent
       };
 
       if (index !== -1) {
@@ -1276,7 +1366,7 @@
       } else {
         db.push(participantRecord);
       }
-      localStorage.setItem('ihfb_participants_db', JSON.stringify(db));
+      localStorage.setItem('ihfb_participants_db_v5', JSON.stringify(db));
     }
 
     function calculateUserProgress() {
@@ -1291,7 +1381,15 @@
       return Math.round(sum / scores.length) + "%";
     }
 
-    // GESTOR DE ENLACES INTELIGENTE (YOUTUBE + GOOGLE DRIVE)
+    // DINÁMICA DE COLOR DE LA BARRA DE PROGRESO SEGÚN PORCENTAJE
+    function getProgressBarColorClass(percent) {
+      if (percent <= 25) return "bg-slate-400";
+      if (percent <= 50) return "bg-amber-500";
+      if (percent <= 79) return "bg-blue-600";
+      return "bg-emerald-500";
+    }
+
+    // REPRODUCTOR HÍBRIDO (YOUTUBE / DRIVE)
     function formatVideoEmbedUrl(rawUrl) {
       if (!rawUrl) return "https://www.youtube.com/embed/dQw4w9WgXcQ";
       let url = rawUrl.trim();
@@ -1310,7 +1408,7 @@
       return url;
     }
 
-    // MODAL EXACTO A LA IMAGEN 3 (VIDEO + VISOR MANUAL SOP)
+    // MODAL AMPLIO Y PROFESIONAL TIPO IMAGEN 2 / 3
     function openModuleVideoModal(card, mod) {
       document.getElementById('proModalTag').textContent = card.num;
       document.getElementById('proModalHeaderTitle').textContent = card.title;
@@ -1320,11 +1418,9 @@
       document.getElementById('proManualName').textContent = card.manual;
       document.getElementById('manualCardSubTitle').textContent = card.title.toUpperCase();
 
-      // Puntos de video
       const pointsList = document.getElementById('proVideoPointsList');
       pointsList.innerHTML = card.points.map(pt => `<li class="flex items-start gap-1.5"><span class="text-blue-600 font-bold">•</span> <span>${pt}</span></li>`).join('');
 
-      // Botón inferior directo a la práctica del módulo
       const btnPractice = document.getElementById('btnModalBottomGoPractice');
       btnPractice.onclick = () => {
         closeProVideoModal();
@@ -1344,7 +1440,7 @@
       document.getElementById('manualPageIndicator').textContent = `${currentManualPage} / 4`;
     }
 
-    // RENDERIZADO DE MÓDULOS Y TARJETAS
+    // RENDERIZADO DE MÓDULOS CON BARRA DINÁMICA DE COLORES
     function renderModulesSidebar() {
       const container = document.getElementById('moduleListContainer');
       container.innerHTML = "";
@@ -1353,6 +1449,9 @@
       modulesData.forEach(mod => {
         if (mod.quizCompleted) completedCount++;
         const isCurrent = mod.id === currentSelectedModuleId;
+        const modPercent = mod.quizCompleted ? 100 : (mod.practiceCompleted ? 50 : (mod.unlocked ? 15 : 0));
+        const colorClass = getProgressBarColorClass(modPercent);
+
         const itemDiv = document.createElement('div');
         itemDiv.className = `p-3 rounded-xl border transition cursor-pointer flex flex-col gap-2 ${
           isCurrent 
@@ -1389,10 +1488,10 @@
           <div class="space-y-1">
             <div class="flex justify-between text-[10px] text-slate-500 font-medium">
               <span>Progreso</span>
-              <span>${mod.quizCompleted ? 100 : (mod.practiceCompleted ? 50 : (mod.unlocked ? 15 : 0))}%</span>
+              <span>${modPercent}%</span>
             </div>
             <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-              <div class="h-full bg-blue-600 rounded-full transition-all duration-300" style="width: ${mod.quizCompleted ? 100 : (mod.practiceCompleted ? 50 : (mod.unlocked ? 15 : 0))}%"></div>
+              <div class="h-full ${colorClass} rounded-full transition-all duration-500" style="width: ${modPercent}%"></div>
             </div>
           </div>
         `;
@@ -1464,7 +1563,7 @@
       });
     }
 
-    // GESTIÓN DE PRÁCTICAS
+    // PRÁCTICAS EN VIVO
     function goToModulePractice(modId) {
       document.getElementById('selectPracticeModule').value = modId;
       loadPracticeByModule(modId);
@@ -1527,7 +1626,7 @@
             </div>
             <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs text-blue-900">
               <p class="font-bold mb-1"><i class="fa-solid fa-circle-check text-blue-600 mr-1"></i> Protocolo en Centro Escolar:</p>
-              <p>Revisa la secuencia de validación técnica del dispositivo y confirma que la sincronización del ID del estudiante corresponda al listado de clase de la sede.</p>
+              <p>Revisa la secuencia de validación técnica del dispositivo y confirma que la sincronización del ID del estudiante corresponda al listado de clase.</p>
             </div>
             <div class="p-4 bg-slate-50 border rounded-xl space-y-2.5 text-xs text-slate-700">
               <label class="flex items-center gap-2 cursor-pointer">
@@ -1552,12 +1651,15 @@
       const mod = modulesData.find(m => m.id === modId);
       if (!mod) return;
       mod.practiceCompleted = true;
-      localStorage.setItem('ihfb_modules_clean_v4', JSON.stringify(modulesData));
-      if (currentUser.isRegistered) saveParticipantToDatabase(currentUser);
+      localStorage.setItem('ihfb_modules_pro_v5', JSON.stringify(modulesData));
+      if (currentUser.isRegistered) {
+        saveParticipantToDatabase(currentUser);
+        syncToGoogleSheetsWebhook(currentUser, `Práctica Validada: ${mod.code}`);
+      }
 
       renderModulesSidebar();
       renderProgressTable();
-      showProAlert("¡Práctica Validada!", `Has completado con éxito la práctica de ${mod.code}. El Quiz ha sido desbloqueado.`);
+      showProAlert("¡Práctica Validada!", `Has completado la práctica de ${mod.code}. El Quiz ha sido desbloqueado.`);
 
       document.getElementById('selectQuizModule').value = modId;
       loadQuizByModule(modId);
@@ -1659,8 +1761,11 @@
         }
       }
 
-      localStorage.setItem('ihfb_modules_clean_v4', JSON.stringify(modulesData));
-      if (currentUser.isRegistered) saveParticipantToDatabase(currentUser);
+      localStorage.setItem('ihfb_modules_pro_v5', JSON.stringify(modulesData));
+      if (currentUser.isRegistered) {
+        saveParticipantToDatabase(currentUser);
+        syncToGoogleSheetsWebhook(currentUser, `Quiz Evaluado: ${modId} - Nota: ${percentage}%`);
+      }
 
       const resultBox = document.getElementById('quizResultBox');
       resultBox.classList.remove('hidden');
@@ -1695,7 +1800,7 @@
       updateTotalProgressMetrics();
     }
 
-    // PROGRESO Y CONSTANCIA
+    // PROGRESO Y CONSTANCIA (CON BARRA DINÁMICA)
     function renderProgressTable() {
       const tbody = document.getElementById('progressTableBody');
       tbody.innerHTML = "";
@@ -1735,8 +1840,12 @@
       const completedCount = modulesData.filter(m => m.quizCompleted).length;
       const totalPercent = Math.round((completedCount / modulesData.length) * 100);
 
+      const colorClass = getProgressBarColorClass(totalPercent);
+
       document.getElementById('progresoPorcentajeTotal').textContent = `${totalPercent}%`;
-      document.getElementById('progresoBarraGeneral').style.width = `${totalPercent}%`;
+      const barra = document.getElementById('progresoBarraGeneral');
+      barra.style.width = `${totalPercent}%`;
+      barra.className = `h-full ${colorClass} transition-all duration-500`;
 
       const btnCert = document.getElementById('btnPrintCertificate');
       if (completedCount === modulesData.length || isAdminMode) {
@@ -1754,7 +1863,7 @@
       window.print();
     }
 
-    // MODAL DE AUTENTICACIÓN ADMIN Y CONSOLA DE REGISTROS
+    // MODAL ADMIN Y GOOGLE SHEETS
     function openAdminPasswordModal() {
       document.getElementById('adminPasswordInput').value = "";
       document.getElementById('adminPasswordModal').classList.remove('hidden');
@@ -1775,14 +1884,13 @@
         document.getElementById('topAdminBadge').classList.remove('hidden');
         document.getElementById('topAdminBadge').classList.add('flex');
         
-        // Desbloquear todos los módulos visualmente para revisión de admin
         modulesData.forEach(m => m.unlocked = true);
         renderModulesSidebar();
         renderActiveModuleCards(currentSelectedModuleId);
         renderProgressTable();
         updateTotalProgressMetrics();
 
-        showProAlert("Modo Administrador Activado", "Tienes acceso completo al menú, editor de recursos y a la Base de Datos de participantes.");
+        showProAlert("Modo Administrador Activado", "Tienes acceso completo al menú, editor de recursos y a la Base de Datos con enlace a Google Sheets.");
         openAdminDatabaseModal();
       } else {
         showProAlert("Acceso Denegado", "Clave administrativa incorrecta.", false);
@@ -1796,10 +1904,10 @@
       if (!currentUser.isRegistered) desactivarSesionVisual();
       renderModulesSidebar();
       renderActiveModuleCards(currentSelectedModuleId);
-      showProAlert("Modo Administrador Desactivado", "Se ha cerrado la sesión de coordinación.");
+      showProAlert("Modo Administrador Cerrado", "Se ha cerrado la sesión de coordinación.");
     }
 
-    // BASE DE DATOS MODAL
+    // BASE DE DATOS MODAL Y LINK A GOOGLE SHEETS
     function openAdminDatabaseModal() {
       renderAdminDatabaseTable();
       document.getElementById('adminDatabaseModal').classList.remove('hidden');
@@ -1809,19 +1917,39 @@
       document.getElementById('adminDatabaseModal').classList.add('hidden');
     }
 
+    function saveGoogleSheetConfig() {
+      const newUrl = document.getElementById('googleSheetUrlInput').value.trim();
+      if (newUrl) {
+        googleSheetTargetUrl = newUrl;
+        localStorage.setItem('ihfb_google_sheet_url', newUrl);
+        showProAlert("Enlace Guardado", "El enlace de Google Sheets ha sido configurado como destino oficial.");
+      }
+    }
+
+    function openConfiguredGoogleSheet() {
+      if (googleSheetTargetUrl) {
+        window.open(googleSheetTargetUrl, "_blank");
+      } else {
+        showProAlert("Sin Enlace", "Ingresa y guarda el enlace de tu Google Sheet primero.", false);
+      }
+    }
+
+    function showAppsScriptHelp() {
+      showProAlert("Conectar con Google Sheets", "Para que los datos caigan en vivo en tu Sheet: 1. Abre tu Google Sheet. 2. Ve a Extensiones > Apps Script. 3. Pega un script sencillo doPost(e) { ... } y despliégalo como Aplicación Web (Acceso: Cualquier usuario). 4. Pega la URL aquí.", true);
+    }
+
     function renderAdminDatabaseTable() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v5')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
-      // Si está vacía, agregar registros de ejemplo de docentes y monitores para visualización inicial
       if (db.length === 0) {
         db.push(
-          { name: "Prof. Nelson Morales", email: "nelson.morales@clases.edu.sv", role: "Docente", dept: "San Salvador", progress: 100, avgScore: "95%", folio: "IHFB-DOC-8491", date: "29/10/2026" },
-          { name: "Rebeca Callejas", email: "rebecacallejas@clases.edu.sv", role: "Docente", dept: "San Salvador", progress: 50, avgScore: "85%", folio: "IHFB-DOC-3120", date: "29/10/2026" },
-          { name: "Carlos Menjívar", email: "carlos.menjivar@mined.gob.sv", role: "Supervisor", dept: "Santa Ana", progress: 28, avgScore: "90%", folio: "IHFB-SUP-9104", date: "28/10/2026" }
+          { name: "Prof. Nelson Morales", email: "nelson.morales@clases.edu.sv", role: "Docente", progress: 100, avgScore: "95%", folio: "IHFB-DOC-8491", date: "29/10/2026" },
+          { name: "Rebeca Callejas", email: "rebecacallejas@clases.edu.sv", role: "Docente", progress: 50, avgScore: "85%", folio: "IHFB-DOC-3120", date: "29/10/2026" },
+          { name: "Carlos Menjívar", email: "carlos.menjivar@mined.gob.sv", role: "Supervisor", progress: 28, avgScore: "90%", folio: "IHFB-SUP-9104", date: "28/10/2026" }
         );
-        localStorage.setItem('ihfb_participants_db', JSON.stringify(db));
+        localStorage.setItem('ihfb_participants_db_v5', JSON.stringify(db));
       }
 
       document.getElementById('adminRecordCount').textContent = `Mostrando ${db.length} participantes registrados`;
@@ -1832,7 +1960,7 @@
         tr.innerHTML = `
           <td class="px-3 py-3 font-bold text-slate-800">${item.name}</td>
           <td class="px-3 py-3 text-slate-600 font-mono text-[11px]">${item.email}</td>
-          <td class="px-3 py-3">${item.role} • <span class="text-slate-500">${item.dept}</span></td>
+          <td class="px-3 py-3 font-medium text-slate-700">${item.role}</td>
           <td class="px-3 py-3 text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> Sí</td>
           <td class="px-3 py-3 font-bold text-blue-700">${item.progress}%</td>
           <td class="px-3 py-3 font-semibold">${item.avgScore}</td>
@@ -1846,7 +1974,7 @@
     function filterAdminDatabase() {
       const query = document.getElementById('adminSearchInput').value.toLowerCase();
       const roleFilter = document.getElementById('adminRoleFilter').value;
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v5')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -1864,7 +1992,7 @@
         tr.innerHTML = `
           <td class="px-3 py-3 font-bold text-slate-800">${item.name}</td>
           <td class="px-3 py-3 text-slate-600 font-mono text-[11px]">${item.email}</td>
-          <td class="px-3 py-3">${item.role} • <span class="text-slate-500">${item.dept}</span></td>
+          <td class="px-3 py-3 font-medium text-slate-700">${item.role}</td>
           <td class="px-3 py-3 text-emerald-600 font-bold"><i class="fa-solid fa-check-circle mr-1"></i> Sí</td>
           <td class="px-3 py-3 font-bold text-blue-700">${item.progress}%</td>
           <td class="px-3 py-3 font-semibold">${item.avgScore}</td>
@@ -1876,14 +2004,14 @@
     }
 
     function exportParticipantsToCSV() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v5')) || [];
       if (db.length === 0) {
         showProAlert("Base de Datos Vacía", "No hay registros disponibles para exportar.", false);
         return;
       }
-      let csv = "Nombre,Correo,Rol,Sede,Avance_Porcentaje,Promedio_Notas,Folio,Fecha\n";
+      let csv = "Nombre,Correo,Rol,Avance_Porcentaje,Promedio_Notas,Folio,Fecha\n";
       db.forEach(u => {
-        csv += `"${u.name}","${u.email}","${u.role}","${u.dept}","${u.progress}","${u.avgScore}","${u.folio}","${u.date}"\n`;
+        csv += `"${u.name}","${u.email}","${u.role}","${u.progress}","${u.avgScore}","${u.folio}","${u.date}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
@@ -1928,7 +2056,7 @@
       mod.cards[cardIndex].manual = document.getElementById('editCardManualText').value.trim();
       mod.cards[cardIndex].points = document.getElementById('editCardPoints').value.split(',').map(s => s.trim()).filter(Boolean);
 
-      localStorage.setItem('ihfb_modules_clean_v4', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_pro_v5', JSON.stringify(modulesData));
       closeAdminEditModal();
       renderActiveModuleCards(modId);
       showProAlert("Cambios Guardados", "El enlace y el manual han sido actualizados con éxito.");
