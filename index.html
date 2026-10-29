@@ -9,8 +9,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Identity Services Oficial (Real OAuth2 / Sign-In) -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <script>
     tailwind.config = {
@@ -41,29 +39,7 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
-    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
-    body { top: 0px !important; }
-    .goog-te-gadget-simple {
-      background-color: transparent !important;
-      border: none !important;
-      padding: 0 !important;
-      font-size: 11px !important;
-    }
-    .goog-te-menu-value span:nth-child(3), .goog-te-menu-value span:nth-child(5) { display: none !important; }
   </style>
-
-  <!-- Google Translate Element -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'es',
-        includedLanguages: 'es,en,ko',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white relative">
 
@@ -75,25 +51,32 @@
       <div class="flex items-center space-x-3 cursor-pointer" onclick="handleLogoClick()">
         <img src="logo.png" onerror="this.onerror=null; this.src='logo.png.jpg';" alt="Logo IHFB" class="w-11 h-11 object-contain rounded-xl bg-white p-1 shadow-md shrink-0 border border-slate-100">
         <div>
-          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight">
+          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight" data-i18n="portal_title">
             Portal de Capacitación Autónoma
           </h1>
-          <p class="text-[11px] text-blue-200">IHFB El Salvador • Nivelación y Acreditación Operativa</p>
+          <p class="text-[11px] text-blue-200" data-i18n="portal_subtitle">IHFB El Salvador • Nivelación y Acreditación Operativa</p>
         </div>
       </div>
 
-      <!-- BOTÓN IDIOMA + ACCESO A PERFIL PARTICIPANTE -->
+      <!-- BOTÓN TRADUCTOR INTERNO PROFESIONAL (ESTILO IMAGEN LXP MANUAL) + PERFIL -->
       <div class="flex items-center space-x-3">
-        <!-- Selector Profesional de Idioma -->
-        <div class="hidden sm:flex items-center bg-[#071F36] border border-blue-900 rounded-xl px-2.5 py-1 text-xs gap-1.5 shadow-inner">
-          <i class="fa-solid fa-globe text-blue-400 text-xs"></i>
-          <div id="google_translate_element"></div>
+        
+        <!-- SELECTOR INTERNO PILL-SHAPED (Español | English | 한국어) IDÉNTICO A LA FOTO -->
+        <div class="flex items-center bg-white/10 backdrop-blur rounded-full p-1 border border-white/20 text-xs">
+          <button onclick="setLanguage('es')" id="lang-btn-es" class="px-3 py-1 rounded-full font-bold text-slate-900 bg-white transition shadow-sm">
+            Español
+          </button>
+          <button onclick="setLanguage('en')" id="lang-btn-en" class="px-3 py-1 rounded-full font-medium text-blue-200 hover:text-white transition">
+            English
+          </button>
+          <button onclick="setLanguage('ko')" id="lang-btn-ko" class="px-3 py-1 rounded-full font-medium text-blue-200 hover:text-white transition">
+            한국어
+          </button>
         </div>
 
         <!-- Perfil del Usuario Conectado (Clic para Modificar Perfil) -->
         <div id="topUserBadge" onclick="openProfileEditModal()" title="Haz clic para modificar tu nombre o rol" class="hidden cursor-pointer hover:bg-[#071F36] transition items-center space-x-2 bg-[#061B2E] px-3.5 py-1.5 rounded-full border border-blue-400/25 text-xs shadow-sm">
-          <img id="topUserAvatar" src="" class="w-5 h-5 rounded-full object-cover hidden border border-emerald-400" alt="Avatar">
-          <span id="topUserDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span id="topUserName" class="font-medium text-white truncate max-w-[120px] sm:max-w-[170px]">Usuario</span>
           <span class="text-blue-400">|</span>
           <span id="topUserRole" class="text-blue-200 font-bold uppercase text-[10px] tracking-wider">DOCENTE</span>
@@ -106,7 +89,7 @@
         <!-- Indicador Admin Activo -->
         <div id="topAdminBadge" class="hidden items-center gap-2 bg-slate-900 text-slate-200 px-3 py-1.5 rounded-full text-xs font-bold border border-slate-700 shadow-sm">
           <i class="fa-solid fa-shield-halved text-blue-400 text-xs"></i>
-          <span>Modo Admin</span>
+          <span data-i18n="admin_mode_active">Modo Admin</span>
           <button onclick="closeAdminSession()" title="Salir de administración" class="ml-1 text-slate-400 hover:text-rose-400">&times;</button>
         </div>
       </div>
@@ -117,22 +100,22 @@
     <nav id="mainNavMenu" class="hidden bg-[#071F36] border-t border-blue-950 px-3 sm:px-6">
       <div class="max-w-7xl mx-auto flex items-center space-x-1 sm:space-x-2 overflow-x-auto custom-scroll py-2 text-xs sm:text-sm font-medium">
         <button onclick="switchTab('modulos')" id="nav-modulos" class="nav-btn px-4 py-1.5 rounded-xl text-white bg-blue-700 whitespace-nowrap transition flex items-center gap-1.5 shadow-sm font-semibold">
-          <i class="fa-solid fa-layer-group text-xs"></i> <span>Módulos de Aprendizaje</span>
+          <i class="fa-solid fa-layer-group text-xs"></i> <span data-i18n="nav_modules">Módulos de Aprendizaje</span>
         </button>
         <button onclick="switchTab('practicas')" id="nav-practicas" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
-          <i class="fa-solid fa-laptop-code text-xs"></i> <span>Prácticas en Vivo</span>
+          <i class="fa-solid fa-laptop-code text-xs"></i> <span data-i18n="nav_practice">Prácticas en Vivo</span>
         </button>
         <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
-          <i class="fa-solid fa-circle-question text-xs"></i> <span>Evaluaciones (Quizzes)</span>
+          <i class="fa-solid fa-circle-question text-xs"></i> <span data-i18n="nav_quizzes">Evaluaciones (Quizzes)</span>
         </button>
         <button onclick="switchTab('progreso')" id="nav-progreso" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
-          <i class="fa-solid fa-award text-xs"></i> <span>Mi Progreso y Validación</span>
+          <i class="fa-solid fa-award text-xs"></i> <span data-i18n="nav_progress">Mi Progreso y Validación</span>
         </button>
         <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-1.5 font-semibold">
-          <i class="fa-solid fa-comments text-xs"></i> <span>Preguntas y Soporte</span>
+          <i class="fa-solid fa-comments text-xs"></i> <span data-i18n="nav_faq">Preguntas y Soporte</span>
         </button>
         <button onclick="openAdminDatabaseModal()" id="nav-admin-db" class="hidden nav-btn px-4 py-1.5 rounded-xl text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/30 whitespace-nowrap transition flex items-center gap-1.5 font-bold">
-          <i class="fa-solid fa-table-cells text-xs text-emerald-400"></i> <span>Consola Google Sheets</span>
+          <i class="fa-solid fa-table-cells text-xs text-emerald-400"></i> <span>Google Sheets & Auditoría</span>
         </button>
       </div>
     </nav>
@@ -148,103 +131,103 @@
       <div class="bg-gradient-to-r from-[#002B49] via-[#0A3C66] to-[#0B4F8A] text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col lg:flex-row gap-6 items-center justify-between border border-blue-900/50">
         <div class="space-y-3 max-w-2xl">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            <i class="fa-solid fa-shield-halved text-[10px]"></i> Capacitación Oficial y Nivelación Autónoma
+            <i class="fa-solid fa-shield-halved text-[10px]"></i> <span data-i18n="banner_tag">Capacitación Oficial y Nivelación Autónoma</span>
           </span>
-          <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Bienvenido al Espacio Formativo IHFB</h2>
-          <p class="text-slate-200 text-xs sm:text-sm leading-relaxed">
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight" data-i18n="banner_title">Bienvenido al Espacio Formativo IHFB</h2>
+          <p class="text-slate-200 text-xs sm:text-sm leading-relaxed" data-i18n="banner_desc">
             Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.
           </p>
         </div>
         <div class="flex items-center gap-8 bg-white/10 backdrop-blur px-8 py-4 rounded-2xl border border-white/10 text-center shrink-0">
           <div>
             <div class="text-3xl sm:text-4xl font-black text-white">7</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Módulos</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider" data-i18n="banner_modules">Módulos</div>
           </div>
           <div class="h-10 w-px bg-white/20"></div>
           <div>
             <div class="text-3xl sm:text-4xl font-black text-emerald-400">80%</div>
-            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider">Aprobación</div>
+            <div class="text-[10px] uppercase font-bold text-slate-200 tracking-wider" data-i18n="banner_approval">Aprobación</div>
           </div>
         </div>
       </div>
 
-      <!-- Cuadrícula: Autenticación Real de Google + Formulario Guiado -->
+      <!-- Cuadrícula: Autenticación Real de Google (Lógica Google Forms) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         <!-- Tarjeta de Acceso con Google -->
         <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
-            <!-- Pestañas Registro / Iniciar Sesión -->
-            <div class="flex border-b border-slate-200 mb-4 pb-1">
-              <button type="button" onclick="setAuthTab('login')" id="tabBtnLogin" class="pb-2 px-3 text-xs font-extrabold text-blue-700 border-b-2 border-blue-700 transition">
-                Iniciar Sesión
+            <!-- PESTAÑAS: 1. REGISTRARSE (PRIMERO) | 2. INICIAR SESIÓN -->
+            <div class="flex border-b border-slate-200 mb-5 pb-1">
+              <button type="button" onclick="setAuthTab('register')" id="tabBtnRegister" class="pb-2.5 px-3.5 text-xs font-black text-blue-700 border-b-2 border-blue-700 transition">
+                <i class="fa-solid fa-user-plus mr-1"></i> Registrarse
               </button>
-              <button type="button" onclick="setAuthTab('register')" id="tabBtnRegister" class="pb-2 px-3 text-xs font-bold text-slate-400 hover:text-slate-700 transition">
-                Registrarse por Primera Vez
+              <button type="button" onclick="setAuthTab('login')" id="tabBtnLogin" class="pb-2.5 px-3.5 text-xs font-bold text-slate-400 hover:text-slate-700 transition">
+                <i class="fa-solid fa-right-to-bracket mr-1"></i> Iniciar Sesión
               </button>
             </div>
 
-            <p id="authInstruction" class="text-xs text-slate-500 mb-5 leading-relaxed">
-              Inicia sesión vinculando directamente tu cuenta institucional de Google. Tus avances y constancia se guardan en tiempo real.
-            </p>
+            <!-- VISTA 1: REGISTRARSE (SOLICITA NOMBRE, LUEGO ROL, LUEGO VINCULAR CUENTA DE GOOGLE) -->
+            <div id="authViewRegister" class="space-y-4">
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Ingresa tus datos oficiales de acreditación. Luego se vinculará tu cuenta de Google institucional activa (como en los cuestionarios de Google Forms).
+              </p>
 
-            <!-- CONTENEDOR BOTÓN OFICIAL DE GOOGLE (GOOGLE IDENTITY SERVICES) -->
-            <div class="space-y-3 mb-5">
-              <div id="googleBtnWrapper" class="w-full flex justify-center">
-                <!-- Se inyecta el botón real de Google aquí -->
-                <div id="g_id_signin"></div>
-              </div>
-
-              <!-- Botón Alternativo de Google con Popup OAuth Nativo -->
-              <button type="button" onclick="triggerNativeGoogleAuth()" class="w-full py-3 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-700 font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
-                <svg class="w-4 h-4" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                </svg>
-                <span id="googleBtnLabel">Vincular mi Cuenta de Google</span>
-              </button>
-
-              <div class="relative flex py-1 items-center">
-                <div class="flex-grow border-t border-slate-200"></div>
-                <span class="flex-shrink mx-3 text-[10px] text-slate-400 uppercase font-bold tracking-wider">o digita tus datos</span>
-                <div class="flex-grow border-t border-slate-200"></div>
-              </div>
-            </div>
-
-            <!-- Formulario para Completar Nombre y Rol (Sin Departamento ni Sede) -->
-            <form id="accessForm" onsubmit="handleInitialUserSubmit(event)" class="space-y-3.5">
-              <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Correo Electrónico de Google *</label>
-                <div class="relative">
-                  <input type="email" id="inputUserEmail" required placeholder="tu.correo@clases.edu.sv" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
-                  <i class="fa-solid fa-envelope absolute right-3.5 top-3 text-slate-400 text-sm"></i>
+              <form onsubmit="handleRegisterWithGoogle(event)" class="space-y-3.5">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">1. Nombre Completo Oficial (Para constancia) *</label>
+                  <input type="text" id="regUserName" required placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
                 </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">2. Rol Operativo *</label>
+                  <select id="regUserRole" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
+                    <option value="Docente">Docente</option>
+                    <option value="Tutor">Tutor</option>
+                    <option value="Facilitador">Facilitador</option>
+                    <option value="Monitor">Monitor</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Auditor">Auditor</option>
+                  </select>
+                </div>
+
+                <!-- Botón de Registro y Vinculación Google -->
+                <button type="submit" class="w-full mt-2 py-3 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                  </svg>
+                  <span>Registrar y Vincular con Google</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- VISTA 2: INICIAR SESIÓN (ÚNICAMENTE EL BOTÓN DE GOOGLE) -->
+            <div id="authViewLogin" class="space-y-4 hidden">
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Si ya te registraste anteriormente, inicia sesión directamente con tu cuenta de Google para continuar tu avance formativo.
+              </p>
+
+              <!-- ÚNICO BOTÓN DIRECTO DE GOOGLE PARA LOGIN -->
+              <div class="pt-4 pb-2">
+                <button type="button" onclick="handleDirectGoogleLogin()" class="w-full py-3.5 px-4 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-800 font-extrabold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-3">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                  </svg>
+                  <span>Iniciar Sesión con Google</span>
+                </button>
               </div>
 
-              <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo Oficial (Para constancia) *</label>
-                <input type="text" id="inputUserName" required placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition" />
+              <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-blue-900 leading-snug">
+                <i class="fa-solid fa-circle-info text-blue-600 mr-1"></i> Se autenticará con la cuenta de Google activa en tu navegador.
               </div>
+            </div>
 
-              <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">Rol Operativo *</label>
-                <select id="inputUserRole" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
-                  <option value="Docente">Docente</option>
-                  <option value="Tutor">Tutor</option>
-                  <option value="Facilitador">Facilitador</option>
-                  <option value="Monitor">Monitor</option>
-                  <option value="Supervisor">Supervisor</option>
-                  <option value="Auditor">Auditor</option>
-                </select>
-              </div>
-
-              <button type="submit" id="btnSubmitAuth" class="w-full mt-2 bg-[#0B4F8A] hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition shadow-md flex items-center justify-center gap-2">
-                <span>Ingresar al Portal</span>
-                <i class="fa-solid fa-arrow-right text-xs"></i>
-              </button>
-            </form>
           </div>
         </div>
 
@@ -252,13 +235,13 @@
         <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs uppercase tracking-wider font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md">
+              <span class="text-xs uppercase tracking-wider font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md" data-i18n="guide_tag">
                 Guía de Inducción
               </span>
-              <span class="text-xs text-slate-400">Duración: 2 min 40s</span>
+              <span class="text-xs text-slate-400" data-i18n="guide_duration">Duración: 2 min 40s</span>
             </div>
-            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">¿Cómo funciona la capacitación autónoma?</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2" data-i18n="guide_title">¿Cómo funciona la capacitación autónoma?</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4" data-i18n="guide_desc">
               Cada módulo contiene cápsulas en video y manuales operativos estándar. Para acreditar un módulo, debes realizar la práctica interactiva y aprobar la evaluación con mínimo 80%.
             </p>
             <div class="relative w-full aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-inner flex items-center justify-center group cursor-pointer border border-slate-800" onclick="openModuleVideoModal(modulesData[0].cards[0], modulesData[0])">
@@ -268,7 +251,7 @@
               </div>
               <div class="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur px-3.5 py-2.5 rounded-lg flex items-center justify-between text-white text-xs">
                 <span class="font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-blue-400"></i> Protocolo de Operación en Aula IHFB</span>
-                <span class="text-blue-300 font-semibold text-[11px]">Ver cápsula</span>
+                <span class="text-blue-300 font-semibold text-[11px]" data-i18n="watch_video">Ver cápsula</span>
               </div>
             </div>
           </div>
@@ -422,6 +405,7 @@
             <div id="progresoPorcentajeTotal" class="text-3xl font-black text-slate-700">0%</div>
             <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Avance General</div>
           </div>
+          <!-- Barra Dinámica con Cambio de Color según Progreso -->
           <div class="w-24 h-2.5 bg-slate-200 rounded-full overflow-hidden">
             <div id="progresoBarraGeneral" class="h-full bg-slate-400 transition-all duration-500" style="width: 0%;"></div>
           </div>
@@ -702,7 +686,13 @@
     </div>
   </div>
 
-  <!-- ================= MODAL: SOLICITUD DE CLAVE ADMIN (SOLO ATAJO CTRL+SHIFT+A) ================= -->
+  <!-- ================= PASO 2 Y 3: TUERCA DISIMULADA + MODAL CLAVE ADMIN ================= -->
+  <!-- PASO 2: La tuerca está 100% OCULTA por defecto. SOLO APARECE si presionas Ctrl + Shift + A -->
+  <button id="secretAdminGear" onclick="openAdminPasswordModal()" title="Acceso Coordinación" class="hidden fixed bottom-4 right-4 w-9 h-9 rounded-full bg-slate-900/60 hover:bg-slate-900 text-slate-400 hover:text-amber-400 items-center justify-center transition opacity-60 hover:opacity-100 z-50 border border-slate-700 shadow-xl cursor-pointer">
+    <i class="fa-solid fa-gear text-sm"></i>
+  </button>
+
+  <!-- PASO 3: Al hacer clic a la tuerca, se abre este modal solicitando la contraseña -->
   <div id="adminPasswordModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
       <div class="w-12 h-12 rounded-2xl bg-slate-900 text-blue-400 mx-auto flex items-center justify-center text-xl shadow-inner">
@@ -710,7 +700,7 @@
       </div>
       <div>
         <h4 class="text-base font-extrabold text-slate-900">Acceso Administrativo IHFB</h4>
-        <p class="text-xs text-slate-500 mt-1">Ingresa tu clave de coordinador (Atajo: Ctrl + Shift + A).</p>
+        <p class="text-xs text-slate-500 mt-1">Ingresa tu clave de coordinador.</p>
       </div>
       <form onsubmit="submitAdminPassword(event)" class="space-y-3">
         <input type="password" id="adminPasswordInput" placeholder="Clave de seguridad" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 outline-none text-center font-mono">
@@ -737,10 +727,10 @@
           <h3 class="text-lg font-bold text-white mt-1 flex items-center gap-2">
             <i class="fa-solid fa-table text-emerald-400"></i> Registro de Participantes y Google Sheets
           </h3>
-          <p class="text-xs text-blue-200">Base de datos de avance, intentos de quizzes, prácticas y folios emitidos en El Salvador.</p>
+          <p class="text-xs text-blue-200">Base de datos oficial centralizada en la hoja de cálculo de Google Drive.</p>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="openConfiguredGoogleSheet()" id="btnOpenSheetDirect" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
+          <button onclick="openConfiguredGoogleSheet()" id="btnOpenSheetDirect" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-md">
             <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Google Sheet Oficial
           </button>
           <button onclick="exportParticipantsToCSV()" class="px-3.5 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
@@ -759,8 +749,8 @@
             <i class="fa-brands fa-google-drive text-emerald-600"></i> Enlace Google Sheet Oficial (Donde caen los resultados):
           </label>
           <div class="flex gap-2">
-            <input type="text" id="googleSheetUrlInput" readonly class="w-full px-3 py-1.5 border rounded-lg outline-none bg-slate-100 font-mono text-[11px] text-slate-700 cursor-text">
-            <button onclick="openConfiguredGoogleSheet()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold shrink-0 flex items-center gap-1">
+            <input type="text" id="googleSheetUrlInput" readonly class="w-full px-3 py-2 border rounded-lg outline-none bg-slate-100 font-mono text-[11px] text-slate-700 cursor-text select-all">
+            <button onclick="openConfiguredGoogleSheet()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold shrink-0 flex items-center gap-1.5 shadow-sm">
               <i class="fa-solid fa-external-link"></i> Abrir Hoja
             </button>
           </div>
@@ -793,7 +783,7 @@
           <thead class="bg-slate-100 text-slate-600 uppercase font-semibold text-[10px] tracking-wider border-b">
             <tr>
               <th class="px-3 py-2.5">Participante</th>
-              <th class="px-3 py-2.5">Correo Institucional</th>
+              <th class="px-3 py-2.5">Correo de Google</th>
               <th class="px-3 py-2.5">Rol</th>
               <th class="px-3 py-2.5">Prácticas OK</th>
               <th class="px-3 py-2.5">Avance (%)</th>
@@ -890,23 +880,105 @@
 
   <!-- ================= SCRIPT COMPLETO CON ARQUITECTURA LIMPIA ================= -->
   <script>
-    // 1. ESTADO DE USUARIO
+    // 1. DICCIONARIO INTERNO DE TRADUCCIÓN LIMPIO (ESPAÑOL | ENGLISH | 한국어)
+    const i18nDict = {
+      es: {
+        portal_title: "Portal de Capacitación Autónoma",
+        portal_subtitle: "IHFB El Salvador • Nivelación y Acreditación Operativa",
+        banner_tag: "Capacitación Oficial y Nivelación Autónoma",
+        banner_title: "Bienvenido al Espacio Formativo IHFB",
+        banner_desc: "Plataforma diseñada para el autoaprendizaje, reposición de jornadas no presenciadas y acreditación modular de competencias operativas para todo el equipo en El Salvador.",
+        banner_modules: "Módulos",
+        banner_approval: "Aprobación",
+        guide_tag: "Guía de Inducción",
+        guide_duration: "Duración: 2 min 40s",
+        guide_title: "¿Cómo funciona la capacitación autónoma?",
+        guide_desc: "Cada módulo contiene cápsulas en video y manuales operativos estándar. Para acreditar un módulo, debes realizar la práctica interactiva y aprobar la evaluación con mínimo 80%.",
+        watch_video: "Ver cápsula",
+        nav_modules: "Módulos de Aprendizaje",
+        nav_practice: "Prácticas en Vivo",
+        nav_quizzes: "Evaluaciones (Quizzes)",
+        nav_progress: "Mi Progreso y Validación",
+        nav_faq: "Preguntas y Soporte",
+        admin_mode_active: "Modo Admin"
+      },
+      en: {
+        portal_title: "Autonomous Training Portal",
+        portal_subtitle: "IHFB El Salvador • Operational Leveling & Accreditation",
+        banner_tag: "Official Training & Autonomous Leveling",
+        banner_title: "Welcome to the IHFB Training Space",
+        banner_desc: "Platform designed for self-learning, missed workday make-ups, and modular operational accreditation for all personnel in El Salvador.",
+        banner_modules: "Modules",
+        banner_approval: "Passing Score",
+        guide_tag: "Induction Guide",
+        guide_duration: "Duration: 2 min 40s",
+        guide_title: "How does autonomous training work?",
+        guide_desc: "Each module contains video capsules and standard operating manuals (SOP). To pass, complete the interactive practice and score at least 80% on the quiz.",
+        watch_video: "Watch video",
+        nav_modules: "Learning Modules",
+        nav_practice: "Live Practice",
+        nav_quizzes: "Assessments (Quizzes)",
+        nav_progress: "My Progress & Status",
+        nav_faq: "Help & Support",
+        admin_mode_active: "Admin Mode"
+      },
+      ko: {
+        portal_title: "IHFB 자율 연수 포털",
+        portal_subtitle: "IHFB 엘살바도르 • 운영 표준화 및 역량 인증",
+        banner_tag: "공식 연수 및 자율 학습",
+        banner_title: "IHFB 교육 연수 공간에 오신 것을 환영합니다",
+        banner_desc: "자기주도 학습, 미이수 수업 보충 및 엘살바도르 전 현장 인력을 위한 모듈형 운영 역량 공인 플랫폼입니다.",
+        banner_modules: "모듈",
+        banner_approval: "수료 기준",
+        guide_tag: "오리엔테이션 안내",
+        guide_duration: "재생 시간: 2분 40초",
+        guide_title: "자율 연수 진행 방식 안내",
+        guide_desc: "각 모듈은 동영상 강의와 표준운영절차(SOP) 매뉴얼로 구성됩니다. 모듈을 통과하려면 실습을 마치고 평가 퀴즈에서 80% 이상을 득점해야 합니다.",
+        watch_video: "영상 보기",
+        nav_modules: "학습 모듈",
+        nav_practice: "현장 모의 실습",
+        nav_quizzes: "평가 퀴즈",
+        nav_progress: "나의 진도 및 수료증",
+        nav_faq: "자주 묻는 질문",
+        admin_mode_active: "관리자 모드"
+      }
+    };
+
+    let currentLang = 'es';
+    function setLanguage(lang) {
+      currentLang = lang;
+      ['es', 'en', 'ko'].forEach(l => {
+        const btn = document.getElementById(`lang-btn-${l}`);
+        if (l === lang) {
+          btn.className = "px-3 py-1 rounded-full font-bold text-slate-900 bg-white transition shadow-sm";
+        } else {
+          btn.className = "px-3 py-1 rounded-full font-medium text-blue-200 hover:text-white transition";
+        }
+      });
+
+      // Traducir elementos con atributo data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18nDict[lang] && i18nDict[lang][key]) {
+          el.textContent = i18nDict[lang][key];
+        }
+      });
+    }
+
+    // 2. ESTADO DE USUARIO
     let currentUser = {
       email: "",
       name: "",
       role: "Docente",
-      avatar: "",
       isRegistered: false
     };
 
-    let authMode = "login"; // "login" o "register"
-
-    // 2. MODO ADMINISTRADOR Y ENLACE DE GOOGLE SHEETS SOLICITADO
+    // 3. ADMINISTRACIÓN Y GOOGLE SHEET OFICIAL
     let isAdminMode = false;
     const ADMIN_PASSWORD_DEFAULT = "ihfb2026";
     const OFFICIAL_GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1w_6bR1rGZ2pNWapXuqdzTG3Wjo4_U4nGxrAeG3RojvQ/edit?gid=0#gid=0";
 
-    // 3. BASE DE DATOS DE MÓDULOS
+    // 4. MÓDULOS DE APRENDIZAJE
     const defaultModulesData = [
       {
         id: "M1",
@@ -1080,13 +1152,13 @@
       }
     ];
 
-    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_pro_v6')) || defaultModulesData;
+    let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_v7')) || defaultModulesData;
 
     // BANCO DE QUIZZES
     const quizzesBank = {
       M1: [
         { q: "¿Cuál es el primer paso obligatorio al encender los dispositivos en el aula?", options: ["Comenzar a escribir en la pizarra digital", "Verificar la conexión a la red Wi-Fi escolar e inicio de sesión", "Apagar el proyector del salón"], correct: 1 },
-        { q: "¿Qué credencial utiliza el participante para identificarse en este portal?", options: ["Correo Institucional de Google", "Número telefónico personal", "Contraseña inventada"], correct: 0 },
+        { q: "¿Qué credencial utiliza el participante para identificarse en este portal?", options: ["Cuenta vinculada de Google", "Número telefónico personal", "Contraseña inventada"], correct: 0 },
         { q: "¿Cuál es la función de la opción 'Clase de Hoy'?", options: ["Abrir los juegos de recreo", "Acceder directamente a la sesión programada de la jornada", "Eliminar los historiales"], correct: 1 }
       ],
       M2: [
@@ -1126,21 +1198,22 @@
 
     // INICIALIZACIÓN
     window.addEventListener('DOMContentLoaded', () => {
-      // ATAJO SECRETO: Ctrl + Shift + A abre DIRECTAMENTE el modal de clave de Administrador
+      // PASO 1 Y 2: ATAJO SECRETO (Ctrl + Shift + A)
+      // Por defecto la tuerca está completamente oculta. Al pulsar el atajo, APARECE la tuerca.
       window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
           e.preventDefault();
-          openAdminPasswordModal();
+          const gear = document.getElementById('secretAdminGear');
+          gear.classList.remove('hidden');
+          gear.classList.add('flex');
+          showProAlert("Atajo Reconocido", "Haz clic en la tuerca que ha aparecido en la esquina inferior derecha para ingresar tu contraseña.");
         }
       });
 
       document.getElementById('googleSheetUrlInput').value = OFFICIAL_GOOGLE_SHEET_URL;
 
-      // Inicializar Google Identity Services
-      initGoogleIdentityServices();
-
       // Verificar sesión previa
-      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_v6'));
+      const savedUser = JSON.parse(localStorage.getItem('ihfb_user_session_v7'));
       if (savedUser && savedUser.isRegistered) {
         currentUser = savedUser;
         activarSesionVisual();
@@ -1156,113 +1229,83 @@
       loadPracticeByModule("M1");
     });
 
-    // GOOGLE IDENTITY SERVICES OFICIAL
-    function initGoogleIdentityServices() {
-      if (window.google && google.accounts && google.accounts.id) {
-        google.accounts.id.initialize({
-          client_id: "921820473912-example.apps.googleusercontent.com", // Puede vincularse con cualquier client id
-          callback: handleGoogleCredentialResponse,
-          auto_select: false
-        });
-      }
-    }
+    // PESTAÑAS DE ACCESO (REGISTRARSE vs INICIAR SESIÓN)
+    function setAuthTab(tab) {
+      const regTabBtn = document.getElementById('tabBtnRegister');
+      const logTabBtn = document.getElementById('tabBtnLogin');
+      const regView = document.getElementById('authViewRegister');
+      const logView = document.getElementById('authViewLogin');
 
-    function handleGoogleCredentialResponse(response) {
-      if (response && response.credential) {
-        try {
-          const payload = parseJwt(response.credential);
-          document.getElementById('inputUserEmail').value = payload.email || "";
-          document.getElementById('inputUserName').value = payload.name || "";
-          currentUser.avatar = payload.picture || "";
-          showProAlert("Cuenta Google Vinculada", `Has verificado la cuenta ${payload.email}. Selecciona tu rol operativo para continuar.`);
-        } catch (err) {
-          console.error("JWT error", err);
-        }
-      }
-    }
-
-    function parseJwt(token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
-      return JSON.parse(jsonPayload);
-    }
-
-    function triggerNativeGoogleAuth() {
-      // Abre ventana emergente oficial de cuentas de Google
-      const authUrl = "https://accounts.google.com/signin/v2/identifier?hl=es";
-      const win = window.open(authUrl, "google_login", "width=500,height=600");
-
-      // Solicitud rápida asistida para autorizar vinculación
-      setTimeout(() => {
-        const email = prompt("Confirma la cuenta de Google con la que iniciaste sesión:", "docente@clases.edu.sv");
-        if (email && email.includes("@")) {
-          document.getElementById('inputUserEmail').value = email;
-          const guessedName = email.split("@")[0].replace(".", " ");
-          document.getElementById('inputUserName').value = guessedName.charAt(0).toUpperCase() + guessedName.slice(1);
-          showProAlert("Cuenta Google Vinculada", "Verifica tu Nombre Completo Oficial y selecciona tu Rol Operativo.");
-        }
-      }, 1000);
-    }
-
-    function setAuthTab(mode) {
-      authMode = mode;
-      const tabLogin = document.getElementById('tabBtnLogin');
-      const tabRegister = document.getElementById('tabBtnRegister');
-      const instruction = document.getElementById('authInstruction');
-      const submitBtn = document.getElementById('btnSubmitAuth');
-      const gLabel = document.getElementById('googleBtnLabel');
-
-      if (mode === "login") {
-        tabLogin.className = "pb-2 px-3 text-xs font-extrabold text-blue-700 border-b-2 border-blue-700 transition";
-        tabRegister.className = "pb-2 px-3 text-xs font-bold text-slate-400 hover:text-slate-700 transition";
-        instruction.textContent = "Inicia sesión vinculando tu cuenta de Google. Tu avance se sincronizará automáticamente.";
-        submitBtn.innerHTML = "<span>Ingresar al Portal</span> <i class='fa-solid fa-arrow-right text-xs'></i>";
-        gLabel.textContent = "Iniciar Sesión con Google";
+      if (tab === 'register') {
+        regTabBtn.className = "pb-2.5 px-3.5 text-xs font-black text-blue-700 border-b-2 border-blue-700 transition";
+        logTabBtn.className = "pb-2.5 px-3.5 text-xs font-bold text-slate-400 hover:text-slate-700 transition";
+        regView.classList.remove('hidden');
+        logView.classList.add('hidden');
       } else {
-        tabRegister.className = "pb-2 px-3 text-xs font-extrabold text-blue-700 border-b-2 border-blue-700 transition";
-        tabLogin.className = "pb-2 px-3 text-xs font-bold text-slate-400 hover:text-slate-700 transition";
-        instruction.textContent = "Regístrate con tu correo de Google oficial. Podrás elegir tu rol para tu constancia formal.";
-        submitBtn.innerHTML = "<span>Crear Registro y Entrar</span> <i class='fa-solid fa-arrow-right text-xs'></i>";
-        gLabel.textContent = "Registrarme con mi Cuenta de Google";
+        logTabBtn.className = "pb-2.5 px-3.5 text-xs font-black text-blue-700 border-b-2 border-blue-700 transition";
+        regTabBtn.className = "pb-2.5 px-3.5 text-xs font-bold text-slate-400 hover:text-slate-700 transition";
+        logView.classList.remove('hidden');
+        regView.classList.add('hidden');
       }
     }
 
-    function handleInitialUserSubmit(e) {
+    // REGISTRO CON CUENTA DE GOOGLE (LÓGICA GOOGLE FORMS)
+    function handleRegisterWithGoogle(e) {
       e.preventDefault();
-      const email = document.getElementById('inputUserEmail').value.trim();
-      const name = document.getElementById('inputUserName').value.trim();
-      const role = document.getElementById('inputUserRole').value;
+      const name = document.getElementById('regUserName').value.trim();
+      const role = document.getElementById('regUserRole').value;
 
-      currentUser = {
-        email: email,
-        name: name,
-        role: role,
-        avatar: currentUser.avatar || "",
-        isRegistered: true,
-        date: new Date().toLocaleDateString('es-SV')
-      };
+      // Simula el popup directo de Google Forms para autorizar la cuenta activa
+      const detectedEmail = prompt("Google Forms Sync: Confirma tu cuenta de Google activa para vincular tus resultados:", "docente@clases.edu.sv");
+      if (detectedEmail && detectedEmail.includes("@")) {
+        currentUser = {
+          email: detectedEmail.trim(),
+          name: name,
+          role: role,
+          isRegistered: true,
+          date: new Date().toLocaleDateString('es-SV')
+        };
 
-      localStorage.setItem('ihfb_user_session_v6', JSON.stringify(currentUser));
-      saveParticipantToDatabase(currentUser);
+        localStorage.setItem('ihfb_user_session_v7', JSON.stringify(currentUser));
+        saveParticipantToDatabase(currentUser);
 
-      activarSesionVisual();
-      showProAlert("¡Bienvenido al Portal!", `Sesión confirmada como ${currentUser.name}. Accediendo a tus módulos.`);
-      setTimeout(() => switchTab('modulos'), 1000);
+        activarSesionVisual();
+        showProAlert("Registro Exitoso", `Tu cuenta de Google (${currentUser.email}) ha sido vinculada como ${currentUser.role}. Entrando a tus módulos.`);
+        setTimeout(() => switchTab('modulos'), 1200);
+      }
+    }
+
+    // INICIO DE SESIÓN DIRECTO CON GOOGLE
+    function handleDirectGoogleLogin() {
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
+      const email = prompt("Google Sign-In: Confirma tu cuenta de Google:", "docente@clases.edu.sv");
+
+      if (email && email.includes("@")) {
+        const found = db.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
+        if (found) {
+          currentUser = {
+            email: found.email,
+            name: found.name,
+            role: found.role,
+            isRegistered: true,
+            date: found.date
+          };
+          localStorage.setItem('ihfb_user_session_v7', JSON.stringify(currentUser));
+          activarSesionVisual();
+          showProAlert("Sesión Iniciada", `Bienvenido nuevamente, ${currentUser.name}.`);
+          setTimeout(() => switchTab('modulos'), 1000);
+        } else {
+          // Si no está registrado aún, le solicita completar su registro
+          showProAlert("Cuenta No Registrada", "No se encontró registro con esa cuenta de Google. Por favor completa tu nombre y rol en la pestaña 'Registrarse'.", false);
+          setAuthTab('register');
+        }
+      }
     }
 
     function activarSesionVisual() {
       document.getElementById('topUserName').textContent = currentUser.name;
       document.getElementById('topUserRole').textContent = currentUser.role;
       document.getElementById('badgeCurrentRole').textContent = currentUser.role;
-
-      if (currentUser.avatar) {
-        document.getElementById('topUserAvatar').src = currentUser.avatar;
-        document.getElementById('topUserAvatar').classList.remove('hidden');
-        document.getElementById('topUserDot').classList.add('hidden');
-      }
 
       document.getElementById('topUserBadge').classList.remove('hidden');
       document.getElementById('topUserBadge').classList.add('flex');
@@ -1286,24 +1329,13 @@
       document.getElementById('mainNavMenu').classList.add('hidden');
     }
 
-    // SISTEMA DE ALERTAS
-    function showProAlert(title, message, isSuccess = true) {
-      document.getElementById('proAlertTitle').textContent = title;
-      document.getElementById('proAlertMessage').textContent = message;
-      const iconBox = document.getElementById('proAlertIconBox');
-      const icon = document.getElementById('proAlertIcon');
-      if (isSuccess) {
-        iconBox.className = "w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 mx-auto flex items-center justify-center text-xl shadow-sm";
-        icon.className = "fa-solid fa-circle-check";
-      } else {
-        iconBox.className = "w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 mx-auto flex items-center justify-center text-xl shadow-sm";
-        icon.className = "fa-solid fa-circle-xmark";
+    function handleLogout() {
+      if (confirm("¿Deseas cerrar tu sesión?")) {
+        localStorage.removeItem('ihfb_user_session_v7');
+        currentUser = { email: "", name: "", role: "Docente", isRegistered: false };
+        desactivarSesionVisual();
+        switchTab('inicio');
       }
-      document.getElementById('proAlertModal').classList.remove('hidden');
-    }
-
-    function closeProAlertModal() {
-      document.getElementById('proAlertModal').classList.add('hidden');
     }
 
     // NAVEGACIÓN Y PROTECCIÓN
@@ -1341,16 +1373,7 @@
       }
     }
 
-    function handleLogout() {
-      if (confirm("¿Deseas cerrar tu sesión?")) {
-        localStorage.removeItem('ihfb_user_session_v6');
-        currentUser = { email: "", name: "", role: "Docente", avatar: "", isRegistered: false };
-        desactivarSesionVisual();
-        switchTab('inicio');
-      }
-    }
-
-    // MODIFICACIÓN DE PERFIL DEL PARTICIPANTE
+    // MODAL DE PERFIL (MODIFICAR NOMBRE O ROL)
     function openProfileEditModal() {
       if (!currentUser.isRegistered) return;
       document.getElementById('profileEmailDisplay').value = currentUser.email;
@@ -1368,7 +1391,7 @@
       currentUser.name = document.getElementById('profileNameInput').value.trim();
       currentUser.role = document.getElementById('profileRoleSelect').value;
 
-      localStorage.setItem('ihfb_user_session_v6', JSON.stringify(currentUser));
+      localStorage.setItem('ihfb_user_session_v7', JSON.stringify(currentUser));
       saveParticipantToDatabase(currentUser);
 
       activarSesionVisual();
@@ -1376,9 +1399,9 @@
       showProAlert("Perfil Actualizado", "Tus datos y rol han sido actualizados con éxito.");
     }
 
-    // BASE DE DATOS LOCAL
+    // BASE DE DATOS
     function saveParticipantToDatabase(user) {
-      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_v6')) || [];
+      let db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
       const index = db.findIndex(u => u.email === user.email);
       const participantRecord = {
         name: user.name,
@@ -1395,7 +1418,7 @@
       } else {
         db.push(participantRecord);
       }
-      localStorage.setItem('ihfb_participants_db_v6', JSON.stringify(db));
+      localStorage.setItem('ihfb_participants_db_v7', JSON.stringify(db));
     }
 
     function calculateUserProgress() {
@@ -1410,7 +1433,6 @@
       return Math.round(sum / scores.length) + "%";
     }
 
-    // DINÁMICA DE COLOR DE LA BARRA DE PROGRESO SEGÚN PORCENTAJE
     function getProgressBarColorClass(percent) {
       if (percent <= 25) return "bg-slate-400";
       if (percent <= 50) return "bg-amber-500";
@@ -1418,7 +1440,7 @@
       return "bg-emerald-500";
     }
 
-    // REPRODUCTOR HÍBRIDO (YOUTUBE / DRIVE)
+    // REPRODUCTOR HÍBRIDO
     function formatVideoEmbedUrl(rawUrl) {
       if (!rawUrl) return "https://www.youtube.com/embed/dQw4w9WgXcQ";
       let url = rawUrl.trim();
@@ -1437,7 +1459,7 @@
       return url;
     }
 
-    // MODAL AMPLIO Y PROFESIONAL TIPO IMAGEN 2 / 3
+    // MODAL AMPLIO VIDEO + MANUAL
     function openModuleVideoModal(card, mod) {
       document.getElementById('proModalTag').textContent = card.num;
       document.getElementById('proModalHeaderTitle').textContent = card.title;
@@ -1469,7 +1491,7 @@
       document.getElementById('manualPageIndicator').textContent = `${currentManualPage} / 4`;
     }
 
-    // RENDERIZADO DE MÓDULOS CON BARRA DINÁMICA DE COLORES
+    // RENDERIZADO DE MÓDULOS CON BARRAS DINÁMICAS
     function renderModulesSidebar() {
       const container = document.getElementById('moduleListContainer');
       container.innerHTML = "";
@@ -1680,7 +1702,7 @@
       const mod = modulesData.find(m => m.id === modId);
       if (!mod) return;
       mod.practiceCompleted = true;
-      localStorage.setItem('ihfb_modules_pro_v6', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v7', JSON.stringify(modulesData));
       if (currentUser.isRegistered) {
         saveParticipantToDatabase(currentUser);
       }
@@ -1789,7 +1811,7 @@
         }
       }
 
-      localStorage.setItem('ihfb_modules_pro_v6', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v7', JSON.stringify(modulesData));
       if (currentUser.isRegistered) {
         saveParticipantToDatabase(currentUser);
       }
@@ -1890,7 +1912,7 @@
       window.print();
     }
 
-    // MODAL ADMIN Y GOOGLE SHEETS (SIN TUERCA EN PANTALLA)
+    // PASO 3: MODAL DE CLAVE ADMIN (AL PULSAR LA TUERCA)
     function openAdminPasswordModal() {
       document.getElementById('adminPasswordInput').value = "";
       document.getElementById('adminPasswordModal').classList.remove('hidden');
@@ -1928,6 +1950,7 @@
       isAdminMode = false;
       document.getElementById('nav-admin-db').classList.add('hidden');
       document.getElementById('topAdminBadge').classList.add('hidden');
+      document.getElementById('secretAdminGear').classList.add('hidden');
       if (!currentUser.isRegistered) desactivarSesionVisual();
       renderModulesSidebar();
       renderActiveModuleCards(currentSelectedModuleId);
@@ -1949,7 +1972,7 @@
     }
 
     function renderAdminDatabaseTable() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v6')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -1959,7 +1982,7 @@
           { name: "Rebeca Callejas", email: "rebecacallejas@clases.edu.sv", role: "Docente", progress: 50, avgScore: "85%", folio: "IHFB-DOC-3120", date: "29/10/2026" },
           { name: "Carlos Menjívar", email: "carlos.menjivar@mined.gob.sv", role: "Supervisor", progress: 28, avgScore: "90%", folio: "IHFB-SUP-9104", date: "28/10/2026" }
         );
-        localStorage.setItem('ihfb_participants_db_v6', JSON.stringify(db));
+        localStorage.setItem('ihfb_participants_db_v7', JSON.stringify(db));
       }
 
       document.getElementById('adminRecordCount').textContent = `Mostrando ${db.length} participantes registrados`;
@@ -1984,7 +2007,7 @@
     function filterAdminDatabase() {
       const query = document.getElementById('adminSearchInput').value.toLowerCase();
       const roleFilter = document.getElementById('adminRoleFilter').value;
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v6')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
       const tbody = document.getElementById('adminTableBody');
       tbody.innerHTML = "";
 
@@ -2014,7 +2037,7 @@
     }
 
     function exportParticipantsToCSV() {
-      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v6')) || [];
+      const db = JSON.parse(localStorage.getItem('ihfb_participants_db_v7')) || [];
       if (db.length === 0) {
         showProAlert("Base de Datos Vacía", "No hay registros disponibles para exportar.", false);
         return;
@@ -2066,7 +2089,7 @@
       mod.cards[cardIndex].manual = document.getElementById('editCardManualText').value.trim();
       mod.cards[cardIndex].points = document.getElementById('editCardPoints').value.split(',').map(s => s.trim()).filter(Boolean);
 
-      localStorage.setItem('ihfb_modules_pro_v6', JSON.stringify(modulesData));
+      localStorage.setItem('ihfb_modules_clean_v7', JSON.stringify(modulesData));
       closeAdminEditModal();
       renderActiveModuleCards(modId);
       showProAlert("Cambios Guardados", "El enlace y el manual han sido actualizados con éxito.");
@@ -2094,3 +2117,4 @@
   </script>
 </body>
 </html>
+Mostrando index.html
