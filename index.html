@@ -33,7 +33,9 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
-    body { 
+    
+    /* SUPRESIÓN TOTAL DE BARRAS DE GOOGLE TRANSLATE */
+    html, body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
       top: 0px !important; 
       position: static !important; 
@@ -46,36 +48,33 @@
       -webkit-backdrop-filter: blur(14px);
     }
 
-    /* ================================================================
-       MÁSCARA TOTAL DE GOOGLE TRANSLATE (100% INVISIBLE Y SIN MOLESTIAS)
-       Oculta barras, marcos, globos flotantes y saltos del body
-       ================================================================ */
-    .goog-te-banner-frame.skiptranslate, 
+    /* ELIMINA 100% CUALQUIER BARRA O POPUP DE GOOGLE TRANSLATE */
     .goog-te-banner-frame,
+    .goog-te-banner-frame.skiptranslate,
     iframe.goog-te-banner-frame,
-    .skiptranslate.goog-te-gadget { 
-      display: none !important; 
-      visibility: hidden !important;
-      height: 0 !important;
-      width: 0 !important;
-    }
-    .goog-tooltip, 
-    .goog-tooltip:hover, 
+    #goog-gt-tt,
     .goog-te-balloon-frame,
-    #goog-gt-tt { 
-      display: none !important; 
+    .goog-tooltip,
+    .goog-tooltip:hover {
+      display: none !important;
       visibility: hidden !important;
+      height: 0px !important;
+      width: 0px !important;
+      opacity: 0 !important;
     }
-    .goog-text-highlight { 
-      background-color: transparent !important; 
-      box-shadow: none !important; 
+    body {
+      top: 0px !important;
+    }
+    .goog-text-highlight {
+      background-color: transparent !important;
+      box-shadow: none !important;
     }
     #google_translate_element {
       display: none !important;
     }
   </style>
 
-  <!-- Script Oficial de Google Translate API -->
+  <!-- Google Translate SDK Oculto -->
   <div id="google_translate_element" style="display:none !important;"></div>
   <script type="text/javascript">
     function googleTranslateElementInit() {
@@ -105,10 +104,10 @@
         </div>
       </div>
 
-      <!-- TRADUCTOR DISCRETO LIMPIO (ACTIVADOR INTERNO DE GOOGLE TRANSLATE) + PERFIL -->
+      <!-- BOTONES DE IDIOMA EN LA ESQUINA SUPERIOR DERECHA + BADGE USUARIO -->
       <div class="flex items-center space-x-3">
         
-        <!-- SELECTOR TIPO PÍLDORA QUE ACTIVA GOOGLE TRANSLATE SIN BARRAS NI MENÚS RAROS -->
+        <!-- SELECTOR INTERNO PILL-STYLE EN LA ESQUINA DERECHA -->
         <div class="flex items-center bg-white/10 backdrop-blur rounded-full p-1 border border-white/20 text-xs shadow-inner">
           <button onclick="triggerGoogleTranslate('es')" id="lang-btn-es" class="px-3 py-1 rounded-full font-bold text-slate-900 bg-white transition shadow-sm">
             Español
@@ -206,30 +205,30 @@
         </div>
       </div>
 
-      <!-- Cuadrícula: Autenticación de Alto Impacto -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <!-- Cuadrícula de Acceso PROPORCIONADA Y DE ALTO IMPACTO -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        <!-- Tarjeta de Acceso Ejecutiva y de Alto Impacto -->
-        <div class="lg:col-span-5 bg-white rounded-2xl shadow-md border border-slate-200/90 flex flex-col justify-between overflow-hidden">
+        <!-- Tarjeta de Acceso Ejecutiva (PROPORCIONAL Y SIN ESPACIOS VACÍOS) -->
+        <div class="lg:col-span-5 bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
           
           <!-- Encabezado de la Tarjeta de Acceso -->
           <div class="bg-gradient-to-r from-[#002B49] to-[#0A3C66] text-white p-5 flex items-center justify-between border-b border-blue-950">
             <div class="flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-blue-300 text-sm">
+              <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-blue-300 text-base shadow-inner">
                 <i class="fa-solid fa-id-badge"></i>
               </div>
               <div>
                 <h3 class="text-sm font-extrabold text-white leading-tight">Acceso Institucional Seguro</h3>
-                <p class="text-[11px] text-blue-200">Acreditación oficial El Salvador</p>
+                <p class="text-[11px] text-blue-200">Acreditación Oficial IHFB El Salvador</p>
               </div>
             </div>
-            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">
+            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full font-bold">
               Google Workspace
             </span>
           </div>
 
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
-            <!-- PESTAÑAS CON DISEÑO PREMIUM DE ALTO CONTRASTE -->
+          <div class="p-6 space-y-5">
+            <!-- PESTAÑAS CON DISEÑO DE ALTO CONTRASTE -->
             <div class="grid grid-cols-2 p-1 bg-slate-100 rounded-xl gap-1 border border-slate-200">
               <button type="button" onclick="setAuthTab('register')" id="tabBtnRegister" class="py-2.5 px-3 text-xs font-extrabold rounded-lg transition text-white bg-blue-700 shadow-sm flex items-center justify-center gap-1.5">
                 <i class="fa-solid fa-user-plus text-[11px]"></i> <span>Registrarse</span>
@@ -239,13 +238,13 @@
               </button>
             </div>
 
-            <!-- VISTA 1: REGISTRARSE (SOLO PARA NUEVOS) -->
+            <!-- VISTA 1: REGISTRARSE (EL BOTÓN GOOGLE SE ACTIVA SOLO SI HAY NOMBRE Y ROL) -->
             <div id="authViewRegister" class="space-y-4">
-              <div class="p-3 bg-blue-50/70 border border-blue-100 rounded-xl text-xs text-blue-900 leading-relaxed">
-                <span class="font-bold flex items-center gap-1 mb-0.5 text-blue-950">
-                  <i class="fa-solid fa-circle-info text-blue-600"></i> Registro por Primera Vez:
+              <div class="p-3 bg-blue-50/80 border border-blue-100 rounded-xl text-xs text-blue-900 leading-relaxed">
+                <span class="font-bold flex items-center gap-1 text-blue-950 mb-0.5">
+                  <i class="fa-solid fa-circle-info text-blue-600"></i> Registro por primera vez:
                 </span>
-                Digita tu nombre completo y rol. Luego haz clic en el botón de Google para vincular tu cuenta institucional.
+                Digita tu nombre completo y rol operativo. El botón de Google se habilitará automáticamente para vincular tu cuenta institucional.
               </div>
 
               <div class="space-y-3.5">
@@ -253,14 +252,14 @@
                   <label class="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
                     <i class="fa-solid fa-user text-slate-400 text-[10px]"></i> 1. Nombre Completo Oficial (Para constancia) *
                   </label>
-                  <input type="text" id="regUserName" placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition font-medium" />
+                  <input type="text" id="regUserName" oninput="validateRegistrationForm()" placeholder="Ej. Nelson Edgardo Morales" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none transition font-medium" />
                 </div>
 
                 <div>
                   <label class="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
                     <i class="fa-solid fa-briefcase text-slate-400 text-[10px]"></i> 2. Rol Operativo *
                   </label>
-                  <select id="regUserRole" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
+                  <select id="regUserRole" onchange="validateRegistrationForm()" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-blue-600 outline-none bg-white font-medium">
                     <option value="Docente">Docente</option>
                     <option value="Tutor">Tutor</option>
                     <option value="Facilitador">Facilitador</option>
@@ -270,38 +269,71 @@
                   </select>
                 </div>
 
-                <!-- Botón Oficial de Registro con Google GSI -->
-                <div class="pt-2 flex flex-col items-center">
-                  <div id="gsi_register_button" class="w-full flex justify-center"></div>
+                <!-- CONTENEDOR DEL BOTÓN DE GOOGLE: DESHABILITADO SI FALTA EL NOMBRE -->
+                <div class="pt-2">
+                  <!-- Indicador de bloqueo cuando está vacío -->
+                  <div id="regGoogleDisabledNotice" class="w-full py-3 px-4 bg-slate-100 border border-slate-200 text-slate-400 font-bold rounded-full text-xs text-center flex items-center justify-center gap-2 cursor-not-allowed">
+                    <i class="fa-solid fa-lock text-slate-400 text-xs"></i>
+                    <span>Escribe tu nombre para activar Google</span>
+                  </div>
+
+                  <!-- Botón real de Google GSI (Se muestra únicamente cuando se llena el nombre) -->
+                  <div id="regGoogleActiveBox" class="hidden flex justify-center w-full">
+                    <div id="gsi_register_button" class="w-full flex justify-center"></div>
+                  </div>
+                </div>
+
+                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-[11px] text-slate-500 space-y-1">
+                  <div class="flex items-center gap-1 font-semibold text-slate-700">
+                    <i class="fa-solid fa-shield-halved text-emerald-600"></i> Garantía de validez:
+                  </div>
+                  <div>Tu nombre oficial quedará impreso en tu constancia digital y sincronizado con la base de datos central.</div>
                 </div>
               </div>
             </div>
 
-            <!-- VISTA 2: INICIAR SESIÓN (ÚNICAMENTE EL BOTÓN OFICIAL DE GOOGLE GSI) -->
-            <div id="authViewLogin" class="space-y-4 hidden my-auto py-4">
-              <div class="text-center space-y-1">
-                <h4 class="text-sm font-extrabold text-slate-900">Bienvenido nuevamente</h4>
-                <p class="text-xs text-slate-500">Selecciona tu cuenta de Google para ingresar a tu espacio de formación:</p>
+            <!-- VISTA 2: INICIAR SESIÓN (DISEÑO LLENO, PROPORCIONADO Y ELEGANTE) -->
+            <div id="authViewLogin" class="space-y-4 hidden py-2">
+              <div class="p-3.5 bg-blue-50/80 border border-blue-100 rounded-xl text-xs text-blue-950 space-y-1">
+                <div class="font-extrabold flex items-center gap-1.5 text-blue-900">
+                  <i class="fa-solid fa-user-check text-blue-600"></i> Retoma de formación autónoma
+                </div>
+                <p class="text-slate-600 text-[11px] leading-relaxed">
+                  Si ya te registraste anteriormente, selecciona tu cuenta de Google. El portal cargará tus avances, notas y constancias de inmediato.
+                </p>
               </div>
 
-              <!-- CONTENEDOR DONDE GOOGLE RENDERIZA SU BOTÓN OFICIAL EN FORMA DE PÍLDORA -->
-              <div class="pt-4 pb-2 flex flex-col items-center justify-center">
+              <!-- BOTÓN OFICIAL DE GOOGLE GSI CENTRADO -->
+              <div class="py-3 flex flex-col items-center justify-center">
                 <div id="gsi_login_button" class="w-full flex justify-center"></div>
               </div>
 
-              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-[11px] text-slate-600 leading-snug text-center">
-                <i class="fa-solid fa-lock text-slate-400 mr-1"></i> Se autenticará de forma segura con la cuenta activa en tu navegador.
+              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-[11px] text-slate-600 space-y-2">
+                <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check text-emerald-600"></i> Cuentas autorizadas:
+                </div>
+                <div class="space-y-1 pl-4 text-[10px] text-slate-500">
+                  <div>• Cuentas oficiales del MINED (<code>@clases.edu.sv</code>)</div>
+                  <div>• Cuentas del equipo técnico IHFB (<code>@ihateflyingbugs.com</code>)</div>
+                  <div>• Cuentas Google registradas en el programa</div>
+                </div>
+              </div>
+
+              <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-xl text-[11px] text-amber-900 flex items-start gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5 text-xs"></i>
+                <span>¿Es tu primera vez aquí? Ve a la pestaña <strong>Registrarse</strong> para crear tu expediente.</span>
               </div>
             </div>
 
-            <div class="pt-2 text-center text-[10px] text-slate-400 border-t border-slate-100">
-              Sincronizado en tiempo real con la base de datos oficial IHFB El Salvador
+            <div class="pt-3 text-center text-[10px] text-slate-400 border-t border-slate-100 flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-server text-blue-500 text-[9px]"></i>
+              <span>Sincronización en tiempo real con Google Sheets Oficial</span>
             </div>
           </div>
         </div>
 
         <!-- Video de Inducción General (Reproducción directa en la misma página) -->
-        <div class="lg:col-span-7 bg-white rounded-2xl shadow-md border border-slate-200/90 p-6 flex flex-col justify-between relative">
+        <div class="lg:col-span-7 bg-white rounded-2xl shadow-lg border border-slate-200 p-6 flex flex-col justify-between relative">
           <!-- Botón Admin para cambiar el Video de Inducción -->
           <button id="btnEditIntroVideoAdmin" onclick="openAdminIntroVideoEditModal()" class="hidden absolute top-4 right-4 px-3 py-1 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-lg text-xs shadow-md items-center gap-1.5 z-10">
             <i class="fa-solid fa-video"></i> Editar Video
@@ -333,15 +365,15 @@
           </div>
 
           <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-100 text-center">
-            <div class="p-2 rounded-xl bg-slate-50">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
               <div class="w-6 h-6 mx-auto rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mb-1">1</div>
               <p class="text-[11px] font-semibold text-slate-700">Explora Videos & SOP</p>
             </div>
-            <div class="p-2 rounded-xl bg-slate-50">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
               <div class="w-6 h-6 mx-auto rounded-full bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center mb-1">2</div>
               <p class="text-[11px] font-semibold text-slate-700">Simula y Evalúa</p>
             </div>
-            <div class="p-2 rounded-xl bg-slate-50">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
               <div class="w-6 h-6 mx-auto rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center mb-1">3</div>
               <p class="text-[11px] font-semibold text-slate-700">Obtén tu Constancia</p>
             </div>
@@ -694,11 +726,10 @@
 
   </main>
 
-  <!-- ================= VENTANA MODAL AMPLIA DE MÓDULO (TIPO IMAGEN 2 / 3) ================= -->
+  <!-- ================= VENTANA MODAL AMPLIA DE MÓDULO ================= -->
   <div id="proVideoManualModal" class="fixed inset-0 bg-slate-950/80 modal-glass z-50 flex items-center justify-center p-2 sm:p-5 hidden">
     <div class="bg-white rounded-2xl overflow-hidden max-w-6xl w-full shadow-2xl border border-slate-200 flex flex-col max-h-[95vh]">
       
-      <!-- Barra Superior -->
       <div class="px-5 py-3.5 bg-slate-900 text-white flex justify-between items-center text-xs">
         <div class="flex items-center gap-2 font-bold">
           <span id="proModalTag" class="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded font-black">VIDEO 1</span>
@@ -709,10 +740,7 @@
         </button>
       </div>
 
-      <!-- Cuerpo Dividido en 2 Columnas -->
       <div class="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-y-auto custom-scroll">
-        
-        <!-- Columna Izquierda: Video + Puntos -->
         <div class="lg:col-span-6 p-5 border-r border-slate-200 flex flex-col justify-between space-y-4">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -733,7 +761,6 @@
           </div>
         </div>
 
-        <!-- Columna Derecha: Visor SOP Paginado -->
         <div class="lg:col-span-6 p-5 flex flex-col justify-between space-y-4 bg-slate-50/50">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
@@ -772,10 +799,8 @@
             </div>
           </div>
         </div>
-
       </div>
 
-      <!-- Barra Inferior -->
       <div class="p-4 bg-white border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3">
         <span class="text-xs text-slate-500">¿Terminaste de revisar el video y el manual? Comprueba tu aprendizaje en el simulador:</span>
         <button id="btnModalBottomGoPractice" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#0B4F8A] hover:bg-blue-800 text-white font-extrabold text-xs transition shadow-md flex items-center justify-center gap-2">
@@ -1133,13 +1158,225 @@
     let isAdminMode = false;
     let authMode = "register";
 
+    // 2. MÓDULOS DE APRENDIZAJE
+    const defaultModulesData = [
+      {
+        id: "M1",
+        code: "M1",
+        title: "Access & Login",
+        icon: "fa-globe",
+        progress: 0,
+        unlocked: true,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
+        desc: "Configuración del entorno del aula, conectividad Wi-Fi y acceso a cuentas.",
+        cards: [
+          {
+            num: "VIDEO 1",
+            title: "Configuración del entorno del aula",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-01: Verificación de Red y Enlace de Dispositivos",
+            points: ["1.1 Configuración del entorno del aula", "1.2 Conexión Wi-Fi escolar", "1.3 Inicio de sesión seguro en la plataforma", "1.4 Selección de escuela"]
+          },
+          {
+            num: "VIDEO 2",
+            title: "Lista de aulas y Clase de hoy",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-02: Asignación y Apertura de Jornada Escolar",
+            points: ["Lista de Aulas asignadas", "Acceso rápido a 'Clase de Hoy'", "Verificación de lista de asistencia inicial"]
+          }
+        ]
+      },
+      {
+        id: "M2",
+        code: "M2",
+        title: "Menu Options",
+        icon: "fa-clipboard-list",
+        progress: 0,
+        unlocked: false,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
+        desc: "Opciones de menú, clases regulares, revisión y control de asistencia.",
+        cards: [
+          {
+            num: "VIDEO 3",
+            title: "Clase regular y Asistencia",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-03: Control de Asistencia y Reporte de Ausencias",
+            points: ["Navegación de clase regular", "Revisión previa de materiales", "Toma de asistencia digital"]
+          },
+          {
+            num: "VIDEO 4",
+            title: "Lista de Clases y Tareas",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-04: Gestión de Tareas y Recursos Complementarios",
+            points: ["Mi progreso escolar", "Lista de clases habilitadas", "Programación de tareas y refuerzos"]
+          }
+        ]
+      },
+      {
+        id: "M3",
+        code: "M3",
+        title: "Visibility Settings",
+        icon: "fa-eye",
+        progress: 0,
+        unlocked: false,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
+        desc: "Configuración de visibilidad, modo individual y ocultar contenidos.",
+        cards: [
+          {
+            num: "VIDEO 5",
+            title: "Configuración de Visibilidad",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-05: Ajustes de Privacidad y Visibilidad en Clase",
+            points: ["Ocultar/Mostrar contenido para alumnos", "Visibilidad diferenciada por grupo", "Gestión de permisos"]
+          }
+        ]
+      },
+      {
+        id: "M4",
+        code: "M4",
+        title: "Curriculum Structure",
+        icon: "fa-folder-open",
+        progress: 0,
+        unlocked: false,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
+        desc: "Estructura de Lenguaje y Matemáticas, refuerzo escolar con IA.",
+        cards: [
+          {
+            num: "VIDEO 7",
+            title: "Estructura Curricular",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-07: Despliegue de Unidades de Aprendizaje",
+            points: ["Grupo de clase", "Refuerzo y comprensión", "Rutas guiadas por IA"]
+          }
+        ]
+      },
+      {
+        id: "M5",
+        code: "M5",
+        title: "Class Mode",
+        icon: "fa-screwdriver-wrench",
+        progress: 0,
+        unlocked: false,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
+        desc: "Sincronización en tiempo real, bloqueo de pantalla y pizarra.",
+        cards: [
+          {
+            num: "VIDEO 9",
+            title: "Modo de Clase (Bloqueo y Control)",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-09: Dinámicas de Control y Atención en Aula",
+            points: ["Bloqueo remoto de pantalla", "Sincronización de respuestas", "Envío simultáneo"]
+          }
+        ]
+      },
+      {
+        id: "M6",
+        code: "M6",
+        title: "Monitoring Tools",
+        icon: "fa-chart-simple",
+        progress: 0,
+        unlocked: false,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
+        desc: "Tableros de rendimiento, completación escolar y reportes de aula.",
+        cards: [
+          {
+            num: "VIDEO 11",
+            title: "Monitoreo en Tiempo Real",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-11: Uso de Dashboards para Monitores y Tutores",
+            points: ["Detección de alumnos rezagados", "Reportes de completación"]
+          }
+        ]
+      },
+      {
+        id: "M7",
+        code: "M7",
+        title: "Supervisor Page",
+        icon: "fa-shield",
+        progress: 0,
+        unlocked: false,
+        practiceCompleted: false,
+        quizCompleted: false,
+        score: null,
+        desc: "Consola de supervisión departamental, auditoría de listas y soporte.",
+        cards: [
+          {
+            num: "VIDEO 12",
+            title: "Consola de Auditoría y Control",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            manualUrl: "https://drive.google.com",
+            manual: "SOP-12: Auditoría Integral y Control de Calidad",
+            points: ["Fiscalización de uso escolar", "Verificación de inventarios de tablets"]
+          }
+        ]
+      }
+    ];
+
     let modulesData = JSON.parse(localStorage.getItem('ihfb_modules_clean_final')) || defaultModulesData;
     let currentSelectedModuleId = "M1";
     let currentManualPage = 1;
 
-    // 2. FUNCIÓN PARA DISPARAR GOOGLE TRANSLATE SIN BARRAS
+    // BANCO DE PREGUNTAS
+    const quizzesBank = {
+      M1: [
+        { q: "¿Cuál es el primer paso obligatorio al encender los dispositivos en el aula?", options: ["Comenzar a escribir en la pizarra digital", "Verificar la conexión a la red Wi-Fi escolar e inicio de sesión", "Apagar el proyector del salón"], correct: 1 },
+        { q: "¿Qué credencial utiliza el participante para identificarse en este portal?", options: ["Cuenta vinculada de Google", "Número telefónico personal", "Contraseña inventada"], correct: 0 },
+        { q: "¿Cuál es la función de la opción 'Clase de Hoy'?", options: ["Abrir los juegos de recreo", "Acceder directamente a la sesión programada de la jornada", "Eliminar los historiales"], correct: 1 }
+      ],
+      M2: [
+        { q: "¿Cuándo debe registrarse el control de asistencia digital?", options: ["Al inicio de la jornada en el menú de clase", "Al día siguiente por mensaje", "Solo al final del año"], correct: 0 },
+        { q: "¿Dónde puede consultar el docente el historial de tareas?", options: ["En el menú 'Lista de Tareas'", "En la papelera", "En la red pública"], correct: 0 },
+        { q: "¿Qué permite la opción 'Revisión previa de la clase'?", options: ["Borrar las notas", "Visualizar anticipadamente ejercicios y justificaciones pedagógicas", "Bloquear la pantalla"], correct: 1 }
+      ],
+      M3: [
+        { q: "¿Para qué sirve el ajuste de visibilidad de contenidos?", options: ["Para regular el brillo físico", "Para mostrar u ocultar unidades según el avance", "Para reiniciar las tablets"], correct: 1 },
+        { q: "¿Quién tiene permiso para cambiar la visibilidad?", options: ["Cualquier estudiante", "El docente o personal autorizado con credencial asignada", "El router Wi-Fi"], correct: 1 },
+        { q: "Si un alumno tiene debilidad visual, ¿qué ajuste se recomienda?", options: ["Modo de alto contraste y tamaño adaptativo", "Bloquear la pantalla", "Cerrar la sesión"], correct: 0 }
+      ],
+      M4: [
+        { q: "¿Cómo está estructurado el refuerzo escolar en la plataforma IHFB?", options: ["Lecciones aleatorias", "Unidades secuenciales con apoyo del Tutor IA", "Videos de redes sociales"], correct: 1 },
+        { q: "¿Qué función cumple el motor de Inteligencia Artificial?", options: ["Reemplazar al docente", "Dar pistas pedagógicas y retroalimentación inmediata", "Apagar la tablet"], correct: 1 },
+        { q: "¿Qué evaluación externa evidenció el impacto del currículo en El Salvador?", options: ["OECD PISA for Schools", "Censo local", "Torneo deportivo"], correct: 0 }
+      ],
+      M5: [
+        { q: "¿Qué mensaje exacto visualiza el alumno cuando se presiona 'Bloquear Pantalla'?", options: ["Sin conexión", "Pantalla bloqueada. Es momento de concentrarte en la clase.", "Clase finalizada"], correct: 1 },
+        { q: "¿Qué ocurre en la pantalla del docente cuando el alumno selecciona una opción?", options: ["No pasa nada", "Se sincroniza al instante mostrando la respuesta y su justificación", "Se bloquea el proyector"], correct: 1 },
+        { q: "¿Para qué sirve la 'Pizarra Digital' en modo clase?", options: ["Modelar ejercicios y hacer anotaciones en tiempo real", "Jugar videojuegos", "Escuchar música"], correct: 0 }
+      ],
+      M6: [
+        { q: "¿Cuál es el indicador principal que monitorean tutores y monitores?", options: ["El color de las carcasas", "La tasa de completación efectiva de actividades", "El estado del tiempo"], correct: 1 },
+        { q: "En el caso El Salvador, ¿cuál fue la completación con apoyo operativo vs. solo software?", options: ["50% vs 50%", "84.45% con acompañamiento vs. 8.58% solo software", "10% vs 90%"], correct: 1 },
+        { q: "¿Qué acción toma el monitor si detecta baja completación repetitiva?", options: ["Suspender al estudiante", "Notificar al docente y brindar tutoría personalizada", "Ignorar el dato"], correct: 1 }
+      ],
+      M7: [
+        { q: "¿Qué función tiene el perfil de Supervisor / Auditor?", options: ["Fiscalizar listas, validar inventarios de dispositivos y auditar el avance escolar", "Limpiar las aulas", "Reparar cables"], correct: 0 },
+        { q: "¿Cómo se respaldan las incidencias técnicas según el SOP?", options: ["Mediante comentarios verbales", "A través de tickets de soporte y bitácoras en mesa de ayuda", "En chats no oficiales"], correct: 1 },
+        { q: "¿Qué requisito es indispensable para emitir la constancia oficial?", options: ["Asistir el primer día", "Completar la práctica y aprobar el 100% de los módulos con al menos 80%", "Tener fibra óptica"], correct: 1 }
+      ]
+    };
+
+    // 3. FUNCIÓN PARA DISPARAR GOOGLE TRANSLATE SIN BARRAS
     function triggerGoogleTranslate(lang) {
-      // 1. Actualizar estilos de los botones
       ['es', 'en', 'ko'].forEach(l => {
         const btn = document.getElementById(`lang-btn-${l}`);
         if (btn) {
@@ -1151,22 +1388,37 @@
         }
       });
 
-      // 2. Ejecutar la traducción real de Google mediante su combo nativo
       var select = document.querySelector('.goog-te-combo');
       if (select) {
         select.value = lang;
         select.dispatchEvent(new Event('change'));
       } else {
-        // Establecer cookies de Google Translate y refrescar de forma transparente
         document.cookie = "googtrans=/es/" + lang + "; path=/;";
         document.cookie = "googtrans=/es/" + lang + "; domain=" + window.location.hostname + "; path=/;";
         location.reload();
       }
     }
 
-    // 3. INICIALIZACIÓN AL CARGAR LA PÁGINA
+    // 4. VALIDAR FORMULARIO DE REGISTRO EN TIEMPO REAL (BLOQUEO DE GOOGLE SI FALTA NOMBRE)
+    function validateRegistrationForm() {
+      const name = document.getElementById('regUserName').value.trim();
+      const disabledNotice = document.getElementById('regGoogleDisabledNotice');
+      const activeBox = document.getElementById('regGoogleActiveBox');
+
+      if (name.length >= 3) {
+        disabledNotice.classList.add('hidden');
+        activeBox.classList.remove('hidden');
+        activeBox.classList.add('flex');
+      } else {
+        disabledNotice.classList.remove('hidden');
+        activeBox.classList.add('hidden');
+        activeBox.classList.remove('flex');
+      }
+    }
+
+    // 5. INICIALIZACIÓN AL CARGAR LA PÁGINA
     window.addEventListener('DOMContentLoaded', () => {
-      // ATAJO COMO INTERRUPTOR (TOGGLE): Ctrl + Shift + A (SIN ALERTAS MOLESTAS)
+      // ATAJO SILENCIOSO COMO INTERRUPTOR (Ctrl + Shift + A)
       window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
           e.preventDefault();
@@ -1196,6 +1448,7 @@
       renderProgressTable();
       updateTotalProgressMetrics();
       loadPracticeByModule("M1");
+      validateRegistrationForm();
     });
 
     // INTERRUPTOR TOGGLE SILENCIOSO DE LA TUERCA
@@ -1211,7 +1464,7 @@
       }
     }
 
-    // 4. GOOGLE IDENTITY SERVICES OFICIAL (GSI)
+    // 6. GOOGLE IDENTITY SERVICES OFICIAL (GSI)
     function initGoogleIdentityServices() {
       if (window.google && google.accounts && google.accounts.id) {
         google.accounts.id.initialize({
@@ -1260,7 +1513,7 @@
             const regName = regNameInput ? regNameInput.value.trim() : "";
             const regRole = document.getElementById('regUserRole').value;
 
-            if (!regName) {
+            if (!regName || regName.length < 3) {
               showProAlert("Nombre Requerido", "Debes ingresar tu Nombre Completo Oficial antes de vincular tu cuenta de Google.", false);
               return;
             }
@@ -1336,7 +1589,7 @@
       }
     }
 
-    // 5. ENLACE EN VIVO A GOOGLE SHEETS
+    // 7. ENLACE EN VIVO A GOOGLE SHEETS (APPS SCRIPT)
     function syncToGoogleSheetsWebhook(user, eventType = "Actualización") {
       const payload = {
         timestamp: new Date().toLocaleString("es-SV"),
@@ -1359,7 +1612,7 @@
       }
     }
 
-    // 6. GESTIÓN VISUAL Y NAVEGACIÓN
+    // 8. GESTIÓN VISUAL Y NAVEGACIÓN
     function activarSesionVisual() {
       document.getElementById('topUserName').textContent = currentUser.name;
       document.getElementById('topUserRole').textContent = currentUser.role;
@@ -1402,6 +1655,7 @@
         logTabBtn.className = "py-2.5 px-3 text-xs font-bold rounded-lg transition text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5";
         regView.classList.remove('hidden');
         logView.classList.add('hidden');
+        validateRegistrationForm();
       } else {
         logTabBtn.className = "py-2.5 px-3 text-xs font-extrabold rounded-lg transition text-white bg-blue-700 shadow-sm flex items-center justify-center gap-1.5";
         regTabBtn.className = "py-2.5 px-3 text-xs font-bold rounded-lg transition text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5";
@@ -1468,7 +1722,7 @@
       switchTab('inicio');
     }
 
-    // 7. REPRODUCCIÓN DEL VIDEO DE INDUCCIÓN INLINE
+    // 9. REPRODUCCIÓN DEL VIDEO DE INDUCCIÓN INLINE
     function playInlineIntroVideo() {
       const container = document.getElementById('inlineIntroPlayerContainer');
       const embedUrl = formatVideoEmbedUrl(introVideoUrl);
@@ -1477,7 +1731,7 @@
       `;
     }
 
-    // 8. EDICIÓN DEL BANNER Y VIDEO DE INDUCCIÓN (MODO ADMIN)
+    // 10. EDICIÓN DEL BANNER Y VIDEO DE INDUCCIÓN (MODO ADMIN)
     function renderBannerUI() {
       document.getElementById('portalBannerTag').textContent = bannerConfig.tag;
       document.getElementById('portalBannerTitle').textContent = bannerConfig.title;
@@ -1543,7 +1797,7 @@
       showProAlert("Video Actualizado", "El video de inducción ha sido actualizado correctamente.");
     }
 
-    // 9. MODAL DE PERFIL
+    // 11. MODAL DE PERFIL
     function openProfileEditModal() {
       if (!currentUser.isRegistered) return;
       document.getElementById('profileEmailDisplay').value = currentUser.email;
@@ -1570,7 +1824,7 @@
       showProAlert("Perfil Actualizado", "Tus datos oficiales y rol han sido actualizados con éxito.");
     }
 
-    // 10. BASE DE DATOS LOCAL
+    // 12. BASE DE DATOS LOCAL
     function saveParticipantToDatabase(user) {
       let db = JSON.parse(localStorage.getItem('ihfb_participants_db_final')) || [];
       const index = db.findIndex(u => u.email.toLowerCase() === user.email.toLowerCase());
@@ -1611,7 +1865,7 @@
       return "bg-emerald-500";
     }
 
-    // 11. DASHBOARD POST-LOGIN
+    // 13. DASHBOARD POST-LOGIN
     function renderDashboardMetrics() {
       const completedCount = modulesData.filter(m => m.quizCompleted).length;
       const totalPercent = Math.round((completedCount / modulesData.length) * 100);
@@ -1655,7 +1909,7 @@
       });
     }
 
-    // 12. REPRODUCTOR HÍBRIDO
+    // 14. REPRODUCTOR HÍBRIDO
     function formatVideoEmbedUrl(rawUrl) {
       if (!rawUrl) return "https://www.youtube.com/embed/dQw4w9WgXcQ";
       let url = rawUrl.trim();
@@ -1674,7 +1928,7 @@
       return url;
     }
 
-    // 13. MODAL AMPLIO VIDEO + MANUAL
+    // 15. MODAL AMPLIO VIDEO + MANUAL
     function openModuleVideoModal(card, mod) {
       document.getElementById('proModalTag').textContent = card.num;
       document.getElementById('proModalHeaderTitle').textContent = card.title;
@@ -1706,7 +1960,7 @@
       document.getElementById('manualPageIndicator').textContent = `${currentManualPage} / 4`;
     }
 
-    // 14. RENDERIZADO DE MÓDULOS CON BARRAS DINÁMICAS
+    // 16. RENDERIZADO DE MÓDULOS CON BARRAS DINÁMICAS
     function renderModulesSidebar() {
       const container = document.getElementById('moduleListContainer');
       container.innerHTML = "";
@@ -1829,7 +2083,7 @@
       });
     }
 
-    // 15. PRÁCTICAS EN VIVO
+    // 17. PRÁCTICAS EN VIVO
     function goToModulePractice(modId) {
       document.getElementById('selectPracticeModule').value = modId;
       loadPracticeByModule(modId);
@@ -1951,7 +2205,7 @@
       }
     }
 
-    // 16. QUIZZES Y CALIFICACIÓN
+    // 18. QUIZZES Y CALIFICACIÓN
     function loadQuizByModule(modId) {
       const mod = modulesData.find(m => m.id === modId);
       const questions = quizzesBank[modId] || [];
@@ -2070,7 +2324,7 @@
       updateTotalProgressMetrics();
     }
 
-    // 17. PROGRESO Y CONSTANCIA
+    // 19. PROGRESO Y CONSTANCIA
     function renderProgressTable() {
       const tbody = document.getElementById('progressTableBody');
       tbody.innerHTML = "";
@@ -2133,7 +2387,7 @@
       window.print();
     }
 
-    // 18. ADMINISTRACIÓN (PASO 3: MODAL AL HACER CLIC EN LA TUERCA)
+    // 20. ADMINISTRACIÓN (PASO 3: MODAL AL HACER CLIC EN LA TUERCA)
     function openAdminPasswordModal() {
       document.getElementById('adminPasswordInput').value = "";
       document.getElementById('adminPasswordModal').classList.remove('hidden');
@@ -2182,7 +2436,6 @@
       document.getElementById('btnEditIntroVideoAdmin').classList.add('hidden');
       document.getElementById('btnEditIntroVideoAdmin').classList.remove('flex');
 
-      // RETORNO LIMPIO A LA PORTADA DE INICIO SI NO HAY SESIÓN ACTIVA
       if (!currentUser.isRegistered) {
         desactivarSesionVisual();
         switchTab('inicio');
@@ -2194,7 +2447,7 @@
       renderActiveModuleCards(currentSelectedModuleId);
     }
 
-    // 19. BASE DE DATOS Y SHEET OFICIAL
+    // 21. BASE DE DATOS Y SHEET OFICIAL
     function openAdminDatabaseModal() {
       renderAdminDatabaseTable();
       document.getElementById('adminDatabaseModal').classList.remove('hidden');
@@ -2293,7 +2546,7 @@
       document.body.removeChild(link);
     }
 
-    // 20. EDITOR EN VIVO DE ENLACES DE MÓDULOS
+    // 22. EDITOR EN VIVO DE ENLACES DE MÓDULOS
     function openAdminEditModal(modId, cardIndex) {
       const mod = modulesData.find(m => m.id === modId);
       const card = mod.cards[cardIndex];
@@ -2332,7 +2585,7 @@
       showProAlert("Cambios Guardados", "El enlace y el manual han sido actualizados con éxito.");
     }
 
-    // 21. SISTEMA DE ALERTAS GENERALES
+    // 23. SISTEMA DE ALERTAS GENERALES
     function showProAlert(title, message, isSuccess = true) {
       document.getElementById('proAlertTitle').textContent = title;
       document.getElementById('proAlertMessage').textContent = message;
