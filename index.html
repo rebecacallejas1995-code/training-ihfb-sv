@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Capacitación Autónoma IHFB El Salvador</title>
+  <!-- Tailwind CSS para el diseño visual limpio -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Iconos de Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col">
+
+  <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl">
+          I
+        </div>
+        <div>
+          <h1 class="text-base font-bold leading-tight text-slate-800">IHFB El Salvador</h1>
+          <p class="text-xs text-slate-500">Portal de Capacitación Autónoma</p>
+        </div>
+      </div>
+
+      <!-- Menú principal horizontal -->
+      <nav class="hidden md:flex space-x-1" id="nav-tabs">
+        <button onclick="cambiarVista('inicio')" class="px-3 py-2 text-sm font-medium rounded-md bg-blue-50 text-blue-700 nav-btn" data-target="inicio">Inicio & Acceso</button>
+        <button onclick="cambiarVista('modulos')" class="px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:text-slate-900 nav-btn" data-target="modulos">Módulos</button>
+        <button onclick="cambiarVista('practicas')" class="px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:text-slate-900 nav-btn" data-target="practicas">Prácticas en Vivo</button>
+        <button onclick="cambiarVista('progreso')" class="px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:text-slate-900 nav-btn" data-target="progreso">Mi Progreso</button>
+        <button onclick="cambiarVista('faq')" class="px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:text-slate-900 nav-btn" data-target="faq">Preguntas & Soporte</button>
+      </nav>
+
+      <!-- Badge de usuario conectado -->
+      <div id="usuario-badge" class="hidden items-center space-x-2 bg-slate-100 py-1.5 px-3 rounded-full text-xs font-medium text-slate-700">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <span id="badge-nombre">Participante</span>
+        <span class="text-slate-400">|</span>
+        <span id="badge-rol" class="font-bold text-blue-600">Docente</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="flex-1 max-w-7xl mx-auto w-full p-4 md:p-6">
+
+    <!-- SECCIÓN 1: INICIO & ACCESO POR PERFIL -->
+    <section id="vista-inicio" class="space-y-6">
+      <div class="bg-gradient-to-r from-blue-700 to-indigo-800 rounded-2xl p-6 md:p-8 text-white shadow-sm">
+        <div class="max-w-2xl space-y-3">
+          <span class="inline-block bg-blue-500/30 text-blue-100 text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">Nivelación Autónoma</span>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Capacitación y Certificación Operativa</h2>
+          <p class="text-blue-100 text-sm leading-relaxed">
+            Plataforma oficial para docentes, tutores, monitores y supervisores. Completa tus módulos a tu propio ritmo, resuelve las evaluaciones prácticas y obtén tu acreditación formal del proyecto.
+          </p>
+        </div>
+      </div>
+
+      <!-- FORMULARIO DE ACCESO (1 PASO SIN CONTRASEÑA) -->
+      <div class="max-w-xl mx-auto bg-white rounded-xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="text-center mb-6">
+          <h3 class="text-lg font-bold text-slate-900">Ingreso de Participante</h3>
+          <p class="text-xs text-slate-500 mt-1">Ingresa tu número de documento para comenzar o continuar tu avance.</p>
+        </div>
+
+        <form id="form-acceso" onsubmit="guardarParticipante(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Documento de Identidad (DUI / ID)</label>
+            <input type="text" id="input-dui" required placeholder="00000000-0" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Nombre Completo Oficial</label>
+            <input type="text" id="input-nombre" required placeholder="Ej: Juan Carlos Pérez" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Rol Operativo</label>
+              <select id="input-rol" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                <option value="Docente">Docente</option>
+                <option value="Tutor / Facilitador">Tutor / Facilitador</option>
+                <option value="Monitor">Monitor</option>
+                <option value="Supervisor / Auditor">Supervisor / Auditor</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Departamento / Sede</label>
+              <select id="input-sede" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                <option value="San Salvador">San Salvador</option>
+                <option value="Santa Ana">Santa Ana</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="La Libertad">La Libertad</option>
+                <option value="Sonsonate">Sonsonate</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm transition-colors shadow-sm">
+            Ingresar a mis Módulos
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: MÓDULOS DE APRENDIZAJE CON BLOQUEO SECUENCIAL -->
+    <section id="vista-modulos" class="hidden space-y-6">
+      <div class="flex flex-col md:flex-row gap-6">
+        
+        <!-- COLUMNA IZQUIERDA: LISTA DE MÓDULOS (M1 A M7) -->
+        <div class="w-full md:w-80 flex-shrink-0 space-y-3">
+          <div class="bg-white p-4 rounded-xl border border-slate-200">
+            <h3 class="text-sm font-bold text-slate-800 mb-1">Ruta de Formación</h3>
+            <p class="text-xs text-slate-500 mb-4">Los módulos se desbloquean al aprobar cada evaluación.</p>
+            <div id="lista-modulos" class="space-y-2">
+              <!-- Se llena automáticamente con JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: RECURSOS DEL MÓDULO ACTIVO -->
+        <div class="flex-1 space-y-6">
+          <div id="detalle-modulo" class="bg-white p-6 rounded-xl border border-slate-200">
+            <!-- Título y descripción del módulo -->
+            <div class="border-b border-slate-100 pb-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-2">
+              <div>
+                <span id="modulo-tag" class="text-xs font-bold text-blue-600 uppercase tracking-wide">Módulo 1</span>
+                <h2 id="modulo-titulo" class="text-xl font-bold text-slate-900 mt-0.5">Access & Login</h2>
+                <p id="modulo-desc" class="text-xs text-slate-500 mt-1">Configuración del entorno del aula y credenciales de acceso.</p>
+              </div>
+              <span id="modulo-estado-badge" class="self-start md:self-auto px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+                En curso
+              </span>
+            </div>
+
+            <!-- TARJETAS DE VIDEOS Y MANUALES -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="contenedor-tarjetas">
+              <!-- Tarjeta de Video -->
+              <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between hover:border-blue-300 transition-colors bg-slate-50/50">
+                <div>
+                  <span class="text-[11px] font-bold text-blue-600 uppercase">Lección en Video</span>
+                  <h4 class="text-sm font-bold text-slate-800 mt-1" id="card-video-title">Sesión audiovisual oficial</h4>
+                  <p class="text-xs text-slate-500 mt-1">Aprende paso a paso los procesos clave dentro de la plataforma.</p>
+                </div>
+                <button onclick="abrirModalVideo()" class="mt-4 w-full flex items-center justify-center space-x-2 py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-colors">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                  <span>Ver Video Oficial</span>
+                </button>
+              </div>
+
+              <!-- Tarjeta de Manual SOP -->
+              <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between hover:border-blue-300 transition-colors bg-slate-50/50">
+                <div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase">Manual de Procedimiento</span>
+                  <h4 class="text-sm font-bold text-slate-800 mt-1">Guía Oficial en PDF (SOP)</h4>
+                  <p class="text-xs text-slate-500 mt-1">Documento paso a paso con los protocolos de operación en el aula.</p>
+                </div>
+                <a id="btn-manual" href="#" target="_blank" class="mt-4 w-full flex items-center justify-center space-x-2 py-2 px-3 border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-medium transition-colors">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                  <span>Abrir Manual PDF</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- BOTÓN PARA ABRIR QUIZ -->
+            <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-bold text-slate-800">Evaluación de Validación</h4>
+                <p class="text-xs text-slate-500">Responde 3 preguntas prácticas para desbloquear el siguiente módulo.</p>
+              </div>
+              <button onclick="abrirQuizActual()" class="py-2 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow-sm transition-colors">
+                Realizar Quiz
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: PRÁCTICAS EN VIVO (SIMULADOR DE AULA) -->
+    <section id="vista-practicas" class="hidden space-y-6">
+      <div class="bg-white p-6 rounded-xl border border-slate-200">
+        <div class="max-w-2xl mb-6">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">Entorno de Pruebas Seguro</span>
+          <h2 class="text-xl font-bold text-slate-900 mt-1">Simulador de Control de Aula y Bloqueo</h2>
+          <p class="text-xs text-slate-500 mt-1">
+            Comprueba cómo funciona la interacción en tiempo real entre la pantalla del docente y la del estudiante.
+          </p>
+        </div>
+
+        <div
